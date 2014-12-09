@@ -1,0 +1,680 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		62D741F31A37104600DBBAED /* Relayr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; };
+		62D741F41A37104600DBBAED /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7D0E1DFF1A1B53BD00B9AC26 /* TMWMeasurementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */; };
+		7D0E1E021A1B588600B9AC26 /* TMWThresholdDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */; };
+		7D153AE51A1DDDEB00B671B0 /* TMWRulesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE41A1DDDEB00B671B0 /* TMWRulesTableViewCell.m */; };
+		7D153AE81A1DFDF100B671B0 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE71A1DFDF100B671B0 /* SignInViewController.m */; };
+		7D153AEB1A1E001F00B671B0 /* TMWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AEA1A1E001F00B671B0 /* TMWManager.m */; };
+		7D1F1F9F1A30AF0500EFC92B /* DingDing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */; };
+		7D6088C01A1E32A600F671FB /* TMWTransmittersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6088BF1A1E32A600F671FB /* TMWTransmittersTableViewCell.m */; };
+		7D6088C41A1E3A9400F671FB /* TMWMeasurementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6088C31A1E3A9400F671FB /* TMWMeasurementTableViewCell.m */; };
+		7D650D311A2E0829007BB0A1 /* TMWAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D650D301A2E0829007BB0A1 /* TMWAPIService.m */; };
+		7D759EDE1A1B36210004656A /* TMWTransmitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D759EDD1A1B36210004656A /* TMWTransmitterViewController.m */; };
+		7D8307BA1A1CEA8100A68225 /* TMWRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8307B91A1CEA8100A68225 /* TMWRule.m */; };
+		7D8FF3A51A1A4A1500429FDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF3961A1A4A1400429FDE /* Images.xcassets */; };
+		7D8FF3A61A1A4A1500429FDE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF3981A1A4A1500429FDE /* LaunchScreen.xib */; };
+		7D8FF3A71A1A4A1500429FDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF39A1A1A4A1500429FDE /* Main.storyboard */; };
+		7D8FF3A81A1A4A1500429FDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */; };
+		7D8FF3A91A1A4A1500429FDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8FF39F1A1A4A1500429FDE /* main.m */; };
+		7D8FF3AA1A1A4A1500429FDE /* TMWRulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */; };
+		7D8FF3B41A1A542300429FDE /* TMWNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8FF3B31A1A542300429FDE /* TMWNotificationsViewController.m */; };
+		7DB29BF51A35D8F100958ABD /* TMWNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB29BF41A35D8F100958ABD /* TMWNotificationDetailViewController.m */; };
+		7DC4A0411A2DB12E005A65AC /* NSData+Hexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4A03E1A2DB12E005A65AC /* NSData+Hexadecimal.m */; };
+		7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4A0401A2DB12E005A65AC /* NSString+Hexadecimal.m */; };
+		7DC4A0451A2DB388005A65AC /* TMWRuleCondition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4A0441A2DB388005A65AC /* TMWRuleCondition.m */; };
+		7DC4A0481A2DB51F005A65AC /* TMWRuleNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC4A0471A2DB51F005A65AC /* TMWRuleNotification.m */; };
+		7DC9E5021A25D2D5008ECA66 /* TMWNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9E5011A25D2D5008ECA66 /* TMWNotification.m */; };
+		7DC9E5091A25DBD0008ECA66 /* TMWNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9E5081A25DBD0008ECA66 /* TMWNotificationTableViewCell.m */; };
+		7DDA4CB81A1F6FD60097596E /* TMWRuleNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA4CB71A1F6FD60097596E /* TMWRuleNameViewController.m */; };
+		7DDA4CBB1A1F717F0097596E /* TMWEditRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA4CBA1A1F717F0097596E /* TMWEditRuleViewController.m */; };
+		7DF4B6F61A1BE14600F90FFC /* NewJuneBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F41A1BE14600F90FFC /* NewJuneBold.otf */; };
+		7DF4B6F71A1BE14600F90FFC /* NewJuneBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F51A1BE14600F90FFC /* NewJuneBook.otf */; };
+		7DF4B6FA1A1C7C7800F90FFC /* TMWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		62D741EB1A370EAA00DBBAED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6252F0B3199C2465002ECE4D;
+			remoteInfo = Relayr_iOS;
+		};
+		62D741ED1A370EAA00DBBAED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6252F0E5199C2AFA002ECE4D;
+			remoteInfo = Relayr_OSX;
+		};
+		62D741EF1A370EAA00DBBAED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 62E41FC219C35B90008459B7;
+			remoteInfo = Relayr_Tests;
+		};
+		62D741F11A370EE500DBBAED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6252F0B2199C2465002ECE4D;
+			remoteInfo = Relayr_iOS;
+		};
+		62D741F51A37104600DBBAED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6252F0B2199C2465002ECE4D;
+			remoteInfo = Relayr_iOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		62D741F71A37104600DBBAED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				62D741F41A37104600DBBAED /* Relayr.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RelayrSDK.xcodeproj; path = "../../../apple-sdk/RelayrSDK/RelayrSDK.xcodeproj"; sourceTree = "<group>"; };
+		7D0E1DFD1A1B53BD00B9AC26 /* TMWMeasurementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMeasurementViewController.h; sourceTree = "<group>"; };
+		7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMeasurementViewController.m; sourceTree = "<group>"; };
+		7D0E1E001A1B588600B9AC26 /* TMWThresholdDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWThresholdDetailsViewController.h; sourceTree = "<group>"; };
+		7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWThresholdDetailsViewController.m; sourceTree = "<group>"; };
+		7D153AE31A1DDDEB00B671B0 /* TMWRulesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesTableViewCell.h; sourceTree = "<group>"; };
+		7D153AE41A1DDDEB00B671B0 /* TMWRulesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesTableViewCell.m; sourceTree = "<group>"; };
+		7D153AE61A1DFDF100B671B0 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		7D153AE71A1DFDF100B671B0 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		7D153AE91A1E001F00B671B0 /* TMWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWManager.h; sourceTree = "<group>"; };
+		7D153AEA1A1E001F00B671B0 /* TMWManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWManager.m; sourceTree = "<group>"; };
+		7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DingDing.wav; sourceTree = "<group>"; };
+		7D6088BE1A1E32A600F671FB /* TMWTransmittersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTransmittersTableViewCell.h; sourceTree = "<group>"; };
+		7D6088BF1A1E32A600F671FB /* TMWTransmittersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTransmittersTableViewCell.m; sourceTree = "<group>"; };
+		7D6088C21A1E3A9400F671FB /* TMWMeasurementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMeasurementTableViewCell.h; sourceTree = "<group>"; };
+		7D6088C31A1E3A9400F671FB /* TMWMeasurementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMeasurementTableViewCell.m; sourceTree = "<group>"; };
+		7D650D2F1A2E0829007BB0A1 /* TMWAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWAPIService.h; sourceTree = "<group>"; };
+		7D650D301A2E0829007BB0A1 /* TMWAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWAPIService.m; sourceTree = "<group>"; };
+		7D650D351A2E0B3F007BB0A1 /* TMWCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWCredentials.h; sourceTree = "<group>"; };
+		7D759EDC1A1B36210004656A /* TMWTransmitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTransmitterViewController.h; sourceTree = "<group>"; };
+		7D759EDD1A1B36210004656A /* TMWTransmitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTransmitterViewController.m; sourceTree = "<group>"; };
+		7D8307B81A1CEA8100A68225 /* TMWRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRule.h; sourceTree = "<group>"; };
+		7D8307B91A1CEA8100A68225 /* TMWRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRule.m; sourceTree = "<group>"; };
+		7D8FF36B1A1A497A00429FDE /* TellMeWhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeWhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D8FF3961A1A4A1400429FDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7D8FF3991A1A4A1500429FDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7D8FF39B1A1A4A1500429FDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7D8FF39D1A1A4A1500429FDE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7D8FF39F1A1A4A1500429FDE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7D8FF3A11A1A4A1500429FDE /* TMWRulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesViewController.h; sourceTree = "<group>"; };
+		7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesViewController.m; sourceTree = "<group>"; };
+		7D8FF3A41A1A4A1500429FDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D8FF3B21A1A542300429FDE /* TMWNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsViewController.h; sourceTree = "<group>"; };
+		7D8FF3B31A1A542300429FDE /* TMWNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsViewController.m; sourceTree = "<group>"; };
+		7DB29BF31A35D8F100958ABD /* TMWNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationDetailViewController.h; sourceTree = "<group>"; };
+		7DB29BF41A35D8F100958ABD /* TMWNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationDetailViewController.m; sourceTree = "<group>"; };
+		7DC4A03D1A2DB12E005A65AC /* NSData+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hexadecimal.h"; sourceTree = "<group>"; };
+		7DC4A03E1A2DB12E005A65AC /* NSData+Hexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hexadecimal.m"; sourceTree = "<group>"; };
+		7DC4A03F1A2DB12E005A65AC /* NSString+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hexadecimal.h"; sourceTree = "<group>"; };
+		7DC4A0401A2DB12E005A65AC /* NSString+Hexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hexadecimal.m"; sourceTree = "<group>"; };
+		7DC4A0431A2DB388005A65AC /* TMWRuleCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRuleCondition.h; sourceTree = "<group>"; };
+		7DC4A0441A2DB388005A65AC /* TMWRuleCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleCondition.m; sourceTree = "<group>"; };
+		7DC4A0461A2DB51F005A65AC /* TMWRuleNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRuleNotification.h; sourceTree = "<group>"; };
+		7DC4A0471A2DB51F005A65AC /* TMWRuleNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleNotification.m; sourceTree = "<group>"; };
+		7DC9E5001A25D2D5008ECA66 /* TMWNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotification.h; sourceTree = "<group>"; };
+		7DC9E5011A25D2D5008ECA66 /* TMWNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotification.m; sourceTree = "<group>"; };
+		7DC9E5071A25DBD0008ECA66 /* TMWNotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationTableViewCell.h; sourceTree = "<group>"; };
+		7DC9E5081A25DBD0008ECA66 /* TMWNotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationTableViewCell.m; sourceTree = "<group>"; };
+		7DDA4CB61A1F6FD60097596E /* TMWRuleNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRuleNameViewController.h; sourceTree = "<group>"; };
+		7DDA4CB71A1F6FD60097596E /* TMWRuleNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleNameViewController.m; sourceTree = "<group>"; };
+		7DDA4CB91A1F717F0097596E /* TMWEditRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWEditRuleViewController.h; sourceTree = "<group>"; };
+		7DDA4CBA1A1F717F0097596E /* TMWEditRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWEditRuleViewController.m; sourceTree = "<group>"; };
+		7DF4B6F41A1BE14600F90FFC /* NewJuneBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewJuneBold.otf; sourceTree = "<group>"; };
+		7DF4B6F51A1BE14600F90FFC /* NewJuneBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewJuneBook.otf; sourceTree = "<group>"; };
+		7DF4B6F81A1C7C7800F90FFC /* TMWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTabBarController.h; sourceTree = "<group>"; };
+		7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTabBarController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7D8FF3681A1A497A00429FDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62D741F31A37104600DBBAED /* Relayr.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		62B4A6E51A320FE8005F467D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		62D741E61A370EAA00DBBAED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				62D741EC1A370EAA00DBBAED /* Relayr.framework */,
+				62D741EE1A370EAA00DBBAED /* Relayr.framework */,
+				62D741F01A370EAA00DBBAED /* Relayr.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D153AE21A1DDDC700B671B0 /* TMWRulesTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7D153AE31A1DDDEB00B671B0 /* TMWRulesTableViewCell.h */,
+				7D153AE41A1DDDEB00B671B0 /* TMWRulesTableViewCell.m */,
+			);
+			path = TMWRulesTableViewCell;
+			sourceTree = "<group>";
+		};
+		7D1F1F9B1A30AEE300EFC92B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		7D6088BD1A1E323400F671FB /* TMWTransmittersTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7D6088BE1A1E32A600F671FB /* TMWTransmittersTableViewCell.h */,
+				7D6088BF1A1E32A600F671FB /* TMWTransmittersTableViewCell.m */,
+			);
+			path = TMWTransmittersTableViewCell;
+			sourceTree = "<group>";
+		};
+		7D6088C11A1E3A7E00F671FB /* TMWMeasurementTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7D6088C21A1E3A9400F671FB /* TMWMeasurementTableViewCell.h */,
+				7D6088C31A1E3A9400F671FB /* TMWMeasurementTableViewCell.m */,
+			);
+			path = TMWMeasurementTableViewCell;
+			sourceTree = "<group>";
+		};
+		7D8307B71A1CEA6D00A68225 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7D650D351A2E0B3F007BB0A1 /* TMWCredentials.h */,
+				7D8307B81A1CEA8100A68225 /* TMWRule.h */,
+				7D8307B91A1CEA8100A68225 /* TMWRule.m */,
+				7DC4A0431A2DB388005A65AC /* TMWRuleCondition.h */,
+				7DC4A0441A2DB388005A65AC /* TMWRuleCondition.m */,
+				7DC4A0461A2DB51F005A65AC /* TMWRuleNotification.h */,
+				7DC4A0471A2DB51F005A65AC /* TMWRuleNotification.m */,
+				7DC9E5001A25D2D5008ECA66 /* TMWNotification.h */,
+				7DC9E5011A25D2D5008ECA66 /* TMWNotification.m */,
+				7D153AE91A1E001F00B671B0 /* TMWManager.h */,
+				7D153AEA1A1E001F00B671B0 /* TMWManager.m */,
+				7D650D2F1A2E0829007BB0A1 /* TMWAPIService.h */,
+				7D650D301A2E0829007BB0A1 /* TMWAPIService.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7D8FF3621A1A497A00429FDE = {
+			isa = PBXGroup;
+			children = (
+				7D8FF36D1A1A497A00429FDE /* TellMeWhen */,
+				7D8FF36C1A1A497A00429FDE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7D8FF36C1A1A497A00429FDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D8FF36B1A1A497A00429FDE /* TellMeWhen.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7D8FF36D1A1A497A00429FDE /* TellMeWhen */ = {
+			isa = PBXGroup;
+			children = (
+				7DF4B6F31A1BE14600F90FFC /* Fonts */,
+				7D8FF3941A1A4A1400429FDE /* Assets */,
+				7D8FF39C1A1A4A1500429FDE /* Classes */,
+				7D8FF3A31A1A4A1500429FDE /* Configuration */,
+				62B4A6E51A320FE8005F467D /* Frameworks */,
+			);
+			path = TellMeWhen;
+			sourceTree = "<group>";
+		};
+		7D8FF3941A1A4A1400429FDE /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				7D1F1F9B1A30AEE300EFC92B /* Sounds */,
+				7D8FF3951A1A4A1400429FDE /* Images */,
+				7D8FF3971A1A4A1500429FDE /* Storyboards */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		7D8FF3951A1A4A1400429FDE /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7D8FF3961A1A4A1400429FDE /* Images.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		7D8FF3971A1A4A1500429FDE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7D8FF3981A1A4A1500429FDE /* LaunchScreen.xib */,
+				7D8FF39A1A1A4A1500429FDE /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7D8FF39C1A1A4A1500429FDE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7D8FF39F1A1A4A1500429FDE /* main.m */,
+				7D8FF39D1A1A4A1500429FDE /* AppDelegate.h */,
+				7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */,
+				7DC4A03C1A2DB12E005A65AC /* Utilities */,
+				7D8307B71A1CEA6D00A68225 /* Model */,
+				7D8FF3A01A1A4A1500429FDE /* ViewControllers */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		7D8FF3A01A1A4A1500429FDE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7D153AE61A1DFDF100B671B0 /* SignInViewController.h */,
+				7D153AE71A1DFDF100B671B0 /* SignInViewController.m */,
+				7DF4B6F81A1C7C7800F90FFC /* TMWTabBarController.h */,
+				7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */,
+				7D8FF3A11A1A4A1500429FDE /* TMWRulesViewController.h */,
+				7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */,
+				7D153AE21A1DDDC700B671B0 /* TMWRulesTableViewCell */,
+				7D8FF3B21A1A542300429FDE /* TMWNotificationsViewController.h */,
+				7D8FF3B31A1A542300429FDE /* TMWNotificationsViewController.m */,
+				7DC9E5061A25DBA7008ECA66 /* TMWNotificationTableViewCell */,
+				7D759EDC1A1B36210004656A /* TMWTransmitterViewController.h */,
+				7D759EDD1A1B36210004656A /* TMWTransmitterViewController.m */,
+				7D6088BD1A1E323400F671FB /* TMWTransmittersTableViewCell */,
+				7D0E1DFD1A1B53BD00B9AC26 /* TMWMeasurementViewController.h */,
+				7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */,
+				7D6088C11A1E3A7E00F671FB /* TMWMeasurementTableViewCell */,
+				7D0E1E001A1B588600B9AC26 /* TMWThresholdDetailsViewController.h */,
+				7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */,
+				7DDA4CB61A1F6FD60097596E /* TMWRuleNameViewController.h */,
+				7DDA4CB71A1F6FD60097596E /* TMWRuleNameViewController.m */,
+				7DDA4CB91A1F717F0097596E /* TMWEditRuleViewController.h */,
+				7DDA4CBA1A1F717F0097596E /* TMWEditRuleViewController.m */,
+				7DB29BF31A35D8F100958ABD /* TMWNotificationDetailViewController.h */,
+				7DB29BF41A35D8F100958ABD /* TMWNotificationDetailViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7D8FF3A31A1A4A1500429FDE /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				7D8FF3A41A1A4A1500429FDE /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		7DC4A03C1A2DB12E005A65AC /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7DC4A03D1A2DB12E005A65AC /* NSData+Hexadecimal.h */,
+				7DC4A03E1A2DB12E005A65AC /* NSData+Hexadecimal.m */,
+				7DC4A03F1A2DB12E005A65AC /* NSString+Hexadecimal.h */,
+				7DC4A0401A2DB12E005A65AC /* NSString+Hexadecimal.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7DC9E5061A25DBA7008ECA66 /* TMWNotificationTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7DC9E5071A25DBD0008ECA66 /* TMWNotificationTableViewCell.h */,
+				7DC9E5081A25DBD0008ECA66 /* TMWNotificationTableViewCell.m */,
+			);
+			name = TMWNotificationTableViewCell;
+			path = TMWNotificationsTableViewCell;
+			sourceTree = "<group>";
+		};
+		7DF4B6F31A1BE14600F90FFC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7DF4B6F41A1BE14600F90FFC /* NewJuneBold.otf */,
+				7DF4B6F51A1BE14600F90FFC /* NewJuneBook.otf */,
+			);
+			name = Fonts;
+			path = Assets/Fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7D8FF36A1A1A497A00429FDE /* TellMeWhen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7D8FF38E1A1A497B00429FDE /* Build configuration list for PBXNativeTarget "TellMeWhen" */;
+			buildPhases = (
+				7D8FF3671A1A497A00429FDE /* Sources */,
+				7D8FF3681A1A497A00429FDE /* Frameworks */,
+				7D8FF3691A1A497A00429FDE /* Resources */,
+				62D741F71A37104600DBBAED /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				62D741F21A370EE500DBBAED /* PBXTargetDependency */,
+				62D741F61A37104600DBBAED /* PBXTargetDependency */,
+			);
+			name = TellMeWhen;
+			productName = TellMeWhen;
+			productReference = 7D8FF36B1A1A497A00429FDE /* TellMeWhen.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7D8FF3631A1A497A00429FDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Jamie;
+				TargetAttributes = {
+					7D8FF36A1A1A497A00429FDE = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = C87D7SA3JH;
+					};
+				};
+			};
+			buildConfigurationList = 7D8FF3661A1A497A00429FDE /* Build configuration list for PBXProject "TellMeWhen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7D8FF3621A1A497A00429FDE;
+			productRefGroup = 7D8FF36C1A1A497A00429FDE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 62D741E61A370EAA00DBBAED /* Products */;
+					ProjectRef = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				7D8FF36A1A1A497A00429FDE /* TellMeWhen */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		62D741EC1A370EAA00DBBAED /* Relayr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Relayr.framework;
+			remoteRef = 62D741EB1A370EAA00DBBAED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		62D741EE1A370EAA00DBBAED /* Relayr.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Relayr.framework;
+			remoteRef = 62D741ED1A370EAA00DBBAED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		62D741F01A370EAA00DBBAED /* Relayr.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Relayr.xctest;
+			remoteRef = 62D741EF1A370EAA00DBBAED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7D8FF3691A1A497A00429FDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D8FF3A51A1A4A1500429FDE /* Images.xcassets in Resources */,
+				7DF4B6F61A1BE14600F90FFC /* NewJuneBold.otf in Resources */,
+				7DF4B6F71A1BE14600F90FFC /* NewJuneBook.otf in Resources */,
+				7D1F1F9F1A30AF0500EFC92B /* DingDing.wav in Resources */,
+				7D8FF3A71A1A4A1500429FDE /* Main.storyboard in Resources */,
+				7D8FF3A61A1A4A1500429FDE /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7D8FF3671A1A497A00429FDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D153AE51A1DDDEB00B671B0 /* TMWRulesTableViewCell.m in Sources */,
+				7DDA4CBB1A1F717F0097596E /* TMWEditRuleViewController.m in Sources */,
+				7D153AE81A1DFDF100B671B0 /* SignInViewController.m in Sources */,
+				7DF4B6FA1A1C7C7800F90FFC /* TMWTabBarController.m in Sources */,
+				7D153AEB1A1E001F00B671B0 /* TMWManager.m in Sources */,
+				7D8FF3AA1A1A4A1500429FDE /* TMWRulesViewController.m in Sources */,
+				7D8FF3B41A1A542300429FDE /* TMWNotificationsViewController.m in Sources */,
+				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,
+				7DC9E5091A25DBD0008ECA66 /* TMWNotificationTableViewCell.m in Sources */,
+				7D8FF3A91A1A4A1500429FDE /* main.m in Sources */,
+				7DB29BF51A35D8F100958ABD /* TMWNotificationDetailViewController.m in Sources */,
+				7D8307BA1A1CEA8100A68225 /* TMWRule.m in Sources */,
+				7D0E1DFF1A1B53BD00B9AC26 /* TMWMeasurementViewController.m in Sources */,
+				7DC9E5021A25D2D5008ECA66 /* TMWNotification.m in Sources */,
+				7DC4A0411A2DB12E005A65AC /* NSData+Hexadecimal.m in Sources */,
+				7D650D311A2E0829007BB0A1 /* TMWAPIService.m in Sources */,
+				7D6088C01A1E32A600F671FB /* TMWTransmittersTableViewCell.m in Sources */,
+				7D8FF3A81A1A4A1500429FDE /* AppDelegate.m in Sources */,
+				7D759EDE1A1B36210004656A /* TMWTransmitterViewController.m in Sources */,
+				7D6088C41A1E3A9400F671FB /* TMWMeasurementTableViewCell.m in Sources */,
+				7DDA4CB81A1F6FD60097596E /* TMWRuleNameViewController.m in Sources */,
+				7D0E1E021A1B588600B9AC26 /* TMWThresholdDetailsViewController.m in Sources */,
+				7DC4A0451A2DB388005A65AC /* TMWRuleCondition.m in Sources */,
+				7DC4A0481A2DB51F005A65AC /* TMWRuleNotification.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		62D741F21A370EE500DBBAED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Relayr_iOS;
+			targetProxy = 62D741F11A370EE500DBBAED /* PBXContainerItemProxy */;
+		};
+		62D741F61A37104600DBBAED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Relayr_iOS;
+			targetProxy = 62D741F51A37104600DBBAED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7D8FF3981A1A4A1500429FDE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D8FF3991A1A4A1500429FDE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		7D8FF39A1A1A4A1500429FDE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7D8FF39B1A1A4A1500429FDE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7D8FF38C1A1A497A00429FDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7D8FF38D1A1A497A00429FDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7D8FF38F1A1A497B00429FDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TellMeWhen/Frameworks",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7D8FF3901A1A497B00429FDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TellMeWhen/Frameworks",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7D8FF3661A1A497A00429FDE /* Build configuration list for PBXProject "TellMeWhen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D8FF38C1A1A497A00429FDE /* Debug */,
+				7D8FF38D1A1A497A00429FDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7D8FF38E1A1A497B00429FDE /* Build configuration list for PBXNativeTarget "TellMeWhen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D8FF38F1A1A497B00429FDE /* Debug */,
+				7D8FF3901A1A497B00429FDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7D8FF3631A1A497A00429FDE /* Project object */;
+}

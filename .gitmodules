@@ -1,0 +1,3 @@
+[submodule "apple-sdk"]
+	path = apple-sdk
+	url = git@github.com:relayr/apple-sdk.git
