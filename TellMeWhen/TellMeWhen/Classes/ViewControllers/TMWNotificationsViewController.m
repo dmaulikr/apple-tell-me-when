@@ -4,30 +4,25 @@
 #import "TMWManager.h"
 #import "TMWAPIService.h"
 #import "TMWNotificationDetailViewController.h"
-
+#import "TMWActions.h"                          // TMW (ViewControllers/Models)
 
 #pragma mark - Constants
 
 static NSString *const kNotificationsTableViewCellReuseIdentifier = @"NotificationsTableViewCell";
 
-
 @interface TMWNotificationsViewController ()
-
 @property (strong, nonatomic) IBOutlet UIView *noNotificationsView;
 @property (strong, nonatomic) IBOutlet UITableView *notificationsTableView;
 @property (strong, nonatomic) NSArray *notificationsTableViewDataSource;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *clearButton;
-
 - (IBAction)signOutUser:(id)sender;
 - (IBAction)clearNotifications:(id)sender;
-
 @end
 
 
 @implementation TMWNotificationsViewController
 
-
-#pragma mark - View Controller Lifecycle Methods
+#pragma mark - Public API
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -104,8 +99,8 @@ static NSString *const kNotificationsTableViewCellReuseIdentifier = @"Notificati
 #pragma mark - IBActions
 
 - (IBAction)signOutUser:(id)sender {
-    [[TMWManager sharedInstance] signOut];
-    [self performSegueWithIdentifier:@"UnwindToSignInView" sender:self];
+    id <TMWActions> target = [self targetForAction:@selector(signoutFromSender:) withSender:self];
+    [target signoutFromSender:self];
 }
 
 - (IBAction)clearNotifications:(id)sender {

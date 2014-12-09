@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		62D741F31A37104600DBBAED /* Relayr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; };
 		62D741F41A37104600DBBAED /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		62D742011A37161500DBBAED /* TMWRootViewControllerSwapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */; };
 		7D0E1DFF1A1B53BD00B9AC26 /* TMWMeasurementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */; };
 		7D0E1E021A1B588600B9AC26 /* TMWThresholdDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */; };
 		7D153AE51A1DDDEB00B671B0 /* TMWRulesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE41A1DDDEB00B671B0 /* TMWRulesTableViewCell.m */; };
@@ -95,6 +96,10 @@
 
 /* Begin PBXFileReference section */
 		62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RelayrSDK.xcodeproj; path = "../../../apple-sdk/RelayrSDK/RelayrSDK.xcodeproj"; sourceTree = "<group>"; };
+		62D741FF1A37161500DBBAED /* TMWRootViewControllerSwapSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRootViewControllerSwapSegue.h; sourceTree = "<group>"; };
+		62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRootViewControllerSwapSegue.m; sourceTree = "<group>"; };
+		62D742061A37229B00DBBAED /* TMWStoryboardIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStoryboardIDs.h; sourceTree = "<group>"; };
+		62D742071A3722D100DBBAED /* TMWActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWActions.h; sourceTree = "<group>"; };
 		7D0E1DFD1A1B53BD00B9AC26 /* TMWMeasurementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMeasurementViewController.h; sourceTree = "<group>"; };
 		7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMeasurementViewController.m; sourceTree = "<group>"; };
 		7D0E1E001A1B588600B9AC26 /* TMWThresholdDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWThresholdDetailsViewController.h; sourceTree = "<group>"; };
@@ -181,6 +186,24 @@
 				62D741F01A370EAA00DBBAED /* Relayr.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		62D741FE1A37160300DBBAED /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				62D742061A37229B00DBBAED /* TMWStoryboardIDs.h */,
+				62D741FF1A37161500DBBAED /* TMWRootViewControllerSwapSegue.h */,
+				62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */,
+			);
+			path = Segues;
+			sourceTree = "<group>";
+		};
+		62D742051A37227A00DBBAED /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				62D742071A3722D100DBBAED /* TMWActions.h */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		7D153AE21A1DDDC700B671B0 /* TMWRulesTableViewCell */ = {
@@ -309,10 +332,12 @@
 		7D8FF3A01A1A4A1500429FDE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7D153AE61A1DFDF100B671B0 /* SignInViewController.h */,
-				7D153AE71A1DFDF100B671B0 /* SignInViewController.m */,
+				62D741FE1A37160300DBBAED /* Segues */,
+				62D742051A37227A00DBBAED /* Protocols */,
 				7DF4B6F81A1C7C7800F90FFC /* TMWTabBarController.h */,
 				7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */,
+				7D153AE61A1DFDF100B671B0 /* SignInViewController.h */,
+				7D153AE71A1DFDF100B671B0 /* SignInViewController.m */,
 				7D8FF3A11A1A4A1500429FDE /* TMWRulesViewController.h */,
 				7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */,
 				7D153AE21A1DDDC700B671B0 /* TMWRulesTableViewCell */,
@@ -483,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62D742011A37161500DBBAED /* TMWRootViewControllerSwapSegue.m in Sources */,
 				7D153AE51A1DDDEB00B671B0 /* TMWRulesTableViewCell.m in Sources */,
 				7DDA4CBB1A1F717F0097596E /* TMWEditRuleViewController.m in Sources */,
 				7D153AE81A1DFDF100B671B0 /* SignInViewController.m in Sources */,
@@ -633,6 +659,7 @@
 					"$(PROJECT_DIR)/TellMeWhen/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -648,6 +675,7 @@
 					"$(PROJECT_DIR)/TellMeWhen/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

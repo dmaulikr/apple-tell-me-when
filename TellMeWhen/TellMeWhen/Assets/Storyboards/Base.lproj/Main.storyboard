@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eJM-uJ-g5a">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="f1d-eT-KgF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -52,22 +52,6 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="tcw-cY-EqN">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="eJM-uJ-g5a" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YSO-Ma-72z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="f1d-eT-KgF" kind="relationship" relationship="rootViewController" id="c8o-A0-B3r"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ggk-wK-DcX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1872" y="59.25"/>
-        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="he6-c6-dab">
             <objects>
@@ -80,12 +64,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUd-4E-pgG">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUd-4E-pgG">
+                                <rect key="frame" x="150" y="343" width="300" height="44"/>
                                 <color key="backgroundColor" red="0.50588235294117645" green="0.65098039215686276" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="344" id="IQU-Q2-C5v"/>
-                                    <constraint firstAttribute="height" constant="44" id="zdB-ZB-icY"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="500" constant="300" id="M8o-LJ-ve5"/>
+                                    <constraint firstAttribute="height" constant="44" id="Mxb-pJ-z42"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
                                 <state key="normal" title="sign in">
@@ -97,139 +81,59 @@
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="IQU-Q2-C5v"/>
-                                        <exclude reference="zdB-ZB-icY"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="IQU-Q2-C5v"/>
-                                        <include reference="zdB-ZB-icY"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <action selector="signInPressed:" destination="f1d-eT-KgF" eventType="touchUpInside" id="IC6-Nf-Tvl"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="XyL-JH-G3g">
-                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XyL-JH-G3g">
+                                <rect key="frame" x="281" y="291" width="37" height="37"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBt-QS-Ktt">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="C2J-Sp-Quf">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="48"/>
-                                    </constraint>
-                                    <constraint firstAttribute="width" constant="42" id="q4n-WZ-ipd">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="344"/>
-                                    </constraint>
-                                </constraints>
-                                <string key="text">Checking that the OpenSensor cloud
-is reachable...</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Checking that the OpenSensor cloud is reachable..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBt-QS-Ktt">
+                                <rect key="frame" x="88" y="254" width="425" height="22"/>
                                 <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="C2J-Sp-Quf"/>
-                                        <exclude reference="q4n-WZ-ipd"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="C2J-Sp-Quf"/>
-                                        <include reference="q4n-WZ-ipd"/>
-                                    </mask>
-                                </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RelayrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="rHR-9V-idW">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="07V-vk-L6u"/>
-                                    <constraint firstAttribute="height" constant="128" id="DMF-lc-emb">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="81"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="07V-vk-L6u"/>
-                                        <exclude reference="DMF-lc-emb"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="07V-vk-L6u"/>
-                                        <include reference="DMF-lc-emb"/>
-                                    </mask>
-                                </variation>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="RelayrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bFf-VZ-xqV">
+                                <rect key="frame" x="209" y="167" width="183" height="71"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.28235294119999998" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tUd-4E-pgG" firstAttribute="top" secondItem="XyL-JH-G3g" secondAttribute="bottom" constant="8" id="1ql-Z0-XKg"/>
-                            <constraint firstItem="dBt-QS-Ktt" firstAttribute="top" secondItem="rHR-9V-idW" secondAttribute="bottom" constant="8" id="4xb-bQ-ZUV"/>
-                            <constraint firstAttribute="centerX" secondItem="XyL-JH-G3g" secondAttribute="centerX" id="G7L-Uc-pfe"/>
-                            <constraint firstItem="XyL-JH-G3g" firstAttribute="top" secondItem="dBt-QS-Ktt" secondAttribute="bottom" constant="8" id="HY0-6Z-cEc"/>
-                            <constraint firstAttribute="centerY" secondItem="tUd-4E-pgG" secondAttribute="centerY" id="L2P-bh-SWE"/>
-                            <constraint firstAttribute="centerX" secondItem="dBt-QS-Ktt" secondAttribute="centerX" id="e2U-9t-hMw"/>
-                            <constraint firstAttribute="centerX" secondItem="tUd-4E-pgG" secondAttribute="centerX" id="pxd-JO-ZDD"/>
-                            <constraint firstAttribute="centerX" secondItem="rHR-9V-idW" secondAttribute="centerX" id="uES-7q-hVc"/>
+                            <constraint firstAttribute="centerX" secondItem="bFf-VZ-xqV" secondAttribute="centerX" id="9eS-hx-l1t"/>
+                            <constraint firstItem="tUd-4E-pgG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dBt-QS-Ktt" secondAttribute="bottom" constant="20" id="IwT-JU-KU4"/>
+                            <constraint firstItem="dBt-QS-Ktt" firstAttribute="top" secondItem="bFf-VZ-xqV" secondAttribute="bottom" constant="16" id="KIh-Br-YwM"/>
+                            <constraint firstAttribute="centerX" secondItem="XyL-JH-G3g" secondAttribute="centerX" id="R5a-Dn-QoH"/>
+                            <constraint firstItem="bFf-VZ-xqV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dh3-DN-i8J" secondAttribute="bottom" constant="20" id="XOb-pR-pVZ"/>
+                            <constraint firstItem="tUd-4E-pgG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="giy-Lp-EfP" secondAttribute="leadingMargin" constant="50" id="YUC-sw-hnD"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dBt-QS-Ktt" secondAttribute="trailing" priority="750" constant="15" id="YY5-Ta-hdr"/>
+                            <constraint firstItem="2G1-Jm-nz3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tUd-4E-pgG" secondAttribute="bottom" constant="20" id="Yc9-WD-Fnk"/>
+                            <constraint firstItem="tUd-4E-pgG" firstAttribute="top" secondItem="XyL-JH-G3g" secondAttribute="bottom" constant="15" id="aVc-j7-B1q"/>
+                            <constraint firstItem="XyL-JH-G3g" firstAttribute="top" secondItem="dBt-QS-Ktt" secondAttribute="bottom" constant="15" id="dWc-Do-dH6"/>
+                            <constraint firstAttribute="centerY" secondItem="dBt-QS-Ktt" secondAttribute="centerY" constant="35" id="g0M-zB-0l9"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="tUd-4E-pgG" secondAttribute="trailing" constant="50" id="hrY-zY-qW8"/>
+                            <constraint firstAttribute="centerX" secondItem="dBt-QS-Ktt" secondAttribute="centerX" id="i5p-Sa-vxX"/>
+                            <constraint firstAttribute="centerX" secondItem="tUd-4E-pgG" secondAttribute="centerX" id="zDY-ub-mbM"/>
+                            <constraint firstItem="dBt-QS-Ktt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="giy-Lp-EfP" secondAttribute="leadingMargin" priority="750" constant="15" id="zbn-yh-Ogz"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="tUd-4E-pgG"/>
-                                <exclude reference="XyL-JH-G3g"/>
-                                <exclude reference="dBt-QS-Ktt"/>
-                                <exclude reference="rHR-9V-idW"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="4xb-bQ-ZUV"/>
-                                <exclude reference="e2U-9t-hMw"/>
-                                <exclude reference="G7L-Uc-pfe"/>
-                                <exclude reference="HY0-6Z-cEc"/>
-                                <exclude reference="1ql-Z0-XKg"/>
-                                <exclude reference="L2P-bh-SWE"/>
-                                <exclude reference="pxd-JO-ZDD"/>
-                                <exclude reference="uES-7q-hVc"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="tUd-4E-pgG"/>
-                                <include reference="XyL-JH-G3g"/>
-                                <include reference="dBt-QS-Ktt"/>
-                                <include reference="rHR-9V-idW"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="4xb-bQ-ZUV"/>
-                                <include reference="e2U-9t-hMw"/>
-                                <include reference="G7L-Uc-pfe"/>
-                                <include reference="HY0-6Z-cEc"/>
-                                <include reference="1ql-Z0-XKg"/>
-                                <include reference="L2P-bh-SWE"/>
-                                <include reference="pxd-JO-ZDD"/>
-                                <include reference="uES-7q-hVc"/>
-                            </mask>
-                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact"/>
                     </view>
                     <navigationItem key="navigationItem" id="dHI-9S-Abn"/>
                     <connections>
                         <outlet property="checkingReachability" destination="XyL-JH-G3g" id="qZX-T0-umG"/>
                         <outlet property="reachabilityStatus" destination="dBt-QS-Ktt" id="IS8-25-Zx8"/>
                         <outlet property="signIn" destination="tUd-4E-pgG" id="LH5-ZU-sH3"/>
-                        <segue destination="idj-yv-YbM" kind="show" identifier="ShowTabView" id="VvH-fA-LIm"/>
+                        <segue destination="idj-yv-YbM" kind="custom" identifier="TMWSegueSwapWindowRootVCs" customClass="TMWRootViewControllerSwapSegue" id="VvH-fA-LIm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ioY-u5-vY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1011" y="59.25"/>
+            <point key="canvasLocation" x="-1011" y="59"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1Ns-RZ-k8a">
             <objects>
-                <tabBarController id="idj-yv-YbM" customClass="TMWTabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TMWTabBarController" id="idj-yv-YbM" customClass="TMWTabBarController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="OpK-O3-Ue5"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1676,6 +1580,9 @@ is reachable...</string>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="52" width="400" height="789"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="wqg-3J-Jbc" id="D0j-Ru-8PZ"/>
                                     <outlet property="delegate" destination="wqg-3J-Jbc" id="nYB-5p-oh6"/>
@@ -3369,8 +3276,8 @@ listed here</string>
         <image name="TabBarItemBackgroundActive" width="93" height="49"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="unw-g2-X1W"/>
         <segue reference="qjQ-Yp-ND2"/>
-        <segue reference="G38-Yz-wDt"/>
         <segue reference="kAI-SB-byA"/>
         <segue reference="bnE-Td-xNA"/>
     </inferredMetricsTieBreakers>

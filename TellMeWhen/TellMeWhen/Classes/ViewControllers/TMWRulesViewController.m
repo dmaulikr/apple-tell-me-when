@@ -1,10 +1,11 @@
-#import "TMWRulesViewController.h" // Headers
+#import "TMWRulesViewController.h"      // Headers
+
 #import "TMWRule.h"
 #import "TMWRulesTableViewCell.h"
 #import "TMWManager.h"
 #import "TMWEditRuleViewController.h"
 #import "TMWAPIService.h"
-
+#import "TMWActions.h"                  // TMW (ViewControllers/Protocols)
 
 #pragma mark - Constants
 
@@ -12,20 +13,16 @@ static NSString *const kRulesTableViewCellReuseIdentifier = @"RulesTableViewCell
 
 
 @interface TMWRulesViewController ()
-
 @property (strong, nonatomic) NSArray *rulesTableViewDataSource;
 @property (strong, nonatomic) IBOutlet UITableView *rulesTableView;
 @property (strong, nonatomic) IBOutlet UIView *noRulesView;
-
 - (IBAction)createRule:(UIButton *)sender;
 - (IBAction)signOutUser:(id)sender;
 - (IBAction)unwindToRulesView:(UIStoryboardSegue *)segue;
-
 @end
 
 
 @implementation TMWRulesViewController
-
 
 #pragma mark - View Controller Lifecycle Methods
 
@@ -106,9 +103,10 @@ static NSString *const kRulesTableViewCellReuseIdentifier = @"RulesTableViewCell
     [self performSegueWithIdentifier:@"ShowTransmittersView" sender:self];
 }
 
-- (IBAction)signOutUser:(id)sender {
-    [[TMWManager sharedInstance] signOut];
-    [self performSegueWithIdentifier:@"UnwindToSignInView" sender:self];
+- (IBAction)signOutUser:(id)sender
+{
+    id <TMWActions> target = [self targetForAction:@selector(signoutFromSender:) withSender:self];
+    [target signoutFromSender:self];
 }
 
 

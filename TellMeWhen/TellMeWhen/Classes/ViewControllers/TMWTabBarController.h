@@ -1,6 +1,4 @@
-#import <UIKit/UIKit.h> // Apple
-
+@import UIKit;          // Apple
 
 @interface TMWTabBarController : UITabBarController
-
 @end

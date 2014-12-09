@@ -1,8 +1,8 @@
-#import <Relayr/Relayr.h>
-
-#import "SignInViewController.h" // Headers
-#import "TMWManager.h"
-#import "TMWCredentials.h"
+#import "SignInViewController.h"    // Headers
+#import "TMWStoryboardIDs.h"
+#import "TMWManager.h"              // TMW (Model)
+#import "TMWCredentials.h"          // TMW (Model)
+#import <Relayr/Relayr.h>           // Relayr.framework
 
 static NSString *const kWebHostURI = @"https://api.relayr.io";
 static NSString *const kReachabilityAlertTitle = @"The relayr cloud is not reachable";
@@ -14,11 +14,10 @@ static NSString *const kReachabilityLabelTextWhenReachable = @"The relayr cloud 
 
 
 @interface SignInViewController ()
-@property (strong, nonatomic) IBOutlet UIButton *signIn;
-@property (strong, nonatomic) IBOutlet UILabel *reachabilityStatus;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *checkingReachability;
+@property (strong, nonatomic) IBOutlet UIButton* signIn;
+@property (strong, nonatomic) IBOutlet UILabel* reachabilityStatus;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView* checkingReachability;
 - (IBAction)signInPressed:(id)sender;
-- (IBAction)unwindToSignInView:(UIStoryboardSegue *)segue;
 @end
 
 
@@ -28,9 +27,12 @@ static NSString *const kReachabilityLabelTextWhenReachable = @"The relayr cloud 
     [super awakeFromNib];
 }
 
-#pragma mark - View Management
+#pragma mark - Public API
 
-- (void)viewWillAppear:(BOOL)animated {
+#pragma mark UIViewController methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
     _signIn.userInteractionEnabled = NO; // Disabled by default.
     _signIn.enabled = NO;
     
@@ -44,7 +46,7 @@ static NSString *const kReachabilityLabelTextWhenReachable = @"The relayr cloud 
             if ([TMWManager sharedInstance].relayrUser)
             {
                 [[TMWManager sharedInstance] fetchUsersWunderbars];
-                return [self performSegueWithIdentifier:@"ShowTabView" sender:self];
+                return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self];
             }
             else
             {
@@ -71,26 +73,22 @@ static NSString *const kReachabilityLabelTextWhenReachable = @"The relayr cloud 
             {
                 [TMWManager sharedInstance].relayrUser = user;
                 [[TMWManager sharedInstance] fetchUsersWunderbars];
-                [self performSegueWithIdentifier:@"ShowTabView" sender:self];
+                [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self];
             }
         }];
     }];
 }
 
-- (IBAction)unwindToSignInView:(UIStoryboardSegue *)segue {
-    NSLog(@"Unwind To Sign In View Called.");
-}
+#pragma mark - Private functionality
 
-
-#pragma mark - Actions
-
-- (IBAction)signInPressed:(id)sender {
+- (IBAction)signInPressed:(id)sender
+{
     _signIn.userInteractionEnabled = NO; // Prevent further presses
     [[TMWManager sharedInstance].relayrApp signInUser:^(NSError *error, RelayrUser *user) {
         if (!error) {
             [TMWManager sharedInstance].relayrUser = user;
             [[TMWManager sharedInstance] fetchUsersWunderbars];
-            [self performSegueWithIdentifier:@"ShowTabView" sender:self];
+            [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self];
         } else {
             UIAlertController* signInEerrorAlert = [UIAlertController alertControllerWithTitle:kSignInErrorAlertTitle message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction* ok = [UIAlertAction actionWithTitle:kSignInErrorAlertOkActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -103,10 +101,8 @@ static NSString *const kReachabilityLabelTextWhenReachable = @"The relayr cloud 
     }];
 }
 
-
-#pragma mark - Private Methods
-
-- (void)showReachabilityErrorAlert {
+- (void)showReachabilityErrorAlert
+{
     UIAlertController* reachabilityAlert = [UIAlertController alertControllerWithTitle:kReachabilityAlertTitle message:kReachabilityAlertMessage preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* tryAgain = [UIAlertAction actionWithTitle:kReachabilityAlertTryAgainActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [reachabilityAlert dismissViewControllerAnimated:YES completion:nil];

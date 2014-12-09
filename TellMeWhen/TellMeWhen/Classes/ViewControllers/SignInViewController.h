@@ -1,5 +1,4 @@
-#import <UIKit/UIKit.h> // Apple
-
+@import UIKit;  // Apple
 
 @interface SignInViewController : UIViewController
 
