@@ -12,6 +12,6 @@
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion;
 
 @optional
-- (void)signoutFromSender:(id)sender;
+- (IBAction)signoutFromSender:(id)sender;
 
 @end

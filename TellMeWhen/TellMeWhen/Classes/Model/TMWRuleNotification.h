@@ -5,10 +5,10 @@
  */
 @interface TMWRuleNotification : NSObject
 
-- (instancetype)initWithDeviceToken:(NSData *)deviceToken;
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
+- (instancetype)initWithDeviceToken:(NSData*)deviceToken;
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary;
 
-@property (readonly,nonatomic) NSString *type;
-@property (strong,nonatomic) NSData *deviceToken;
+@property (readonly,nonatomic) NSString* type;
+@property (strong,nonatomic) NSData* deviceToken;
 
 @end

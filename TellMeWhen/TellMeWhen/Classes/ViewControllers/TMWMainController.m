@@ -22,7 +22,7 @@
 
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
-    // TODO:
+    // TODO: (not important) Maybe show in the UITabBar as a badge.
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
@@ -30,7 +30,7 @@
     [[TMWStore sharedInstance].relayrUser queryCloudForIoTs:completion];
 }
 
-- (void)signoutFromSender:(id)sender
+- (IBAction)signoutFromSender:(id)sender
 {
     TMWStore* store = [TMWStore sharedInstance];
     [store.relayrApp signOutUser:store.relayrUser];
@@ -51,7 +51,7 @@
     }];
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{
-        NSFontAttributeName : [UIFont fontWithName:@"NewJuneBook" size:16],
+        NSFontAttributeName : [UIFont fontWithName:@"NewJuneBook" size:14],
         NSForegroundColorAttributeName:[UIColor whiteColor]
     } forState:UIControlStateNormal];
 }

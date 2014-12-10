@@ -9,8 +9,8 @@
 - (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 - (NSDictionary *)compressIntoJSONDictionary;
 
-@property (strong, nonatomic) NSString *meaning;
-@property (strong, nonatomic) NSString *operation;
+@property (strong, nonatomic) NSString* meaning;
+@property (strong, nonatomic) NSString* operation;
 @property (strong, nonatomic) id value;
 
 @end

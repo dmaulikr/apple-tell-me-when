@@ -5,6 +5,7 @@
 #import "NSData+Hexadecimal.h"
 #import "TMWStore.h"
 
+#pragma mark - Definitions
 
 #define TMWRule_RuleID          @"_id"
 #define TMWRule_Revision        @"_rev"
@@ -20,58 +21,53 @@
 #define TMWRule_Notif_Key       @"key"
 #define TMWRule_Notif_Type_APNS @"apns"
 
-
 @implementation TMWRule
-
 
 #pragma mark - Class Methods
 
-+ (TMWRule *)ruleForID:(NSString *)ruleID withinRulesArray:(NSArray *)rules {
-    if (!ruleID.length || !rules.count) {
-        return nil;
-    }
++ (TMWRule *)ruleForID:(NSString *)ruleID withinRulesArray:(NSArray *)rules
+{
+    if (!ruleID.length || !rules.count) { return nil; }
     
     TMWRule *result;
-    for (TMWRule *rule in rules) {
-        if ([ruleID isEqualToString:rule.uid]) {
-            result = rule; break;
-        }
+    for (TMWRule *rule in rules)
+    {
+        if ([ruleID isEqualToString:rule.uid]) { result = rule; break; }
     }
     return result;
 }
 
-
 #pragma mark - Public API
 
-- (instancetype)initWithUserID:(NSString *)userID {
-    if (!userID.length) {
-        return nil;
-    }
+- (instancetype)initWithUserID:(NSString *)userID
+{
+    if (!userID.length) { return nil; }
     
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _userID = userID;
         _active = YES;
     }
     return self;
 }
 
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
-    if (!jsonDictionary.count) {
-        return nil;
-    }
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary
+{
+    if (!jsonDictionary.count) { return nil; }
     
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _uid = jsonDictionary[TMWRule_RuleID];
         _revisionString = jsonDictionary[TMWRule_Revision];
         _userID = jsonDictionary[TMWRule_UserID];
         _transmitterID = jsonDictionary[TMWRule_TransmitterID];
         _deviceID = jsonDictionary[TMWRule_DeviceID];
-        NSNumber *tmpNumber = jsonDictionary[TMWRule_Active];
+        NSNumber* tmpNumber = jsonDictionary[TMWRule_Active];
         _active = (tmpNumber) ? tmpNumber.boolValue : YES; // Rules are active by default
         
-        NSDictionary *tmpDict = jsonDictionary[TMWRule_Details];
+        NSDictionary* tmpDict = jsonDictionary[TMWRule_Details];
         _name = tmpDict[TMWRule_Details_Name];
         _condition = [[TMWRuleCondition alloc] initWithJSONDictionary:jsonDictionary[TMWRule_Condition]];
         
@@ -87,14 +83,11 @@
     return self;
 }
 
-- (NSDictionary *)compressIntoJSONDictionary {
+- (NSDictionary*)compressIntoJSONDictionary
+{
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    if (_uid) {
-        result[TMWRule_RuleID] = _uid;
-    }
-    if (_revisionString) {
-        result[TMWRule_Revision] = _revisionString;
-    }
+    if (_uid) { result[TMWRule_RuleID] = _uid; }
+    if (_revisionString) { result[TMWRule_Revision] = _revisionString; }
     result[TMWRule_UserID] = _userID;
     result[TMWRule_TransmitterID] = _transmitterID;
     result[TMWRule_DeviceID] = _deviceID;
@@ -102,86 +95,16 @@
     result[TMWRule_Details] = @{ TMWRule_Details_Name : _name };
     
     NSDictionary *conditionDictionary = [_condition compressIntoJSONDictionary];
-    if (conditionDictionary) {
-        result[TMWRule_Condition] = conditionDictionary;
-    }
+    if (conditionDictionary) { result[TMWRule_Condition] = conditionDictionary; }
     NSArray *notificationsArray = [self compressNotificationsIntoJSONArray];
-    if (notificationsArray) {
-        result[TMWRule_Notifications] = notificationsArray;
-    }
+    if (notificationsArray) { result[TMWRule_Notifications] = notificationsArray; }
     return (result.count) ? [NSDictionary dictionaryWithDictionary:result] : nil;
 }
 
-- (NSString *)thresholdDescription {
-    NSString *description = @"";
-    if (_condition) {
-        NSNumber *value = _condition.value;
-        float floatVlaue = [value floatValue];
-        if ([_condition.meaning isEqualToString:@"temperature"]) {
-            description = [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, floatVlaue];
-        } else if ([_condition.meaning isEqualToString:@"humidity"]) {
-            description = [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, floatVlaue];
-        } else if([_condition.meaning isEqualToString:@"luminosity"]) {
-            description = [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, floatVlaue / 40.96];
-        } else if ([_condition.meaning isEqualToString:@"proximity"]) {
-            description = [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, floatVlaue / 20.48]; // FIXME: Add text to indicate "closeness"?
-        } else if ([_condition.meaning isEqualToString:@"noise_level"]) {
-            description = [NSString stringWithFormat:@"%@ %.f", _condition.operation, floatVlaue / 102.4];
-        }
-    }
-    return description;
-}
-
-- (NSString *)type {
-    NSString *type = @"";
-    if (_condition) {
-        if ([_condition.meaning isEqualToString:@"temperature"]) {
-            type =  @"Temperature";
-        } else if ([_condition.meaning isEqualToString:@"humidity"]) {
-            type = @"Humidity";
-        } else if ([_condition.meaning isEqualToString:@"proximity"]) {
-            type = @"Proximity";
-        } else if ([_condition.meaning isEqualToString:@"luminosity"]) {
-            type = @"Brightness";
-        } else if ([_condition.meaning isEqualToString:@"noise_level"]) {
-            type = @"Sound";
-        }
-    }
-    return  type;
-}
-
-- (RelayrTransmitter *)transmitter {
-    for (RelayrTransmitter *transmitter in [TMWStore sharedInstance].relayrUser.transmitters) {
-        if ([transmitter.uid isEqualToString:_transmitterID]) {
-            return transmitter;
-        }
-    }
-    return nil;
-}
-
-- (UIImage *)typeImage {
-    UIImage *image = nil;
-    if (_condition) {
-        if ([_condition.meaning isEqualToString:@"temperature"]) {
-            image = [UIImage imageNamed:@"TemperatureIcon"];
-        } else if ([_condition.meaning isEqualToString:@"humidity"]) {
-            image = [UIImage imageNamed:@"HumidityIcon"];
-        } else if ([_condition.meaning isEqualToString:@"proximity"]) {
-            image = [UIImage imageNamed:@"ProximityIcon"];
-        } else if ([_condition.meaning isEqualToString:@"luminosity"]) {
-            image = [UIImage imageNamed:@"LightIcon"];
-        } else if ([_condition.meaning isEqualToString:@"noise_level"]) {
-            image = [UIImage imageNamed:@"NoiseIcon"];
-        }
-    }
-    return image;
-}
-
-
-- (NSArray *)setupNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (NSArray*)setupNotificationsWithDeviceToken:(NSData *)deviceToken
+{
     TMWRuleNotification* notification = [[TMWRuleNotification alloc] initWithDeviceToken:deviceToken];
     if (!notification) { return _notifications; }
-    
     if (!_notifications.count) { return [NSArray arrayWithObject:notification]; }
     
     for (TMWRuleNotification* tmp in _notifications)
@@ -194,10 +117,54 @@
     return [NSArray arrayWithArray:result];
 }
 
+#pragma mark Generator methods (readonly)
+
+- (NSString*)type
+{
+    if (!_condition) { return nil; }
+    return  ([_condition.meaning isEqualToString:@"temperature"]) ? @"Temperature"  :
+            ([_condition.meaning isEqualToString:@"humidity"])    ? @"Humidity"     :
+            ([_condition.meaning isEqualToString:@"proximity"])   ? @"Proximity"    :
+            ([_condition.meaning isEqualToString:@"luminosity"])  ? @"Brightness"   :
+            ([_condition.meaning isEqualToString:@"noise_level"]) ? @"Sound"        : nil;
+}
+
+- (UIImage*)typeImage
+{
+    if (!_condition) { return nil; }
+    return  ([_condition.meaning isEqualToString:@"temperature"]) ? [UIImage imageNamed:@"IconTemperature"] :
+            ([_condition.meaning isEqualToString:@"humidity"])    ? [UIImage imageNamed:@"IconHumidity"]    :
+            ([_condition.meaning isEqualToString:@"proximity"])   ? [UIImage imageNamed:@"IconProximity"]   :
+            ([_condition.meaning isEqualToString:@"luminosity"])  ? [UIImage imageNamed:@"IconLight"]       :
+            ([_condition.meaning isEqualToString:@"noise_level"]) ? [UIImage imageNamed:@"IconNoise"]       : nil;
+}
+
+- (NSString*)thresholdDescription
+{
+    if (!_condition || ![_condition.value isKindOfClass:[NSNumber class]]) { return nil; }
+    
+    float const value = [_condition.value floatValue];
+    // FIXME: (proximity) Add text to indicate "closeness"?
+    return  ([_condition.meaning isEqualToString:@"temperature"]) ? [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, value]   :
+            ([_condition.meaning isEqualToString:@"humidity"])    ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value]   :
+            ([_condition.meaning isEqualToString:@"luminosity"])  ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 40.96]   :
+            ([_condition.meaning isEqualToString:@"proximity"])   ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 20.48]   :
+    ([_condition.meaning isEqualToString:@"noise_level"]) ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4] : nil;
+}
+
+- (RelayrTransmitter *)transmitter
+{
+    for (RelayrTransmitter *transmitter in [TMWStore sharedInstance].relayrUser.transmitters)
+    {
+        if ([transmitter.uid isEqualToString:_transmitterID]) { return transmitter; }
+    }
+    return nil;
+}
 
 #pragma mark - Private Methods
 
-- (NSArray *)compressNotificationsIntoJSONArray {
+- (NSArray *)compressNotificationsIntoJSONArray
+{
     if (!_notifications.count) {
         return nil;
     }

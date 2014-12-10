@@ -55,11 +55,12 @@ static NSString *const kRulesTableViewCellReuseIdentifier = @"RulesTableViewCell
 #pragma mark - Table View Data Source Methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TMWRulesTableViewCell *cell = (TMWRulesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRulesTableViewCellReuseIdentifier];
-    TMWRule *rule = [_rulesTableViewDataSource objectAtIndex:indexPath.row];
-    cell.ruleName.text = rule.name.uppercaseString;
-    [cell setRuleDescriptionTextForRule:rule];
-    return cell;
+//    TMWRulesTableViewCell *cell = (TMWRulesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRulesTableViewCellReuseIdentifier];
+//    TMWRule *rule = [_rulesTableViewDataSource objectAtIndex:indexPath.row];
+//    cell.ruleName.text = rule.name.uppercaseString;
+//    [cell setRuleDescriptionTextForRule:rule];
+//    return cell;
+    return nil;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

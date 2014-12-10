@@ -7,13 +7,13 @@
 
 @implementation TMWRuleCondition
 
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary {
-    if (!jsonDictionary.count) {
-        return nil;
-    }
+- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary
+{
+    if (!jsonDictionary.count) { return nil; }
 
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _meaning = jsonDictionary[TMWRule_Condition_Meaning];
         _operation = jsonDictionary[TMWRule_Condition_Operation];
         id value = jsonDictionary[TMWRule_Condition_Value];
@@ -27,12 +27,12 @@
 }
 
 - (NSDictionary *)compressIntoJSONDictionary {
-    if (!_meaning.length || !_operation.length || !_value) {
-        return nil;
-    }
-    return @{ TMWRule_Condition_Meaning : _meaning,
-              TMWRule_Condition_Operation : _operation,
-              TMWRule_Condition_Value : ([_value isKindOfClass:[NSNumber class]]) ? _value : [NSNull null] };
+    if (!_meaning.length || !_operation.length || !_value) { return nil; }
+    return @{
+        TMWRule_Condition_Meaning   : _meaning,
+        TMWRule_Condition_Operation : _operation,
+        TMWRule_Condition_Value     : ([_value isKindOfClass:[NSNumber class]]) ? _value : [NSNull null]
+    };
 }
 
 @end

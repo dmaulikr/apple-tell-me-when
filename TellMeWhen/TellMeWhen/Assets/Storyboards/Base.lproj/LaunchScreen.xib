@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="RelayrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="NuF-QM-SIh">
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LogoRelayr" translatesAutoresizingMaskIntoConstraints="NO" id="NuF-QM-SIh">
                     <rect key="frame" x="149" y="170" width="183" height="71"/>
                 </imageView>
             </subviews>
@@ -25,6 +25,6 @@
         </view>
     </objects>
     <resources>
-        <image name="RelayrLogo" width="183" height="71"/>
+        <image name="LogoRelayr" width="183" height="71"/>
     </resources>
 </document>
