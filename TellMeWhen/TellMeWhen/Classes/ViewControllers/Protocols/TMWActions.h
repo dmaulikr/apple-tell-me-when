@@ -9,6 +9,9 @@
 - (void)notificationDidArrived:(NSDictionary*)userInfo;
 
 @optional
+- (void)loadIoTsWithCompletion:(void (^)(NSError*))completion;
+
+@optional
 - (void)signoutFromSender:(id)sender;
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		622126531A37F06A00E24072 /* TMWRulesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126521A37F06A00E24072 /* TMWRulesController.m */; };
+		622126561A37F6A200E24072 /* TMWSegueShowChildController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126551A37F6A200E24072 /* TMWSegueShowChildController.m */; };
+		6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */; };
 		62D741F31A37104600DBBAED /* Relayr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; };
 		62D741F41A37104600DBBAED /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62D742011A37161500DBBAED /* TMWRootViewControllerSwapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */; };
@@ -21,7 +24,7 @@
 		7D650D311A2E0829007BB0A1 /* TMWAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D650D301A2E0829007BB0A1 /* TMWAPIService.m */; };
 		7D759EDE1A1B36210004656A /* TMWTransmitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D759EDD1A1B36210004656A /* TMWTransmitterViewController.m */; };
 		7D8307BA1A1CEA8100A68225 /* TMWRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8307B91A1CEA8100A68225 /* TMWRule.m */; };
-		7D8FF3A51A1A4A1500429FDE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF3961A1A4A1400429FDE /* Images.xcassets */; };
+		7D8FF3A51A1A4A1500429FDE /* ios.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF3961A1A4A1400429FDE /* ios.xcassets */; };
 		7D8FF3A61A1A4A1500429FDE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF3981A1A4A1500429FDE /* LaunchScreen.xib */; };
 		7D8FF3A71A1A4A1500429FDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D8FF39A1A1A4A1500429FDE /* Main.storyboard */; };
 		7D8FF3A81A1A4A1500429FDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */; };
@@ -95,6 +98,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6221264C1A37ECB800E24072 /* TMWUIProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWUIProperties.h; sourceTree = "<group>"; };
+		622126511A37F06A00E24072 /* TMWRulesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesController.h; sourceTree = "<group>"; };
+		622126521A37F06A00E24072 /* TMWRulesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesController.m; sourceTree = "<group>"; };
+		622126541A37F6A200E24072 /* TMWSegueShowChildController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueShowChildController.h; sourceTree = "<group>"; };
+		622126551A37F6A200E24072 /* TMWSegueShowChildController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueShowChildController.m; sourceTree = "<group>"; };
+		6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMainTabBar.h; sourceTree = "<group>"; };
+		6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMainTabBar.m; sourceTree = "<group>"; };
 		62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RelayrSDK.xcodeproj; path = "../../../apple-sdk/RelayrSDK/RelayrSDK.xcodeproj"; sourceTree = "<group>"; };
 		62D741FF1A37161500DBBAED /* TMWRootViewControllerSwapSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRootViewControllerSwapSegue.h; sourceTree = "<group>"; };
 		62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRootViewControllerSwapSegue.m; sourceTree = "<group>"; };
@@ -123,7 +133,7 @@
 		7D8307B81A1CEA8100A68225 /* TMWRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRule.h; sourceTree = "<group>"; };
 		7D8307B91A1CEA8100A68225 /* TMWRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWRule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D8FF36B1A1A497A00429FDE /* TellMeWhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeWhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D8FF3961A1A4A1400429FDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7D8FF3961A1A4A1400429FDE /* ios.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ios.xcassets; sourceTree = "<group>"; };
 		7D8FF3991A1A4A1500429FDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7D8FF39B1A1A4A1500429FDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D8FF39D1A1A4A1500429FDE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +180,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		622126501A37F05400E24072 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				622126511A37F06A00E24072 /* TMWRulesController.h */,
+				622126521A37F06A00E24072 /* TMWRulesController.m */,
+			);
+			path = Rules;
+			sourceTree = "<group>";
+		};
+		625760431A37D5B70011F89B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */,
+				6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */,
+				6221264C1A37ECB800E24072 /* TMWUIProperties.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		62B4A6E51A320FE8005F467D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +223,8 @@
 				62D742061A37229B00DBBAED /* TMWStoryboardIDs.h */,
 				62D741FF1A37161500DBBAED /* TMWRootViewControllerSwapSegue.h */,
 				62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */,
+				622126541A37F6A200E24072 /* TMWSegueShowChildController.h */,
+				622126551A37F6A200E24072 /* TMWSegueShowChildController.m */,
 			);
 			path = Segues;
 			sourceTree = "<group>";
@@ -302,7 +333,7 @@
 		7D8FF3951A1A4A1400429FDE /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				7D8FF3961A1A4A1400429FDE /* Images.xcassets */,
+				7D8FF3961A1A4A1400429FDE /* ios.xcassets */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -322,8 +353,9 @@
 				7D8FF39F1A1A4A1500429FDE /* main.m */,
 				7D8FF39D1A1A4A1500429FDE /* AppDelegate.h */,
 				7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */,
-				7D8FF3A01A1A4A1500429FDE /* ViewControllers */,
 				7D8307B71A1CEA6D00A68225 /* Model */,
+				7D8FF3A01A1A4A1500429FDE /* ViewControllers */,
+				625760431A37D5B70011F89B /* Views */,
 				7DC4A03C1A2DB12E005A65AC /* Utilities */,
 			);
 			path = Classes;
@@ -338,6 +370,7 @@
 				7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */,
 				7DF4B6F81A1C7C7800F90FFC /* TMWMainController.h */,
 				7DF4B6F91A1C7C7800F90FFC /* TMWMainController.m */,
+				622126501A37F05400E24072 /* Rules */,
 				7D8FF3A11A1A4A1500429FDE /* TMWRulesViewController.h */,
 				7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */,
 				7D153AE21A1DDDC700B671B0 /* TMWRulesTableViewCell */,
@@ -492,7 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D8FF3A51A1A4A1500429FDE /* Images.xcassets in Resources */,
+				7D8FF3A51A1A4A1500429FDE /* ios.xcassets in Resources */,
 				7DF4B6F61A1BE14600F90FFC /* NewJuneBold.otf in Resources */,
 				7DF4B6F71A1BE14600F90FFC /* NewJuneBook.otf in Resources */,
 				7D1F1F9F1A30AF0500EFC92B /* DingDing.wav in Resources */,
@@ -514,8 +547,10 @@
 				7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */,
 				7DF4B6FA1A1C7C7800F90FFC /* TMWMainController.m in Sources */,
 				7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */,
+				622126561A37F6A200E24072 /* TMWSegueShowChildController.m in Sources */,
 				7D8FF3AA1A1A4A1500429FDE /* TMWRulesViewController.m in Sources */,
 				7D8FF3B41A1A542300429FDE /* TMWNotificationsViewController.m in Sources */,
+				622126531A37F06A00E24072 /* TMWRulesController.m in Sources */,
 				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,
 				7DC9E5091A25DBD0008ECA66 /* TMWNotificationTableViewCell.m in Sources */,
 				7D8FF3A91A1A4A1500429FDE /* main.m in Sources */,
@@ -529,6 +564,7 @@
 				7D8FF3A81A1A4A1500429FDE /* AppDelegate.m in Sources */,
 				7D759EDE1A1B36210004656A /* TMWTransmitterViewController.m in Sources */,
 				7D6088C41A1E3A9400F671FB /* TMWMeasurementTableViewCell.m in Sources */,
+				6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */,
 				7DDA4CB81A1F6FD60097596E /* TMWRuleNameViewController.m in Sources */,
 				7D0E1E021A1B588600B9AC26 /* TMWThresholdDetailsViewController.m in Sources */,
 				7DC4A0451A2DB388005A65AC /* TMWRuleCondition.m in Sources */,

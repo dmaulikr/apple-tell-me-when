@@ -3,7 +3,9 @@
 
 @implementation TMWNotificationTableViewCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
     // Initialization code
 }
 

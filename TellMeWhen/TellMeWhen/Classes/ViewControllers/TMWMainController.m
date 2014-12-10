@@ -1,8 +1,9 @@
-#import "TMWMainController.h" // Apple
-#import "TMWStore.h"          // TMW (Model)
-#import "TMWActions.h"          // TMW (ViewControllers/Protocols)
-#import "TMWStoryboardIDs.h"    // TMW (ViewControllers/Segues)
+#import "TMWMainController.h"               // Apple
+#import "TMWStore.h"                        // TMW (Model)
+#import "TMWActions.h"                      // TMW (ViewControllers/Protocols)
+#import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWRootViewControllerSwapSegue.h"  // TMW (ViewControllers/Segues)
+#import "TMWUIProperties.h"                 // TMW (Views)
 
 @interface TMWMainController () <UITabBarControllerDelegate>
 @property (nonatomic, strong) NSMutableArray* overlayImageViews;
@@ -24,6 +25,11 @@
     // TODO:
 }
 
+- (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
+{
+    [[TMWStore sharedInstance].relayrUser queryCloudForIoTs:completion];
+}
+
 - (void)signoutFromSender:(id)sender
 {
     TMWStore* store = [TMWStore sharedInstance];
@@ -35,37 +41,19 @@
     [segue perform];
 }
 
-#pragma mark UIViewController methods
+#pragma mark NSObject methods
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)awakeFromNib
 {
-    TMWStore* store = [TMWStore sharedInstance];
-    RelayrApp* app = store.relayrApp;
-    RelayrUser* user = store.relayrUser;
-    NSLog(@"%@\n%@", app, user);
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+        NSForegroundColorAttributeName  : [UIColor whiteColor],
+        NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBold size:20]
+    }];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{
+        NSFontAttributeName : [UIFont fontWithName:@"NewJuneBook" size:16],
+        NSForegroundColorAttributeName:[UIColor whiteColor]
+    } forState:UIControlStateNormal];
 }
-
-//- (void)viewDidLoad
-//{
-//    [super viewDidLoad];
-//    [self customiseNavigationBar];
-//    [self setUpTabBarOverlay];
-//}
-
-#pragma mark - Private functionality
-
-//- (void)customiseNavigationBar
-//{
-//    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
-//     setTitleTextAttributes:@{ NSFontAttributeName:[UIFont fontWithName:@"NewJuneBook" size:16], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
-//    UINavigationController *rulesNavigationController = (UINavigationController *)[self.viewControllers objectAtIndex:0];
-//    if (rulesNavigationController) {
-//        rulesNavigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"NewJuneBold" size:20], NSForegroundColorAttributeName:[UIColor whiteColor]};
-//    }
-//    UINavigationController *notificationNavigationController = (UINavigationController *)[self.viewControllers objectAtIndex:1];
-//    if (notificationNavigationController) {
-//        notificationNavigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:@"NewJuneBold" size:20], NSForegroundColorAttributeName:[UIColor whiteColor]};
-//    }
-//}
 
 @end

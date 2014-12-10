@@ -3,6 +3,7 @@
 #import "TMWStore.h"        // TMW (Model)
 #import "TMWStoryboardIDs.h"// TMW (ViewControllers/Segues)
 #import "TMWActions.h"      // TMW (ViewControllers/Protocol)
+#import "TMWRootViewControllerSwapSegue.h"
 #import <Relayr/Relayr.h>   // Relayr.framework
 
 @interface AppDelegate ()
@@ -16,9 +17,14 @@
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:TMWStoryboard bundle:nil];
     
     TMWStore* store = [TMWStore sharedInstance];
-    _window.rootViewController = (!store.relayrApp || !store.relayrUser) ?
-        [storyboard instantiateInitialViewController] :
-        [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
+    UIViewController <TMWActions>* controller;
+    if (store.relayrApp && store.relayrUser)
+    {
+        controller = [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
+        [controller loadIoTsWithCompletion:nil];
+    }
+    else { _window.rootViewController = [storyboard instantiateInitialViewController]; }
+    _window.rootViewController = controller;
     [_window makeKeyAndVisible];
     
     // Setup the notifications.
