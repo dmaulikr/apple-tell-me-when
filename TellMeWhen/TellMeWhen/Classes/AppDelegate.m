@@ -1,88 +1,66 @@
-#import <Relayr/Relayr.h> // relayr
+#import "AppDelegate.h"     // Header
 
-#import "AppDelegate.h"   // Header
-#import "TMWManager.h"
-
+#import "TMWStore.h"        // TMW (Model)
+#import "TMWStoryboardIDs.h"// TMW (ViewControllers/Segues)
+#import "TMWActions.h"      // TMW (ViewControllers/Protocol)
+#import <Relayr/Relayr.h>   // Relayr.framework
 
 @interface AppDelegate ()
 @end
 
-
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [self setUpNotificationsForApplication:application];
-    return YES;
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // ...
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // ...
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // ...
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // ...
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    RelayrApp *app = [TMWManager sharedInstance].relayrApp;
-    if (!app) { return; }
+    _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:TMWStoryboard bundle:nil];
     
-    RelayrUser *user = app.loggedUsers.firstObject;
-    if (!user) { return; }
+    TMWStore* store = [TMWStore sharedInstance];
+    _window.rootViewController = (!store.relayrApp || !store.relayrUser) ?
+        [storyboard instantiateInitialViewController] :
+        [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
+    [_window makeKeyAndVisible];
     
-    [[TMWManager sharedInstance] persistInFileSystem];
-}
-
-- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-    NSLog(@"%@", notificationSettings);
-}
-
-- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSData* previousToken = [TMWManager sharedInstance].apnsToken;
-    if (![previousToken isEqualToData:deviceToken])
-    {
-        // TODO: Send the new token to the server...
-    }
-    [TMWManager sharedInstance].apnsToken = deviceToken;
-}
-
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-    [TMWManager sharedInstance].apnsToken = nil;
-    NSLog(@"Did fail to register remote notification");
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    NSLog(@"%@", userInfo);
-}
-
-
-#pragma mark - Private Methods
-
-- (void)setUpNotificationsForApplication:(UIApplication*)application
-{
+    // Setup the notifications.
     UIUserNotificationType const notificationTypes = UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
     UIUserNotificationSettings* notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
     [application registerUserNotificationSettings:notificationSettings];
     [application registerForRemoteNotifications];
+    
+    // Retrieve the notification (if any) that launched the application.
+    NSDictionary* notif = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (notif.count) { [((id <TMWActions>)_window.rootViewController) notificationDidArrived:notif]; }
+    
+    return YES;
+}
+
+- (void)applicationWillEnterForeground:(UIApplication*)application { }
+- (void)applicationDidBecomeActive:(UIApplication*)application { }
+- (void)applicationWillResignActive:(UIApplication*)application { }
+- (void)applicationWillTerminate:(UIApplication*)application { }
+- (void)applicationDidEnterBackground:(UIApplication*)application
+{
+    TMWStore* store = [TMWStore sharedInstance];
+    
+    RelayrApp* app = [TMWStore sharedInstance].relayrApp;
+    RelayrUser* user = app.loggedUsers.firstObject;
+    if (!app || !user) { [store removeFromFileSystem]; return; }
+    
+    [store persistInFileSystem];
+}
+
+- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings { }
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:deviceToken];
+}
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:nil];
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+    [((id <TMWActions>)_window.rootViewController) notificationDidArrived:userInfo];
 }
 
 @end

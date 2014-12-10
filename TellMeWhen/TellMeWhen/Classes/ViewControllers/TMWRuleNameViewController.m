@@ -1,5 +1,5 @@
 #import "TMWRuleNameViewController.h" // Headers
-#import "TMWManager.h"
+#import "TMWStore.h"
 #import "TMWEditRuleViewController.h"
 #import "TMWRule.h"
 #import "TMWAPIService.h"
@@ -75,7 +75,7 @@
 #pragma mark - Private Methods
 
 - (void)registerNewRule {
-    _rule.notifications = [_rule setupNotificationsWithDeviceToken:[TMWManager sharedInstance].apnsToken];
+    _rule.notifications = [_rule setupNotificationsWithDeviceToken:[TMWStore sharedInstance].deviceToken];
     [TMWAPIService registerRule:_rule completion:^(NSError *error) {
         if (!error) {
             NSLog(@"Created rule with id: %@", _rule.uid);

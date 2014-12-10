@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "RulesTabActive.png"
+      "filename" : "TabBarItemRules.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "RulesTabActive@2x.png"
+      "filename" : "TabBarItemRules@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "RulesTabActive@3x.png"
+      "filename" : "TabBarItemRules@3x.png"
     }
   ],
   "info" : {

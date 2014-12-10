@@ -4,7 +4,7 @@
 #import "TMWMeasurementTableViewCell.h"
 #import "TMWThresholdDetailsViewController.h"
 #import "TMWEditRuleViewController.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 #import "TMWRuleCondition.h"
 #import "TMWAPIService.h"
 

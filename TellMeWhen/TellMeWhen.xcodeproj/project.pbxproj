@@ -13,8 +13,8 @@
 		7D0E1DFF1A1B53BD00B9AC26 /* TMWMeasurementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */; };
 		7D0E1E021A1B588600B9AC26 /* TMWThresholdDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */; };
 		7D153AE51A1DDDEB00B671B0 /* TMWRulesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE41A1DDDEB00B671B0 /* TMWRulesTableViewCell.m */; };
-		7D153AE81A1DFDF100B671B0 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE71A1DFDF100B671B0 /* SignInViewController.m */; };
-		7D153AEB1A1E001F00B671B0 /* TMWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AEA1A1E001F00B671B0 /* TMWManager.m */; };
+		7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */; };
+		7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AEA1A1E001F00B671B0 /* TMWStore.m */; };
 		7D1F1F9F1A30AF0500EFC92B /* DingDing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */; };
 		7D6088C01A1E32A600F671FB /* TMWTransmittersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6088BF1A1E32A600F671FB /* TMWTransmittersTableViewCell.m */; };
 		7D6088C41A1E3A9400F671FB /* TMWMeasurementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D6088C31A1E3A9400F671FB /* TMWMeasurementTableViewCell.m */; };
@@ -39,7 +39,7 @@
 		7DDA4CBB1A1F717F0097596E /* TMWEditRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DDA4CBA1A1F717F0097596E /* TMWEditRuleViewController.m */; };
 		7DF4B6F61A1BE14600F90FFC /* NewJuneBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F41A1BE14600F90FFC /* NewJuneBold.otf */; };
 		7DF4B6F71A1BE14600F90FFC /* NewJuneBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F51A1BE14600F90FFC /* NewJuneBook.otf */; };
-		7DF4B6FA1A1C7C7800F90FFC /* TMWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */; };
+		7DF4B6FA1A1C7C7800F90FFC /* TMWMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DF4B6F91A1C7C7800F90FFC /* TMWMainController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,13 +103,13 @@
 		7D0E1DFD1A1B53BD00B9AC26 /* TMWMeasurementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMeasurementViewController.h; sourceTree = "<group>"; };
 		7D0E1DFE1A1B53BD00B9AC26 /* TMWMeasurementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMeasurementViewController.m; sourceTree = "<group>"; };
 		7D0E1E001A1B588600B9AC26 /* TMWThresholdDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWThresholdDetailsViewController.h; sourceTree = "<group>"; };
-		7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWThresholdDetailsViewController.m; sourceTree = "<group>"; };
+		7D0E1E011A1B588600B9AC26 /* TMWThresholdDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWThresholdDetailsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D153AE31A1DDDEB00B671B0 /* TMWRulesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesTableViewCell.h; sourceTree = "<group>"; };
 		7D153AE41A1DDDEB00B671B0 /* TMWRulesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesTableViewCell.m; sourceTree = "<group>"; };
-		7D153AE61A1DFDF100B671B0 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
-		7D153AE71A1DFDF100B671B0 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
-		7D153AE91A1E001F00B671B0 /* TMWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWManager.h; sourceTree = "<group>"; };
-		7D153AEA1A1E001F00B671B0 /* TMWManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWManager.m; sourceTree = "<group>"; };
+		7D153AE61A1DFDF100B671B0 /* TMWInitialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWInitialController.h; sourceTree = "<group>"; };
+		7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWInitialController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		7D153AE91A1E001F00B671B0 /* TMWStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStore.h; sourceTree = "<group>"; };
+		7D153AEA1A1E001F00B671B0 /* TMWStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DingDing.wav; sourceTree = "<group>"; };
 		7D6088BE1A1E32A600F671FB /* TMWTransmittersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTransmittersTableViewCell.h; sourceTree = "<group>"; };
 		7D6088BF1A1E32A600F671FB /* TMWTransmittersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTransmittersTableViewCell.m; sourceTree = "<group>"; };
@@ -119,23 +119,23 @@
 		7D650D301A2E0829007BB0A1 /* TMWAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWAPIService.m; sourceTree = "<group>"; };
 		7D650D351A2E0B3F007BB0A1 /* TMWCredentials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMWCredentials.h; sourceTree = "<group>"; };
 		7D759EDC1A1B36210004656A /* TMWTransmitterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTransmitterViewController.h; sourceTree = "<group>"; };
-		7D759EDD1A1B36210004656A /* TMWTransmitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTransmitterViewController.m; sourceTree = "<group>"; };
+		7D759EDD1A1B36210004656A /* TMWTransmitterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWTransmitterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D8307B81A1CEA8100A68225 /* TMWRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRule.h; sourceTree = "<group>"; };
-		7D8307B91A1CEA8100A68225 /* TMWRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRule.m; sourceTree = "<group>"; };
+		7D8307B91A1CEA8100A68225 /* TMWRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWRule.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D8FF36B1A1A497A00429FDE /* TellMeWhen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TellMeWhen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D8FF3961A1A4A1400429FDE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7D8FF3991A1A4A1500429FDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7D8FF39B1A1A4A1500429FDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D8FF39D1A1A4A1500429FDE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D8FF39F1A1A4A1500429FDE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7D8FF3A11A1A4A1500429FDE /* TMWRulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesViewController.h; sourceTree = "<group>"; };
-		7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesViewController.m; sourceTree = "<group>"; };
+		7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWRulesViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D8FF3A41A1A4A1500429FDE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D8FF3B21A1A542300429FDE /* TMWNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsViewController.h; sourceTree = "<group>"; };
-		7D8FF3B31A1A542300429FDE /* TMWNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsViewController.m; sourceTree = "<group>"; };
+		7D8FF3B31A1A542300429FDE /* TMWNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWNotificationsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7DB29BF31A35D8F100958ABD /* TMWNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationDetailViewController.h; sourceTree = "<group>"; };
-		7DB29BF41A35D8F100958ABD /* TMWNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationDetailViewController.m; sourceTree = "<group>"; };
+		7DB29BF41A35D8F100958ABD /* TMWNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWNotificationDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7DC4A03D1A2DB12E005A65AC /* NSData+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hexadecimal.h"; sourceTree = "<group>"; };
 		7DC4A03E1A2DB12E005A65AC /* NSData+Hexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hexadecimal.m"; sourceTree = "<group>"; };
 		7DC4A03F1A2DB12E005A65AC /* NSString+Hexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hexadecimal.h"; sourceTree = "<group>"; };
@@ -149,13 +149,13 @@
 		7DC9E5071A25DBD0008ECA66 /* TMWNotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationTableViewCell.h; sourceTree = "<group>"; };
 		7DC9E5081A25DBD0008ECA66 /* TMWNotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationTableViewCell.m; sourceTree = "<group>"; };
 		7DDA4CB61A1F6FD60097596E /* TMWRuleNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRuleNameViewController.h; sourceTree = "<group>"; };
-		7DDA4CB71A1F6FD60097596E /* TMWRuleNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleNameViewController.m; sourceTree = "<group>"; };
+		7DDA4CB71A1F6FD60097596E /* TMWRuleNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWRuleNameViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7DDA4CB91A1F717F0097596E /* TMWEditRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWEditRuleViewController.h; sourceTree = "<group>"; };
 		7DDA4CBA1A1F717F0097596E /* TMWEditRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWEditRuleViewController.m; sourceTree = "<group>"; };
 		7DF4B6F41A1BE14600F90FFC /* NewJuneBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewJuneBold.otf; sourceTree = "<group>"; };
 		7DF4B6F51A1BE14600F90FFC /* NewJuneBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NewJuneBook.otf; sourceTree = "<group>"; };
-		7DF4B6F81A1C7C7800F90FFC /* TMWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTabBarController.h; sourceTree = "<group>"; };
-		7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTabBarController.m; sourceTree = "<group>"; };
+		7DF4B6F81A1C7C7800F90FFC /* TMWMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMainController.h; sourceTree = "<group>"; };
+		7DF4B6F91A1C7C7800F90FFC /* TMWMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMainController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +244,8 @@
 		7D8307B71A1CEA6D00A68225 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7D153AE91A1E001F00B671B0 /* TMWStore.h */,
+				7D153AEA1A1E001F00B671B0 /* TMWStore.m */,
 				7D650D351A2E0B3F007BB0A1 /* TMWCredentials.h */,
 				7D8307B81A1CEA8100A68225 /* TMWRule.h */,
 				7D8307B91A1CEA8100A68225 /* TMWRule.m */,
@@ -253,8 +255,6 @@
 				7DC4A0471A2DB51F005A65AC /* TMWRuleNotification.m */,
 				7DC9E5001A25D2D5008ECA66 /* TMWNotification.h */,
 				7DC9E5011A25D2D5008ECA66 /* TMWNotification.m */,
-				7D153AE91A1E001F00B671B0 /* TMWManager.h */,
-				7D153AEA1A1E001F00B671B0 /* TMWManager.m */,
 				7D650D2F1A2E0829007BB0A1 /* TMWAPIService.h */,
 				7D650D301A2E0829007BB0A1 /* TMWAPIService.m */,
 			);
@@ -322,9 +322,9 @@
 				7D8FF39F1A1A4A1500429FDE /* main.m */,
 				7D8FF39D1A1A4A1500429FDE /* AppDelegate.h */,
 				7D8FF39E1A1A4A1500429FDE /* AppDelegate.m */,
-				7DC4A03C1A2DB12E005A65AC /* Utilities */,
-				7D8307B71A1CEA6D00A68225 /* Model */,
 				7D8FF3A01A1A4A1500429FDE /* ViewControllers */,
+				7D8307B71A1CEA6D00A68225 /* Model */,
+				7DC4A03C1A2DB12E005A65AC /* Utilities */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -334,10 +334,10 @@
 			children = (
 				62D741FE1A37160300DBBAED /* Segues */,
 				62D742051A37227A00DBBAED /* Protocols */,
-				7DF4B6F81A1C7C7800F90FFC /* TMWTabBarController.h */,
-				7DF4B6F91A1C7C7800F90FFC /* TMWTabBarController.m */,
-				7D153AE61A1DFDF100B671B0 /* SignInViewController.h */,
-				7D153AE71A1DFDF100B671B0 /* SignInViewController.m */,
+				7D153AE61A1DFDF100B671B0 /* TMWInitialController.h */,
+				7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */,
+				7DF4B6F81A1C7C7800F90FFC /* TMWMainController.h */,
+				7DF4B6F91A1C7C7800F90FFC /* TMWMainController.m */,
 				7D8FF3A11A1A4A1500429FDE /* TMWRulesViewController.h */,
 				7D8FF3A21A1A4A1500429FDE /* TMWRulesViewController.m */,
 				7D153AE21A1DDDC700B671B0 /* TMWRulesTableViewCell */,
@@ -511,9 +511,9 @@
 				62D742011A37161500DBBAED /* TMWRootViewControllerSwapSegue.m in Sources */,
 				7D153AE51A1DDDEB00B671B0 /* TMWRulesTableViewCell.m in Sources */,
 				7DDA4CBB1A1F717F0097596E /* TMWEditRuleViewController.m in Sources */,
-				7D153AE81A1DFDF100B671B0 /* SignInViewController.m in Sources */,
-				7DF4B6FA1A1C7C7800F90FFC /* TMWTabBarController.m in Sources */,
-				7D153AEB1A1E001F00B671B0 /* TMWManager.m in Sources */,
+				7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */,
+				7DF4B6FA1A1C7C7800F90FFC /* TMWMainController.m in Sources */,
+				7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */,
 				7D8FF3AA1A1A4A1500429FDE /* TMWRulesViewController.m in Sources */,
 				7D8FF3B41A1A542300429FDE /* TMWNotificationsViewController.m in Sources */,
 				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,

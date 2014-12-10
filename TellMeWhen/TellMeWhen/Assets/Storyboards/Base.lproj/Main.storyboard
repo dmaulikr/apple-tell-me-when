@@ -52,10 +52,10 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Sign In View Controller-->
+        <!--Initial-->
         <scene sceneID="he6-c6-dab">
             <objects>
-                <viewController id="f1d-eT-KgF" customClass="SignInViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TMWInitialController" title="Initial" id="f1d-eT-KgF" customClass="TMWInitialController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dh3-DN-i8J"/>
                         <viewControllerLayoutGuide type="bottom" id="2G1-Jm-nz3"/>
@@ -64,9 +64,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUd-4E-pgG">
-                                <rect key="frame" x="150" y="343" width="300" height="44"/>
-                                <color key="backgroundColor" red="0.50588235294117645" green="0.65098039215686276" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XyL-JH-G3g">
+                                <rect key="frame" x="281" y="294" width="37" height="37"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="181" y="401" width="37" height="37"/>
+                                </variation>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Checking that the OpenSensor cloud is reachable..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBt-QS-Ktt">
+                                <rect key="frame" x="88" y="254" width="424.5" height="22"/>
+                                <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="39.5" y="344" width="321" height="42"/>
+                                </variation>
+                            </label>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="RelayrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bFf-VZ-xqV">
+                                <rect key="frame" x="209" y="167" width="183" height="71"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUd-4E-pgG">
+                                <rect key="frame" x="150" y="346" width="300" height="44"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="500" constant="300" id="M8o-LJ-ve5"/>
                                     <constraint firstAttribute="height" constant="44" id="Mxb-pJ-z42"/>
@@ -76,32 +94,26 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="66" y="453" width="268" height="44"/>
+                                </variation>
                                 <connections>
-                                    <action selector="signInPressed:" destination="f1d-eT-KgF" eventType="touchUpInside" id="IC6-Nf-Tvl"/>
+                                    <action selector="buttonPressed:" destination="f1d-eT-KgF" eventType="touchUpInside" id="bR8-gN-aks"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XyL-JH-G3g">
-                                <rect key="frame" x="281" y="291" width="37" height="37"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Checking that the OpenSensor cloud is reachable..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBt-QS-Ktt">
-                                <rect key="frame" x="88" y="254" width="425" height="22"/>
-                                <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="RelayrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bFf-VZ-xqV">
-                                <rect key="frame" x="209" y="167" width="183" height="71"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.28235294119999998" blue="0.42745098040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="bFf-VZ-xqV" secondAttribute="centerX" id="9eS-hx-l1t"/>
-                            <constraint firstItem="tUd-4E-pgG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dBt-QS-Ktt" secondAttribute="bottom" constant="20" id="IwT-JU-KU4"/>
+                            <constraint firstItem="tUd-4E-pgG" firstAttribute="top" secondItem="dBt-QS-Ktt" secondAttribute="bottom" constant="70" id="IwT-JU-KU4"/>
                             <constraint firstItem="dBt-QS-Ktt" firstAttribute="top" secondItem="bFf-VZ-xqV" secondAttribute="bottom" constant="16" id="KIh-Br-YwM"/>
                             <constraint firstAttribute="centerX" secondItem="XyL-JH-G3g" secondAttribute="centerX" id="R5a-Dn-QoH"/>
                             <constraint firstItem="bFf-VZ-xqV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dh3-DN-i8J" secondAttribute="bottom" constant="20" id="XOb-pR-pVZ"/>
@@ -109,52 +121,70 @@
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dBt-QS-Ktt" secondAttribute="trailing" priority="750" constant="15" id="YY5-Ta-hdr"/>
                             <constraint firstItem="2G1-Jm-nz3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tUd-4E-pgG" secondAttribute="bottom" constant="20" id="Yc9-WD-Fnk"/>
                             <constraint firstItem="tUd-4E-pgG" firstAttribute="top" secondItem="XyL-JH-G3g" secondAttribute="bottom" constant="15" id="aVc-j7-B1q"/>
-                            <constraint firstItem="XyL-JH-G3g" firstAttribute="top" secondItem="dBt-QS-Ktt" secondAttribute="bottom" constant="15" id="dWc-Do-dH6"/>
                             <constraint firstAttribute="centerY" secondItem="dBt-QS-Ktt" secondAttribute="centerY" constant="35" id="g0M-zB-0l9"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="tUd-4E-pgG" secondAttribute="trailing" constant="50" id="hrY-zY-qW8"/>
                             <constraint firstAttribute="centerX" secondItem="dBt-QS-Ktt" secondAttribute="centerX" id="i5p-Sa-vxX"/>
                             <constraint firstAttribute="centerX" secondItem="tUd-4E-pgG" secondAttribute="centerX" id="zDY-ub-mbM"/>
                             <constraint firstItem="dBt-QS-Ktt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="giy-Lp-EfP" secondAttribute="leadingMargin" priority="750" constant="15" id="zbn-yh-Ogz"/>
                         </constraints>
-                        <variation key="heightClass=regular-widthClass=compact"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dHI-9S-Abn"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
-                        <outlet property="checkingReachability" destination="XyL-JH-G3g" id="qZX-T0-umG"/>
-                        <outlet property="reachabilityStatus" destination="dBt-QS-Ktt" id="IS8-25-Zx8"/>
-                        <outlet property="signIn" destination="tUd-4E-pgG" id="LH5-ZU-sH3"/>
+                        <outlet property="explanationLabel" destination="dBt-QS-Ktt" id="IS8-25-Zx8"/>
+                        <outlet property="multipurposeButton" destination="tUd-4E-pgG" id="g43-I1-kWe"/>
+                        <outlet property="spinner" destination="XyL-JH-G3g" id="qZX-T0-umG"/>
+                        <outlet property="textToButtonConstraint" destination="IwT-JU-KU4" id="cE2-Dc-5UJ"/>
                         <segue destination="idj-yv-YbM" kind="custom" identifier="TMWSegueSwapWindowRootVCs" customClass="TMWRootViewControllerSwapSegue" id="VvH-fA-LIm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ioY-u5-vY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1011" y="59"/>
+            <point key="canvasLocation" x="-886" y="59"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Controller-->
         <scene sceneID="1Ns-RZ-k8a">
             <objects>
-                <tabBarController storyboardIdentifier="TMWTabBarController" id="idj-yv-YbM" customClass="TMWTabBarController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="OpK-O3-Ue5"/>
+                <tabBarController storyboardIdentifier="TMWMainController" id="idj-yv-YbM" customClass="TMWMainController" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="CcV-qD-RnY">
+                    <tabBar key="tabBar" contentMode="scaleAspectFit" itemPositioning="centered" itemSpacing="100" id="CcV-qD-RnY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.019607843140000001" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8GJ-EU-OJb" kind="relationship" relationship="viewControllers" id="GDz-hh-vzA"/>
-                        <segue destination="7qh-2s-6MH" kind="relationship" relationship="viewControllers" id="KpF-TO-gYa"/>
+                        <segue destination="SXT-Ft-6WY" kind="relationship" relationship="viewControllers" id="38e-Ze-fhc"/>
+                        <segue destination="I9w-xY-lH1" kind="relationship" relationship="viewControllers" id="X3N-BV-wh0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpG-oX-YaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-111" y="59.25"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
+        <scene sceneID="0cn-qm-h3N">
+            <objects>
+                <viewController id="SXT-Ft-6WY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T4R-yz-muz"/>
+                        <viewControllerLayoutGuide type="bottom" id="wzY-4d-uMR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fPo-Mn-Ld0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.68142344072272043" green="1" blue="0.56903461537979561" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="kTF-1I-qFL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0bz-d2-XTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="574" y="-149"/>
+        </scene>
+        <!--rules-->
         <scene sceneID="Kep-Zr-wAh">
             <objects>
                 <navigationController id="8GJ-EU-OJb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="jPd-qt-zRw"/>
+                    <tabBarItem key="tabBarItem" title="rules" image="TabBarItemRules" selectedImage="TabBarItemRulesSelected" id="jPd-qt-zRw"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="BackArrow" backIndicatorTransitionMaskImage="BackArrow" id="0uA-OC-DT3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1505,7 +1535,8 @@
                                                             <exclude reference="4A3-XR-7Ed"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="8" y="32" width="304" height="30"/>
                                                         <mask key="constraints">
                                                             <include reference="4A3-XR-7Ed"/>
                                                         </mask>
@@ -1524,7 +1555,8 @@
                                                             <exclude reference="Fry-2q-96K"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="93.5" width="320" height="1"/>
                                                         <mask key="constraints">
                                                             <include reference="Fry-2q-96K"/>
                                                         </mask>
@@ -1580,9 +1612,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="52" width="400" height="789"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="wqg-3J-Jbc" id="D0j-Ru-8PZ"/>
                                     <outlet property="delegate" destination="wqg-3J-Jbc" id="nYB-5p-oh6"/>
@@ -2591,15 +2620,38 @@ Wunderbar Onboarding App.</string>
             </objects>
             <point key="canvasLocation" x="5167.5" y="-23.25"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
+        <scene sceneID="48w-YE-cWX">
+            <objects>
+                <viewController id="I9w-xY-lH1" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="evr-bW-jXX"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y7F-Lp-KnF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qf9-X4-MCw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.98431372549999996" green="0.0" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Ecw-B9-JmD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ytT-ue-ehk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="574" y="551"/>
+        </scene>
+        <!--notifications-->
         <scene sceneID="w6w-Nf-UZ9">
             <objects>
                 <navigationController id="7qh-2s-6MH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="g8v-0k-8B3"/>
+                    <tabBarItem key="tabBarItem" title="notifications" image="TabBarItemNotifications" id="g8v-0k-8B3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vLJ-3g-ejN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.15686274510000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="21"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="66x-tv-zcH" kind="relationship" relationship="rootViewController" id="LPd-bR-aZT"/>
@@ -2663,8 +2715,7 @@ listed here</string>
                                                 <exclude reference="eH3-Zz-o9V"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="83" y="0.0" width="234" height="30"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="eH3-Zz-o9V"/>
                                             </mask>
@@ -3274,6 +3325,9 @@ listed here</string>
         <image name="NewIcon" width="33" height="33"/>
         <image name="RelayrLogo" width="183" height="71"/>
         <image name="TabBarItemBackgroundActive" width="93" height="49"/>
+        <image name="TabBarItemNotifications" width="59" height="59"/>
+        <image name="TabBarItemRules" width="59" height="59"/>
+        <image name="TabBarItemRulesSelected" width="59" height="59"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="unw-g2-X1W"/>

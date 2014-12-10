@@ -5,7 +5,7 @@
 #import "TMWRule.h"
 #import "TMWMeasurementViewController.h"
 #import "TMWEditRuleViewController.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 
 
 static NSString *const kTransmittersTableViewCellReuseIdentifier = @"TransmittersTableViewCell";
@@ -28,7 +28,7 @@ static NSString *const kTransmittersTableViewCellReuseIdentifier = @"Transmitter
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _transmittersTableViewDataSource = [TMWManager sharedInstance].wunderbars;
+    _transmittersTableViewDataSource = [[TMWStore sharedInstance].relayrUser.transmitters allObjects];
     [self showOrHideTransmitterTableView];
 }
 
@@ -70,7 +70,7 @@ static NSString *const kTransmittersTableViewCellReuseIdentifier = @"Transmitter
         // Make "patch" rule API call
         [self performSegueWithIdentifier:@"UnwindToEditRuleView" sender:transmitter];
     } else {
-        TMWRule *newRule = [[TMWRule alloc] initWithUserID:[TMWManager sharedInstance].relayrUser.uid];
+        TMWRule *newRule = [[TMWRule alloc] initWithUserID:[TMWStore sharedInstance].relayrUser.uid];
         newRule.transmitterID = transmitter.uid;
         newRule.transmitter = transmitter; // TODO: Refactor me please!
         [self performSegueWithIdentifier:@"ShowMeasurementView" sender:newRule];

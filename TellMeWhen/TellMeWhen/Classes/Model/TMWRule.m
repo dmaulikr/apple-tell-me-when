@@ -3,7 +3,7 @@
 #import "TMWRuleCondition.h"
 #import "NSString+Hexadecimal.h" // TMW (Common/Utilities)
 #import "NSData+Hexadecimal.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 
 
 #define TMWRule_RuleID          @"_id"
@@ -151,7 +151,7 @@
 }
 
 - (RelayrTransmitter *)transmitter {
-    for (RelayrTransmitter *transmitter in [TMWManager sharedInstance].wunderbars) {
+    for (RelayrTransmitter *transmitter in [TMWStore sharedInstance].relayrUser.transmitters) {
         if ([transmitter.uid isEqualToString:_transmitterID]) {
             return transmitter;
         }

@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "TabBarItemBackgroundNormal.png"
+      "filename" : "TabBarItemNotificationsSelected.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "TabBarItemBackgroundNormal@2x.png"
+      "filename" : "TabBarItemNotificationsSelected@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "TabBarItemBackgroundNormal@3x.png"
+      "filename" : "TabBarItemNotificationsSelected@3x.png"
     }
   ],
   "info" : {

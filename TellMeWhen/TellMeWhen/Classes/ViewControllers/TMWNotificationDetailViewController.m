@@ -1,6 +1,6 @@
 #import "TMWNotificationDetailViewController.h"
 #import "TMWRule.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 
 @interface TMWNotificationDetailViewController ()
 
@@ -20,7 +20,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    for (TMWRule *rule in [TMWManager sharedInstance].rules) {
+    for (TMWRule *rule in [TMWStore sharedInstance].rules) {
         if ([rule.uid isEqualToString:_notification.ruleID]) {
             _rule = rule;
         }
@@ -32,7 +32,7 @@
     dateFormatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     _thresholdTimestampMetLabel.text = [dateFormatter stringFromDate:_notification.timestamp];
-    RelayrUser *user = [TMWManager sharedInstance].relayrUser;
+    RelayrUser *user = [TMWStore sharedInstance].relayrUser;
     if (!user || !_rule.deviceID.length) {
         return;
     }

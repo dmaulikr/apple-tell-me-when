@@ -1,19 +1,19 @@
-#import "TMWManager.h"      // Header
+#import "TMWStore.h"      // Header
 #import "TMWCredentials.h"
 
 #define RelayrTMW_FSFolder                  @"/io.relayr.tmw"
 
-@interface TMWManager () <NSCoding>
+@interface TMWStore () <NSCoding>
 @end
 
 static NSString* kPersistanceLocation;
 static NSString* const kCodingNotifications = @"notif";
 static NSString* const kCodingDeviceToken = @"devTo";
 
-@implementation TMWManager
+@implementation TMWStore
 
 + (instancetype)sharedInstance {
-    static TMWManager* sharedInstance;
+    static TMWStore* sharedInstance;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -46,51 +46,39 @@ static NSString* const kCodingDeviceToken = @"devTo";
 
 #pragma mark - Public Methods
 
-- (void)signOut {
-    _relayrUser = nil;
-    [_relayrApp signOutUser:_relayrUser];
-}
-
-- (void)fetchUsersWunderbars {
-    [_relayrUser queryCloudForIoTs:^(NSError *error) {
-        if (!error) {
-            self.wunderbars = [_relayrUser.transmitters allObjects];
-        }
-    }];
-}
-
 - (BOOL)persistInFileSystem
 {
-    [RelayrApp persistAppInFileSystem:_relayrApp];
-    
-    TMWManager* tmwManager = [TMWManager sharedInstance];
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* path = kPersistanceLocation;
-    if (!tmwManager || !fileManager || !path.length) { return NO; }
-    
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:self];
     if (!data) { return NO; }
     
-    return [fileManager createFileAtPath:path contents:data attributes:nil];
+    [RelayrApp persistAppInFileSystem:_relayrApp];
+    return [[NSFileManager defaultManager] createFileAtPath:kPersistanceLocation contents:data attributes:nil];
+}
+
+- (BOOL)removeFromFileSystem
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ( ![manager fileExistsAtPath:kPersistanceLocation] ) { return YES; }
+    return [manager removeItemAtPath:kPersistanceLocation error:nil];
 }
 
 #pragma mark NSCoding
 
 - (id)initWithCoder:(NSCoder*)decoder
 {
-    self = [super init];
+    self = [self init];
     if (self)
     {
-        _apnsToken = [decoder decodeObjectForKey:kCodingDeviceToken];
+        _deviceToken = [decoder decodeObjectForKey:kCodingDeviceToken];
         NSArray* notifications = [decoder decodeObjectForKey:kCodingNotifications];
-        if (notifications) { _notifications = [NSMutableArray arrayWithArray:notifications]; }
+        if (notifications.count) { [_notifications addObjectsFromArray:notifications]; }
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder*)coder
 {
-    [coder encodeObject:_apnsToken forKey:kCodingDeviceToken];
+    [coder encodeObject:_deviceToken forKey:kCodingDeviceToken];
     if (_notifications) { [coder encodeObject:[NSArray arrayWithArray:_notifications] forKey:kCodingNotifications]; }
 }
 

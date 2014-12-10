@@ -1,7 +1,7 @@
 #import "TMWNotificationsViewController.h" // Headers
 #import "TMWNotification.h"
 #import "TMWNotificationTableViewCell.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 #import "TMWAPIService.h"
 #import "TMWNotificationDetailViewController.h"
 #import "TMWActions.h"                          // TMW (ViewControllers/Models)
@@ -26,7 +26,7 @@ static NSString *const kNotificationsTableViewCellReuseIdentifier = @"Notificati
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [TMWAPIService requestNotificationsForUserID:[TMWManager sharedInstance].relayrUser.uid completion:^(NSError *error, NSArray *notifications) {
+    [TMWAPIService requestNotificationsForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError *error, NSArray *notifications) {
         if (!error) {
             _notificationsTableViewDataSource = notifications;
              NSLog(@"Received %lu notofications", (unsigned long)notifications.count);
@@ -50,7 +50,7 @@ static NSString *const kNotificationsTableViewCellReuseIdentifier = @"Notificati
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TMWNotificationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kNotificationsTableViewCellReuseIdentifier];
     TMWNotification *notification = [_notificationsTableViewDataSource objectAtIndex:indexPath.row];
-    for (TMWRule *rule in [TMWManager sharedInstance].rules) {
+    for (TMWRule *rule in [TMWStore sharedInstance].rules) {
         if ([notification.ruleID isEqualToString:rule.uid]) {
             cell.notificationNameLabel.text = rule.name.uppercaseString;
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

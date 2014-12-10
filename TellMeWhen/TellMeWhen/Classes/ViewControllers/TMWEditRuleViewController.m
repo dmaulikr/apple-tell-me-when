@@ -5,7 +5,7 @@
 #import "TMWRuleNameViewController.h"
 #import "TMWRulesViewController.h"
 #import "TMWRule.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 #import "TMWAPIService.h"
 
 

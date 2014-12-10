@@ -2,7 +2,7 @@
 
 #import "TMWRule.h"
 #import "TMWRulesTableViewCell.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 #import "TMWEditRuleViewController.h"
 #import "TMWAPIService.h"
 #import "TMWActions.h"                  // TMW (ViewControllers/Protocols)
@@ -28,14 +28,14 @@ static NSString *const kRulesTableViewCellReuseIdentifier = @"RulesTableViewCell
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [TMWAPIService requestRulesForUserID:[TMWManager sharedInstance].relayrUser.uid completion:^(NSError *error, NSArray *rules) {
+    [TMWAPIService requestRulesForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError *error, NSArray *rules) {
         if (!error) {
             _rulesTableViewDataSource = rules;
         } else {
             NSLog(@"%@", error.description);
         }
         // TODO: Add activity indicator to the UI
-        [TMWManager sharedInstance].rules = (NSMutableArray *)_rulesTableViewDataSource;
+        [TMWStore sharedInstance].rules = (NSMutableArray *)_rulesTableViewDataSource;
         [self showOrHideTableView];
     }];
 }
@@ -88,7 +88,7 @@ static NSString *const kRulesTableViewCellReuseIdentifier = @"RulesTableViewCell
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     TMWRule *rule = [_rulesTableViewDataSource objectAtIndex:indexPath.row];
-    [TMWManager sharedInstance].ruleBeingEdited = rule;
+//    [TMWStore sharedInstance].ruleBeingEdited = rule;
     [self performSegueWithIdentifier:@"ShowEditRuleView" sender:rule];
 }
 
@@ -116,7 +116,7 @@ static NSString *const kRulesTableViewCellReuseIdentifier = @"RulesTableViewCell
     NSMutableArray *newArray = [NSMutableArray arrayWithArray:_rulesTableViewDataSource];
     [newArray removeObject:rule];
     _rulesTableViewDataSource = (NSArray *)newArray;
-    [TMWManager sharedInstance].rules = newArray;
+    [TMWStore sharedInstance].rules = newArray;
 }
 
 - (void)showOrHideTableView {

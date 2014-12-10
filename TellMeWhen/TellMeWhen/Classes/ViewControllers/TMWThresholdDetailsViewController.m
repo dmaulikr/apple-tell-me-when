@@ -4,7 +4,7 @@
 #import "TMWRule.h"
 #import "TMWRuleCondition.h"
 #import "TMWAPIService.h"
-#import "TMWManager.h"
+#import "TMWStore.h"
 
 @interface TMWThresholdDetailsViewController ()
 
@@ -70,7 +70,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    RelayrUser *user = [TMWManager sharedInstance].relayrUser;
+    RelayrUser *user = [TMWStore sharedInstance].relayrUser;
     if (!user || !_rule.deviceID.length) {
         return;
     }
