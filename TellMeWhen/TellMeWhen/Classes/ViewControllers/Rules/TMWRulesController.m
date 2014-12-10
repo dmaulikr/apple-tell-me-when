@@ -46,8 +46,10 @@
     TMWRule* rule = _rules[indexPath.row];
     
     TMWRulesCellView* cell = [tableView dequeueReusableCellWithIdentifier:@"TMWRulesCellView"];
+    cell.logo.image = rule.typeImage;
     cell.ruleName.text = rule.name.uppercaseString;
     cell.ruleDescription.text = [NSString stringWithFormat:@"%@ %@", rule.type, rule.thresholdDescription];
+    cell.activator.on = rule.active;
     return cell;
 }
 
