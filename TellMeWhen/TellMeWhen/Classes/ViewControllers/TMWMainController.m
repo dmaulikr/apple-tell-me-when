@@ -51,7 +51,7 @@
     }];
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{
-        NSFontAttributeName : [UIFont fontWithName:@"NewJuneBook" size:14],
+        NSFontAttributeName : [UIFont fontWithName:TMWFont_NewJuneBook size:14],
         NSForegroundColorAttributeName:[UIColor whiteColor]
     } forState:UIControlStateNormal];
 }

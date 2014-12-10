@@ -12,9 +12,9 @@ static NSString* const kCodingDeviceToken = @"devTo";
 
 @implementation TMWStore
 
-+ (instancetype)sharedInstance {
++ (instancetype)sharedInstance
+{
     static TMWStore* sharedInstance;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSArray* paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
@@ -35,7 +35,8 @@ static NSString* const kCodingDeviceToken = @"devTo";
     return sharedInstance;
 }
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         _rules = [NSMutableArray array];

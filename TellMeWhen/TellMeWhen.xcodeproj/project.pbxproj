@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		622126531A37F06A00E24072 /* TMWRulesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126521A37F06A00E24072 /* TMWRulesController.m */; };
 		622126561A37F6A200E24072 /* TMWSegueShowChildController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126551A37F6A200E24072 /* TMWSegueShowChildController.m */; };
+		624712B01A38E4DC00736711 /* TMWNotificationsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712AF1A38E4DC00736711 /* TMWNotificationsListController.m */; };
+		624712B31A38EFAD00736711 /* TMWNotificationDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712B21A38EFAD00736711 /* TMWNotificationDetailsController.m */; };
+		624712B61A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712B51A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.m */; };
+		624712C71A38FA8900736711 /* Relayr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624712BF1A38FA7200736711 /* Relayr.framework */; };
+		624712C81A38FA8900736711 /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 624712BF1A38FA7200736711 /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */; };
 		6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */; };
-		62D741F31A37104600DBBAED /* Relayr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; };
-		62D741F41A37104600DBBAED /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 62D741EC1A370EAA00DBBAED /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		62D742011A37161500DBBAED /* TMWRootViewControllerSwapSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */; };
 		7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */; };
 		7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AEA1A1E001F00B671B0 /* TMWStore.m */; };
@@ -35,37 +38,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		62D741EB1A370EAA00DBBAED /* PBXContainerItemProxy */ = {
+		624712BE1A38FA7200736711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			containerPortal = 624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6252F0B3199C2465002ECE4D;
 			remoteInfo = Relayr_iOS;
 		};
-		62D741ED1A370EAA00DBBAED /* PBXContainerItemProxy */ = {
+		624712C01A38FA7200736711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			containerPortal = 624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6252F0E5199C2AFA002ECE4D;
 			remoteInfo = Relayr_OSX;
 		};
-		62D741EF1A370EAA00DBBAED /* PBXContainerItemProxy */ = {
+		624712C21A38FA7200736711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			containerPortal = 624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 62E41FC219C35B90008459B7;
 			remoteInfo = Relayr_Tests;
 		};
-		62D741F11A370EE500DBBAED /* PBXContainerItemProxy */ = {
+		624712C41A38FA7C00736711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			containerPortal = 624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6252F0B2199C2465002ECE4D;
 			remoteInfo = Relayr_iOS;
 		};
-		62D741F51A37104600DBBAED /* PBXContainerItemProxy */ = {
+		624712C91A38FA8900736711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+			containerPortal = 624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6252F0B2199C2465002ECE4D;
 			remoteInfo = Relayr_iOS;
@@ -79,7 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				62D741F41A37104600DBBAED /* Relayr.framework in Embed Frameworks */,
+				624712C81A38FA8900736711 /* Relayr.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,11 +95,17 @@
 		622126521A37F06A00E24072 /* TMWRulesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesController.m; sourceTree = "<group>"; };
 		622126541A37F6A200E24072 /* TMWSegueShowChildController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueShowChildController.h; sourceTree = "<group>"; };
 		622126551A37F6A200E24072 /* TMWSegueShowChildController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueShowChildController.m; sourceTree = "<group>"; };
+		624712AE1A38E4DC00736711 /* TMWNotificationsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsListController.h; sourceTree = "<group>"; };
+		624712AF1A38E4DC00736711 /* TMWNotificationsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsListController.m; sourceTree = "<group>"; };
+		624712B11A38EFAD00736711 /* TMWNotificationDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationDetailsController.h; sourceTree = "<group>"; };
+		624712B21A38EFAD00736711 /* TMWNotificationDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationDetailsController.m; sourceTree = "<group>"; };
+		624712B41A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueEmbedTableViewBackgroundView.h; sourceTree = "<group>"; };
+		624712B51A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueEmbedTableViewBackgroundView.m; sourceTree = "<group>"; };
+		624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RelayrSDK.xcodeproj; path = "../../apple-sdk/RelayrSDK/RelayrSDK.xcodeproj"; sourceTree = "<group>"; };
 		624D1C361A384D90009BB2D6 /* TMWRulesCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesCellView.h; sourceTree = "<group>"; };
 		624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesCellView.m; sourceTree = "<group>"; };
 		6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMainTabBar.h; sourceTree = "<group>"; };
 		6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMainTabBar.m; sourceTree = "<group>"; };
-		62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RelayrSDK.xcodeproj; path = "../../../apple-sdk/RelayrSDK/RelayrSDK.xcodeproj"; sourceTree = "<group>"; };
 		62D741FF1A37161500DBBAED /* TMWRootViewControllerSwapSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRootViewControllerSwapSegue.h; sourceTree = "<group>"; };
 		62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRootViewControllerSwapSegue.m; sourceTree = "<group>"; };
 		62D742061A37229B00DBBAED /* TMWStoryboardIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStoryboardIDs.h; sourceTree = "<group>"; };
@@ -140,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62D741F31A37104600DBBAED /* Relayr.framework in Frameworks */,
+				624712C71A38FA8900736711 /* Relayr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +163,35 @@
 				622126521A37F06A00E24072 /* TMWRulesController.m */,
 			);
 			path = Rules;
+			sourceTree = "<group>";
+		};
+		624712AB1A38E4AD00736711 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				624712AE1A38E4DC00736711 /* TMWNotificationsListController.h */,
+				624712AF1A38E4DC00736711 /* TMWNotificationsListController.m */,
+				624712B11A38EFAD00736711 /* TMWNotificationDetailsController.h */,
+				624712B21A38EFAD00736711 /* TMWNotificationDetailsController.m */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		624712B71A38FA5E00736711 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		624712B91A38FA7200736711 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				624712BF1A38FA7200736711 /* Relayr.framework */,
+				624712C11A38FA7200736711 /* Relayr.framework */,
+				624712C31A38FA7200736711 /* Relayr.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		624D1C321A384D6B009BB2D6 /* Notifications */ = {
@@ -184,24 +222,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		62B4A6E51A320FE8005F467D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		62D741E61A370EAA00DBBAED /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				62D741EC1A370EAA00DBBAED /* Relayr.framework */,
-				62D741EE1A370EAA00DBBAED /* Relayr.framework */,
-				62D741F01A370EAA00DBBAED /* Relayr.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		62D741FE1A37160300DBBAED /* Segues */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +230,8 @@
 				62D742001A37161500DBBAED /* TMWRootViewControllerSwapSegue.m */,
 				622126541A37F6A200E24072 /* TMWSegueShowChildController.h */,
 				622126551A37F6A200E24072 /* TMWSegueShowChildController.m */,
+				624712B41A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.h */,
+				624712B51A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.m */,
 			);
 			path = Segues;
 			sourceTree = "<group>";
@@ -273,7 +295,7 @@
 				7D8FF3941A1A4A1400429FDE /* Assets */,
 				7D8FF39C1A1A4A1500429FDE /* Classes */,
 				7D8FF3A31A1A4A1500429FDE /* Configuration */,
-				62B4A6E51A320FE8005F467D /* Frameworks */,
+				624712B71A38FA5E00736711 /* Frameworks */,
 			);
 			path = TellMeWhen;
 			sourceTree = "<group>";
@@ -329,6 +351,7 @@
 				7DF4B6F81A1C7C7800F90FFC /* TMWMainController.h */,
 				7DF4B6F91A1C7C7800F90FFC /* TMWMainController.m */,
 				622126501A37F05400E24072 /* Rules */,
+				624712AB1A38E4AD00736711 /* Notifications */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -377,8 +400,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				62D741F21A370EE500DBBAED /* PBXTargetDependency */,
-				62D741F61A37104600DBBAED /* PBXTargetDependency */,
+				624712C51A38FA7C00736711 /* PBXTargetDependency */,
+				624712CA1A38FA8900736711 /* PBXTargetDependency */,
 			);
 			name = TellMeWhen;
 			productName = TellMeWhen;
@@ -413,8 +436,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 62D741E61A370EAA00DBBAED /* Products */;
-					ProjectRef = 62D741E51A370EAA00DBBAED /* RelayrSDK.xcodeproj */;
+					ProductGroup = 624712B91A38FA7200736711 /* Products */;
+					ProjectRef = 624712B81A38FA7200736711 /* RelayrSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -425,25 +448,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		62D741EC1A370EAA00DBBAED /* Relayr.framework */ = {
+		624712BF1A38FA7200736711 /* Relayr.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Relayr.framework;
-			remoteRef = 62D741EB1A370EAA00DBBAED /* PBXContainerItemProxy */;
+			remoteRef = 624712BE1A38FA7200736711 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		62D741EE1A370EAA00DBBAED /* Relayr.framework */ = {
+		624712C11A38FA7200736711 /* Relayr.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Relayr.framework;
-			remoteRef = 62D741ED1A370EAA00DBBAED /* PBXContainerItemProxy */;
+			remoteRef = 624712C01A38FA7200736711 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		62D741F01A370EAA00DBBAED /* Relayr.xctest */ = {
+		624712C31A38FA7200736711 /* Relayr.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = Relayr.xctest;
-			remoteRef = 62D741EF1A370EAA00DBBAED /* PBXContainerItemProxy */;
+			remoteRef = 624712C21A38FA7200736711 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -478,11 +501,14 @@
 				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,
 				7D8FF3A91A1A4A1500429FDE /* main.m in Sources */,
 				624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */,
+				624712B61A38F66E00736711 /* TMWSegueEmbedTableViewBackgroundView.m in Sources */,
 				7D8307BA1A1CEA8100A68225 /* TMWRule.m in Sources */,
+				624712B01A38E4DC00736711 /* TMWNotificationsListController.m in Sources */,
 				7DC9E5021A25D2D5008ECA66 /* TMWNotification.m in Sources */,
 				7DC4A0411A2DB12E005A65AC /* NSData+Hexadecimal.m in Sources */,
 				7D650D311A2E0829007BB0A1 /* TMWAPIService.m in Sources */,
 				7D8FF3A81A1A4A1500429FDE /* AppDelegate.m in Sources */,
+				624712B31A38EFAD00736711 /* TMWNotificationDetailsController.m in Sources */,
 				6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */,
 				7DC4A0451A2DB388005A65AC /* TMWRuleCondition.m in Sources */,
 				7DC4A0481A2DB51F005A65AC /* TMWRuleNotification.m in Sources */,
@@ -492,15 +518,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		62D741F21A370EE500DBBAED /* PBXTargetDependency */ = {
+		624712C51A38FA7C00736711 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Relayr_iOS;
-			targetProxy = 62D741F11A370EE500DBBAED /* PBXContainerItemProxy */;
+			targetProxy = 624712C41A38FA7C00736711 /* PBXContainerItemProxy */;
 		};
-		62D741F61A37104600DBBAED /* PBXTargetDependency */ = {
+		624712CA1A38FA8900736711 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Relayr_iOS;
-			targetProxy = 62D741F51A37104600DBBAED /* PBXContainerItemProxy */;
+			targetProxy = 624712C91A38FA8900736711 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
