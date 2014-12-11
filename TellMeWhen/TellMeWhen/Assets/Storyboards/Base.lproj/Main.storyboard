@@ -222,6 +222,7 @@
                                             </variation>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="fxx-Ag-PrE" firstAttribute="top" secondItem="Uqb-la-Z2z" secondAttribute="topMargin" constant="23" id="4UV-8h-2Qt"/>
                                         <constraint firstItem="Kgf-91-HEt" firstAttribute="top" secondItem="DpB-vK-pLW" secondAttribute="bottom" constant="3" id="4sm-D1-nex"/>
@@ -266,7 +267,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="createButton" destination="r0v-Fz-cdx" id="wrW-xR-QU5"/>
-                        <segue destination="Pwk-h1-dJG" kind="custom" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="BPg-AO-C9d"/>
+                        <segue destination="Pwk-h1-dJG" kind="custom" identifier="TMWSegueFromRulesToOnboarding" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="BPg-AO-C9d"/>
                         <segue destination="6vR-82-nQh" kind="custom" identifier="TMWSegueFromRulesToNoRules" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="3UF-3d-Aan"/>
                     </connections>
                 </tableViewController>
