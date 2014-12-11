@@ -635,7 +635,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TellMeWhen/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -651,7 +650,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TellMeWhen/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
