@@ -13,16 +13,14 @@ static NSString* const kCodingRuleID = @"rID";
 static NSString* const kCodingUserID = @"uID";
 static NSString* const kCodingTimestamp = @"ts";
 static NSString* const kCodingValue = @"val";
-static NSString* const kCodingName = @"nam";
 
 @implementation TMWNotification
 
 #pragma mark - Public API
 
-- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary {
-    if (!jsonDictionary.count) {
-        return nil;
-    }
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary
+{
+    if (!jsonDictionary.count) { return nil; }
     self = [super init];
     if (self) {
         _uid = jsonDictionary[TMWNotification_UID];
@@ -45,9 +43,33 @@ static NSString* const kCodingName = @"nam";
     return self;
 }
 
-// Legacy Methods
-- (NSString *)description {
-    return _name;
+- (NSString*)valueDescription
+{
+    return ([_value isKindOfClass:[NSNumber class]]) ? ((NSNumber*)_value).stringValue : @"N/A";
+}
+
++ (void)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs
+{
+    if (!coreNotifs || !serverNotifs.count) { return; }
+    
+    for (TMWNotification* sNotif in serverNotifs)
+    {
+        BOOL addToCoreNotifications = YES;
+        for (TMWNotification* cNotif in coreNotifs)
+        {
+            if ([sNotif.uid isEqualToString:cNotif.uid])
+            {
+                addToCoreNotifications = NO;
+                cNotif.revisionString = sNotif.revisionString;
+                cNotif.ruleID = sNotif.ruleID;
+                cNotif.userID = sNotif.userID;
+                cNotif.timestamp = sNotif.timestamp;
+                cNotif.value = sNotif.value;
+                break;
+            }
+        }
+        if (addToCoreNotifications) { [coreNotifs addObject:sNotif]; }
+    }
 }
 
 #pragma mark NSCoding
@@ -63,7 +85,6 @@ static NSString* const kCodingName = @"nam";
         _userID = [decoder decodeObjectForKey:kCodingUserID];
         _timestamp = [decoder decodeObjectForKey:kCodingTimestamp];
         _value = [decoder decodeObjectForKey:kCodingValue];
-        _name = [decoder decodeObjectForKey:kCodingName];
     }
     return self;
 }
@@ -76,7 +97,6 @@ static NSString* const kCodingName = @"nam";
     [coder encodeObject:_userID forKey:kCodingUserID];
     [coder encodeObject:_timestamp forKey:kCodingTimestamp];
     [coder encodeObject:_value forKey:kCodingValue];
-    [coder encodeObject:_name forKey:kCodingName];
 }
 
 @end

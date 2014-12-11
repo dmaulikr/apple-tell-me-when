@@ -7,7 +7,7 @@
 
 @implementation TMWRuleCondition
 
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary
 {
     if (!jsonDictionary.count) { return nil; }
 
@@ -26,7 +26,8 @@
     return self;
 }
 
-- (NSDictionary *)compressIntoJSONDictionary {
+- (NSDictionary*)compressIntoJSONDictionary
+{
     if (!_meaning.length || !_operation.length || !_value) { return nil; }
     return @{
         TMWRule_Condition_Meaning   : _meaning,

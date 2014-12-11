@@ -6,11 +6,11 @@
 
 + (instancetype)sharedInstance;
 
-@property (strong, nonatomic) RelayrApp* relayrApp;
-@property (weak,   nonatomic) RelayrUser* relayrUser;
-@property (strong, nonatomic) NSData* deviceToken;
-@property (strong, nonatomic) NSMutableArray* rules;
-@property (strong, nonatomic) NSMutableArray* notifications;
+@property (strong,nonatomic) RelayrApp* relayrApp;
+@property (weak,nonatomic) RelayrUser* relayrUser;
+@property (strong,nonatomic) NSData* deviceToken;
+@property (strong,nonatomic) NSMutableArray* rules;
+@property (strong,nonatomic) NSMutableArray* notifications;
 
 - (BOOL)persistInFileSystem;
 - (BOOL)removeFromFileSystem;

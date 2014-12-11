@@ -140,9 +140,6 @@
             return;
         }
         
-        TMWStore* store = [TMWStore sharedInstance];
-        RelayrApp* app = store.relayrApp;
-        NSLog(@"RelayrApp: %@", app);
         [TMWStore sharedInstance].relayrUser = user;
         [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self];
     }];

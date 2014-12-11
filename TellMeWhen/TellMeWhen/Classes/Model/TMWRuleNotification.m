@@ -25,7 +25,8 @@ NSString* const TMWRuleNotificationTypeEmail = @"email";
     return self;
 }
 
-- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary {
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary
+{
     if (!jsonDictionary.count) { return nil; }
     
     self = [super init];
@@ -38,7 +39,8 @@ NSString* const TMWRuleNotificationTypeEmail = @"email";
     return self;
 }
 
-- (NSDictionary *)compressIntoJSONDictionary {
+- (NSDictionary *)compressIntoJSONDictionary
+{
     if (!_type) { return nil; }
     
     NSMutableDictionary* result = [[NSMutableDictionary alloc] init];

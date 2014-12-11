@@ -9,14 +9,17 @@
 /* Begin PBXBuildFile section */
 		622126531A37F06A00E24072 /* TMWRulesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126521A37F06A00E24072 /* TMWRulesController.m */; };
 		622126561A37F6A200E24072 /* TMWSegueSwapChildController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126551A37F6A200E24072 /* TMWSegueSwapChildController.m */; };
-		624712B01A38E4DC00736711 /* TMWNotificationsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712AF1A38E4DC00736711 /* TMWNotificationsListController.m */; };
+		624712B01A38E4DC00736711 /* TMWNotificationsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712AF1A38E4DC00736711 /* TMWNotificationsController.m */; };
 		624712B31A38EFAD00736711 /* TMWNotificationDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712B21A38EFAD00736711 /* TMWNotificationDetailsController.m */; };
 		624712B61A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624712B51A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.m */; };
 		624712C71A38FA8900736711 /* Relayr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 624712BF1A38FA7200736711 /* Relayr.framework */; };
 		624712C81A38FA8900736711 /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 624712BF1A38FA7200736711 /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */; };
 		6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */; };
+		6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */; };
+		62A490EE1A39E7AC0093157E /* TMWDateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A490ED1A39E7AC0093157E /* TMWDateConverter.m */; };
 		62D742011A37161500DBBAED /* TMWSegueSwapRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D742001A37161500DBBAED /* TMWSegueSwapRootViewController.m */; };
+		62D7E1191A39E09900D81856 /* TMWNotificationsListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D7E1181A39E09900D81856 /* TMWNotificationsListCellView.m */; };
 		7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */; };
 		7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AEA1A1E001F00B671B0 /* TMWStore.m */; };
 		7D1F1F9F1A30AF0500EFC92B /* DingDing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */; };
@@ -95,8 +98,8 @@
 		622126521A37F06A00E24072 /* TMWRulesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesController.m; sourceTree = "<group>"; };
 		622126541A37F6A200E24072 /* TMWSegueSwapChildController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueSwapChildController.h; sourceTree = "<group>"; };
 		622126551A37F6A200E24072 /* TMWSegueSwapChildController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueSwapChildController.m; sourceTree = "<group>"; };
-		624712AE1A38E4DC00736711 /* TMWNotificationsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsListController.h; sourceTree = "<group>"; };
-		624712AF1A38E4DC00736711 /* TMWNotificationsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsListController.m; sourceTree = "<group>"; };
+		624712AE1A38E4DC00736711 /* TMWNotificationsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsController.h; sourceTree = "<group>"; };
+		624712AF1A38E4DC00736711 /* TMWNotificationsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsController.m; sourceTree = "<group>"; };
 		624712B11A38EFAD00736711 /* TMWNotificationDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationDetailsController.h; sourceTree = "<group>"; };
 		624712B21A38EFAD00736711 /* TMWNotificationDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationDetailsController.m; sourceTree = "<group>"; };
 		624712B41A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueEmbedViewInTableBacgroundkView.h; sourceTree = "<group>"; };
@@ -106,10 +109,16 @@
 		624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesCellView.m; sourceTree = "<group>"; };
 		6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMainTabBar.h; sourceTree = "<group>"; };
 		6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMainTabBar.m; sourceTree = "<group>"; };
+		628725381A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueRemoveViewFromTableBackgroundView.h; sourceTree = "<group>"; };
+		628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueRemoveViewFromTableBackgroundView.m; sourceTree = "<group>"; };
+		62A490EC1A39E7AC0093157E /* TMWDateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWDateConverter.h; sourceTree = "<group>"; };
+		62A490ED1A39E7AC0093157E /* TMWDateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWDateConverter.m; sourceTree = "<group>"; };
 		62D741FF1A37161500DBBAED /* TMWSegueSwapRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueSwapRootViewController.h; sourceTree = "<group>"; };
 		62D742001A37161500DBBAED /* TMWSegueSwapRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueSwapRootViewController.m; sourceTree = "<group>"; };
 		62D742061A37229B00DBBAED /* TMWStoryboardIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStoryboardIDs.h; sourceTree = "<group>"; };
 		62D742071A3722D100DBBAED /* TMWActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWActions.h; sourceTree = "<group>"; };
+		62D7E1171A39E09900D81856 /* TMWNotificationsListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsListCellView.h; sourceTree = "<group>"; };
+		62D7E1181A39E09900D81856 /* TMWNotificationsListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsListCellView.m; sourceTree = "<group>"; };
 		7D153AE61A1DFDF100B671B0 /* TMWInitialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWInitialController.h; sourceTree = "<group>"; };
 		7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWInitialController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D153AE91A1E001F00B671B0 /* TMWStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStore.h; sourceTree = "<group>"; };
@@ -168,8 +177,8 @@
 		624712AB1A38E4AD00736711 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				624712AE1A38E4DC00736711 /* TMWNotificationsListController.h */,
-				624712AF1A38E4DC00736711 /* TMWNotificationsListController.m */,
+				624712AE1A38E4DC00736711 /* TMWNotificationsController.h */,
+				624712AF1A38E4DC00736711 /* TMWNotificationsController.m */,
 				624712B11A38EFAD00736711 /* TMWNotificationDetailsController.h */,
 				624712B21A38EFAD00736711 /* TMWNotificationDetailsController.m */,
 			);
@@ -194,13 +203,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		624D1C321A384D6B009BB2D6 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
 		624D1C351A384D73009BB2D6 /* Rules */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,7 +219,7 @@
 				6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */,
 				6221264C1A37ECB800E24072 /* TMWUIProperties.h */,
 				624D1C351A384D73009BB2D6 /* Rules */,
-				624D1C321A384D6B009BB2D6 /* Notifications */,
+				62D7E1161A39E07500D81856 /* Notifications */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,6 +234,8 @@
 				622126551A37F6A200E24072 /* TMWSegueSwapChildController.m */,
 				624712B41A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.h */,
 				624712B51A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.m */,
+				628725381A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.h */,
+				628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */,
 			);
 			path = Segues;
 			sourceTree = "<group>";
@@ -242,6 +246,15 @@
 				62D742071A3722D100DBBAED /* TMWActions.h */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		62D7E1161A39E07500D81856 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				62D7E1171A39E09900D81856 /* TMWNotificationsListCellView.h */,
+				62D7E1181A39E09900D81856 /* TMWNotificationsListCellView.m */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		7D1F1F9B1A30AEE300EFC92B /* Sounds */ = {
@@ -268,6 +281,8 @@
 				7DC4A0471A2DB51F005A65AC /* TMWRuleNotification.m */,
 				7DC9E5001A25D2D5008ECA66 /* TMWNotification.h */,
 				7DC9E5011A25D2D5008ECA66 /* TMWNotification.m */,
+				62A490EC1A39E7AC0093157E /* TMWDateConverter.h */,
+				62A490ED1A39E7AC0093157E /* TMWDateConverter.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -494,16 +509,19 @@
 			files = (
 				62D742011A37161500DBBAED /* TMWSegueSwapRootViewController.m in Sources */,
 				7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */,
+				62D7E1191A39E09900D81856 /* TMWNotificationsListCellView.m in Sources */,
+				6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */,
 				7DF4B6FA1A1C7C7800F90FFC /* TMWMainController.m in Sources */,
 				7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */,
 				622126561A37F6A200E24072 /* TMWSegueSwapChildController.m in Sources */,
+				62A490EE1A39E7AC0093157E /* TMWDateConverter.m in Sources */,
 				622126531A37F06A00E24072 /* TMWRulesController.m in Sources */,
 				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,
 				7D8FF3A91A1A4A1500429FDE /* main.m in Sources */,
 				624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */,
 				624712B61A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.m in Sources */,
 				7D8307BA1A1CEA8100A68225 /* TMWRule.m in Sources */,
-				624712B01A38E4DC00736711 /* TMWNotificationsListController.m in Sources */,
+				624712B01A38E4DC00736711 /* TMWNotificationsController.m in Sources */,
 				7DC9E5021A25D2D5008ECA66 /* TMWNotification.m in Sources */,
 				7DC4A0411A2DB12E005A65AC /* NSData+Hexadecimal.m in Sources */,
 				7D650D311A2E0829007BB0A1 /* TMWAPIService.m in Sources */,
@@ -633,9 +651,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -648,9 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/TellMeWhen/Configuration/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

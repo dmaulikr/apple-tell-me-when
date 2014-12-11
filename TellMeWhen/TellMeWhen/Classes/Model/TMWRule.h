@@ -1,6 +1,5 @@
-#import <Foundation/Foundation.h> // Apple
-
-#import <Relayr/Relayr.h> // Relayr
+@import Foundation;         // Apple
+#import <Relayr/Relayr.h>   // Relayr
 
 @class TMWRuleCondition;
 
@@ -16,9 +15,9 @@
 - (NSDictionary *)compressIntoJSONDictionary;
 - (NSArray*)setupNotificationsWithDeviceToken:(NSData*)deviceToken;
 
-@property (readonly, nonatomic) NSString* userID;
 @property (strong, nonatomic) NSString* uid;
 @property (strong, nonatomic) NSString* revisionString;
+@property (readonly, nonatomic) NSString* userID;
 @property (strong, nonatomic) NSString* transmitterID;
 @property (strong, nonatomic) NSString* deviceID;
 @property (strong, nonatomic) NSString* name;
@@ -27,7 +26,7 @@
 @property (nonatomic) BOOL active;
 
 @property (readonly, nonatomic) NSString* type;
-@property (readonly, nonatomic) UIImage* typeImage;
+@property (readonly, nonatomic) UIImage* icon;
 @property (readonly, nonatomic) NSString* thresholdDescription;
 @property (readonly, nonatomic) RelayrTransmitter* transmitter;
 

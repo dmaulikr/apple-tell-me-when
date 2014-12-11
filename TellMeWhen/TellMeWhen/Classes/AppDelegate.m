@@ -23,7 +23,7 @@
         controller = [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
         [controller loadIoTsWithCompletion:nil];
     }
-    else { _window.rootViewController = [storyboard instantiateInitialViewController]; }
+    else { controller = [storyboard instantiateInitialViewController]; }
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];
     

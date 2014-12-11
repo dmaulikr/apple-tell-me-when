@@ -129,7 +129,7 @@
             ([_condition.meaning isEqualToString:@"noise_level"]) ? @"Sound"        : nil;
 }
 
-- (UIImage*)typeImage
+- (UIImage*)icon
 {
     if (!_condition) { return nil; }
     return  ([_condition.meaning isEqualToString:@"temperature"]) ? [UIImage imageNamed:@"IconTemperature"] :
@@ -145,11 +145,11 @@
     
     float const value = [_condition.value floatValue];
     // FIXME: (proximity) Add text to indicate "closeness"?
-    return  ([_condition.meaning isEqualToString:@"temperature"]) ? [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, value]   :
-            ([_condition.meaning isEqualToString:@"humidity"])    ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value]   :
+    return  ([_condition.meaning isEqualToString:@"temperature"]) ? [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, value]           :
+            ([_condition.meaning isEqualToString:@"humidity"])    ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value]           :
             ([_condition.meaning isEqualToString:@"luminosity"])  ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 40.96]   :
             ([_condition.meaning isEqualToString:@"proximity"])   ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 20.48]   :
-    ([_condition.meaning isEqualToString:@"noise_level"]) ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4] : nil;
+            ([_condition.meaning isEqualToString:@"noise_level"]) ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4]      : nil;
 }
 
 - (RelayrTransmitter *)transmitter

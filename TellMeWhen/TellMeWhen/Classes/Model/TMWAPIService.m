@@ -57,7 +57,8 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 #pragma mark - Public API
 
-+ (void)initialize {
++ (void)initialize
+{
     NSString *authRules = [NSString stringWithFormat:@"%@:%@", TMWAPIService_Rules_Username, TMWAPIService_Rules_Password];
     kTMWAPIAuthorizationRules = [NSString stringWithFormat:@"Basic %@", [[authRules dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
     
@@ -65,7 +66,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     kTMWAPIAuthorizationNotifications = [NSString stringWithFormat:@"Basic %@", [[authNotif dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
 }
 
-+ (void)registerRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion {
++ (void)registerRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion
+{
     NSDictionary *bodyDict = [rule compressIntoJSONDictionary];
     if (!bodyDict) {
         if (completion) {
@@ -111,19 +113,14 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)requestRulesForUserID:(NSString *)userID completion:(void (^)(NSError *error, NSArray *rules))completion {
-    if (!completion) {
-        return;
-    }
-    if (!userID.length) {
-        return completion(RelayrErrorMissingArgument, nil);
-    }
++ (void)requestRulesForUserID:(NSString *)userID completion:(void (^)(NSError *error, NSArray *rules))completion
+{
+    if (!completion) { return; }
+    if (!userID.length) { return completion(RelayrErrorMissingArgument, nil); }
     
     __autoreleasing NSError *error;
-    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"user_id" : userID } } options:kNilOptions error:&error];
-    if (error) {
-        return completion(error, nil);
-    }
+    NSData* bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"user_id" : userID } } options:kNilOptions error:&error];
+    if (error) { return completion(error, nil); }
     
     NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesGet];
     NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
@@ -149,7 +146,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)setRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion {
++ (void)setRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion
+{
     NSDictionary *bodyDict = [rule compressIntoJSONDictionary];
     if (!bodyDict || !rule.uid.length || !rule.revisionString.length) {
         if (completion) {
@@ -195,7 +193,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)deleteRule:(TMWRule *)rule completion:(void (^)(NSError * error))completion {
++ (void)deleteRule:(TMWRule *)rule completion:(void (^)(NSError * error))completion
+{
     NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesDelete(rule.uid, rule.revisionString)];
     NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModeDELETE];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
@@ -222,7 +221,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)requestNotificationsForRuleID:(NSString *)ruleID completion:(void (^)(NSError *error, NSArray *notifications))completion {
++ (void)requestNotificationsForRuleID:(NSString *)ruleID completion:(void (^)(NSError *error, NSArray *notifications))completion
+{
     if (!completion) {
         return;
     }
@@ -262,7 +262,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)requestNotificationsForUserID:(NSString *)userID completion:(void (^)(NSError *error, NSArray *notifications))completion {
++ (void)requestNotificationsForUserID:(NSString *)userID completion:(void (^)(NSError *error, NSArray *notifications))completion
+{
     if (!completion) {
         return;
     }
@@ -302,7 +303,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)deleteNotifications:(NSArray *)notifications completion:(void (^)(NSError *))completion {
++ (void)deleteNotifications:(NSArray *)notifications completion:(void (^)(NSError *))completion
+{
     if (!notifications.count) {
         if (completion) {
             completion(RelayrErrorMissingArgument);
@@ -343,7 +345,8 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 #pragma mark - Private functionality
 
-+ (NSURLSession*)sharedSession {
++ (NSURLSession*)sharedSession
+{
     static NSURLSession* session;
     
     static dispatch_once_t onceToken;
@@ -362,14 +365,16 @@ NSString *kTMWAPIAuthorizationNotifications;
     return session;
 }
 
-+ (NSURL *)buildAbsoluteURLFromHost:(NSString*)hostString relativeString:(NSString*)relativePath {
++ (NSURL *)buildAbsoluteURLFromHost:(NSString*)hostString relativeString:(NSString*)relativePath
+{
     NSString* result = (hostString) // FIXME: Don't nest the ternery operator: it's not particularly readable
         ? (relativePath.length) ? [hostString stringByAppendingString:relativePath] : hostString
         : (relativePath.length) ? relativePath : nil;
     return [NSURL URLWithString:[result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 }
 
-+ (NSMutableURLRequest *)requestForURL:(NSURL*)absoluteURL HTTPMethod:(NSString*)httpMode {
++ (NSMutableURLRequest *)requestForURL:(NSURL*)absoluteURL HTTPMethod:(NSString*)httpMode
+{
     if (!absoluteURL || !httpMode.length) {
         return nil;
     }

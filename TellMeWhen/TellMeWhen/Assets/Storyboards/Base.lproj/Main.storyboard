@@ -38,6 +38,7 @@
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
+            <string>NewJuneBook</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -142,8 +143,8 @@
                         <color key="barTintColor" red="0.019607843140000001" green="0.1137254902" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8GJ-EU-OJb" kind="relationship" relationship="viewControllers" id="5gQ-6s-JbS"/>
-                        <segue destination="7qh-2s-6MH" kind="relationship" relationship="viewControllers" id="4t0-Dm-P1U"/>
+                        <segue destination="8GJ-EU-OJb" kind="relationship" relationship="viewControllers" id="Lrs-bt-MAJ"/>
+                        <segue destination="7qh-2s-6MH" kind="relationship" relationship="viewControllers" id="LvU-2l-akz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpG-oX-YaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -282,8 +283,6 @@
                         <outlet property="tableView" destination="8mt-Uv-OuA" id="klj-ad-BY3"/>
                         <segue destination="Pwk-h1-dJG" kind="custom" identifier="TMWSegueFromRulesToOnboarding" customClass="TMWSegueSwapChildController" id="Ofe-ws-Wv9"/>
                         <segue destination="6vR-82-nQh" kind="custom" identifier="TMWSegueFromRulesToNoRules" customClass="TMWSegueSwapChildController" id="3xq-mm-duf"/>
-                        <segue destination="qr5-gf-ebk" kind="show" id="grT-BI-yzf"/>
-                        <segue destination="ZPK-6P-VjG" kind="show" id="j9N-wB-lvY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZqF-l3-MF6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -623,22 +622,20 @@
         <!--NOTIFICATIONS-->
         <scene sceneID="nAS-17-HlG">
             <objects>
-                <tableViewController id="zMM-RD-ofT" customClass="TMWNotificationsListController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vdg-9z-xCA">
+                <tableViewController id="zMM-RD-ofT" customClass="TMWNotificationsController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vdg-9z-xCA">
                         <rect key="frame" x="1" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="Ggu-30-xjE">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TMWNotificationsListCellView" rowHeight="104" id="Ggu-30-xjE" customClass="TMWNotificationsListCellView">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ggu-30-xjE" id="r07-pm-9c8">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Highest temperature = 38" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhr-9Z-yb3">
-                                            <rect key="frame" x="12" y="40" width="192" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="VqT-Kt-EsN"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Temperature &lt; 40 C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhr-9Z-yb3">
+                                            <rect key="frame" x="12" y="42" width="147" height="20"/>
                                             <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
                                             <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -647,7 +644,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="TEMP WATCH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCq-TZ-WSt">
-                                            <rect key="frame" x="12" y="16" width="120" height="20"/>
+                                            <rect key="frame" x="12" y="16" width="120" height="22"/>
                                             <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
                                             <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -656,7 +653,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="11:23" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdV-ai-Ie1">
-                                            <rect key="frame" x="541" y="36" width="47" height="22"/>
+                                            <rect key="frame" x="541" y="50" width="47" height="22"/>
                                             <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
                                             <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -665,7 +662,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="TODAY" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8h-M6-KDj">
-                                            <rect key="frame" x="541" y="18" width="47" height="15"/>
+                                            <rect key="frame" x="541" y="32" width="47" height="15"/>
                                             <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="12"/>
                                             <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -673,24 +670,44 @@
                                                 <rect key="frame" x="129" y="327" width="142" height="24"/>
                                             </variation>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Value: 22.C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsx-Bi-cAd">
+                                            <rect key="frame" x="12" y="65" width="71" height="17"/>
+                                            <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="14"/>
+                                            <color key="textColor" red="0.64148889134102638" green="0.67963499977885844" blue="0.69951467803030298" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="72" y="377" width="258" height="47"/>
+                                            </variation>
+                                        </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Mhr-9Z-yb3" secondAttribute="bottom" constant="8" id="7Eh-Jp-0Ps"/>
                                         <constraint firstItem="Mhr-9Z-yb3" firstAttribute="top" secondItem="SCq-TZ-WSt" secondAttribute="bottom" constant="4" id="CzP-I2-fAZ"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="vdV-ai-Ie1" secondAttribute="bottom" constant="10" id="EEs-37-WrV"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="E8h-M6-KDj" secondAttribute="trailing" constant="4" id="HzM-6N-HnH"/>
-                                        <constraint firstItem="E8h-M6-KDj" firstAttribute="top" secondItem="r07-pm-9c8" secondAttribute="topMargin" constant="10" id="IVY-wh-wGX"/>
+                                        <constraint firstItem="E8h-M6-KDj" firstAttribute="top" secondItem="r07-pm-9c8" secondAttribute="topMargin" constant="24" id="IVY-wh-wGX"/>
                                         <constraint firstItem="Mhr-9Z-yb3" firstAttribute="leading" secondItem="r07-pm-9c8" secondAttribute="leadingMargin" constant="4" id="Icq-7w-hkO"/>
                                         <constraint firstItem="vdV-ai-Ie1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mhr-9Z-yb3" secondAttribute="trailing" constant="8" id="NX1-Y8-H7M"/>
+                                        <constraint firstItem="wsx-Bi-cAd" firstAttribute="top" secondItem="Mhr-9Z-yb3" secondAttribute="bottom" constant="4" id="Pou-dy-qnL"/>
                                         <constraint firstItem="vdV-ai-Ie1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SCq-TZ-WSt" secondAttribute="trailing" constant="8" id="SMZ-Rx-py2"/>
                                         <constraint firstItem="SCq-TZ-WSt" firstAttribute="leading" secondItem="r07-pm-9c8" secondAttribute="leadingMargin" constant="4" id="Wzu-Gm-yrS"/>
+                                        <constraint firstItem="wsx-Bi-cAd" firstAttribute="leading" secondItem="r07-pm-9c8" secondAttribute="leadingMargin" constant="4" id="cHH-Pe-i2t"/>
                                         <constraint firstItem="vdV-ai-Ie1" firstAttribute="width" secondItem="E8h-M6-KDj" secondAttribute="width" id="dAN-hI-lYa"/>
+                                        <constraint firstItem="vdV-ai-Ie1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wsx-Bi-cAd" secondAttribute="trailing" constant="8" id="fOJ-ZJ-PoE"/>
                                         <constraint firstItem="SCq-TZ-WSt" firstAttribute="top" secondItem="r07-pm-9c8" secondAttribute="topMargin" constant="8" id="jhy-WJ-WAK"/>
                                         <constraint firstItem="vdV-ai-Ie1" firstAttribute="top" secondItem="E8h-M6-KDj" secondAttribute="bottom" constant="4" id="o2I-Dz-ajt"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="wsx-Bi-cAd" secondAttribute="bottom" constant="8" id="pb9-eB-5Xu"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="vdV-ai-Ie1" secondAttribute="trailing" constant="4" id="t4G-1K-8ek"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="ruleDescription" destination="Mhr-9Z-yb3" id="zza-dr-a9T"/>
+                                    <outlet property="ruleName" destination="SCq-TZ-WSt" id="2fO-TT-Nsa"/>
+                                    <outlet property="triggeredDay" destination="E8h-M6-KDj" id="UFs-TI-ENN"/>
+                                    <outlet property="triggeredTime" destination="vdV-ai-Ie1" id="C9I-Ke-dNd"/>
+                                    <outlet property="triggeredValue" destination="wsx-Bi-cAd" id="8gc-FT-Zbb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -704,11 +721,17 @@
                                 <action selector="signoutFromSender:" destination="Hku-Mi-Enc" id="Zr3-uL-m3C"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="clear" id="VYJ-Vg-Vpm"/>
+                        <barButtonItem key="rightBarButtonItem" title="clear" id="VYJ-Vg-Vpm">
+                            <connections>
+                                <action selector="clearButtonTriggered:" destination="zMM-RD-ofT" id="7c6-Zu-5Ae"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonClear" destination="VYJ-Vg-Vpm" id="fTC-I3-5L7"/>
                         <segue destination="vAM-kf-6BI" kind="show" id="JEZ-ZW-d5f"/>
-                        <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueEmbedBckViewToNotifList" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="Jaf-01-nf6"/>
+                        <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueFromNotifsToNoNotifs" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="Jaf-01-nf6"/>
+                        <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueFromNoNotifsToNotifs" customClass="TMWSegueRemoveViewFromTableBackgroundView" id="0MQ-4F-ecA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hku-Mi-Enc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -962,7 +985,7 @@
                         <viewControllerLayoutGuide type="top" id="s4W-5b-4yV"/>
                         <viewControllerLayoutGuide type="bottom" id="vVl-ih-WdD"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tTe-LO-lBo">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="tTe-LO-lBo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -975,8 +998,8 @@
                                     <rect key="frame" x="50" y="376" width="302" height="48"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="950" verticalCompressionResistancePriority="950" text="NO RULES YET" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLt-tK-Aye">
-                                <rect key="frame" x="228" y="267" width="148" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="950" verticalCompressionResistancePriority="950" text="NO NEW NOTIFICATIONS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLt-tK-Aye">
+                                <rect key="frame" x="179" y="267" width="244" height="24"/>
                                 <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                 <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -994,7 +1017,6 @@
                                 </variation>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="LUr-Wq-izW" firstAttribute="top" secondItem="vLt-tK-Aye" secondAttribute="bottom" priority="750" constant="22" id="Fyl-Jo-Fub"/>
                             <constraint firstAttribute="centerX" secondItem="vLt-tK-Aye" secondAttribute="centerX" constant="-1" id="LY6-Gi-YOH"/>
@@ -1025,9 +1047,9 @@
         <image name="TabBarItemRules" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Mbn-eF-iar"/>
-        <segue reference="e4r-x9-I9b"/>
         <segue reference="1o4-aZ-RYi"/>
+        <segue reference="e4r-x9-I9b"/>
         <segue reference="DcS-Sv-1m3"/>
+        <segue reference="0MQ-4F-ecA"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,7 +1,9 @@
 @import UIKit;      // Apple
 
-@interface TMWNotificationsListController : UITableViewController
+@interface TMWNotificationsController : UITableViewController
 
 //- (IBAction)unwindToList:(UIStoryboardSegue*)segue;
+
+- (void)queryNotifications;
 
 @end

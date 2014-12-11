@@ -1,5 +1,6 @@
 #import "TMWMainController.h"               // Apple
 #import "TMWStore.h"                        // TMW (Model)
+#import "TMWNotificationsController.h"  // TMW (ViewController)
 #import "TMWActions.h"                      // TMW (ViewControllers/Protocols)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueSwapRootViewController.h"  // TMW (ViewControllers/Segues)
@@ -22,7 +23,8 @@
 
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
-    // TODO: (not important) Maybe show in the UITabBar as a badge.
+    if (![self.selectedViewController isKindOfClass:[TMWNotificationsController class]]) { return; }
+    [(TMWNotificationsController*)self.selectedViewController queryNotifications];
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
