@@ -9,4 +9,4 @@
 #define TMWStoryboardIDs_SegueFromMainToSign            TMWStoryboardIDs_SegueFromSignToMain
 #define TMWStoryboardIDs_SegueFromRulesToOnboarding     @"TMWSegueFromRulesToOnboarding"
 #define TMWStoryboardIDs_SegueFromRulesToNoRules        @"TMWSegueFromRulesToNoRules"
-#define TMWStoryboardIDs_SegueFromNotifsToNoNotifs      @"TMWSegueEmbedTableViewBackgroundView"
+#define TMWStoryboardIDs_SegueFromNotifsToNoNotifs      @"TMWSegueEmbedBckViewToNotifList"

@@ -1,10 +1,10 @@
-#import "TMWSegueShowChildController.h"    // Header
+#import "TMWSegueSwapChildController.h"    // Header
 
 #pragma mark - Definitions
 
 #define TMWSegueShowChildCntrll_TransitionDuration  0.3
 
-@implementation TMWSegueShowChildController
+@implementation TMWSegueSwapChildController
 
 #pragma mark - Public API
 

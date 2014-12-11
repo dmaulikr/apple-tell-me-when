@@ -2,7 +2,7 @@
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWActions.h"                      // TMW (ViewControllers/Protocols)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
-#import "TMWRootViewControllerSwapSegue.h"  // TMW (ViewControllers/Segues)
+#import "TMWSegueSwapRootViewController.h"  // TMW (ViewControllers/Segues)
 #import "TMWUIProperties.h"                 // TMW (Views)
 
 @interface TMWMainController () <UITabBarControllerDelegate>
@@ -37,7 +37,7 @@
     store.relayrUser = nil;
     
     UIViewController* signInVC = [[UIStoryboard storyboardWithName:TMWStoryboard bundle:nil] instantiateInitialViewController];
-    TMWRootViewControllerSwapSegue* segue = [[TMWRootViewControllerSwapSegue alloc] initWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain source:self destination:signInVC];
+    TMWSegueSwapRootViewController* segue = [[TMWSegueSwapRootViewController alloc] initWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain source:self destination:signInVC];
     [segue perform];
 }
 

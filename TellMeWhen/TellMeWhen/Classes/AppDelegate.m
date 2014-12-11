@@ -3,7 +3,7 @@
 #import "TMWStore.h"        // TMW (Model)
 #import "TMWStoryboardIDs.h"// TMW (ViewControllers/Segues)
 #import "TMWActions.h"      // TMW (ViewControllers/Protocol)
-#import "TMWRootViewControllerSwapSegue.h"
+#import "TMWSegueSwapRootViewController.h"
 #import <Relayr/Relayr.h>   // Relayr.framework
 
 @interface AppDelegate ()

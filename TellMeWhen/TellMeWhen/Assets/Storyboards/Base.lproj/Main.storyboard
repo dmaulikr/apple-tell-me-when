@@ -123,7 +123,7 @@
                         <outlet property="multipurposeButton" destination="tUd-4E-pgG" id="g43-I1-kWe"/>
                         <outlet property="spinner" destination="XyL-JH-G3g" id="qZX-T0-umG"/>
                         <outlet property="textToButtonConstraint" destination="IwT-JU-KU4" id="cE2-Dc-5UJ"/>
-                        <segue destination="idj-yv-YbM" kind="custom" identifier="TMWSegueSwapWindowRootVCs" customClass="TMWRootViewControllerSwapSegue" id="VvH-fA-LIm"/>
+                        <segue destination="idj-yv-YbM" kind="custom" identifier="TMWSegueSwapWindowRootVCs" customClass="TMWSegueSwapRootViewController" id="VvH-fA-LIm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ioY-u5-vY5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -280,8 +280,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="8mt-Uv-OuA" id="klj-ad-BY3"/>
-                        <segue destination="Pwk-h1-dJG" kind="custom" identifier="TMWSegueFromRulesToOnboarding" customClass="TMWSegueShowChildController" id="Ofe-ws-Wv9"/>
-                        <segue destination="6vR-82-nQh" kind="custom" identifier="TMWSegueFromRulesToNoRules" customClass="TMWSegueShowChildController" id="3xq-mm-duf"/>
+                        <segue destination="Pwk-h1-dJG" kind="custom" identifier="TMWSegueFromRulesToOnboarding" customClass="TMWSegueSwapChildController" id="Ofe-ws-Wv9"/>
+                        <segue destination="6vR-82-nQh" kind="custom" identifier="TMWSegueFromRulesToNoRules" customClass="TMWSegueSwapChildController" id="3xq-mm-duf"/>
                         <segue destination="qr5-gf-ebk" kind="show" id="grT-BI-yzf"/>
                         <segue destination="ZPK-6P-VjG" kind="show" id="j9N-wB-lvY"/>
                     </connections>
@@ -708,7 +708,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="vAM-kf-6BI" kind="show" id="JEZ-ZW-d5f"/>
-                        <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueEmbedTableViewBackgroundView" customClass="TMWSegueEmbedTableViewBackgroundView" id="Jaf-01-nf6"/>
+                        <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueEmbedBckViewToNotifList" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="Jaf-01-nf6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hku-Mi-Enc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1025,9 +1025,9 @@
         <image name="TabBarItemRules" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="grT-BI-yzf"/>
-        <segue reference="DcS-Sv-1m3"/>
-        <segue reference="1o4-aZ-RYi"/>
+        <segue reference="Mbn-eF-iar"/>
         <segue reference="e4r-x9-I9b"/>
+        <segue reference="1o4-aZ-RYi"/>
+        <segue reference="DcS-Sv-1m3"/>
     </inferredMetricsTieBreakers>
 </document>

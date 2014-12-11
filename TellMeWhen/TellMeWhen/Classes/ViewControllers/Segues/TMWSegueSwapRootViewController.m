@@ -1,6 +1,6 @@
-#import "TMWRootViewControllerSwapSegue.h"  // Header
+#import "TMWSegueSwapRootViewController.h"  // Header
 
-@implementation TMWRootViewControllerSwapSegue
+@implementation TMWSegueSwapRootViewController
 
 - (void)perform
 {
