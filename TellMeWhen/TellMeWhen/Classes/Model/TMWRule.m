@@ -37,6 +37,32 @@
     return result;
 }
 
++ (void)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSArray*)serverRules
+{
+    if (!coreRules || !serverRules.count) { return; }
+    
+    for (TMWRule* sRule in serverRules)
+    {
+        BOOL addToCoreNotifications = YES;
+        for (TMWRule* cRule in coreRules)
+        {
+            if ([sRule.uid isEqualToString:cRule.uid])
+            {
+                addToCoreNotifications = NO;
+                cRule.revisionString = sRule.revisionString;
+                cRule.transmitterID = sRule.transmitterID;
+                cRule.deviceID = sRule.deviceID;
+                cRule.name = sRule.name;
+                cRule.condition = sRule.condition;
+                cRule.notifications = sRule.notifications;
+                cRule.active = sRule.active;
+                break;
+            }
+        }
+        if (addToCoreNotifications) { [coreRules addObject:sRule]; }
+    }
+}
+
 #pragma mark - Public API
 
 - (instancetype)initWithUserID:(NSString *)userID
@@ -96,7 +122,7 @@
     
     NSDictionary *conditionDictionary = [_condition compressIntoJSONDictionary];
     if (conditionDictionary) { result[TMWRule_Condition] = conditionDictionary; }
-    NSArray *notificationsArray = [self compressNotificationsIntoJSONArray];
+    NSArray *notificationsArray = [self compressRuleIntoJSONArray];
     if (notificationsArray) { result[TMWRule_Notifications] = notificationsArray; }
     return (result.count) ? [NSDictionary dictionaryWithDictionary:result] : nil;
 }
@@ -152,7 +178,7 @@
             ([_condition.meaning isEqualToString:@"noise_level"]) ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4]      : nil;
 }
 
-- (RelayrTransmitter *)transmitter
+- (RelayrTransmitter*)transmitter
 {
     for (RelayrTransmitter *transmitter in [TMWStore sharedInstance].relayrUser.transmitters)
     {
@@ -163,7 +189,7 @@
 
 #pragma mark - Private Methods
 
-- (NSArray *)compressNotificationsIntoJSONArray
+- (NSArray*)compressRuleIntoJSONArray
 {
     if (!_notifications.count) {
         return nil;

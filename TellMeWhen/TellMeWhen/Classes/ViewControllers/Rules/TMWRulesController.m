@@ -1,51 +1,88 @@
 #import "TMWRulesController.h"      // Header
+
 #import "TMWStore.h"                // TMW (Model)
 #import "TMWAPIService.h"           // TMW (Model)
 #import "TMWRule.h"                 // TMW (Model)
 #import "TMWRuleCondition.h"        // TMW (Model)
+
 #import "TMWStoryboardIDs.h"        // TMW (ViewControllers/Segues)
+#import "TMWUIProperties.h"         // TMW (Views)
 #import "TMWRulesCellView.h"        // TMW (Views/Rules)
 
 #pragma mark Definitions
 
-#define TMWRulesCntrll_RetryDelay      1.0
+#define TMWRulesController_RefreshString    @"Querying rules..."
 
-@interface TMWRulesController () <UITableViewDelegate,UITableViewDataSource>
-@property (weak, nonatomic) IBOutlet UITableView* tableView;
-@property (readonly,nonatomic) NSArray* rules;
+@interface TMWRulesController ()
+@property (strong, nonatomic) IBOutlet UIBarButtonItem* createButton;
+- (IBAction)createRule:(UIBarButtonItem*)sender;
 @end
 
 @implementation TMWRulesController
 
 #pragma mark - Public API
 
-- (IBAction)createRule:(id)sender
+- (void)queryRules
 {
-    NSLog(@"Start creating a rule.");
+    [self refreshRequest:nil];
 }
+
+#pragma mark UIViewController methods
 
 - (void)viewDidLoad
 {
-    [self showChild];
+    UIRefreshControl* control = (self.refreshControl) ? self.refreshControl : [[UIRefreshControl alloc] init];
+    control.tintColor = [UIColor whiteColor];
+    [control addTarget:self action:@selector(refreshRequest:) forControlEvents:UIControlEventValueChanged];
+    control.attributedTitle = [[NSAttributedString alloc] initWithString:TMWRulesController_RefreshString attributes:@{
+        NSForegroundColorAttributeName : [UIColor whiteColor],
+        NSFontAttributeName : [UIFont fontWithName:TMWFont_NewJuneBook size:14]
+    }];
+    self.refreshControl = control;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self queryRules];
 }
 
 #pragma mark UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-    return 1;
+    if (![TMWStore sharedInstance].relayrUser.transmitters.count)
+    {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.navigationItem setRightBarButtonItems:nil animated:YES];
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToOnboarding sender:self];
+        return 0;
+    }
+    else if (![TMWStore sharedInstance].rules.count)
+    {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.navigationItem setRightBarButtonItems:@[_createButton] animated:YES];
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToNoRules sender:self];
+        return 0;
+    }
+    else
+    {
+        tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        [self.navigationItem setRightBarButtonItems:@[_createButton] animated:YES];
+        [self removeChildControllers];
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _rules.count;
+    return [TMWStore sharedInstance].rules.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    TMWRule* rule = _rules[indexPath.row];
+    TMWRule* rule = [TMWStore sharedInstance].rules[indexPath.row];
     
-    TMWRulesCellView* cell = [tableView dequeueReusableCellWithIdentifier:@"TMWRulesCellView"];
+    TMWRulesCellView* cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TMWRulesCellView class])];
     cell.logo.image = rule.icon;
     cell.ruleName.text = rule.name.uppercaseString;
     cell.ruleDescription.text = [NSString stringWithFormat:@"%@ %@", rule.type, rule.thresholdDescription];
@@ -55,40 +92,26 @@
 
 #pragma mark - Private functionality
 
-- (void)showChild
+- (void)refreshRequest:(UIRefreshControl*)sender
 {
-    RelayrUser* user = [TMWStore sharedInstance].relayrUser;
-    NSSet* transmitters = user.transmitters;
-    
-    if (!transmitters.count)
-    {
-        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToOnboarding sender:self];
-        if (transmitters) { return; }
+    __weak UITableView* tableView = self.tableView;
+    [TMWAPIService requestRulesForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* rules) {
+        if (error) { return [sender endRefreshing]; }  // TODO:
         
-        __weak TMWRulesController* weakSelf = self;
-        return [user queryCloudForIoTs:^(NSError* error) {
-            TMWRulesController* strongSelf = weakSelf; if (!strongSelf) { return; }
-            if (!error) { [strongSelf showChild]; }
-        }];
-    }
-    
-    [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToNoRules sender:self];
-    
-    __weak TMWRulesController* weakSelf = self;
-    [TMWAPIService requestRulesForUserID:user.uid completion:^(NSError* error, NSArray* rules) {
-        if (error || !rules.count) { return; }  // TODO: Show error
-        [weakSelf showRules:rules];
+        if (rules.count)
+        {
+            TMWStore* store = [TMWStore sharedInstance];
+            [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules];
+        }
+        
+        [sender endRefreshing];
+        [tableView reloadData];
     }];
 }
 
-- (void)showRules:(NSArray*)rules
+- (IBAction)createRule:(UIBarButtonItem *)sender
 {
-    if (!rules.count) { [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToNoRules sender:self]; }
-    
-    _rules = rules;
-    [self removeFromParentViewController];
-    _tableView.hidden = NO;
-    [_tableView reloadData];
+    // TODO:
 }
 
 - (void)removeChildControllers
@@ -98,6 +121,7 @@
     {
         [cntrll willMoveToParentViewController:nil];
         if ([cntrll isViewLoaded]) { [cntrll.view removeFromSuperview]; }
+        self.tableView.backgroundView = nil;
         [cntrll removeFromParentViewController];
     }
 }

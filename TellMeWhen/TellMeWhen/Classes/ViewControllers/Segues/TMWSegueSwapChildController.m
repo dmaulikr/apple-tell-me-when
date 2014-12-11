@@ -1,4 +1,5 @@
-#import "TMWSegueSwapChildController.h"    // Header
+#import "TMWSegueSwapChildController.h"     // Header
+#import "TMWActions.h"                      // TMW (ViewController)
 
 #pragma mark - Definitions
 
@@ -31,7 +32,11 @@
         
         [previousChildVC removeFromParentViewController];
         [futureChildVC didMoveToParentViewController:containerVC];
-//        [containerVC transitionFromViewController:previousChildVC toViewController:futureChildVC duration:TMWSegueShowChildCntrll_TransitionDuration options:UIViewAnimationOptionCurveEaseOut animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>]
+    }
+    
+    if ([futureChildVC respondsToSelector:@selector(loadIoTsWithCompletion:)])
+    {
+        [(UIViewController<TMWActions>*)futureChildVC loadIoTsWithCompletion:nil];
     }
 }
 

@@ -8,8 +8,6 @@
  */
 @interface TMWRule : NSObject
 
-+ (TMWRule *)ruleForID:(NSString *)ruleID withinRulesArray:(NSArray *)rules;
-
 - (instancetype)initWithUserID:(NSString *)userID;
 - (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 - (NSDictionary *)compressIntoJSONDictionary;
@@ -29,5 +27,8 @@
 @property (readonly, nonatomic) UIImage* icon;
 @property (readonly, nonatomic) NSString* thresholdDescription;
 @property (readonly, nonatomic) RelayrTransmitter* transmitter;
+
++ (TMWRule*)ruleForID:(NSString*)ruleID withinRulesArray:(NSArray*)rules;
++ (void)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSArray*)serverRules;
 
 @end

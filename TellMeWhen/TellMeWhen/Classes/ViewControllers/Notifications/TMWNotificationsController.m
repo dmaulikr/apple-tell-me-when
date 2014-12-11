@@ -1,8 +1,8 @@
-#import "TMWNotificationsController.h"          // Header
+#import "TMWNotificationsController.h"              // Header
 
 #import "TMWStore.h"                                // TMW (Model)
-#import "TMWNotification.h"                         // TMW (Model)
 #import "TMWAPIService.h"                           // TMW (Model)
+#import "TMWNotification.h"                         // TMW (Model)
 
 #import "TMWStoryboardIDs.h"                        // TMW (ViewControllers)
 #import "TMWSegueEmbedViewInTableBacgroundkView.h"  // TMW (ViewControllers/Segue)
@@ -22,7 +22,6 @@
 
 #pragma mark - Public API
 
-//- (IBAction)unwindToList:(UIStoryboardSegue*)segue { }
 - (void)queryNotifications
 {
     [self refreshRequest:nil];
@@ -97,6 +96,7 @@
         [tableView reloadData];
     }];
 }
+
 - (IBAction)clearButtonTriggered:(UIBarButtonItem *)sender
 {
     __weak TMWNotificationsController* weakSelf = self;

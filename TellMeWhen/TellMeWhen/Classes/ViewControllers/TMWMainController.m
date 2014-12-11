@@ -1,6 +1,7 @@
 #import "TMWMainController.h"               // Apple
 #import "TMWStore.h"                        // TMW (Model)
-#import "TMWNotificationsController.h"  // TMW (ViewController)
+#import "TMWRulesController.h"              // TMW (ViewController)
+#import "TMWNotificationsController.h"      // TMW (ViewController)
 #import "TMWActions.h"                      // TMW (ViewControllers/Protocols)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueSwapRootViewController.h"  // TMW (ViewControllers/Segues)
@@ -23,8 +24,14 @@
 
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
-    if (![self.selectedViewController isKindOfClass:[TMWNotificationsController class]]) { return; }
-    [(TMWNotificationsController*)self.selectedViewController queryNotifications];
+    if ([self.selectedViewController isKindOfClass:[TMWNotificationsController class]])
+    {
+        [(TMWNotificationsController*)self.selectedViewController queryNotifications];
+    }
+    else if ([self.selectedViewController isKindOfClass:[TMWRulesController class]])
+    {
+        [(TMWRulesController*)self.selectedViewController queryRules];
+    }
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
@@ -39,8 +46,7 @@
     store.relayrUser = nil;
     
     UIViewController* signInVC = [[UIStoryboard storyboardWithName:TMWStoryboard bundle:nil] instantiateInitialViewController];
-    TMWSegueSwapRootViewController* segue = [[TMWSegueSwapRootViewController alloc] initWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain source:self destination:signInVC];
-    [segue perform];
+    [[[TMWSegueSwapRootViewController alloc] initWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain source:self destination:signInVC] perform];
 }
 
 #pragma mark NSObject methods

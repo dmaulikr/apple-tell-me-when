@@ -1,7 +1,7 @@
 @import UIKit;      // Apple
 
-@interface TMWRulesController : UIViewController
+@interface TMWRulesController : UITableViewController
 
-- (IBAction)createRule:(id)sender;
+- (void)queryRules;
 
 @end
