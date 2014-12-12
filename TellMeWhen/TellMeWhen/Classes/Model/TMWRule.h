@@ -29,6 +29,11 @@
 @property (readonly, nonatomic) RelayrTransmitter* transmitter;
 
 + (TMWRule*)ruleForID:(NSString*)ruleID withinRulesArray:(NSArray*)rules;
-+ (void)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSArray*)serverRules;
+
++ (BOOL)synchronizeStoredRules:(NSMutableArray*)coreRules
+         withNewlyArrivedRules:(NSMutableArray*)serverRules
+resultingInCellsIndexPathsToAdd:(NSArray**)addingCellIndexPaths
+       cellsIndexPathsToRemove:(NSArray**)removingCellsIndexPaths
+       cellsIndexPathsToReload:(NSArray**)reloadingCellIndexPaths;
 
 @end

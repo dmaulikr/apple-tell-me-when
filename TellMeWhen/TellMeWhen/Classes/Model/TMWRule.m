@@ -23,46 +23,6 @@
 
 @implementation TMWRule
 
-#pragma mark - Class Methods
-
-+ (TMWRule *)ruleForID:(NSString *)ruleID withinRulesArray:(NSArray *)rules
-{
-    if (!ruleID.length || !rules.count) { return nil; }
-    
-    TMWRule *result;
-    for (TMWRule *rule in rules)
-    {
-        if ([ruleID isEqualToString:rule.uid]) { result = rule; break; }
-    }
-    return result;
-}
-
-+ (void)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSArray*)serverRules
-{
-    if (!coreRules || !serverRules.count) { return; }
-    
-    for (TMWRule* sRule in serverRules)
-    {
-        BOOL addToCoreNotifications = YES;
-        for (TMWRule* cRule in coreRules)
-        {
-            if ([sRule.uid isEqualToString:cRule.uid])
-            {
-                addToCoreNotifications = NO;
-                cRule.revisionString = sRule.revisionString;
-                cRule.transmitterID = sRule.transmitterID;
-                cRule.deviceID = sRule.deviceID;
-                cRule.name = sRule.name;
-                cRule.condition = sRule.condition;
-                cRule.notifications = sRule.notifications;
-                cRule.active = sRule.active;
-                break;
-            }
-        }
-        if (addToCoreNotifications) { [coreRules addObject:sRule]; }
-    }
-}
-
 #pragma mark - Public API
 
 - (instancetype)initWithUserID:(NSString *)userID
@@ -187,6 +147,98 @@
     return nil;
 }
 
+#pragma mark Class Methods
+
++ (TMWRule*)ruleForID:(NSString *)ruleID withinRulesArray:(NSArray*)rules
+{
+    if (!ruleID.length || !rules.count) { return nil; }
+    
+    TMWRule *result;
+    for (TMWRule *rule in rules)
+    {
+        if ([ruleID isEqualToString:rule.uid]) { result = rule; break; }
+    }
+    return result;
+}
+
++ (BOOL)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSMutableArray*)serverRules resultingInCellsIndexPathsToAdd:(NSArray**)addingCellIndexPaths cellsIndexPathsToRemove:(NSArray**)removingCellsIndexPaths cellsIndexPathsToReload:(NSArray**)reloadingCellIndexPaths
+{
+    if (!serverRules.count)
+    {
+        *addingCellIndexPaths = nil;
+        *removingCellsIndexPaths = [TMWRule arrayIndexPaths:coreRules inSection:0];
+        *reloadingCellIndexPaths = nil;
+        [coreRules removeAllObjects];
+        return (*removingCellsIndexPaths) ? YES : NO;
+    }
+    else if (!coreRules.count)
+    {
+        *addingCellIndexPaths = [TMWRule arrayIndexPaths:serverRules inSection:0];
+        *removingCellsIndexPaths = nil;
+        *reloadingCellIndexPaths = nil;
+        [coreRules addObjectsFromArray:serverRules];
+        return (*addingCellIndexPaths) ? YES : NO;
+    }
+    
+    __block NSMutableArray* rulesToRemove;
+    __block NSMutableArray* indexPathsToRemove;
+    __block NSMutableArray* indexPathsToReplace;
+    [coreRules enumerateObjectsUsingBlock:^(TMWRule* cRule, NSUInteger idx, BOOL* stop) {
+        TMWRule* toReplace;
+        
+        for (TMWRule* sRule in serverRules)
+        {
+            if ([cRule.uid isEqualToString:sRule.uid])
+            {
+                toReplace = sRule;
+                
+                cRule.revisionString = sRule.revisionString;
+                cRule.transmitterID = sRule.transmitterID;
+                cRule.deviceID = sRule.deviceID;
+                if (![cRule.name isEqualToString:sRule.name] || ![cRule.condition isEqual:sRule.condition] || cRule.active!=sRule.active)
+                {
+                    cRule.name = sRule.name;
+                    cRule.condition = sRule.condition;
+                    cRule.active = sRule.active;
+                    if (!indexPathsToReplace) { indexPathsToReplace = [[NSMutableArray alloc] init]; }
+                    [indexPathsToReplace addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
+                }
+                cRule.notifications = sRule.notifications;
+                break;
+            }
+        }
+        
+        if (!toReplace)
+        {
+            if (!indexPathsToRemove) { indexPathsToRemove = [[NSMutableArray alloc] init]; }
+            [indexPathsToRemove addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
+            
+            if (!rulesToRemove) { rulesToRemove = [[NSMutableArray alloc] init]; }
+            [rulesToRemove addObject:cRule];
+        }
+        else { [serverRules removeObject:toReplace]; }
+    }];
+    
+    [coreRules removeObjectsInArray:rulesToRemove];
+    *removingCellsIndexPaths = (indexPathsToRemove.count) ? indexPathsToRemove.copy : nil;
+    *reloadingCellIndexPaths = (indexPathsToReplace.count) ? indexPathsToReplace.copy : nil;
+    
+    NSUInteger const remainingRules = serverRules.count;
+    if (remainingRules)
+    {
+        NSMutableArray* indexPathsToAdd = [[NSMutableArray alloc] initWithCapacity:remainingRules];
+        NSUInteger const alreadyStoredRules = coreRules.count;
+        for (NSUInteger i=coreRules.count; i<alreadyStoredRules+remainingRules; ++i)
+        {
+            [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+        }
+        
+        [coreRules addObjectsFromArray:serverRules];
+    }
+    
+    return ((*reloadingCellIndexPaths).count || (*addingCellIndexPaths).count || (*removingCellsIndexPaths).count) ? YES : NO;
+}
+
 #pragma mark - Private Methods
 
 - (NSArray*)compressRuleIntoJSONArray
@@ -203,6 +255,16 @@
         [result addObject:@{ TMWRule_Notif_Type : notification.type, TMWRule_Notif_Key : hexString }];
     }
     return (result.count) ? [NSArray arrayWithArray:result] : nil;
+}
+
++ (NSArray*)arrayIndexPaths:(NSArray*)array inSection:(NSInteger const)section
+{
+    NSUInteger const count = array.count;
+    if (!count) { return nil; }
+    
+    NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:count];
+    for (NSUInteger i=0; i<count; ++i) { [result addObject:[NSIndexPath indexPathForRow:i inSection:section]]; }
+    return result;
 }
 
 @end

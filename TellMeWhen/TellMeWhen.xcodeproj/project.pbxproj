@@ -16,6 +16,7 @@
 		624712C81A38FA8900736711 /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 624712BF1A38FA7200736711 /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */; };
 		6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */; };
+		627140BC1A3B2FC100C23BAC /* TMWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 627140BB1A3B2FC100C23BAC /* TMWTableViewCell.m */; };
 		6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */; };
 		62A490EE1A39E7AC0093157E /* TMWDateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A490ED1A39E7AC0093157E /* TMWDateConverter.m */; };
 		62D742011A37161500DBBAED /* TMWSegueSwapRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D742001A37161500DBBAED /* TMWSegueSwapRootViewController.m */; };
@@ -109,6 +110,8 @@
 		624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesCellView.m; sourceTree = "<group>"; };
 		6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMainTabBar.h; sourceTree = "<group>"; };
 		6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMainTabBar.m; sourceTree = "<group>"; };
+		627140BA1A3B2FC100C23BAC /* TMWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTableViewCell.h; sourceTree = "<group>"; };
+		627140BB1A3B2FC100C23BAC /* TMWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTableViewCell.m; sourceTree = "<group>"; };
 		628725381A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueRemoveViewFromTableBackgroundView.h; sourceTree = "<group>"; };
 		628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueRemoveViewFromTableBackgroundView.m; sourceTree = "<group>"; };
 		62A490EC1A39E7AC0093157E /* TMWDateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWDateConverter.h; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 				6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */,
 				6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */,
 				6221264C1A37ECB800E24072 /* TMWUIProperties.h */,
+				627140BA1A3B2FC100C23BAC /* TMWTableViewCell.h */,
+				627140BB1A3B2FC100C23BAC /* TMWTableViewCell.m */,
 				624D1C351A384D73009BB2D6 /* Rules */,
 				62D7E1161A39E07500D81856 /* Notifications */,
 			);
@@ -515,6 +520,7 @@
 				7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */,
 				622126561A37F6A200E24072 /* TMWSegueSwapChildController.m in Sources */,
 				62A490EE1A39E7AC0093157E /* TMWDateConverter.m in Sources */,
+				627140BC1A3B2FC100C23BAC /* TMWTableViewCell.m in Sources */,
 				622126531A37F06A00E24072 /* TMWRulesController.m in Sources */,
 				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,
 				7D8FF3A91A1A4A1500429FDE /* main.m in Sources */,

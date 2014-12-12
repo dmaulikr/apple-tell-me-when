@@ -195,6 +195,8 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 + (void)deleteRule:(TMWRule *)rule completion:(void (^)(NSError * error))completion
 {
+    if (!rule) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
+    
     NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesDelete(rule.uid, rule.revisionString)];
     NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModeDELETE];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];

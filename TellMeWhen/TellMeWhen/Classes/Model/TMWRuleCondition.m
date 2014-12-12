@@ -4,8 +4,9 @@
 #define TMWRule_Condition_Operation @"op"
 #define TMWRule_Condition_Value     @"val"
 
-
 @implementation TMWRuleCondition
+
+#pragma mark - Public API
 
 - (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary
 {
@@ -34,6 +35,14 @@
         TMWRule_Condition_Operation : _operation,
         TMWRule_Condition_Value     : ([_value isKindOfClass:[NSNumber class]]) ? _value : [NSNull null]
     };
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (!object || ![object isKindOfClass:[TMWRuleCondition class]]) { return NO; }
+    
+    TMWRuleCondition* condition;
+    return ([_meaning isEqualToString:condition.meaning] && [_operation isEqualToString:condition.operation] && _value==condition.value) ? YES : NO;
 }
 
 @end

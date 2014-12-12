@@ -6,11 +6,12 @@
  */
 @interface TMWRuleCondition : NSObject
 
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
-- (NSDictionary *)compressIntoJSONDictionary;
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary;
 
-@property (strong, nonatomic) NSString* meaning;
-@property (strong, nonatomic) NSString* operation;
-@property (strong, nonatomic) id value;
+@property (strong,nonatomic) NSString* meaning;
+@property (strong,nonatomic) NSString* operation;
+@property (strong,nonatomic) id value;
+
+- (NSDictionary*)compressIntoJSONDictionary;
 
 @end

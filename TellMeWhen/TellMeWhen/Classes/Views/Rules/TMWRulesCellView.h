@@ -1,6 +1,7 @@
-@import UIKit;      // Apple
+@import UIKit;                  // Apple
+#import "TMWTableViewCell.h"    // TMW (Views)
 
-@interface TMWRulesCellView : UITableViewCell
+@interface TMWRulesCellView : TMWTableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView* logo;
 @property (weak, nonatomic) IBOutlet UILabel* ruleName;
