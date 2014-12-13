@@ -7,8 +7,9 @@
 @end
 
 static NSString* kPersistanceLocation;
+static NSString* const kCodingDeviceToken   = @"devTo";
+static NSString* const kCodingRules         = @"rul";
 static NSString* const kCodingNotifications = @"notif";
-static NSString* const kCodingDeviceToken = @"devTo";
 
 @implementation TMWStore
 
@@ -71,8 +72,10 @@ static NSString* const kCodingDeviceToken = @"devTo";
     if (self)
     {
         _deviceToken = [decoder decodeObjectForKey:kCodingDeviceToken];
-        NSArray* notifications = [decoder decodeObjectForKey:kCodingNotifications];
-        if (notifications.count) { [_notifications addObjectsFromArray:notifications]; }
+        NSArray* tmp = [decoder decodeObjectForKey:kCodingRules];
+        if (tmp.count) { [_rules addObjectsFromArray:tmp]; }
+        tmp = [decoder decodeObjectForKey:kCodingNotifications];
+        if (tmp.count) { [_notifications addObjectsFromArray:tmp]; }
     }
     return self;
 }
@@ -80,7 +83,8 @@ static NSString* const kCodingDeviceToken = @"devTo";
 - (void)encodeWithCoder:(NSCoder*)coder
 {
     [coder encodeObject:_deviceToken forKey:kCodingDeviceToken];
-    if (_notifications) { [coder encodeObject:[NSArray arrayWithArray:_notifications] forKey:kCodingNotifications]; }
+    if (_rules.count) { [coder encodeObject:_rules.copy forKey:kCodingRules]; }
+    if (_notifications.count) { [coder encodeObject:_notifications.copy forKey:kCodingNotifications]; }
 }
 
 @end

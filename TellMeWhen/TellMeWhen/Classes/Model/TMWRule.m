@@ -15,17 +15,29 @@
 #define TMWRule_Active          @"active"
 #define TMWRule_Details         @"details"
 #define TMWRule_Details_Name    @"name"
+#define TMWRule_Details_Modify  @"modified"
 #define TMWRule_Condition       @"condition"
 #define TMWRule_Notifications   @"notifications"
 #define TMWRule_Notif_Type      @"type"
 #define TMWRule_Notif_Key       @"key"
 #define TMWRule_Notif_Type_APNS @"apns"
 
+static NSString* const kCodingID        = @"uid";
+static NSString* const kCodingRevision  = @"rev";
+static NSString* const kCodingUserID    = @"uID";
+static NSString* const kCodingTransID   = @"trID";
+static NSString* const kCodingDevID     = @"devID";
+static NSString* const kCodingName      = @"name";
+static NSString* const kCodingModified  = @"mod";
+static NSString* const kCodingCondition = @"cond";
+static NSString* const kCodingNotifs    = @"nots";
+static NSString* const kCodingActive    = @"act";
+
 @implementation TMWRule
 
 #pragma mark - Public API
 
-- (instancetype)initWithUserID:(NSString *)userID
+- (instancetype)initWithUserID:(NSString*)userID
 {
     if (!userID.length) { return nil; }
     
@@ -55,6 +67,9 @@
         
         NSDictionary* tmpDict = jsonDictionary[TMWRule_Details];
         _name = tmpDict[TMWRule_Details_Name];
+        NSNumber* timestamp = jsonDictionary[TMWRule_Details_Modify];
+        if (timestamp) { _modified = [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue / 1000.0]; }
+        
         _condition = [[TMWRuleCondition alloc] initWithJSONDictionary:jsonDictionary[TMWRule_Condition]];
         
         NSMutableArray *notifications = [[NSMutableArray alloc] init];
@@ -71,20 +86,24 @@
 
 - (NSDictionary*)compressIntoJSONDictionary
 {
-    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
     if (_uid) { result[TMWRule_RuleID] = _uid; }
     if (_revisionString) { result[TMWRule_Revision] = _revisionString; }
     result[TMWRule_UserID] = _userID;
     result[TMWRule_TransmitterID] = _transmitterID;
     result[TMWRule_DeviceID] = _deviceID;
     result[TMWRule_Active] = [NSNumber numberWithBool:_active];
-    result[TMWRule_Details] = @{ TMWRule_Details_Name : _name };
     
-    NSDictionary *conditionDictionary = [_condition compressIntoJSONDictionary];
+    NSMutableDictionary* details = [[NSMutableDictionary alloc] initWithCapacity:2];
+    if (_name) { details[TMWRule_Details_Name] = _name; }
+    if (_modified) { details[TMWRule_Details_Modify] = [NSNumber numberWithDouble:floor(_modified.timeIntervalSince1970 * 1000.0)]; }
+    result[TMWRule_Details] = details.copy;
+    
+    NSDictionary* conditionDictionary = [_condition compressIntoJSONDictionary];
     if (conditionDictionary) { result[TMWRule_Condition] = conditionDictionary; }
     NSArray *notificationsArray = [self compressRuleIntoJSONArray];
     if (notificationsArray) { result[TMWRule_Notifications] = notificationsArray; }
-    return (result.count) ? [NSDictionary dictionaryWithDictionary:result] : nil;
+    return [NSDictionary dictionaryWithDictionary:result];
 }
 
 - (NSArray*)setupNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -145,6 +164,47 @@
         if ([transmitter.uid isEqualToString:_transmitterID]) { return transmitter; }
     }
     return nil;
+}
+
+#pragma mark NSObject
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"\n{\n\tID: %@\n\tRevision: %@\n\tUserID: %@\n\tTransmitterID: %@\n\tDeviceID: %@\n\tName: %@\n\tLast modified: %@\n\tCondition: %@\n\tNum devices receiving push notifications: %lu\n\tActive: %@\n}\n", _uid, _revisionString, _userID, _transmitterID, _deviceID, _name, _modified, _condition, (unsigned long)_notifications.count, (_active) ? @"Yes" : @"No"];
+}
+
+#pragma mark NSCoding
+
+- (id)initWithCoder:(NSCoder*)decoder
+{
+    self = [super init];
+    if (self)
+    {
+        _uid = [decoder decodeObjectForKey:kCodingID];
+        _revisionString = [decoder decodeObjectForKey:kCodingRevision];
+        _userID = [decoder decodeObjectForKey:kCodingUserID];
+        _deviceID = [decoder decodeObjectForKey:kCodingDevID];
+        _name = [decoder decodeObjectForKey:kCodingName];
+        _modified = [decoder decodeObjectForKey:kCodingModified];
+        _condition = [decoder decodeObjectForKey:kCodingCondition];
+        _notifications = [decoder decodeObjectForKey:kCodingNotifs];
+        _active = [decoder decodeBoolForKey:kCodingActive];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder*)coder
+{
+    [coder encodeObject:_uid forKey:kCodingID];
+    [coder encodeObject:_revisionString forKey:kCodingRevision];
+    [coder encodeObject:_userID forKey:kCodingUserID];
+    [coder encodeObject:_transmitterID forKey:kCodingTransID];
+    [coder encodeObject:_deviceID forKey:kCodingDevID];
+    [coder encodeObject:_name forKey:kCodingName];
+    [coder encodeObject:_modified forKey:kCodingModified];
+    [coder encodeObject:_condition forKey:kCodingCondition];
+    [coder encodeObject:_notifications forKey:kCodingNotifs];
+    [coder encodeBool:_active forKey:kCodingActive];
 }
 
 #pragma mark Class Methods

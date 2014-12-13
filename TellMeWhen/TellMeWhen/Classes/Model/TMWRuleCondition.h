@@ -4,7 +4,7 @@
 /*!
  *  @abstract Condition specify by a rule.
  */
-@interface TMWRuleCondition : NSObject
+@interface TMWRuleCondition : NSObject <NSCoding>
 
 - (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary;
 

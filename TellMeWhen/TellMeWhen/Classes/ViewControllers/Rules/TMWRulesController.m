@@ -15,7 +15,7 @@
 #define TMWRulesCntrl_UpperLineColor        [UIColor colorWithWhite:0.65 alpha:0.15]
 #define TMWRulesCntrl_BottomLineColor       [UIColor colorWithWhite:0.2 alpha:0.65]
 #define TMWRulesCntrl_LineHeight            1
-#define TMWRulesCntrl_EndRefreshingDelay    0.37
+#define TMWRulesCntrl_EndRefreshingDelay    0.36
 
 #define TMWRulesCntrl_RowDeletionAnimation  UITableViewRowAnimationLeft
 #define TMWRulesCntrl_RowAdditionAnimation  UITableViewRowAnimationLeft
@@ -125,7 +125,7 @@
         [TMWRule ruleForID:ruleToDelete.uid withinRulesArray:store.rules];
         [store.rules removeObject:ruleToDelete];
         
-        if (store.rules.count == 0) {
+        if (!store.rules.count) {
             [weakTableView reloadData];
         } else {
             [weakTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:TMWRulesCntrl_RowDeletionAnimation];
@@ -149,9 +149,23 @@
 
 - (void)refreshRequest:(UIRefreshControl*)sender
 {
+    RelayrUser* user = [TMWStore sharedInstance].relayrUser;
     __weak UITableView* weakTableView = self.tableView;
+    
+    // If there are no transmitters, when it refreshes it looks for newly added transmitters.
+    if (!user.transmitters.count)
+    {
+        return [user queryCloudForIoTs:^(NSError* error) {
+            [sender endRefreshing];
+            if (error || !user.transmitters.count) { return; } // TODO: Show text to user...
+            [weakTableView reloadData];
+        }];
+    }
+    
+    // If there are transmitters, look for rules.
     [TMWAPIService requestRulesForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* rules) {
-        if (error) { return [sender endRefreshing]; }  // TODO:
+        [sender endRefreshing];
+        if (error) { return; }  // TODO:
         
         TMWStore* store = [TMWStore sharedInstance];
         
@@ -160,7 +174,6 @@
         NSArray* indexPathsToReplace;
         BOOL const isThereChanges = [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules.mutableCopy resultingInCellsIndexPathsToAdd:&indexPathsToAdd cellsIndexPathsToRemove:&indexPathsToRemove cellsIndexPathsToReload:&indexPathsToReplace];
         
-        [sender endRefreshing];
         if (!isThereChanges) { return; }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWRulesCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

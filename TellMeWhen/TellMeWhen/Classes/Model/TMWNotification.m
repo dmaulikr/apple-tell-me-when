@@ -1,18 +1,18 @@
 #import "TMWNotification.h" // Header
 
-#define TMWNotification_UID @"_id"
-#define TMWNotification_Revision @"_rev"
-#define TMWNotification_RuleID @"rule_id"
-#define TMWNotification_UserID @"user_id"
-#define TMWNotification_Timestamp @"timestamp"
-#define TMWNotification_Value @"val"
+#define TMWNotification_UID         @"_id"
+#define TMWNotification_Revision    @"_rev"
+#define TMWNotification_RuleID      @"rule_id"
+#define TMWNotification_UserID      @"user_id"
+#define TMWNotification_Timestamp   @"timestamp"
+#define TMWNotification_Value       @"val"
 
-static NSString* const kCodingID = @"uid";
-static NSString* const kCodingRevision = @"rev";
-static NSString* const kCodingRuleID = @"rID";
-static NSString* const kCodingUserID = @"uID";
+static NSString* const kCodingID        = @"uid";
+static NSString* const kCodingRevision  = @"rev";
+static NSString* const kCodingRuleID    = @"rID";
+static NSString* const kCodingUserID    = @"uID";
 static NSString* const kCodingTimestamp = @"ts";
-static NSString* const kCodingValue = @"val";
+static NSString* const kCodingValue     = @"val";
 
 @implementation TMWNotification
 
@@ -27,49 +27,45 @@ static NSString* const kCodingValue = @"val";
         _revisionString = jsonDictionary[TMWNotification_Revision];
         _ruleID = jsonDictionary[TMWNotification_RuleID];
         _userID = jsonDictionary[TMWNotification_UserID];
-        NSNumber *timestamp = jsonDictionary[TMWNotification_Timestamp];
-
-        if (timestamp) {
-            _timestamp = [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue / 1000.0];
-        }
         
-        id value = jsonDictionary[TMWNotification_Value];
-        if ([value isKindOfClass:[NSNumber class]]) {
-            _value = value;
-        } else {
-            // TODO: Complete when more complex values are added
-        }
+        NSNumber* timestamp = jsonDictionary[TMWNotification_Timestamp];
+        if (timestamp) { _timestamp = [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue / 1000.0]; }
+        
+        _value = jsonDictionary[TMWNotification_Value]; // TODO: Complete when more complex values are added
     }
     return self;
 }
 
-- (NSString*)valueDescription
+- (NSString*)valueToString
 {
-    return ([_value isKindOfClass:[NSNumber class]]) ? ((NSNumber*)_value).stringValue : @"N/A";
+    if (_value) {
+        return [NSString stringWithFormat:@"%@", _value];
+    } else {
+        return @"N/A";
+    }
 }
 
-+ (void)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs
++ (BOOL)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs resultingInCellsIndexPathsToAdd:(NSArray *__autoreleasing *)addingCellIndexPaths
 {
-    if (!coreNotifs || !serverNotifs.count) { return; }
-    
-    for (TMWNotification* sNotif in serverNotifs)
+    NSUInteger const numServerNotifs = serverNotifs.count;
+    if (!numServerNotifs)
     {
-        BOOL addToCoreNotifications = YES;
-        for (TMWNotification* cNotif in coreNotifs)
-        {
-            if ([sNotif.uid isEqualToString:cNotif.uid])
-            {
-                addToCoreNotifications = NO;
-                cNotif.revisionString = sNotif.revisionString;
-                cNotif.ruleID = sNotif.ruleID;
-                cNotif.userID = sNotif.userID;
-                cNotif.timestamp = sNotif.timestamp;
-                cNotif.value = sNotif.value;
-                break;
-            }
-        }
-        if (addToCoreNotifications) { [coreNotifs addObject:sNotif]; }
+        *addingCellIndexPaths = nil;
+        return NO;
     }
+    
+    NSUInteger const numCoreNotifs = coreNotifs.count;
+    NSUInteger const end = coreNotifs.count + numServerNotifs;
+    
+    NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:numServerNotifs];
+    for (NSUInteger i=numCoreNotifs; i<end; ++i)
+    {
+        [result addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    
+    [coreNotifs addObjectsFromArray:serverNotifs];
+    *addingCellIndexPaths = result.copy;
+    return YES;
 }
 
 #pragma mark NSCoding
@@ -97,6 +93,13 @@ static NSString* const kCodingValue = @"val";
     [coder encodeObject:_userID forKey:kCodingUserID];
     [coder encodeObject:_timestamp forKey:kCodingTimestamp];
     [coder encodeObject:_value forKey:kCodingValue];
+}
+
+#pragma mark NSObject
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"\n{\n\tID: %@\n\tRevision: %@\n\tRuleID: %@\n\tUserID: %@\n\tTimestamp: %@\n\tValue: %@\n}\n", _uid, _revisionString, _ruleID, _userID, _timestamp, _value];
 }
 
 @end

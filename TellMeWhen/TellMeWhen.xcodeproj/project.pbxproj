@@ -20,7 +20,7 @@
 		6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */; };
 		62A490EE1A39E7AC0093157E /* TMWDateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A490ED1A39E7AC0093157E /* TMWDateConverter.m */; };
 		62D742011A37161500DBBAED /* TMWSegueSwapRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D742001A37161500DBBAED /* TMWSegueSwapRootViewController.m */; };
-		62D7E1191A39E09900D81856 /* TMWNotificationsListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D7E1181A39E09900D81856 /* TMWNotificationsListCellView.m */; };
+		62D7E1191A39E09900D81856 /* TMWNotificationsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D7E1181A39E09900D81856 /* TMWNotificationsCellView.m */; };
 		7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */; };
 		7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D153AEA1A1E001F00B671B0 /* TMWStore.m */; };
 		7D1F1F9F1A30AF0500EFC92B /* DingDing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7D1F1F9E1A30AF0500EFC92B /* DingDing.wav */; };
@@ -120,8 +120,8 @@
 		62D742001A37161500DBBAED /* TMWSegueSwapRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWSegueSwapRootViewController.m; sourceTree = "<group>"; };
 		62D742061A37229B00DBBAED /* TMWStoryboardIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStoryboardIDs.h; sourceTree = "<group>"; };
 		62D742071A3722D100DBBAED /* TMWActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWActions.h; sourceTree = "<group>"; };
-		62D7E1171A39E09900D81856 /* TMWNotificationsListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsListCellView.h; sourceTree = "<group>"; };
-		62D7E1181A39E09900D81856 /* TMWNotificationsListCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsListCellView.m; sourceTree = "<group>"; };
+		62D7E1171A39E09900D81856 /* TMWNotificationsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsCellView.h; sourceTree = "<group>"; };
+		62D7E1181A39E09900D81856 /* TMWNotificationsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsCellView.m; sourceTree = "<group>"; };
 		7D153AE61A1DFDF100B671B0 /* TMWInitialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWInitialController.h; sourceTree = "<group>"; };
 		7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWInitialController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D153AE91A1E001F00B671B0 /* TMWStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStore.h; sourceTree = "<group>"; };
@@ -256,8 +256,8 @@
 		62D7E1161A39E07500D81856 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				62D7E1171A39E09900D81856 /* TMWNotificationsListCellView.h */,
-				62D7E1181A39E09900D81856 /* TMWNotificationsListCellView.m */,
+				62D7E1171A39E09900D81856 /* TMWNotificationsCellView.h */,
+				62D7E1181A39E09900D81856 /* TMWNotificationsCellView.m */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -514,7 +514,7 @@
 			files = (
 				62D742011A37161500DBBAED /* TMWSegueSwapRootViewController.m in Sources */,
 				7D153AE81A1DFDF100B671B0 /* TMWInitialController.m in Sources */,
-				62D7E1191A39E09900D81856 /* TMWNotificationsListCellView.m in Sources */,
+				62D7E1191A39E09900D81856 /* TMWNotificationsCellView.m in Sources */,
 				6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */,
 				7DF4B6FA1A1C7C7800F90FFC /* TMWMainController.m in Sources */,
 				7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */,

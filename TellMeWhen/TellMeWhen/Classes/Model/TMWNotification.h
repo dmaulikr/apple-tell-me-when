@@ -1,5 +1,5 @@
 @import Foundation; // Apple
-
+@import UIKit;      // Apple
 
 @interface TMWNotification : NSObject <NSCoding>
 
@@ -12,8 +12,10 @@
 @property (strong,nonatomic) NSDate* timestamp;
 @property (strong,nonatomic) id value;
 
-@property (readonly,nonatomic) NSString* valueDescription;
+- (NSString*)valueToString;
 
-+ (void)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs;
++ (BOOL)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs
+         withNewlyArrivedNotifications:(NSArray*)serverNotifs
+       resultingInCellsIndexPathsToAdd:(NSArray**)addingCellIndexPaths;
 
 @end

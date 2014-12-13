@@ -11,3 +11,4 @@
 #define TMWStoryboardIDs_SegueFromRulesToNoRules        @"TMWSegueFromRulesToNoRules"
 #define TMWStoryboardIDs_SegueFromNotifsToNoNotifs      @"TMWSegueFromNotifsToNoNotifs"
 #define TMWStoryboardIDs_SegueFromNoNotifsToNotifs      @"TMWSegueFromNoNotifsToNotifs"
+#define TMWStoryboardIDs_SegueFromNotifsToDetails       @"TMWSegueFromNotifsToDetails"

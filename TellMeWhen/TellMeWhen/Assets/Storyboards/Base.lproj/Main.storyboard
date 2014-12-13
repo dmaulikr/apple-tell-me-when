@@ -21,12 +21,9 @@
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
-            <string>NewJuneBold</string>
-            <string>NewJuneBold</string>
-            <string>NewJuneBold</string>
-            <string>NewJuneBold</string>
         </mutableArray>
         <mutableArray key="NewJuneBook.otf">
+            <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
@@ -603,13 +600,13 @@
         <scene sceneID="nAS-17-HlG">
             <objects>
                 <tableViewController id="zMM-RD-ofT" customClass="TMWNotificationsController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vdg-9z-xCA">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="104" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vdg-9z-xCA">
                         <rect key="frame" x="1" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TMWNotificationsListCellView" rowHeight="104" id="Ggu-30-xjE" customClass="TMWNotificationsListCellView">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TMWNotificationsCellView" rowHeight="104" id="Ggu-30-xjE" customClass="TMWNotificationsCellView">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ggu-30-xjE" id="r07-pm-9c8">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -709,7 +706,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="buttonClear" destination="VYJ-Vg-Vpm" id="fTC-I3-5L7"/>
-                        <segue destination="vAM-kf-6BI" kind="show" id="JEZ-ZW-d5f"/>
+                        <segue destination="vAM-kf-6BI" kind="show" identifier="TMWSegueFromNotifsToDetails" id="JEZ-ZW-d5f"/>
                         <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueFromNotifsToNoNotifs" customClass="TMWSegueEmbedViewInTableBacgroundkView" id="Jaf-01-nf6"/>
                         <segue destination="wIW-gE-ovN" kind="custom" identifier="TMWSegueFromNoNotifsToNotifs" customClass="TMWSegueRemoveViewFromTableBackgroundView" id="0MQ-4F-ecA"/>
                     </connections>
@@ -721,30 +718,31 @@
         <!--NOTIFICATION DETAILS-->
         <scene sceneID="ayh-RY-Eoh">
             <objects>
-                <tableViewController title="NOTIFICATION DETAILS" hidesBottomBarWhenPushed="YES" id="vAM-kf-6BI" customClass="TMWNotificationDetails" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="79" sectionHeaderHeight="22" sectionFooterHeight="22" id="TKS-dc-Q86">
+                <tableViewController title="NOTIFICATION DETAILS" hidesBottomBarWhenPushed="YES" id="vAM-kf-6BI" customClass="TMWNotificationDetailsController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="79" sectionHeaderHeight="22" sectionFooterHeight="22" id="TKS-dc-Q86">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection id="U35-71-6PC">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="98" id="u3l-yu-o39">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="101" id="u3l-yu-o39">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u3l-yu-o39" id="ucC-1f-Jrn">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Rule" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVS-Fk-Baj">
-                                                    <rect key="frame" x="16" y="16" width="30" height="17"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="14"/>
+                                                    <rect key="frame" x="16" y="16" width="34" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="129" y="327" width="142" height="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Temperature &gt; 32 C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUl-Q1-83k">
-                                                    <rect key="frame" x="16" y="61" width="147" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="Temperature &gt; 32 C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUl-Q1-83k">
+                                                    <rect key="frame" x="16" y="64" width="147" height="20"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -753,9 +751,9 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="TEMP WATCH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wys-kx-3YB">
-                                                    <rect key="frame" x="16" y="37" width="107" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
-                                                    <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="16" y="41" width="101" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
+                                                    <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="129" y="327" width="142" height="24"/>
@@ -772,19 +770,19 @@
                                                 <constraint firstItem="cUl-Q1-83k" firstAttribute="leading" secondItem="ucC-1f-Jrn" secondAttribute="leadingMargin" constant="8" id="qc4-bk-TOS"/>
                                                 <constraint firstItem="wys-kx-3YB" firstAttribute="leading" secondItem="ucC-1f-Jrn" secondAttribute="leadingMargin" constant="8" id="rXb-Vf-YNM"/>
                                                 <constraint firstItem="UVS-Fk-Baj" firstAttribute="leading" secondItem="ucC-1f-Jrn" secondAttribute="leadingMargin" constant="8" id="sqR-gt-AdV"/>
-                                                <constraint firstItem="wys-kx-3YB" firstAttribute="top" secondItem="UVS-Fk-Baj" secondAttribute="bottom" constant="4" id="vB2-hw-8ir"/>
+                                                <constraint firstItem="wys-kx-3YB" firstAttribute="top" secondItem="UVS-Fk-Baj" secondAttribute="bottom" constant="6" id="vB2-hw-8ir"/>
                                                 <constraint firstItem="cUl-Q1-83k" firstAttribute="top" secondItem="wys-kx-3YB" secondAttribute="bottom" constant="4" id="znT-LI-gxx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="73" id="E05-Mz-OxB">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="E05-Mz-OxB">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E05-Mz-OxB" id="VtD-IZ-t6H">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Threshold first met" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sz4-VN-4dF">
-                                                    <rect key="frame" x="16" y="16" width="130" height="17"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Threshold met" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sz4-VN-4dF">
+                                                    <rect key="frame" x="16" y="16" width="112" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -792,7 +790,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Today 11:23" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBN-7x-kFM">
-                                                    <rect key="frame" x="16" y="37" width="90" height="20"/>
+                                                    <rect key="frame" x="16" y="39" width="90" height="20"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
                                                     <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -813,50 +811,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="73" id="rcB-WW-2iC">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rcB-WW-2iC" id="2my-NZ-39u">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Duration above threashold" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LO0-Ov-Qu5">
-                                                    <rect key="frame" x="16" y="16" width="181" height="17"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="14"/>
-                                                    <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="129" y="327" width="142" height="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="2 hrs 34 mins 2 secs (23 times)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEQ-2r-pGl">
-                                                    <rect key="frame" x="16" y="37" width="229" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
-                                                    <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="72" y="377" width="258" height="47"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="LO0-Ov-Qu5" firstAttribute="top" secondItem="2my-NZ-39u" secondAttribute="topMargin" constant="8" id="1rt-Gu-WNo"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="LO0-Ov-Qu5" secondAttribute="trailing" constant="8" id="4Le-eq-1Vg"/>
-                                                <constraint firstItem="mEQ-2r-pGl" firstAttribute="leading" secondItem="2my-NZ-39u" secondAttribute="leadingMargin" constant="8" id="KpW-LR-q43"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="mEQ-2r-pGl" secondAttribute="trailing" constant="8" id="V5g-U0-3jt"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="mEQ-2r-pGl" secondAttribute="bottom" constant="8" id="aKw-G6-8dv"/>
-                                                <constraint firstItem="mEQ-2r-pGl" firstAttribute="top" secondItem="LO0-Ov-Qu5" secondAttribute="bottom" constant="4" id="axu-km-0AY"/>
-                                                <constraint firstItem="LO0-Ov-Qu5" firstAttribute="leading" secondItem="2my-NZ-39u" secondAttribute="leadingMargin" constant="8" id="iyf-rU-P2w"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="98" id="yLE-tZ-nk2">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="yLE-tZ-nk2">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yLE-tZ-nk2" id="a6x-qP-EpL">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Highest value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDs-v5-pyX">
-                                                    <rect key="frame" x="16" y="16" width="93" height="17"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Triggered value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDs-v5-pyX">
+                                                    <rect key="frame" x="16" y="16" width="120" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -864,47 +826,35 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="38 C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAs-BT-cOf">
-                                                    <rect key="frame" x="16" y="37" width="34" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
-                                                    <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="16" y="40" width="34" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
+                                                    <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <rect key="frame" x="129" y="327" width="142" height="24"/>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Today 11:28" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zet-Sy-zjM">
-                                                    <rect key="frame" x="16" y="61" width="90" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
-                                                    <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="72" y="377" width="258" height="47"/>
-                                                    </variation>
-                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zet-Sy-zjM" secondAttribute="trailing" constant="8" id="1vJ-sU-eDd"/>
-                                                <constraint firstItem="zet-Sy-zjM" firstAttribute="leading" secondItem="a6x-qP-EpL" secondAttribute="leadingMargin" constant="8" id="7jt-9R-Ifd"/>
-                                                <constraint firstItem="zet-Sy-zjM" firstAttribute="top" secondItem="zAs-BT-cOf" secondAttribute="bottom" constant="4" id="Ann-cS-KLJ"/>
                                                 <constraint firstItem="NDs-v5-pyX" firstAttribute="top" secondItem="a6x-qP-EpL" secondAttribute="topMargin" constant="8" id="EgK-Jq-8XG"/>
                                                 <constraint firstItem="NDs-v5-pyX" firstAttribute="leading" secondItem="a6x-qP-EpL" secondAttribute="leadingMargin" constant="8" id="WMZ-ng-83z"/>
                                                 <constraint firstItem="zAs-BT-cOf" firstAttribute="top" secondItem="NDs-v5-pyX" secondAttribute="bottom" constant="4" id="WtJ-NW-Iig"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="zet-Sy-zjM" secondAttribute="bottom" constant="8" id="emp-q0-773"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="NDs-v5-pyX" secondAttribute="trailing" constant="8" id="hhF-OS-Icj"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zAs-BT-cOf" secondAttribute="trailing" constant="8" id="mVY-1s-XgI"/>
                                                 <constraint firstItem="zAs-BT-cOf" firstAttribute="leading" secondItem="a6x-qP-EpL" secondAttribute="leadingMargin" constant="8" id="mnu-eb-Mww"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="zAs-BT-cOf" secondAttribute="bottom" constant="8" id="ykR-gg-UMJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="73" id="ri6-tr-Apy">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="ri6-tr-Apy">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ri6-tr-Apy" id="ywk-ef-7ZD">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Current sensor value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyI-GN-sR1">
-                                                    <rect key="frame" x="16" y="16" width="141" height="17"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="14"/>
+                                                    <rect key="frame" x="16" y="16" width="161" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -912,8 +862,8 @@
                                                     </variation>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="22.4 C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONK-Le-3Rp">
-                                                    <rect key="frame" x="16" y="37" width="48" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
+                                                    <rect key="frame" x="16" y="40" width="46" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
@@ -921,7 +871,7 @@
                                                     </variation>
                                                 </label>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="die-UU-eQc">
-                                                    <rect key="frame" x="16" y="37" width="20" height="20"/>
+                                                    <rect key="frame" x="16" y="40" width="20" height="20"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -947,11 +897,14 @@
                             <outlet property="delegate" destination="vAM-kf-6BI" id="5Ek-Q0-KYy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="NOTIFICATION DETAILS" id="XRA-L0-2Ka">
-                        <barButtonItem key="leftBarButtonItem" image="TabBarItemBackArrow" id="Tlg-kk-eQS">
-                            <color key="tintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <connections>
+                        <outlet property="currentValue" destination="ONK-Le-3Rp" id="c76-Be-HSs"/>
+                        <outlet property="indicator" destination="die-UU-eQc" id="Ql9-hh-DKF"/>
+                        <outlet property="ruleDescription" destination="cUl-Q1-83k" id="VhI-Yg-ls7"/>
+                        <outlet property="ruleName" destination="wys-kx-3YB" id="cOM-Lj-mtT"/>
+                        <outlet property="triggeredDate" destination="aBN-7x-kFM" id="nRg-22-aFz"/>
+                        <outlet property="triggeredValue" destination="zAs-BT-cOf" id="0Xs-mt-Xgt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Clb-Mn-Gft" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1022,14 +975,13 @@
         <image name="IconNew" width="33" height="33"/>
         <image name="IconNothing" width="63" height="63"/>
         <image name="LogoRelayr" width="183" height="71"/>
-        <image name="TabBarItemBackArrow" width="33" height="33"/>
         <image name="TabBarItemNotifications" width="20" height="19"/>
         <image name="TabBarItemRules" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0MQ-4F-ecA"/>
-        <segue reference="1o4-aZ-RYi"/>
+        <segue reference="Jaf-01-nf6"/>
         <segue reference="e4r-x9-I9b"/>
+        <segue reference="1o4-aZ-RYi"/>
         <segue reference="DcS-Sv-1m3"/>
     </inferredMetricsTieBreakers>
 </document>
