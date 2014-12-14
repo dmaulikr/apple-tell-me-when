@@ -159,11 +159,14 @@ static NSString* const kCodingActive    = @"act";
 
 - (RelayrTransmitter*)transmitter
 {
-    for (RelayrTransmitter *transmitter in [TMWStore sharedInstance].relayrUser.transmitters)
+    if (!_transmitterID.length) { return nil; }
+    
+    RelayrTransmitter* result;
+    for (RelayrTransmitter* transmitter in [TMWStore sharedInstance].relayrUser.transmitters)
     {
-        if ([transmitter.uid isEqualToString:_transmitterID]) { return transmitter; }
+        if ([transmitter.uid isEqualToString:_transmitterID]) { result = transmitter; break; }
     }
-    return nil;
+    return result;
 }
 
 #pragma mark NSObject

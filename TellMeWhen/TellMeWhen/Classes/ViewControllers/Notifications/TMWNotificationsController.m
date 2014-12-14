@@ -13,13 +13,6 @@
 #pragma mark Definitions
 
 #define TMWNotifListCntrll_RefreshString    @"Querying notifications..."
-#define TMWRulesCntrl_UpperLineColor        [UIColor colorWithWhite:0.65 alpha:0.15]
-#define TMWRulesCntrl_BottomLineColor       [UIColor colorWithWhite:0.2 alpha:0.65]
-#define TMWRulesCntrl_LineHeight            1
-#define TMWRulesCntrl_EndRefreshingDelay    0.36
-
-#define TMWRulesCntrl_RowDeletionAnimation  UITableViewRowAnimationLeft
-#define TMWRulesCntrl_RowAdditionAnimation  UITableViewRowAnimationLeft
 
 @interface TMWNotificationsController ()
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* buttonClear;
@@ -27,11 +20,6 @@
 @end
 
 @implementation TMWNotificationsController
-{
-    UIColor* _upperLineColor;
-    UIColor* _bottomLineColor;
-    CGFloat _lineHeight;
-}
 
 #pragma mark - Public API
 
@@ -44,10 +32,7 @@
 
 - (void)viewDidLoad
 {
-    _upperLineColor = TMWRulesCntrl_UpperLineColor;
-    _bottomLineColor = TMWRulesCntrl_BottomLineColor;
-    _lineHeight = TMWRulesCntrl_LineHeight;
-    
+    [super viewDidLoad];
     UIRefreshControl* control = (self.refreshControl) ? self.refreshControl : [[UIRefreshControl alloc] init];
     control.tintColor = [UIColor whiteColor];
     [control addTarget:self action:@selector(refreshRequest:) forControlEvents:UIControlEventValueChanged];
@@ -99,8 +84,6 @@
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     TMWNotificationsCellView* cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TMWNotificationsCellView class])];
-    [cell setUpperLineWithColor:_upperLineColor height:_lineHeight];
-    [cell setBottomLineWithColor:_bottomLineColor height:_lineHeight];
     cell.notification = [[TMWStore sharedInstance].notifications objectAtIndex:indexPath.row];
     return cell;
 }
@@ -123,7 +106,7 @@
     }
     else
     {
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:TMWRulesCntrl_RowDeletionAnimation];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:TMWCntrl_RowDeletionAnimation];
     }
 }
 
@@ -163,13 +146,13 @@
             if (!numPreviousNotifications) {
                 [tableView reloadData];
             } else {
-                [tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWRulesCntrl_RowAdditionAnimation];
+                [tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWCntrl_RowAdditionAnimation];
             }
         }];
     }];
 }
 
-- (IBAction)clearButtonTriggered:(UIBarButtonItem *)sender
+- (IBAction)clearButtonTriggered:(UIBarButtonItem*)sender
 {
     __weak TMWNotificationsController* weakSelf = self;
     NSArray* notifications = [TMWStore sharedInstance].notifications.copy;
@@ -182,6 +165,12 @@
         if (!strongSelf) { return; }
         [strongSelf.tableView reloadData];
     }];
+}
+
+#pragma mark Navigation functionality
+
+- (IBAction)unwindToNotificationsList:(UIStoryboardSegue*)segue
+{
 }
 
 @end

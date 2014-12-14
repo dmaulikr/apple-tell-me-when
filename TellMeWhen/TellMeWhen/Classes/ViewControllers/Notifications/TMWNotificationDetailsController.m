@@ -6,7 +6,7 @@
 #import "TMWDateConverter.h"                    // TMW (Model)
 
 @interface TMWNotificationDetailsController ()
-@property (strong, nonatomic) IBOutlet UILabel *ruleDescription;
+@property (strong, nonatomic) IBOutlet UILabel* ruleDescription;
 @property (strong,nonatomic) IBOutlet UILabel* ruleName;
 @property (strong,nonatomic) IBOutlet UILabel* triggeredDate;
 @property (strong,nonatomic) IBOutlet UILabel* triggeredValue;
@@ -20,8 +20,9 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     TMWRule* rule = [TMWRule ruleForID:_notification.ruleID withinRulesArray:[TMWStore sharedInstance].rules];
-
     if (rule)
     {
         _ruleName.text = rule.name.uppercaseString;

@@ -1,4 +1,9 @@
 #import "TMWTableViewCell.h"    // Header
+#import "TMWUIProperties.h"     // TMW (Views)
+
+static UIColor* kTMWTableViewCellUpperLineColor;
+static UIColor* kTMWTableViewCellBottomLineColor;
+static CGFloat kTMWTableViewCellLineHeight;
 
 @implementation TMWTableViewCell
 {
@@ -7,6 +12,19 @@
 }
 
 #pragma mark - Public API
+
++ (void)initialize
+{
+    kTMWTableViewCellUpperLineColor = TMWCntrl_UpperLineColor;
+    kTMWTableViewCellBottomLineColor = TMWCntrl_BottomLineColor;
+    kTMWTableViewCellLineHeight = TMWCntrl_LineHeight;
+}
+
+- (void)awakeFromNib
+{
+    [self setUpperLineWithColor:kTMWTableViewCellUpperLineColor height:kTMWTableViewCellLineHeight];
+    [self setBottomLineWithColor:kTMWTableViewCellBottomLineColor height:kTMWTableViewCellLineHeight];
+}
 
 - (void)setUpperLineWithColor:(UIColor*)color height:(CGFloat)height
 {
@@ -54,6 +72,20 @@
         _bottomLine.position = CGPointMake(0.5*size.width, size.height-0.5*h);
         _bottomLine.backgroundColor = color.CGColor;
     }
+}
+
++ (TMWTableViewCell*)findCellOfChildView:(UIView*)view
+{
+    if (!view) { return nil; }
+    Class const cellClass = [TMWTableViewCell class];
+    
+    while (![view isKindOfClass:cellClass])
+    {
+        view = view.superview;
+        if (!view) { return nil; }
+    }
+    
+    return (TMWTableViewCell*)view;
 }
 
 #pragma mark UIView methods

@@ -36,6 +36,18 @@ static NSString* const kCodingNotifications = @"notif";
     return sharedInstance;
 }
 
++ (RelayrTransmitter*)transmitterWithID:(NSString*)transmitterID
+{
+    if (!transmitterID.length) { return nil; }
+    
+    RelayrTransmitter* result;
+    for (RelayrTransmitter* transmitter in [TMWStore sharedInstance].relayrUser.transmitters)
+    {
+        if ([transmitterID isEqualToString:transmitter.uid]) { result = transmitter; break; }
+    }
+    return result;
+}
+
 - (instancetype)init
 {
     self = [super init];

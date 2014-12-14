@@ -5,4 +5,6 @@
 - (void)setUpperLineWithColor:(UIColor*)color height:(CGFloat)height;
 - (void)setBottomLineWithColor:(UIColor*)color height:(CGFloat)height;
 
++ (TMWTableViewCell*)findCellOfChildView:(UIView*)view;
+
 @end

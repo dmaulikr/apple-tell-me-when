@@ -1,4 +1,3 @@
-@import UIKit;                  // Apple
 #import "TMWTableViewCell.h"    // TMW (Views)
 
 @interface TMWRulesCellView : TMWTableViewCell

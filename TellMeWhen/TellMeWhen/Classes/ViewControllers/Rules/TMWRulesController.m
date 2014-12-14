@@ -1,36 +1,28 @@
-#import "TMWRulesController.h"      // Header
+#import "TMWRulesController.h"              // Header
 
-#import "TMWStore.h"                // TMW (Model)
-#import "TMWAPIService.h"           // TMW (Model)
-#import "TMWRule.h"                 // TMW (Model)
-#import "TMWRuleCondition.h"        // TMW (Model)
+#import "TMWStore.h"                        // TMW (Model)
+#import "TMWAPIService.h"                   // TMW (Model)
+#import "TMWRule.h"                         // TMW (Model)
+#import "TMWRuleCondition.h"                // TMW (Model)
 
-#import "TMWStoryboardIDs.h"        // TMW (ViewControllers/Segues)
-#import "TMWUIProperties.h"         // TMW (Views)
-#import "TMWRulesCellView.h"        // TMW (Views/Rules)
+#import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
+#import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
+#import "TMWRulesSummaryController.h"       // TMW (ViewControllers/Rules)
+#import "TMWRuleTransmittersController.h"   // TMW (ViewControllers/Rules)
+#import "TMWUIProperties.h"                 // TMW (Views)
+#import "TMWRulesCellView.h"                // TMW (Views/Rules)
 
 #pragma mark Definitions
 
 #define TMWRulesCntrl_RefreshString         @"Querying rules..."
-#define TMWRulesCntrl_UpperLineColor        [UIColor colorWithWhite:0.65 alpha:0.15]
-#define TMWRulesCntrl_BottomLineColor       [UIColor colorWithWhite:0.2 alpha:0.65]
-#define TMWRulesCntrl_LineHeight            1
-#define TMWRulesCntrl_EndRefreshingDelay    0.36
 
-#define TMWRulesCntrl_RowDeletionAnimation  UITableViewRowAnimationLeft
-#define TMWRulesCntrl_RowAdditionAnimation  UITableViewRowAnimationLeft
-
-@interface TMWRulesController ()
+@interface TMWRulesController () <TMWSegueUnwindingRules>
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* createButton;
 - (IBAction)createRule:(UIBarButtonItem*)sender;
+- (IBAction)ruleToogle:(UISwitch *)sender;
 @end
 
 @implementation TMWRulesController
-{
-    UIColor* _upperLineColor;
-    UIColor* _bottomLineColor;
-    CGFloat _lineHeight;
-}
 
 #pragma mark - Public API
 
@@ -43,9 +35,7 @@
 
 - (void)viewDidLoad
 {
-    _upperLineColor = TMWRulesCntrl_UpperLineColor;
-    _bottomLineColor = TMWRulesCntrl_BottomLineColor;
-    _lineHeight = TMWRulesCntrl_LineHeight;
+    [super viewDidLoad];
     
     UIRefreshControl* control = (self.refreshControl) ? self.refreshControl : [[UIRefreshControl alloc] init];
     control.tintColor = [UIColor whiteColor];
@@ -61,6 +51,18 @@
 {
     [super viewWillAppear:animated];
     [self queryRules];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesToSummary])
+    {
+        ((TMWRulesSummaryController*)segue.destinationViewController).rule = [TMWStore sharedInstance].rules[self.tableView.indexPathForSelectedRow.row];
+    }
+    else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesToNew])
+    {
+        ((TMWRuleTransmittersController*)segue.destinationViewController).rule = [[TMWRule alloc] initWithUserID:[TMWStore sharedInstance].relayrUser.uid];
+    }
 }
 
 #pragma mark UITableViewDataSource methods
@@ -97,8 +99,6 @@
     TMWRule* rule = [TMWStore sharedInstance].rules[indexPath.row];
     
     TMWRulesCellView* cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TMWRulesCellView class])];
-    [cell setUpperLineWithColor:_upperLineColor height:_lineHeight];
-    [cell setBottomLineWithColor:_bottomLineColor height:_lineHeight];
     cell.logo.image = rule.icon;
     cell.ruleName.text = rule.name.uppercaseString;
     cell.ruleDescription.text = [NSString stringWithFormat:@"%@ %@", rule.type, rule.thresholdDescription];
@@ -128,7 +128,7 @@
         if (!store.rules.count) {
             [weakTableView reloadData];
         } else {
-            [weakTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:TMWRulesCntrl_RowDeletionAnimation];
+            [weakTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:TMWCntrl_RowDeletionAnimation];
         }
     }];
 }
@@ -142,7 +142,7 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    // TODO:
+    [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToSummary sender:self];
 }
 
 #pragma mark - Private functionality
@@ -176,7 +176,7 @@
         
         if (!isThereChanges) { return; }
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWRulesCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UITableView* tableView = weakTableView; if (!tableView) { return; }
             
             NSUInteger const ruleNumbers = store.rules.count;
@@ -184,16 +184,27 @@
             
             [tableView beginUpdates];
             if (indexPathsToReplace.count) { [self.tableView reloadRowsAtIndexPaths:indexPathsToReplace withRowAnimation:UITableViewRowAnimationNone]; }
-            if (indexPathsToRemove.count) { [self.tableView deleteRowsAtIndexPaths:indexPathsToRemove withRowAnimation:TMWRulesCntrl_RowDeletionAnimation]; }
-            if (indexPathsToAdd.count) { [self.tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWRulesCntrl_RowAdditionAnimation]; }
+            if (indexPathsToRemove.count) { [self.tableView deleteRowsAtIndexPaths:indexPathsToRemove withRowAnimation:TMWCntrl_RowDeletionAnimation]; }
+            if (indexPathsToAdd.count) { [self.tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWCntrl_RowAdditionAnimation]; }
             [tableView endUpdates];
         });
     }];
 }
 
-- (IBAction)createRule:(UIBarButtonItem *)sender
+- (IBAction)ruleToogle:(UISwitch*)sender
 {
-    // TODO:
+    TMWRulesCellView* cellView = (TMWRulesCellView*)[TMWTableViewCell findCellOfChildView:sender];
+    if (!cellView) { return; }
+    
+    TMWRule* rule = [TMWStore sharedInstance].rules[[self.tableView indexPathForCell:cellView].row];
+    if (!rule) { return; }
+    
+    rule.active = sender.on;
+    [TMWAPIService setRule:rule completion:^(NSError* error) {
+        if (!error) { return; }
+        rule.active = !sender.on;
+        [sender setOn:rule.active animated:YES];
+    }];
 }
 
 - (void)removeChildControllers
@@ -206,6 +217,23 @@
         self.tableView.backgroundView = nil;
         [cntrll removeFromParentViewController];
     }
+}
+
+#pragma mark Navigation functionality
+
+- (IBAction)createRule:(UIBarButtonItem*)sender
+{
+    [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToNew sender:self];
+}
+
+- (void)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
+{
+    // Unwinding from Rules creation.
+}
+
+- (IBAction)unwindFromRuleSummary:(UIStoryboardSegue*)segue
+{
+    // Unwinding from Rules summary
 }
 
 @end

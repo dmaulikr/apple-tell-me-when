@@ -8,3 +8,10 @@
 
 #define TMWFont_NewJuneBook             @"NewJuneBook"
 #define TMWFont_NewJuneBold             @"NewJuneBold"
+
+#define TMWCntrl_UpperLineColor        [UIColor colorWithWhite:0.65 alpha:0.15]
+#define TMWCntrl_BottomLineColor       [UIColor colorWithWhite:0.2 alpha:0.65]
+#define TMWCntrl_LineHeight            1
+#define TMWCntrl_EndRefreshingDelay    0.36
+#define TMWCntrl_RowAdditionAnimation  UITableViewRowAnimationLeft
+#define TMWCntrl_RowDeletionAnimation  UITableViewRowAnimationLeft
