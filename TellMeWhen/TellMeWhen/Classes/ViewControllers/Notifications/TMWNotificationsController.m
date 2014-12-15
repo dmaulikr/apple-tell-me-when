@@ -121,7 +121,7 @@
 {
     TMWNotificationsCellView* cell = (TMWNotificationsCellView*)[tableView cellForRowAtIndexPath:indexPath];
     TMWNotification* notification = cell.notification;
-    if (!notification) { return [cell setSelected:NO animated:YES]; }
+    if (!notification) { return [tableView deselectRowAtIndexPath:indexPath animated:YES]; }
     [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromNotifsToDetails sender:self];
 }
 

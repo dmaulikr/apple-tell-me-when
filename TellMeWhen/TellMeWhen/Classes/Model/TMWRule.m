@@ -127,21 +127,21 @@ static NSString* const kCodingActive    = @"act";
 - (NSString*)type
 {
     if (!_condition) { return nil; }
-    return  ([_condition.meaning isEqualToString:@"temperature"]) ? @"Temperature"  :
-            ([_condition.meaning isEqualToString:@"humidity"])    ? @"Humidity"     :
-            ([_condition.meaning isEqualToString:@"proximity"])   ? @"Proximity"    :
-            ([_condition.meaning isEqualToString:@"luminosity"])  ? @"Brightness"   :
-            ([_condition.meaning isEqualToString:@"noise_level"]) ? @"Sound"        : nil;
+    return  ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) ? @"Temperature"  :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForHumidity]])    ? @"Humidity"     :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForProximity]])   ? @"Proximity"    :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForLight]])       ? @"Brightness"   :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForNoise]])       ? @"Sound"        : nil;
 }
 
 - (UIImage*)icon
 {
     if (!_condition) { return nil; }
-    return  ([_condition.meaning isEqualToString:@"temperature"]) ? [UIImage imageNamed:@"IconTemperature"] :
-            ([_condition.meaning isEqualToString:@"humidity"])    ? [UIImage imageNamed:@"IconHumidity"]    :
-            ([_condition.meaning isEqualToString:@"proximity"])   ? [UIImage imageNamed:@"IconProximity"]   :
-            ([_condition.meaning isEqualToString:@"luminosity"])  ? [UIImage imageNamed:@"IconLight"]       :
-            ([_condition.meaning isEqualToString:@"noise_level"]) ? [UIImage imageNamed:@"IconNoise"]       : nil;
+    return  ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) ? [UIImage imageNamed:@"IconTemperature"] :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForHumidity]])    ? [UIImage imageNamed:@"IconHumidity"]    :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForProximity]])   ? [UIImage imageNamed:@"IconProximity"]   :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForLight]])       ? [UIImage imageNamed:@"IconLight"]       :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForNoise]])       ? [UIImage imageNamed:@"IconNoise"]       : nil;
 }
 
 - (NSString*)thresholdDescription
@@ -150,11 +150,11 @@ static NSString* const kCodingActive    = @"act";
     
     float const value = [_condition.value floatValue];
     // FIXME: (proximity) Add text to indicate "closeness"?
-    return  ([_condition.meaning isEqualToString:@"temperature"]) ? [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, value]           :
-            ([_condition.meaning isEqualToString:@"humidity"])    ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value]           :
-            ([_condition.meaning isEqualToString:@"luminosity"])  ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 40.96]   :
-            ([_condition.meaning isEqualToString:@"proximity"])   ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 20.48]   :
-            ([_condition.meaning isEqualToString:@"noise_level"]) ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4]      : nil;
+    return  ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) ? [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, value]         :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForHumidity]])    ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value]         :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForLight]])       ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 40.96] :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForProximity]])   ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 20.48] :
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForNoise]])       ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4]    : nil;
 }
 
 - (RelayrTransmitter*)transmitter

@@ -2,91 +2,68 @@
 
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
+#import "TMWRuleCondition.h"                // TMW (Model)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
+#import "TMWRuleThresholdController.h"      // TMW (ViewControllers/Rules)
 
 @interface TMWRuleMeasurementsController () <TMWSegueUnwindingRules>
+@property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
 @end
 
 @implementation TMWRuleMeasurementsController
 
-- (void)viewDidLoad
+#pragma mark - Public API
+
+#pragma mark UIViewController methods
+
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesMeasuToThresh])
+    {
+        TMWRuleThresholdController* cntrll = (TMWRuleThresholdController*)segue.destinationViewController;
+        cntrll.rule = _rule;
+        
+        if (_needsServerModification)
+        {
+            cntrll.needsServerModification = _needsServerModification;
+            cntrll.tmpMeaning = [self meaningFromSelectedCell];
+        }
+    }
 }
 
-#pragma mark - Table view data source
+#pragma mark UITableViewDelegate methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    // Return the number of sections.
-    return 0;
+    return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - Private functionality
+
+- (IBAction)backButtonTapped:(id)sender
 {
-    // Return the number of rows in the section.
-    return 0;
+    [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+- (NSString*)meaningFromSelectedCell
+{
+    NSInteger const row = [self.tableView indexPathForSelectedRow].row;
+    return (row == 0) ? [TMWRuleCondition meaningForTemperature]
+        :  (row == 1) ? [TMWRuleCondition meaningForHumidity]
+        :  (row == 2) ? [TMWRuleCondition meaningForNoise]
+        :  (row == 3) ? [TMWRuleCondition meaningForProximity]
+        :  (row == 4) ? [TMWRuleCondition meaningForLight]
+        :  nil;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+#pragma mark Navigation functionality
+
+- (NSString*)segueIdentifierForUnwind
+{
+    return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleMeasurToTrans : TMWStoryboardIDs_UnwindFromRuleMeasurToSum;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+- (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue { }
 
 @end

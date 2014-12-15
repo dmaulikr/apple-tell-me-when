@@ -14,4 +14,10 @@
 
 - (NSDictionary*)compressIntoJSONDictionary;
 
++ (NSString*)meaningForTemperature;
++ (NSString*)meaningForHumidity;
++ (NSString*)meaningForNoise;
++ (NSString*)meaningForProximity;
++ (NSString*)meaningForLight;
+
 @end

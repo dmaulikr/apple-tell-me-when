@@ -226,9 +226,14 @@
     [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesToNew sender:self];
 }
 
-- (void)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
+- (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
 {
     // Unwinding from Rules creation.
+}
+
+- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue
+{
+    // Unwinding after successful creation
 }
 
 - (IBAction)unwindFromRuleSummary:(UIStoryboardSegue*)segue

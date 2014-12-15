@@ -6,6 +6,9 @@
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleTransmittersController.h"   // TMW (ViewControllers/Rules)
+#import "TMWRuleMeasurementsController.h"   // TMW (ViewControllers/Rules)
+#import "TMWRuleThresholdController.h"      // TMW (ViewControllers/Rules)
+#import "TMWRuleNamingController.h"         // TMW (ViewControllers/Rules)
 
 @interface TMWRulesSummaryController () <TMWSegueUnwindingRules>
 - (IBAction)activationToogled:(UISwitch *)sender;
@@ -37,6 +40,25 @@
     {
         TMWRuleTransmittersController* cntrll = (TMWRuleTransmittersController*)segue.destinationViewController;
         cntrll.rule = _rule;
+        cntrll.needsServerModification = YES;
+    }
+    else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToMeasur])
+    {
+        TMWRuleMeasurementsController* cntrll = (TMWRuleMeasurementsController*)segue.destinationViewController;
+        cntrll.rule = _rule;
+        cntrll.needsServerModification = YES;
+    }
+    else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToThresh])
+    {
+        TMWRuleThresholdController* cntrll = (TMWRuleThresholdController*)segue.destinationViewController;
+        cntrll.rule = _rule;
+        cntrll.needsServerModification = YES;
+    }
+    else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToNaming])
+    {
+        TMWRuleNamingController* cntrll = (TMWRuleNamingController*)segue.destinationViewController;
+        cntrll.rule = _rule;
+        cntrll.needsServerModification = YES;
     }
 }
 
@@ -45,21 +67,14 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     NSUInteger const row = indexPath.row;
-    if (row == 1)
-    {
-        
-    }
-    else if (row == 2)
-    {
+    if (row == 1) {
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesSummaryToNaming sender:self];
+    } else if (row == 2) {
         [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesSummaryToTransm sender:self];
-    }
-    else if (row == 3)
-    {
-        
-    }
-    else if (row == 4)
-    {
-        
+    } else if (row == 3) {
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesSummaryToMeasur sender:self];
+    } else if (row == 4) {
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesSummaryToThresh sender:self];
     }
 }
 
@@ -78,24 +93,9 @@
 
 #pragma mark Navigation functionality
 
-- (void)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
-{
-    
-}
-
-- (void)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue
-{
-    
-}
-
-- (void)unwindFromRuleThreshold:(UIStoryboardSegue*)segue
-{
-    
-}
-
-- (void)unwindFromRuleName:(UIStoryboardSegue*)segue
-{
-    
-}
+- (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue {}
+- (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue {}
+- (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue {}
+- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue {}
 
 @end

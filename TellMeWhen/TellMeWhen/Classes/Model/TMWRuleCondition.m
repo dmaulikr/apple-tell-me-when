@@ -67,4 +67,31 @@ static NSString* const kCodingValue     = @"val";
     [coder encodeObject:_value forKey:kCodingValue];
 }
 
+#pragma mark Class methods
+
++ (NSString*)meaningForTemperature
+{
+    return @"temperature";
+}
+
++ (NSString*)meaningForHumidity
+{
+    return @"humidity";
+}
+
++ (NSString*)meaningForNoise
+{
+    return @"noise_level";
+}
+
++ (NSString*)meaningForProximity
+{
+    return @"proximity";
+}
+
++ (NSString*)meaningForLight
+{
+    return @"luminosity";
+}
+
 @end

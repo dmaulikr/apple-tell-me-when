@@ -1,6 +1,7 @@
 #import "TMWRuleTransmittersController.h"   // Header
 
 #import "TMWStore.h"                        // TMW (Model)
+#import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
@@ -13,6 +14,7 @@
 #define TMWRuleTransCntrl_RefreshString     @"Querying user's IoTs..."
 
 @interface TMWRuleTransmittersController () <TMWSegueUnwindingRules>
+@property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
 @end
 
 @implementation TMWRuleTransmittersController
@@ -36,11 +38,12 @@
     self.refreshControl = control;
 }
 
-#pragma mark UIViewController methods
-
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
-    // TODO:
+    if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesTransToMeasures])
+    {
+        ((TMWRuleMeasurementsController*)segue.destinationViewController).rule = _rule;
+    }
 }
 
 #pragma mark UITableViewDataSource methods
@@ -50,9 +53,10 @@
     NSSet* transSet = [TMWStore sharedInstance].relayrUser.transmitters;
     if (!transSet.count)
     {
-        // TODO: If there are no transmitters, unwind to rules... <#TODO#>
+        _transmitters = nil;
+        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+        return 0;
     }
-    
     _transmitters = transSet.allObjects;
     return 1;
 }
@@ -64,14 +68,35 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    RelayrTransmitter* transmitter = (RelayrTransmitter*)_transmitters[indexPath.row];
     TMWRuleTransmitterCellView* cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TMWRuleTransmitterCellView class])];
-    cell.transmitterNameLabel.text = ((RelayrTransmitter*)_transmitters[indexPath.row]).name;
+    cell.transmitterNameLabel.text = transmitter.name;
+    cell.transmitterID = transmitter.uid;
     return cell;
 }
 
+#pragma mark UITableViewDelegate methods
+
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:self];
+    if (!_needsServerModification)
+    {
+        return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:self];
+    }
+    
+    TMWRuleTransmitterCellView* cell = (TMWRuleTransmitterCellView*)[tableView cellForRowAtIndexPath:indexPath];
+    RelayrTransmitter* transmitter = [TMWStore transmitterWithID:cell.transmitterID];
+    if (!transmitter.uid.length || [transmitter.uid isEqualToString:_rule.transmitterID])
+    {
+        return [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransToSum sender:self];
+    }
+    
+    _rule.transmitterID = transmitter.uid;
+    
+    __weak TMWRuleTransmittersController* weakSelf = self;
+    [TMWAPIService setRule:_rule completion:^(NSError* error) {
+        [weakSelf performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:weakSelf];
+    }];
 }
 
 #pragma mark - Private functionality
@@ -85,5 +110,19 @@
         [weakTableView reloadData];
     }];
 }
+
+- (IBAction)backButtonTapped:(id)sender
+{
+    [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+}
+
+#pragma mark Navigation functionality
+
+- (NSString*)segueIdentifierForUnwind
+{
+    return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleTransToList : TMWStoryboardIDs_UnwindFromRuleTransToSum;
+}
+
+- (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue { }
 
 @end

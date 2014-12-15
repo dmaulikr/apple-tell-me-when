@@ -3,5 +3,6 @@
 @interface TMWRuleTransmitterCellView : TMWTableViewCell
 
 @property (strong,nonatomic) IBOutlet UILabel* transmitterNameLabel;
+@property (strong,nonatomic) NSString* transmitterID;
 
 @end
