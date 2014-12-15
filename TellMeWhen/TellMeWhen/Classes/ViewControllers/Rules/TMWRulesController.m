@@ -150,15 +150,15 @@
 - (void)refreshRequest:(UIRefreshControl*)sender
 {
     RelayrUser* user = [TMWStore sharedInstance].relayrUser;
-    __weak UITableView* weakTableView = self.tableView;
+    __weak TMWRulesController* weakSelf = self;
     
     // If there are no transmitters, when it refreshes it looks for newly added transmitters.
     if (!user.transmitters.count)
     {
         return [user queryCloudForIoTs:^(NSError* error) {
-            [sender endRefreshing];
-            if (error || !user.transmitters.count) { return; } // TODO: Show text to user...
-            [weakTableView reloadData];
+            if (error || !user.transmitters.count) { return [sender endRefreshing]; } // TODO: Show text to user...
+            [weakSelf.tableView reloadData];
+            [weakSelf refreshRequest:sender];
         }];
     }
     
@@ -177,7 +177,7 @@
         if (!isThereChanges) { return; }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            UITableView* tableView = weakTableView; if (!tableView) { return; }
+            UITableView* tableView = weakSelf.tableView; if (!tableView) { return; }
             
             NSUInteger const ruleNumbers = store.rules.count;
             if ((ruleNumbers>tableView.numberOfSections) || (ruleNumbers<tableView.numberOfSections)) { return [tableView reloadData]; }

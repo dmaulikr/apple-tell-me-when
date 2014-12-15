@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B23" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="f1d-eT-KgF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -434,7 +434,7 @@
                                     <action selector="createRule:" destination="VL8-Za-JHu" eventType="touchUpInside" id="Yvc-RC-uoR"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="IconNothing" translatesAutoresizingMaskIntoConstraints="NO" id="3rY-m9-eAO">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="IconNothing" translatesAutoresizingMaskIntoConstraints="NO" id="3rY-m9-eAO">
                                 <rect key="frame" x="270" y="161" width="63" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="g5y-DV-VOH"/>
@@ -1629,7 +1629,7 @@
                                     <rect key="frame" x="129" y="327" width="142" height="24"/>
                                 </variation>
                             </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="IconNothing" translatesAutoresizingMaskIntoConstraints="NO" id="wvf-Qz-ka1">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="IconNothing" translatesAutoresizingMaskIntoConstraints="NO" id="wvf-Qz-ka1">
                                 <rect key="frame" x="270" y="178" width="63" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="4jF-rQ-Lbv"/>
