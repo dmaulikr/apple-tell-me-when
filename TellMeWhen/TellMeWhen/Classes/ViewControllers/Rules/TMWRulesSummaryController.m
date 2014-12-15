@@ -12,6 +12,7 @@
 
 @interface TMWRulesSummaryController () <TMWSegueUnwindingRules>
 - (IBAction)activationToogled:(UISwitch *)sender;
+@property (strong, nonatomic) IBOutlet UISwitch* activationSwitch;
 @property (strong, nonatomic) IBOutlet UILabel* ruleNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* transmitterNameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView* measurementImageView;
@@ -27,11 +28,12 @@
 {
     [super viewDidLoad];
     
+    _activationSwitch.on = _rule.active;
     _ruleNameLabel.text = _rule.name;
     _transmitterNameLabel.text = _rule.transmitter.name;
     _measurementImageView.image = _rule.icon;
     _measurementNameLabel.text = _rule.type;
-    _conditionLabel.text = [NSString stringWithFormat:@"%@ %@", _rule.type, _rule.thresholdDescription];
+    _conditionLabel.text = _rule.thresholdDescription;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender

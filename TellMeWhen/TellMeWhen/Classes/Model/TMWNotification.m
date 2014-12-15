@@ -18,6 +18,12 @@ static NSString* const kCodingValue     = @"val";
 
 #pragma mark - Public API
 
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary
 {
     if (!jsonDictionary.count) { return nil; }

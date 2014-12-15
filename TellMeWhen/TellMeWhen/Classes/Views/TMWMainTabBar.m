@@ -10,7 +10,7 @@
 
 #pragma mark Private prototypes
 
-NSArray* createColors(void);
+static NSArray* createColors(void);
 
 @interface TMWMainTabBar () <UITabBarDelegate>
 @end
@@ -56,7 +56,7 @@ NSArray* createColors(void);
 
 #pragma mark - Private functionality
 
-NSArray* createColors(void)
+static NSArray* createColors(void)
 {
     CGFloat const colorMembers0[] = TMWMainTabBar_GradientColor0;
     CGFloat const colorMembers1[] = TMWMainTabBar_GradientColor1;

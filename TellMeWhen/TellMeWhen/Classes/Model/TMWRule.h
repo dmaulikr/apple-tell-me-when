@@ -6,7 +6,7 @@
 /*!
  *  @abstract A rule is a condition to be met by a stream of data (usually MQTT).
  */
-@interface TMWRule : NSObject <NSCoding>
+@interface TMWRule : NSObject <NSCoding,NSCopying>
 
 - (instancetype)initWithUserID:(NSString *)userID;
 - (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;

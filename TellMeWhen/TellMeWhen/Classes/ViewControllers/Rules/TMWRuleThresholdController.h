@@ -7,6 +7,6 @@
 
 @property (nonatomic) BOOL needsServerModification;
 
-@property (strong,nonatomic) NSString* tmpMeaning;
+@property (strong,nonatomic) TMWRule* tmpRule;
 
 @end

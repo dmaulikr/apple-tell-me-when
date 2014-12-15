@@ -26,8 +26,17 @@
         
         if (_needsServerModification)
         {
+            NSString* tmpMeaning = [self meaningFromSelectedCell];
+            TMWRule* tmpRule = _rule.copy;
+            if (![tmpMeaning isEqualToString:_rule.condition.meaning])
+            {
+                tmpRule.condition.meaning = tmpMeaning;
+                tmpRule.condition.operation = [TMWRuleCondition lessThanOperator];
+                tmpRule.condition.value = [TMWRuleCondition defaultValueForMeaning:tmpMeaning];
+            }
+            
             cntrll.needsServerModification = _needsServerModification;
-            cntrll.tmpMeaning = [self meaningFromSelectedCell];
+            cntrll.tmpRule = tmpRule;
         }
     }
 }

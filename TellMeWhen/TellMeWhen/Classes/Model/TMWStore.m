@@ -31,7 +31,7 @@ static NSString* const kCodingNotifications = @"notif";
                 sharedInstance.relayrUser = sharedInstance.relayrApp.loggedUsers.firstObject;
             }
         }
-        else { sharedInstance = [[self alloc] init]; }
+        else { sharedInstance = [[self alloc] initPrivately]; }
     });
     return sharedInstance;
 }
@@ -48,17 +48,13 @@ static NSString* const kCodingNotifications = @"notif";
     return result;
 }
 
+#pragma mark - Public Methods
+
 - (instancetype)init
 {
-    self = [super init];
-    if (self) {
-        _rules = [NSMutableArray array];
-        _notifications = [NSMutableArray array];
-    }
-    return self;
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
-
-#pragma mark - Public Methods
 
 - (BOOL)persistInFileSystem
 {
@@ -80,7 +76,7 @@ static NSString* const kCodingNotifications = @"notif";
 
 - (id)initWithCoder:(NSCoder*)decoder
 {
-    self = [self init];
+    self = [self initPrivately];
     if (self)
     {
         _deviceToken = [decoder decodeObjectForKey:kCodingDeviceToken];
@@ -97,6 +93,18 @@ static NSString* const kCodingNotifications = @"notif";
     [coder encodeObject:_deviceToken forKey:kCodingDeviceToken];
     if (_rules.count) { [coder encodeObject:_rules.copy forKey:kCodingRules]; }
     if (_notifications.count) { [coder encodeObject:_notifications.copy forKey:kCodingNotifications]; }
+}
+
+#pragma mark - Private functionality
+
+- (instancetype)initPrivately
+{
+    self = [super init];
+    if (self) {
+        _rules = [NSMutableArray array];
+        _notifications = [NSMutableArray array];
+    }
+    return self;
 }
 
 @end

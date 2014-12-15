@@ -37,6 +37,12 @@ static NSString* const kCodingActive    = @"act";
 
 #pragma mark - Public API
 
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (instancetype)initWithUserID:(NSString*)userID
 {
     if (!userID.length) { return nil; }
@@ -146,15 +152,8 @@ static NSString* const kCodingActive    = @"act";
 
 - (NSString*)thresholdDescription
 {
-    if (!_condition || ![_condition.value isKindOfClass:[NSNumber class]]) { return nil; }
-    
-    float const value = [_condition.value floatValue];
-    // FIXME: (proximity) Add text to indicate "closeness"?
-    return  ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) ? [NSString stringWithFormat:@"%@ %.f °C", _condition.operation, value]         :
-            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForHumidity]])    ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value]         :
-            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForLight]])       ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 40.96] :
-            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForProximity]])   ? [NSString stringWithFormat:@"%@ %.f %%", _condition.operation, value / 20.48] :
-            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForNoise]])       ? [NSString stringWithFormat:@"%@ %.f", _condition.operation, value / 102.4]    : nil;
+    if (!_condition || ![_condition.value isKindOfClass:[NSNumber class]]) { return @"N/A"; }
+    return [NSString stringWithFormat:@"%@ %@ %@ %@", self.type, _condition.operation, _condition.value, _condition.unit];
 }
 
 - (RelayrTransmitter*)transmitter
@@ -208,6 +207,23 @@ static NSString* const kCodingActive    = @"act";
     [coder encodeObject:_condition forKey:kCodingCondition];
     [coder encodeObject:_notifications forKey:kCodingNotifs];
     [coder encodeBool:_active forKey:kCodingActive];
+}
+
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone*)zone
+{
+    TMWRule* rule = [[TMWRule alloc] initWithUserID:_userID];
+    rule.uid = _uid;
+    rule.revisionString = _revisionString;
+    rule.transmitterID = _transmitterID;
+    rule.deviceID = _deviceID;
+    rule.name = _name;
+    rule.modified = _modified;
+    rule.condition = _condition.copy;
+    rule.notifications = _notifications.copy;
+    rule.active = _active;
+    return rule;
 }
 
 #pragma mark Class Methods

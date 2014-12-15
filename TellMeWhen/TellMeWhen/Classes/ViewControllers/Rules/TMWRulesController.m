@@ -101,7 +101,7 @@
     TMWRulesCellView* cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TMWRulesCellView class])];
     cell.logo.image = rule.icon;
     cell.ruleName.text = rule.name.uppercaseString;
-    cell.ruleDescription.text = [NSString stringWithFormat:@"%@ %@", rule.type, rule.thresholdDescription];
+    cell.ruleDescription.text = rule.thresholdDescription;
     cell.activator.on = rule.active;
     return cell;
 }

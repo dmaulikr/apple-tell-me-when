@@ -54,13 +54,13 @@
 - (void)awakeFromNib
 {
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-        NSForegroundColorAttributeName  : [UIColor whiteColor],
-        NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBold size:20]
+        NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBold size:20],
+        NSForegroundColorAttributeName  : [UIColor whiteColor]
     }];
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{
-        NSFontAttributeName : [UIFont fontWithName:TMWFont_NewJuneBook size:14],
-        NSForegroundColorAttributeName:[UIColor whiteColor]
+        NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBook size:14],
+        NSForegroundColorAttributeName  : [UIColor whiteColor]
     } forState:UIControlStateNormal];
 }
 

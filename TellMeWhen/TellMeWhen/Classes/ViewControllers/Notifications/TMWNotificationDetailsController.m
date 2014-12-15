@@ -26,7 +26,7 @@
     if (rule)
     {
         _ruleName.text = rule.name.uppercaseString;
-        _ruleDescription.text = [NSString stringWithFormat:@"%@ %@", rule.type, rule.thresholdDescription];
+        _ruleDescription.text = rule.thresholdDescription;
     }
     else
     {

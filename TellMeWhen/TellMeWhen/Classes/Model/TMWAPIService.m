@@ -57,6 +57,12 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 #pragma mark - Public API
 
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 + (void)initialize
 {
     NSString *authRules = [NSString stringWithFormat:@"%@:%@", TMWAPIService_Rules_Username, TMWAPIService_Rules_Password];

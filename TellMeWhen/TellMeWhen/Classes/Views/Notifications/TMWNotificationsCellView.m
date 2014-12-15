@@ -24,7 +24,7 @@
  
     _notification = notification;
     _ruleName.text = rule.name;
-    _ruleDescription.text = [NSString stringWithFormat:@"%@ %@", rule.type, rule.thresholdDescription];
+    _ruleDescription.text = rule.thresholdDescription;
     _triggeredDay.text = [TMWDateConverter dayOfDate:notification.timestamp];
     _triggeredTime.text = [TMWDateConverter timeOfDate:notification.timestamp];
     _triggeredValue.text = [NSString stringWithFormat:@"Value: %@", [notification valueToString]];

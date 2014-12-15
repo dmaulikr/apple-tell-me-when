@@ -36,6 +36,8 @@
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
+            <string>NewJuneBold</string>
+            <string>NewJuneBold</string>
         </mutableArray>
         <mutableArray key="NewJuneBook.otf">
             <string>NewJuneBook</string>
@@ -222,12 +224,13 @@
                                             <accessibility key="accessibilityConfiguration">
                                                 <accessibilityTraits key="traits" none="YES" button="YES" notEnabled="YES"/>
                                             </accessibility>
+                                            <color key="onTintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="ruleToogle:" destination="MiQ-6c-K4z" eventType="valueChanged" id="uzV-0T-wLu"/>
                                             </connections>
                                         </switch>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Rule value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgf-91-HEt">
-                                            <rect key="frame" x="96" y="48" width="96" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="1000" text="Rule value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgf-91-HEt">
+                                            <rect key="frame" x="91" y="48" width="96" height="24"/>
                                             <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="20"/>
                                             <color key="textColor" red="0.72156862749999995" green="0.76470588240000004" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -235,8 +238,8 @@
                                                 <rect key="frame" x="72" y="377" width="258" height="47"/>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="RULE NAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DpB-vK-pLW">
-                                            <rect key="frame" x="96" y="20" width="119" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="RULE NAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DpB-vK-pLW">
+                                            <rect key="frame" x="91" y="20" width="119" height="24"/>
                                             <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                             <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -249,15 +252,15 @@
                                     <constraints>
                                         <constraint firstItem="fxx-Ag-PrE" firstAttribute="top" secondItem="Uqb-la-Z2z" secondAttribute="topMargin" constant="23" id="4UV-8h-2Qt"/>
                                         <constraint firstItem="Kgf-91-HEt" firstAttribute="top" secondItem="DpB-vK-pLW" secondAttribute="bottom" constant="4" id="4sm-D1-nex"/>
-                                        <constraint firstItem="DpB-vK-pLW" firstAttribute="leading" secondItem="eOQ-jX-fn1" secondAttribute="trailing" constant="15" id="Kc6-q4-gab"/>
+                                        <constraint firstItem="DpB-vK-pLW" firstAttribute="leading" secondItem="eOQ-jX-fn1" secondAttribute="trailing" priority="750" constant="10" id="Kc6-q4-gab"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="eOQ-jX-fn1" secondAttribute="bottom" constant="4" id="N2z-PT-xD0"/>
-                                        <constraint firstItem="Kgf-91-HEt" firstAttribute="leading" secondItem="eOQ-jX-fn1" secondAttribute="trailing" constant="15" id="Ukd-AR-qOg"/>
+                                        <constraint firstItem="Kgf-91-HEt" firstAttribute="leading" secondItem="eOQ-jX-fn1" secondAttribute="trailing" priority="750" constant="10" id="Ukd-AR-qOg"/>
                                         <constraint firstItem="DpB-vK-pLW" firstAttribute="top" secondItem="Uqb-la-Z2z" secondAttribute="topMargin" constant="12" id="atg-FR-Svt"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fxx-Ag-PrE" secondAttribute="trailing" constant="6" id="hh8-wJ-Ejv"/>
                                         <constraint firstItem="eOQ-jX-fn1" firstAttribute="leading" secondItem="Uqb-la-Z2z" secondAttribute="leadingMargin" constant="4" id="k51-Tq-EFK"/>
-                                        <constraint firstItem="fxx-Ag-PrE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kgf-91-HEt" secondAttribute="trailing" priority="750" constant="4" id="oUP-jW-w2q"/>
+                                        <constraint firstItem="fxx-Ag-PrE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kgf-91-HEt" secondAttribute="trailing" constant="4" id="oUP-jW-w2q"/>
                                         <constraint firstItem="eOQ-jX-fn1" firstAttribute="top" secondItem="Uqb-la-Z2z" secondAttribute="topMargin" constant="4" id="wFz-AJ-X2x"/>
-                                        <constraint firstItem="fxx-Ag-PrE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DpB-vK-pLW" secondAttribute="trailing" priority="750" constant="4" id="zFe-BT-lsF"/>
+                                        <constraint firstItem="fxx-Ag-PrE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DpB-vK-pLW" secondAttribute="trailing" constant="4" id="zFe-BT-lsF"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -276,6 +279,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="RULES" id="PzZ-lu-jI8">
                         <barButtonItem key="leftBarButtonItem" title="sign out" id="U8h-ZB-Rov">
+                            <color key="tintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="signoutFromSender:" destination="DSb-3a-bzy" id="Tai-Yo-VEm"/>
                             </connections>
@@ -560,14 +564,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LuE-rL-5TY" id="RGi-HM-gU5">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconTemperature" translatesAutoresizingMaskIntoConstraints="NO" id="vvJ-Lr-0Xa">
-                                                    <rect key="frame" x="16" y="12" width="61" height="61"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconTemperature" translatesAutoresizingMaskIntoConstraints="NO" id="vvJ-Lr-0Xa">
+                                                    <rect key="frame" x="16" y="12" width="62" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="vvJ-Lr-0Xa" secondAttribute="height" multiplier="1:1" id="9vy-ta-bqX"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="TEMPERATURE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E2-En-B4N">
-                                                    <rect key="frame" x="92" y="31" width="150" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="TEMPERATURE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8E2-En-B4N">
+                                                    <rect key="frame" x="93" y="31" width="150" height="24"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -592,14 +596,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ayE-R9-7Th" id="kf6-Dq-yVF">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconHumidity" translatesAutoresizingMaskIntoConstraints="NO" id="XvN-I7-NtV">
-                                                    <rect key="frame" x="16" y="12" width="61" height="61"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconHumidity" translatesAutoresizingMaskIntoConstraints="NO" id="XvN-I7-NtV">
+                                                    <rect key="frame" x="16" y="12" width="62" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="XvN-I7-NtV" secondAttribute="height" multiplier="1:1" id="vLO-u5-NvE"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="HUMIDITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EL-5d-5GT">
-                                                    <rect key="frame" x="92" y="31" width="101" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="HUMIDITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EL-5d-5GT">
+                                                    <rect key="frame" x="93" y="31" width="101" height="24"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -624,14 +628,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nQP-We-IcO" id="Alp-MX-2pW">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconNoise" translatesAutoresizingMaskIntoConstraints="NO" id="bZA-wE-fCp">
-                                                    <rect key="frame" x="16" y="12" width="61" height="61"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconNoise" translatesAutoresizingMaskIntoConstraints="NO" id="bZA-wE-fCp">
+                                                    <rect key="frame" x="16" y="12" width="62" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bZA-wE-fCp" secondAttribute="height" multiplier="1:1" id="6EP-Bl-q55"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="NOISE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vd-aT-nbM">
-                                                    <rect key="frame" x="92" y="31" width="63" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="NOISE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Vd-aT-nbM">
+                                                    <rect key="frame" x="93" y="31" width="63" height="24"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -656,14 +660,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OvJ-La-0Qr" id="Akq-3A-r7K">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconProximity" translatesAutoresizingMaskIntoConstraints="NO" id="Pyp-pP-vlL">
-                                                    <rect key="frame" x="16" y="12" width="61" height="61"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconProximity" translatesAutoresizingMaskIntoConstraints="NO" id="Pyp-pP-vlL">
+                                                    <rect key="frame" x="16" y="12" width="62" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Pyp-pP-vlL" secondAttribute="height" multiplier="1:1" id="9eE-J6-9Pp"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="PROXIMITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yc7-YH-qF7">
-                                                    <rect key="frame" x="92" y="31" width="114" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="PROXIMITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yc7-YH-qF7">
+                                                    <rect key="frame" x="93" y="31" width="114" height="24"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -688,14 +692,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L9B-JX-dny" id="F1u-cj-myS">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="IconLight" translatesAutoresizingMaskIntoConstraints="NO" id="HpW-kM-Pjk">
-                                                    <rect key="frame" x="16" y="12" width="61" height="61"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLight" translatesAutoresizingMaskIntoConstraints="NO" id="HpW-kM-Pjk">
+                                                    <rect key="frame" x="16" y="12" width="62" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="HpW-kM-Pjk" secondAttribute="height" multiplier="1:1" id="Oan-0g-FD8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="LIGHT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vA1-Vf-hG6">
-                                                    <rect key="frame" x="92" y="31" width="60" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="LIGHT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vA1-Vf-hG6">
+                                                    <rect key="frame" x="93" y="31" width="60" height="24"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="20"/>
                                                     <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -805,14 +809,39 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VYf-82-kLs" id="tY1-KT-e1s">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconGreaterThan" translatesAutoresizingMaskIntoConstraints="NO" id="akg-C4-Dbe">
-                                                    <rect key="frame" x="395" y="8" width="68" height="68"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="IconLessThan" translatesAutoresizingMaskIntoConstraints="NO" id="ail-wj-Az1">
-                                                    <rect key="frame" x="76" y="8" width="68" height="68"/>
-                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-uI-CJn" customClass="TMWRuleConditionButton">
+                                                    <rect key="frame" x="8" y="8" width="292" height="84"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="35"/>
+                                                    <state key="normal" title="&lt;">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="lessThanTapped:" destination="Mne-4e-EUB" eventType="touchUpInside" id="82C-6A-yek"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="207-ls-fzP" customClass="TMWRuleConditionButton">
+                                                    <rect key="frame" x="300" y="8" width="292" height="84"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="35"/>
+                                                    <state key="normal" title="&gt;">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="greaterThanTapped:" destination="Mne-4e-EUB" eventType="touchUpInside" id="EGC-Jo-G3M"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="PYM-uI-CJn" firstAttribute="leading" secondItem="tY1-KT-e1s" secondAttribute="leadingMargin" id="3rn-pR-LXZ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="207-ls-fzP" secondAttribute="bottom" id="Dnf-FX-dDg"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="trailing" secondItem="tY1-KT-e1s" secondAttribute="trailingMargin" id="H6f-s8-90h"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="top" secondItem="tY1-KT-e1s" secondAttribute="topMargin" id="Lpg-iY-8P3"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="width" secondItem="PYM-uI-CJn" secondAttribute="width" id="U1g-Gy-1vB"/>
+                                                <constraint firstItem="PYM-uI-CJn" firstAttribute="top" secondItem="tY1-KT-e1s" secondAttribute="topMargin" id="dq7-8I-iXp"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="PYM-uI-CJn" secondAttribute="bottom" id="eoO-BW-Kmt"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="leading" secondItem="PYM-uI-CJn" secondAttribute="trailing" id="u6g-d2-raX"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="3XZ-iR-Qmf" customClass="TMWTableViewCell">
@@ -822,6 +851,10 @@
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XlQ-Sd-YBw">
                                                     <rect key="frame" x="14" y="66" width="572" height="31"/>
+                                                    <color key="tintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="conditionValueChanged:" destination="Mne-4e-EUB" eventType="valueChanged" id="rzs-H5-SjD"/>
+                                                    </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="30 ºC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiW-RZ-nqm">
                                                     <rect key="frame" x="253" y="16" width="95" height="42"/>
@@ -851,7 +884,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Last sensor reading:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeG-b6-pdg">
-                                                    <rect key="frame" x="185" y="23" width="171" height="22"/>
+                                                    <rect key="frame" x="175" y="23" width="171" height="22"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
                                                     <color key="textColor" red="0.64313725489999995" green="0.73725490199999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -860,7 +893,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="22.12ºC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cu9-gC-ZTK">
-                                                    <rect key="frame" x="370" y="23" width="68" height="22"/>
+                                                    <rect key="frame" x="360" y="23" width="68" height="22"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
                                                     <color key="textColor" red="0.64313725489999995" green="0.73725490199999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -871,10 +904,12 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstItem="QeG-b6-pdg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eNj-bs-waM" secondAttribute="leadingMargin" constant="4" id="8D8-6U-OQb"/>
                                                 <constraint firstAttribute="centerY" secondItem="QeG-b6-pdg" secondAttribute="centerY" id="F01-Px-rx2"/>
-                                                <constraint firstAttribute="centerY" secondItem="Cu9-gC-ZTK" secondAttribute="centerY" id="VqU-2o-Llt"/>
-                                                <constraint firstAttribute="centerX" secondItem="QeG-b6-pdg" secondAttribute="centerX" constant="30" id="gQW-e9-y8q"/>
+                                                <constraint firstAttribute="centerY" secondItem="Cu9-gC-ZTK" secondAttribute="centerY" priority="500" id="VqU-2o-Llt"/>
+                                                <constraint firstAttribute="centerX" secondItem="QeG-b6-pdg" secondAttribute="centerX" priority="500" constant="40" id="gQW-e9-y8q"/>
                                                 <constraint firstItem="Cu9-gC-ZTK" firstAttribute="leading" secondItem="QeG-b6-pdg" secondAttribute="trailing" constant="14" id="gTP-hH-WWn"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Cu9-gC-ZTK" secondAttribute="trailing" constant="4" id="nPQ-Ig-KIz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -896,6 +931,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="conditionValueLabel" destination="SiW-RZ-nqm" id="Sv9-Ha-nNr"/>
+                        <outlet property="conditionValueSlider" destination="XlQ-Sd-YBw" id="05C-XG-qAm"/>
+                        <outlet property="greaterThan" destination="207-ls-fzP" id="MbC-OC-GKE"/>
+                        <outlet property="lessThanButton" destination="PYM-uI-CJn" id="XBh-nF-X7k"/>
+                        <outlet property="measurementImageView" destination="CMi-bA-6Hx" id="7eF-fR-8pI"/>
+                        <outlet property="measurementLabel" destination="8KY-is-hgR" id="K8c-sm-CaU"/>
+                        <outlet property="transmitterNameLabel" destination="Yu0-d9-jmX" id="cdw-7J-G44"/>
                         <segue destination="ljH-yK-8lg" kind="show" identifier="TMWSegueFromRuleThresholdToNaming" id="SY3-C7-gfA"/>
                         <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToMeasures" unwindAction="unwindFromRuleThreshold:" id="HE0-nS-kz4"/>
                         <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToSummary" unwindAction="unwindFromRuleThreshold:" id="bIM-IJ-JaL"/>
@@ -955,7 +997,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D9A-pd-Wxn" id="pcT-FL-s25">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAT-Rc-8fA">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" text="Get Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAT-Rc-8fA">
                                                     <rect key="frame" x="16" y="21" width="150" height="22"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -963,6 +1005,7 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBJ-t5-L66">
                                                     <rect key="frame" x="535" y="16" width="51" height="31"/>
+                                                    <color key="onTintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <connections>
                                                         <action selector="activationToogled:" destination="ZPK-6P-VjG" eventType="valueChanged" id="0qo-zg-cev"/>
                                                     </connections>
@@ -985,14 +1028,14 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nlC-b5-2qV" id="tZ2-Gn-1eu">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rule's Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTn-OF-Hay">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="1000" text="Rule's Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTn-OF-Hay">
                                                     <rect key="frame" x="16" y="16" width="96" height="20"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Too hot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu2-1i-cLI">
-                                                    <rect key="frame" x="16" y="42" width="57" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="1000" text="Too hot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pu2-1i-cLI">
+                                                    <rect key="frame" x="16" y="41" width="57" height="20"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
                                                     <color key="textColor" red="0.80947849230000002" green="0.83765815160000001" blue="0.896484375" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1122,7 +1165,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt; 30.0 ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXg-4j-i4x">
-                                                    <rect key="frame" x="16" y="41" width="69" height="20"/>
+                                                    <rect key="frame" x="16" y="42" width="69" height="20"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
                                                     <color key="textColor" red="0.80947849230000002" green="0.83765815160000001" blue="0.896484375" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1201,6 +1244,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activationSwitch" destination="rBJ-t5-L66" id="FAz-Ym-QIQ"/>
                         <outlet property="conditionLabel" destination="MXg-4j-i4x" id="TEo-vY-pe1"/>
                         <outlet property="measurementImageView" destination="3mK-mo-OUK" id="oyG-rt-982"/>
                         <outlet property="measurementNameLabel" destination="TR3-6Q-YvP" id="GJR-r4-LGw"/>
@@ -1337,11 +1381,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="NOTIFICATIONS" id="Hqn-fk-NlJ">
                         <barButtonItem key="leftBarButtonItem" title="sign out" id="XjV-Hk-z1h">
+                            <color key="tintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="signoutFromSender:" destination="Hku-Mi-Enc" id="Zr3-uL-m3C"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="clear" id="VYJ-Vg-Vpm">
+                            <color key="tintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="clearButtonTriggered:" destination="zMM-RD-ofT" id="7c6-Zu-5Ae"/>
                             </connections>
@@ -1661,10 +1707,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IconEdit" width="59" height="59"/>
-        <image name="IconGreaterThan" width="93" height="94"/>
+        <image name="IconEdit" width="26" height="26"/>
         <image name="IconHumidity" width="66" height="66"/>
-        <image name="IconLessThan" width="93" height="94"/>
         <image name="IconLight" width="66" height="66"/>
         <image name="IconNew" width="33" height="33"/>
         <image name="IconNoise" width="66" height="66"/>
@@ -1677,9 +1721,9 @@
         <image name="TabBarItemRules" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="R23-2U-ccp"/>
         <segue reference="jN9-f0-ZrE"/>
-        <segue reference="WMw-C2-A0e"/>
-        <segue reference="fe1-3f-eYe"/>
+        <segue reference="0Dj-pf-Bz7"/>
         <segue reference="SY3-C7-gfA"/>
         <segue reference="0MQ-4F-ecA"/>
     </inferredMetricsTieBreakers>

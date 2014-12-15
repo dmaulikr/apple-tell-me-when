@@ -12,6 +12,7 @@
 		62169A0F1A3D127C005A9E64 /* TMWRuleTransmittersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62169A0E1A3D127C005A9E64 /* TMWRuleTransmittersController.m */; };
 		62169A121A3D16C9005A9E64 /* TMWRuleTransmitterCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62169A111A3D16C9005A9E64 /* TMWRuleTransmitterCellView.m */; };
 		62169A151A3D1B85005A9E64 /* TMWRuleMeasurementsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62169A141A3D1B85005A9E64 /* TMWRuleMeasurementsController.m */; };
+		622056AB1A3EFAD80029CEB9 /* TMWRuleConditionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 622056AA1A3EFAD80029CEB9 /* TMWRuleConditionButton.m */; };
 		622126531A37F06A00E24072 /* TMWRulesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126521A37F06A00E24072 /* TMWRulesController.m */; };
 		622126561A37F6A200E24072 /* TMWSegueSwapChildController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622126551A37F6A200E24072 /* TMWSegueSwapChildController.m */; };
 		622DF6671A3C43F60098C3EA /* TMWRulesSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 622DF6661A3C43F60098C3EA /* TMWRulesSummaryController.m */; };
@@ -112,6 +113,8 @@
 		62169A111A3D16C9005A9E64 /* TMWRuleTransmitterCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleTransmitterCellView.m; sourceTree = "<group>"; };
 		62169A131A3D1B85005A9E64 /* TMWRuleMeasurementsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRuleMeasurementsController.h; sourceTree = "<group>"; };
 		62169A141A3D1B85005A9E64 /* TMWRuleMeasurementsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleMeasurementsController.m; sourceTree = "<group>"; };
+		622056A91A3EFAD80029CEB9 /* TMWRuleConditionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRuleConditionButton.h; sourceTree = "<group>"; };
+		622056AA1A3EFAD80029CEB9 /* TMWRuleConditionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRuleConditionButton.m; sourceTree = "<group>"; };
 		6221264C1A37ECB800E24072 /* TMWUIProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWUIProperties.h; sourceTree = "<group>"; };
 		622126511A37F06A00E24072 /* TMWRulesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWRulesController.h; sourceTree = "<group>"; };
 		622126521A37F06A00E24072 /* TMWRulesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesController.m; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */,
 				62169A101A3D16C9005A9E64 /* TMWRuleTransmitterCellView.h */,
 				62169A111A3D16C9005A9E64 /* TMWRuleTransmitterCellView.m */,
+				622056A91A3EFAD80029CEB9 /* TMWRuleConditionButton.h */,
+				622056AA1A3EFAD80029CEB9 /* TMWRuleConditionButton.m */,
 			);
 			path = Rules;
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 				62169A151A3D1B85005A9E64 /* TMWRuleMeasurementsController.m in Sources */,
 				7DC4A0411A2DB12E005A65AC /* NSData+Hexadecimal.m in Sources */,
 				7D650D311A2E0829007BB0A1 /* TMWAPIService.m in Sources */,
+				622056AB1A3EFAD80029CEB9 /* TMWRuleConditionButton.m in Sources */,
 				62169A061A3CF9C5005A9E64 /* TMWButton.m in Sources */,
 				7D8FF3A81A1A4A1500429FDE /* AppDelegate.m in Sources */,
 				624712B31A38EFAD00736711 /* TMWNotificationDetailsController.m in Sources */,

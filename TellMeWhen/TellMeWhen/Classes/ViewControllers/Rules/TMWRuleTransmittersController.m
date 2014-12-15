@@ -79,18 +79,24 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    TMWRuleTransmitterCellView* cell = (TMWRuleTransmitterCellView*)[tableView cellForRowAtIndexPath:indexPath];
+    
+    RelayrTransmitter* transmitter = [TMWStore transmitterWithID:cell.transmitterID];
+    if (!transmitter.uid.length) { return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self]; }
+    
     if (!_needsServerModification)
     {
+        _rule.transmitterID = transmitter.uid;
         return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:self];
     }
     
-    TMWRuleTransmitterCellView* cell = (TMWRuleTransmitterCellView*)[tableView cellForRowAtIndexPath:indexPath];
-    RelayrTransmitter* transmitter = [TMWStore transmitterWithID:cell.transmitterID];
-    if (!transmitter.uid.length || [transmitter.uid isEqualToString:_rule.transmitterID])
+    if ([transmitter.uid isEqualToString:_rule.transmitterID])
     {
-        return [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransToSum sender:self];
+        return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self];
     }
     
+    
+    // TODO: Get the device for meaning
     _rule.transmitterID = transmitter.uid;
     
     __weak TMWRuleTransmittersController* weakSelf = self;

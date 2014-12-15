@@ -15,6 +15,14 @@ static NSString* const kCodingDeviceToken    = @"devTok";
 
 @implementation TMWRuleNotification
 
+#pragma mark - Public API
+
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
 - (instancetype)initWithDeviceToken:(NSData*)deviceToken
 {
     if (!deviceToken.length) { return nil; }
@@ -69,6 +77,15 @@ static NSString* const kCodingDeviceToken    = @"devTok";
 {
     [coder encodeObject:_type forKey:kCodingType];
     [coder encodeObject:_deviceToken forKey:kCodingDeviceToken];
+}
+
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone*)zone
+{
+    TMWRuleNotification* notification = [[TMWRuleNotification alloc] initWithDeviceToken:_deviceToken];
+    notification.type = _type;
+    return notification;
 }
 
 @end
