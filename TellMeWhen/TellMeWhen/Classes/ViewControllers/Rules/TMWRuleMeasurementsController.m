@@ -22,22 +22,25 @@
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesMeasuToThresh])
     {
         TMWRuleThresholdController* cntrll = (TMWRuleThresholdController*)segue.destinationViewController;
-        cntrll.rule = _rule;
+        NSString* meaning = [self meaningFromSelectedCell];
+        RelayrDevice* device = [_rule.transmitter devicesWithInputMeaning:_rule.condition.meaning].firstObject;
         
-        if (_needsServerModification)
+        if (!_needsServerModification)
         {
-            NSString* tmpMeaning = [self meaningFromSelectedCell];
-            TMWRule* tmpRule = _rule.copy;
-            if (![tmpMeaning isEqualToString:_rule.condition.meaning])
-            {
-                tmpRule.condition.meaning = tmpMeaning;
-                tmpRule.condition.operation = [TMWRuleCondition lessThanOperator];
-                tmpRule.condition.value = [TMWRuleCondition defaultValueForMeaning:tmpMeaning];
-            }
-            
-            cntrll.needsServerModification = _needsServerModification;
-            cntrll.tmpRule = tmpRule;
+            _rule.condition = [[TMWRuleCondition alloc] initWithMeaning:meaning];
+            _rule.deviceID = device.uid;
         }
+        else
+        {
+            TMWRule* tmpRule = _rule.copy;
+            tmpRule.condition.meaning = meaning;
+            tmpRule.condition.operation = [TMWRuleCondition lessThanOperator];
+            tmpRule.condition.value = [TMWRuleCondition defaultValueForMeaning:tmpRule.condition.meaning];
+            tmpRule.deviceID = device.uid;
+        }
+        
+        cntrll.rule = _rule;
+        cntrll.needsServerModification = _needsServerModification;
     }
 }
 
@@ -45,7 +48,9 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self];
+    return ([_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]])   ?
+        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self]     :
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self];
 }
 
 #pragma mark - Private functionality

@@ -33,12 +33,23 @@
     _measurementImageView.image = rule.icon;
     _transmitterNameLabel.text = rule.transmitter.name.uppercaseString;
     _measurementLabel.text = rule.type;
-    _conditionValueLabel.text = [NSString stringWithFormat:@"%@ %@", rule.condition.value, rule.condition.unit];
+    
     FPRange const sliderRange = rule.condition.range;
     _conditionValueSlider.minimumValue = sliderRange.min;
     _conditionValueSlider.maximumValue = sliderRange.max;
-    id value = rule.condition.value;
-    _conditionValueSlider.value = ([value isKindOfClass:[NSNumber class]]) ? ((NSNumber*)value).floatValue : 0.5*(fabsf(sliderRange.min) + fabsf(sliderRange.max));
+    
+    NSNumber* value = ([rule.condition.value isKindOfClass:[NSNumber class]]) ? rule.condition.value : nil;
+    if (value)
+    {
+        _conditionValueLabel.text = [NSString stringWithFormat:@"%.1f %@", value.floatValue, rule.condition.unit];
+        _conditionValueSlider.value = value.floatValue;
+    }
+    else
+    {
+        float const floatValue = 0.5*(fabsf(sliderRange.min) + fabsf(sliderRange.max));
+        _conditionValueLabel.text = [NSString stringWithFormat:@"%.1f %@", floatValue, rule.condition.unit];
+        _conditionValueSlider.value = floatValue;
+    }
 }
 
 #pragma mark UIViewController methods
@@ -70,7 +81,7 @@
 
 - (IBAction)conditionValueChanged:(UISlider*)sender
 {
-    _conditionValueLabel.text = [NSString stringWithFormat:@"%@ %@", @(sender.value), (_tmpRule) ? _tmpRule.condition.unit : _rule.condition.unit];
+    _conditionValueLabel.text = [NSString stringWithFormat:@"%.1f %@", sender.value, (_tmpRule) ? _tmpRule.condition.unit : _rule.condition.unit];
 }
 
 #pragma mark Navigation functionality

@@ -13,6 +13,7 @@ typedef struct FPRange {
  */
 @interface TMWRuleCondition : NSObject <NSCoding,NSCopying>
 
+- (instancetype)initWithMeaning:(NSString*)meaning;
 - (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary;
 
 @property (strong,nonatomic) NSString* meaning;

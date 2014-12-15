@@ -5,7 +5,6 @@
 @interface TMWStore : NSObject
 
 + (instancetype)sharedInstance;
-+ (RelayrTransmitter*)transmitterWithID:(NSString*)transmitterID;
 
 @property (strong,nonatomic) RelayrApp* relayrApp;
 @property (weak,nonatomic) RelayrUser* relayrUser;

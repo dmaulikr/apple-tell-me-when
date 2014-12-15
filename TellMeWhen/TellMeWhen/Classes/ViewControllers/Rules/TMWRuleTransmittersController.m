@@ -3,6 +3,7 @@
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
+#import "TMWRuleCondition.h"                // TMW (Model)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleMeasurementsController.h"   // TMW (ViewControllers/Rules)
@@ -80,24 +81,22 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     TMWRuleTransmitterCellView* cell = (TMWRuleTransmitterCellView*)[tableView cellForRowAtIndexPath:indexPath];
-    
-    RelayrTransmitter* transmitter = [TMWStore transmitterWithID:cell.transmitterID];
-    if (!transmitter.uid.length) { return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self]; }
+    RelayrTransmitter* transmitter = [[TMWStore sharedInstance].relayrUser transmitterWithID:cell.transmitterID];
+    if (!transmitter) { return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self]; }
     
     if (!_needsServerModification)
     {
         _rule.transmitterID = transmitter.uid;
         return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:self];
     }
-    
-    if ([transmitter.uid isEqualToString:_rule.transmitterID])
+    else if ([transmitter.uid isEqualToString:_rule.transmitterID])
     {
         return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self];
     }
     
-    
-    // TODO: Get the device for meaning
     _rule.transmitterID = transmitter.uid;
+    _rule.deviceID = ((RelayrDevice*)[transmitter devicesWithInputMeaning:_rule.condition.meaning].firstObject).uid;
+    _rule.modified = [NSDate date];
     
     __weak TMWRuleTransmittersController* weakSelf = self;
     [TMWAPIService setRule:_rule completion:^(NSError* error) {
