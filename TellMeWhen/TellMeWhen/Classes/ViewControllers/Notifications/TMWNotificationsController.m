@@ -43,12 +43,6 @@
     self.refreshControl = control;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self queryNotifications];
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromNotifsToDetails])

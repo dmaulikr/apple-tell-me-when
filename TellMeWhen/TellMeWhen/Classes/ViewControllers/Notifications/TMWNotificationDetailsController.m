@@ -2,6 +2,7 @@
 
 #import "TMWStore.h"                            // TMW (Model)
 #import "TMWRule.h"                             // TMW (Model)
+#import "TMWRuleCondition.h"                    // TMW (Model)
 #import "TMWNotification.h"                     // TMW (Model)
 #import "TMWDateConverter.h"                    // TMW (Model)
 
@@ -35,7 +36,10 @@
     }
     
     _triggeredDate.text = [NSString stringWithFormat:@"%@ at %@", [TMWDateConverter dayOfDate:_notification.timestamp], [TMWDateConverter timeOfDate:_notification.timestamp]];
-    _triggeredValue.text = [_notification valueToString];
+    
+    NSNumber* value = [_notification convertServerValueWithMeaning:rule.condition.meaning];
+    NSString* valueString = (value) ? [NSString stringWithFormat:@"%.1f", value.floatValue] : @"N/A";
+    _triggeredValue.text = [NSString stringWithFormat:@"Triggered value: %@", valueString];
 }
 
 @end

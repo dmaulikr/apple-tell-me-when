@@ -59,5 +59,6 @@ typedef struct FPRange {
 + (id)defaultValueForMeaning:(NSString*)meaning;
 + (NSString*)unitForMeaning:(NSString*)meaning;
 + (FPRange)rangeForMeaning:(NSString*)meaning;
++ (NSNumber*)convertServerValue:(id)serverValue withMeaning:(NSString*)meaning;
 
 @end

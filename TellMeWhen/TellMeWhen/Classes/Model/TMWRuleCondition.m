@@ -50,35 +50,7 @@ static NSString* const kCodingValue     = @"val";
 
 - (NSNumber*)valueConverted
 {
-    NSNumber* value = ([_value isKindOfClass:[NSNumber class]]) ? _value : nil;
-    if (!value) { return nil; }
-    
-    FPRange range;
-    float convertedValue;
-    
-    if ([_meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) {
-        range = [TMWRuleCondition rangeForTemperature];
-        convertedValue = value.floatValue;
-    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForHumidity]]) {
-        range = [TMWRuleCondition rangeForHumidity];
-        convertedValue = value.floatValue;
-    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForNoise]]) {
-        range = [TMWRuleCondition rangeForNoise];
-        convertedValue = (range.max / [TMWRuleCondition rangeServerForNoise].max) * value.floatValue;
-    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForProximity]]) {
-        range = [TMWRuleCondition rangeForProximity];
-        convertedValue = (range.max / [TMWRuleCondition rangeServerForProximity].max) * value.floatValue;
-    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForLight]]) {
-        range = [TMWRuleCondition rangeForLight];
-        convertedValue = (range.max / [TMWRuleCondition rangeServerForLight].max) * value.floatValue;
-    } else {
-        return nil;
-    }
-    
-    if (convertedValue < range.min) { convertedValue = range.min; }
-    else if (convertedValue > range.max) { convertedValue = range.max; }
-    
-    return [NSNumber numberWithFloat:convertedValue];
+    return [TMWRuleCondition convertServerValue:_value withMeaning:_meaning];
 }
 
 - (void)setValueConverted:(NSNumber*)valueConverted
@@ -360,6 +332,40 @@ static NSString* const kCodingValue     = @"val";
         ([meaning isEqualToString:[TMWRuleCondition meaningForNoise]])          ? [TMWRuleCondition rangeForNoise] :
         ([meaning isEqualToString:[TMWRuleCondition meaningForProximity]])      ? [TMWRuleCondition rangeForProximity] :
         ([meaning isEqualToString:[TMWRuleCondition meaningForLight]])          ? [TMWRuleCondition rangeForLight] : FPRangeZero;
+}
+
++ (NSNumber*)convertServerValue:(id)serverValue withMeaning:(NSString*)meaning
+{
+    if (!serverValue || !meaning || ![serverValue isKindOfClass:[NSNumber class]]) { return nil; }
+    
+    NSNumber* value = serverValue;
+    
+    FPRange range;
+    float convertedValue;
+    
+    if ([meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) {
+        range = [TMWRuleCondition rangeForTemperature];
+        convertedValue = value.floatValue;
+    } else if ([meaning isEqualToString:[TMWRuleCondition meaningForHumidity]]) {
+        range = [TMWRuleCondition rangeForHumidity];
+        convertedValue = value.floatValue;
+    } else if ([meaning isEqualToString:[TMWRuleCondition meaningForNoise]]) {
+        range = [TMWRuleCondition rangeForNoise];
+        convertedValue = (range.max / [TMWRuleCondition rangeServerForNoise].max) * value.floatValue;
+    } else if ([meaning isEqualToString:[TMWRuleCondition meaningForProximity]]) {
+        range = [TMWRuleCondition rangeForProximity];
+        convertedValue = (range.max / [TMWRuleCondition rangeServerForProximity].max) * value.floatValue;
+    } else if ([meaning isEqualToString:[TMWRuleCondition meaningForLight]]) {
+        range = [TMWRuleCondition rangeForLight];
+        convertedValue = (range.max / [TMWRuleCondition rangeServerForLight].max) * value.floatValue;
+    } else {
+        return nil;
+    }
+    
+    if (convertedValue < range.min) { convertedValue = range.min; }
+    else if (convertedValue > range.max) { convertedValue = range.max; }
+    
+    return [NSNumber numberWithFloat:convertedValue];
 }
 
 @end

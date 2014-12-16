@@ -1,8 +1,10 @@
-#import "TMWNotification.h" // Header
+#import "TMWNotification.h"     // Header
+#import "TMWRuleCondition.h"    // TMW (Model)
 
 #define TMWNotification_UID         @"_id"
 #define TMWNotification_Revision    @"_rev"
 #define TMWNotification_RuleID      @"rule_id"
+#define TMWNotification_RuleRev     @"rule_rev"
 #define TMWNotification_UserID      @"user_id"
 #define TMWNotification_Timestamp   @"timestamp"
 #define TMWNotification_Value       @"val"
@@ -10,6 +12,7 @@
 static NSString* const kCodingID        = @"uid";
 static NSString* const kCodingRevision  = @"rev";
 static NSString* const kCodingRuleID    = @"rID";
+static NSString* const kCodingRuleRev   = @"rRev";
 static NSString* const kCodingUserID    = @"uID";
 static NSString* const kCodingTimestamp = @"ts";
 static NSString* const kCodingValue     = @"val";
@@ -32,6 +35,7 @@ static NSString* const kCodingValue     = @"val";
         _uid = jsonDictionary[TMWNotification_UID];
         _revisionString = jsonDictionary[TMWNotification_Revision];
         _ruleID = jsonDictionary[TMWNotification_RuleID];
+        _ruleRevision = jsonDictionary[TMWNotification_RuleRev];
         _userID = jsonDictionary[TMWNotification_UserID];
         
         NSNumber* timestamp = jsonDictionary[TMWNotification_Timestamp];
@@ -42,13 +46,9 @@ static NSString* const kCodingValue     = @"val";
     return self;
 }
 
-- (NSString*)valueToString
+- (NSNumber*)convertServerValueWithMeaning:(NSString*)meaning
 {
-    if (_value) {
-        return [NSString stringWithFormat:@"%@", _value];
-    } else {
-        return @"N/A";
-    }
+    return [TMWRuleCondition convertServerValue:_value withMeaning:meaning];
 }
 
 + (BOOL)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs resultingInCellsIndexPathsToAdd:(NSArray *__autoreleasing *)addingCellIndexPaths

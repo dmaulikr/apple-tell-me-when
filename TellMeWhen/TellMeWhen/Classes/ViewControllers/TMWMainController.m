@@ -23,17 +23,15 @@
 
 - (void)deviceTokenChangedFromData:(NSData*)fromData toData:(NSData*)toData
 {
+    if (![fromData isEqualToData:toData]) { printf("\nDevice token change...\n"); }
     [self.navRulesController deviceTokenChangedFromData:fromData toData:toData];
 }
 
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
-    if (self.selectedViewController != navNotifCntrll)
-    {
-        navNotifCntrll.tabBarItem.badgeValue = TWMMainCntrll_ItemBadgeString;
-    }
-    [navNotifCntrll notificationDidArrived:userInfo];
+    navNotifCntrll.tabBarItem.badgeValue = (self.selectedViewController != navNotifCntrll) ? TWMMainCntrll_ItemBadgeString : nil;
+    if (self.selectedViewController == self.navNotificationsController) { [navNotifCntrll notificationDidArrived:userInfo]; }
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
@@ -44,7 +42,7 @@
 - (void)setupRulesAndNotifications
 {
     [self.navRulesController queryRules];
-    [self.navNotificationsController queryNotifications];
+    if (self.selectedViewController == self.navNotificationsController) { [self.navNotificationsController queryNotifications]; }
 }
 
 - (IBAction)signoutFromSender:(id)sender
@@ -60,6 +58,25 @@
     [[[TMWSegueSwapRootViewController alloc] initWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain source:self destination:signInVC] perform];
 }
 
+#pragma mark UIViewController methods
+
+- (void)viewDidLoad
+{
+    self.delegate = self;
+}
+
+#pragma mark UITabBarControllerDelegate methods
+
+- (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController
+{
+    TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
+    if (tabBarController.selectedViewController == navNotifCntrll)
+    {
+        viewController.tabBarItem.badgeValue = nil;
+        [navNotifCntrll queryNotifications];
+    }
+}
+
 #pragma mark NSObject methods
 
 - (void)awakeFromNib
@@ -73,16 +90,6 @@
         NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBook size:14],
         NSForegroundColorAttributeName  : [UIColor whiteColor]
     } forState:UIControlStateNormal];
-}
-
-#pragma mark UITabBarControllerDelegate methods
-
-- (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController
-{
-    if ([viewController isKindOfClass:[TMWNavNotificationsController class]])
-    {
-        viewController.tabBarItem.badgeValue = nil;
-    }
 }
 
 #pragma mark - Private functionality
