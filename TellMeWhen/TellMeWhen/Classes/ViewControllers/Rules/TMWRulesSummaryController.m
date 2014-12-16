@@ -10,6 +10,14 @@
 #import "TMWRuleThresholdController.h"      // TMW (ViewControllers/Rules)
 #import "TMWRuleNamingController.h"         // TMW (ViewControllers/Rules)
 
+#pragma mark - Define
+
+#define TMWRuleSummary_CellIndexForActivator        0
+#define TMWRuleSummary_CellIndexForRuleName         1
+#define TMWRuleSummary_CellIndexForTransmitterName  2
+#define TMWRuleSummary_CellIndexForMeasurement      3
+#define TMWRuleSummary_CellIndexForCondition        4
+
 @interface TMWRulesSummaryController () <TMWSegueUnwindingRules>
 - (IBAction)activationToogled:(UISwitch *)sender;
 @property (strong, nonatomic) IBOutlet UISwitch* activationSwitch;
@@ -82,6 +90,8 @@
 
 #pragma mark - Private functionality
 
+#pragma mark Navigation functionality
+
 - (IBAction)activationToogled:(UISwitch*)sender
 {
     TMWRule* rule = _rule;
@@ -93,12 +103,44 @@
     }];
 }
 
-#pragma mark Navigation functionality
+- (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
+{
+    _transmitterNameLabel.text = _rule.transmitter.name;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForTransmitterName inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
 
-- (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue {}
-- (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue {}
-- (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue {}
-- (IBAction)unwindFromRuleThresholdToSummary:(UIStoryboardSegue*)segue {}
-- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue {}
+- (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue
+{
+    _measurementImageView.image = _rule.icon;
+    _measurementNameLabel.text = _rule.type;
+    _conditionLabel.text = _rule.thresholdDescription;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForMeasurement inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForCondition inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue
+{
+    _measurementImageView.image = _rule.icon;
+    _measurementNameLabel.text = _rule.type;
+    _conditionLabel.text = _rule.thresholdDescription;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForMeasurement inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForCondition inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (IBAction)unwindFromRuleThresholdPacked:(UIStoryboardSegue*)segue
+{
+    _measurementImageView.image = _rule.icon;
+    _measurementNameLabel.text = _rule.type;
+    _conditionLabel.text = _rule.thresholdDescription;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForMeasurement inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForCondition inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue
+{
+    _ruleNameLabel.text = _rule.name;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:TMWRuleSummary_CellIndexForRuleName inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 
 @end

@@ -75,51 +75,32 @@ NSString *kTMWAPIAuthorizationNotifications;
 + (void)registerRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion
 {
     NSDictionary *bodyDict = [rule compressIntoJSONDictionary];
-    if (!bodyDict) {
-        if (completion) {
-            completion(RelayrErrorMissingArgument);
-        } return;
-    }
+    if (!bodyDict) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
     
     __autoreleasing NSError *error;
-    NSData *bodyData = [NSJSONSerialization  dataWithJSONObject:bodyDict options:kNilOptions error:&error];
-    if (error || !bodyData) {
-        if (completion) {
-            completion((error) ? error : RelayrErrorUnknwon);
-        } return;
-    }
+    NSData* bodyData = [NSJSONSerialization  dataWithJSONObject:bodyDict options:kNilOptions error:&error];
+    if (error || !bodyData) { if (completion) { completion((error) ? error : RelayrErrorUnknwon); } return; }
     
-    NSURL *absoluteURL = [NSURL URLWithString:TMWAPIService_Host_Rules];
-    NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
+    NSURL* absoluteURL = [NSURL URLWithString:TMWAPIService_Host_Rules];
+    NSMutableURLRequest* request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
-    NSURLSessionDataTask *task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *json = (!error && ((NSHTTPURLResponse *)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
-        if (!json) {
-            if (completion) {
-                completion((error) ? error : RelayrErrorWebRequestFailure);
-            }
-            return;
-        }
-        if ( !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue ) {
-            if (completion) {
-                completion((error) ? error : RelayrErrorUnknwon);
-            }
-            return;
-        }
+    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
+        NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
+        if (!json) { if (completion) { completion((error) ? error : RelayrErrorWebRequestFailure); } return; }
+        if ( !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue ) { if (completion) { completion((error) ? error : RelayrErrorUnknwon); } return; }
         
         rule.uid = json[TMWAPI_RulesCreate_ResponseID];
         rule.revisionString = json[TMWAPI_RulesCreate_ResponseRevision];
-        if (completion) {
-            completion(nil);
-        }
+        rule.modified = [NSDate date];
+        if (completion) { completion(nil); }
     }];
     [task resume];
 }
 
-+ (void)requestRulesForUserID:(NSString *)userID completion:(void (^)(NSError *error, NSArray *rules))completion
++ (void)requestRulesForUserID:(NSString *)userID completion:(void (^)(NSError* error, NSArray* rules))completion
 {
     if (!completion) { return; }
     if (!userID.length) { return completion(RelayrErrorMissingArgument, nil); }
@@ -128,22 +109,21 @@ NSString *kTMWAPIAuthorizationNotifications;
     NSData* bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"user_id" : userID } } options:kNilOptions error:&error];
     if (error) { return completion(error, nil); }
     
-    NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesGet];
+    NSURL* absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesGet];
     NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
-    NSURLSessionDataTask *task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *json = (!error && ((NSHTTPURLResponse *)response).statusCode == 200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
-        if (!json) {
-            return completion((error) ? error : RelayrErrorWebRequestFailure, nil);
-        }
+    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode == 200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
+        if (!json) { return completion((error) ? error : RelayrErrorWebRequestFailure, nil); }
         
-        NSArray *jsonRules = json[TMWAPI_RulesGet_ResponseDoc];
-        NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:jsonRules.count];
-        for (NSDictionary *dict in jsonRules) {
-            TMWRule *rule = [[TMWRule alloc] initWithJSONDictionary:dict];
+        NSArray* jsonRules = json[TMWAPI_RulesGet_ResponseDoc];
+        NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:jsonRules.count];
+        for (NSDictionary* dict in jsonRules)
+        {
+            TMWRule* rule = [[TMWRule alloc] initWithJSONDictionary:dict];
             if (rule) { [result addObject:rule]; }
         }
         
@@ -152,12 +132,12 @@ NSString *kTMWAPIAuthorizationNotifications;
     [task resume];
 }
 
-+ (void)setRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion
++ (void)setRule:(TMWRule*)rule completion:(void (^)(NSError* error))completion
 {
     NSDictionary* bodyDict = [rule compressIntoJSONDictionary];
     if (!bodyDict || !rule.uid.length || !rule.revisionString.length) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
     
-    __autoreleasing NSError *error;
+    __autoreleasing NSError* error;
     NSData* bodyData = [NSJSONSerialization  dataWithJSONObject:bodyDict options:kNilOptions error:&error];
     if (error || !bodyData) { if (completion) { completion((error) ? error : RelayrErrorUnknwon); } return; }
     
@@ -174,75 +154,54 @@ NSString *kTMWAPIAuthorizationNotifications;
         
         rule.uid = json[TMWAPI_RulesCreate_ResponseID];
         rule.revisionString = json[TMWAPI_RulesCreate_ResponseRevision];
+        rule.modified = [NSDate date];
         if (completion) { completion(nil); }
     }];
     [task resume];
 }
 
-+ (void)deleteRule:(TMWRule *)rule completion:(void (^)(NSError * error))completion
++ (void)deleteRule:(TMWRule*)rule completion:(void (^)(NSError* error))completion
 {
     if (!rule) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
     
-    NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesDelete(rule.uid, rule.revisionString)];
-    NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModeDELETE];
+    NSURL* absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Rules relativeString:TMWAPIService_Relative_RulesDelete(rule.uid, rule.revisionString)];
+    NSMutableURLRequest* request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModeDELETE];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     
-    NSURLSessionDataTask *task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *json = (!error && ((NSHTTPURLResponse *)response).statusCode == 200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
-        if (!json) {
-            if (completion) {
-                completion((error) ? error : RelayrErrorWebRequestFailure);
-            }
-            return;
-        }
-        if ( !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue ) {
-            if (completion) {
-                completion((error) ? error : RelayrErrorUnknwon);
-            }
-            return;
-        }
+    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode == 200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
+        if (!json) { if (completion) { completion((error) ? error : RelayrErrorWebRequestFailure); } return; }
+        if ( !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue ) { if (completion) { completion((error) ? error : RelayrErrorUnknwon); } return; }
         
-        if (completion) {
-            completion(nil);
-        }
+        if (completion) { completion(nil); }
     }];
     [task resume];
 }
 
 + (void)requestNotificationsForRuleID:(NSString *)ruleID completion:(void (^)(NSError *error, NSArray *notifications))completion
 {
-    if (!completion) {
-        return;
-    }
-    if (!ruleID.length) {
-        return completion(RelayrErrorMissingArgument, nil);
-    }
+    if (!completion) { return; }
+    if (!ruleID.length) { return completion(RelayrErrorMissingArgument, nil); }
     
-    __autoreleasing NSError *error;
-    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"rule_id" : ruleID } } options:kNilOptions error:&error];
-    if (error) {
-        return completion(error, nil);
-    }
+    __autoreleasing NSError* error;
+    NSData* bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"rule_id" : ruleID } } options:kNilOptions error:&error];
+    if (error) { return completion(error, nil); }
     
-    NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Notifications relativeString:TMWAPIService_Relative_NotifGet];
-    NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
+    NSURL* absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Notifications relativeString:TMWAPIService_Relative_NotifGet];
+    NSMutableURLRequest* request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
-    NSURLSessionDataTask *task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         NSDictionary *json = (!error && ((NSHTTPURLResponse *)response).statusCode==200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
-        if (!json) {
-            return completion((error) ? error : RelayrErrorWebRequestFailure, nil);
-        }
+        if (!json) { return completion((error) ? error : RelayrErrorWebRequestFailure, nil); }
         
-        NSArray *jsonRules = json[TMWAPI_NotificationsGet_ResponseDocs];
-        NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:jsonRules.count];
-        for (NSDictionary *dict in jsonRules) {
-            TMWNotification *notif = [[TMWNotification alloc] initWithJSONDictionary:dict];
-            if (notif) {
-                [result addObject:notif];
-            }
+        NSArray* jsonRules = json[TMWAPI_NotificationsGet_ResponseDocs];
+        NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:jsonRules.count];
+        for (NSDictionary* dict in jsonRules) {
+            TMWNotification* notif = [[TMWNotification alloc] initWithJSONDictionary:dict];
+            if (notif) { [result addObject:notif]; }
         }
         
         completion(nil, [NSArray arrayWithArray:result]);
@@ -252,38 +211,28 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 + (void)requestNotificationsForUserID:(NSString *)userID completion:(void (^)(NSError *error, NSArray *notifications))completion
 {
-    if (!completion) {
-        return;
-    }
-    if (!userID.length) {
-        return completion(RelayrErrorMissingArgument, nil);
-    }
+    if (!completion) { return; }
+    if (!userID.length) { return completion(RelayrErrorMissingArgument, nil); }
     
-    __autoreleasing NSError *error;
-    NSData *bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"user_id" : userID } } options:kNilOptions error:&error];
-    if (error) {
-        return completion(error, nil);
-    }
+    __autoreleasing NSError* error;
+    NSData* bodyData = [NSJSONSerialization dataWithJSONObject:@{ @"selector" : @{ @"user_id" : userID } } options:kNilOptions error:&error];
+    if (error) { return completion(error, nil); }
     
-    NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Notifications relativeString:TMWAPIService_Relative_NotifGet];
+    NSURL* absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Notifications relativeString:TMWAPIService_Relative_NotifGet];
     NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
-    NSURLSessionDataTask *task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary *json = (!error && ((NSHTTPURLResponse *)response).statusCode==200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
-        if (!json) {
-            return completion((error) ? error : RelayrErrorWebRequestFailure, nil);
-        }
+    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode==200 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
+        if (!json) { return completion((error) ? error : RelayrErrorWebRequestFailure, nil); }
         
-        NSArray *jsonRules = json[TMWAPI_NotificationsGet_ResponseDocs];
-        NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:jsonRules.count];
-        for (NSDictionary *dict in jsonRules) {
-            TMWNotification *notif = [[TMWNotification alloc] initWithJSONDictionary:dict];
-            if (notif) {
-                [result addObject:notif];
-            }
+        NSArray* jsonRules = json[TMWAPI_NotificationsGet_ResponseDocs];
+        NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:jsonRules.count];
+        for (NSDictionary* dict in jsonRules) {
+            TMWNotification* notif = [[TMWNotification alloc] initWithJSONDictionary:dict];
+            if (notif) { [result addObject:notif]; }
         }
         
         completion(nil, [NSArray arrayWithArray:result]);
@@ -293,32 +242,20 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 + (void)deleteNotifications:(NSArray *)notifications completion:(void (^)(NSError *))completion
 {
-    if (!notifications.count) {
-        if (completion) {
-            completion(RelayrErrorMissingArgument);
-        }
-        return;
-    }
+    if (!notifications.count) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
     
-    NSMutableArray *docs = [[NSMutableArray alloc] initWithCapacity:notifications.count];
-    for (TMWNotification *notif in notifications) {
-        if (!notif.uid.length || !notif.revisionString.length) {
-            continue;
-        }
+    NSMutableArray* docs = [[NSMutableArray alloc] initWithCapacity:notifications.count];
+    for (TMWNotification* notif in notifications) {
+        if (!notif.uid.length || !notif.revisionString.length) { continue; }
         [docs addObject:@{ TMWAPI_NotificationsDelete_RequestID  : notif.uid, TMWAPI_NotificationsDelete_RequestRev   : notif.revisionString,TMWAPI_NotificationsDelete_RequestDelet : [NSNumber numberWithBool:YES]
         }];
     }
     
-    __autoreleasing NSError *error;
+    __autoreleasing NSError* error;
     NSData *bodyData = [NSJSONSerialization dataWithJSONObject:@{ TMWAPI_NotificationsDelete_RequestDocs : docs } options:kNilOptions error:&error];
-    if (error) {
-        if (completion) {
-            completion(error);
-        }
-        return;
-    }
+    if (error) { if (completion) { completion(error); } return; }
     
-    NSURL *absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Notifications relativeString:TMWAPIService_Relative_NotifDelete];
+    NSURL* absoluteURL = [TMWAPIService buildAbsoluteURLFromHost:TMWAPIService_Host_Notifications relativeString:TMWAPIService_Relative_NotifDelete];
     NSMutableURLRequest *request = [TMWAPIService requestForURL:absoluteURL HTTPMethod:kTMWAPIRequestModePOST];
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
@@ -353,7 +290,7 @@ NSString *kTMWAPIAuthorizationNotifications;
     return session;
 }
 
-+ (NSURL *)buildAbsoluteURLFromHost:(NSString*)hostString relativeString:(NSString*)relativePath
++ (NSURL*)buildAbsoluteURLFromHost:(NSString*)hostString relativeString:(NSString*)relativePath
 {
     NSString* result = (hostString) // FIXME: Don't nest the ternery operator: it's not particularly readable
         ? (relativePath.length) ? [hostString stringByAppendingString:relativePath] : hostString
@@ -361,16 +298,12 @@ NSString *kTMWAPIAuthorizationNotifications;
     return [NSURL URLWithString:[result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 }
 
-+ (NSMutableURLRequest *)requestForURL:(NSURL*)absoluteURL HTTPMethod:(NSString*)httpMode
++ (NSMutableURLRequest*)requestForURL:(NSURL*)absoluteURL HTTPMethod:(NSString*)httpMode
 {
-    if (!absoluteURL || !httpMode.length) {
-        return nil;
-    }
+    if (!absoluteURL || !httpMode.length) { return nil; }
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:absoluteURL];
-    if (!request) {
-        return nil;
-    }
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:absoluteURL];
+    if (!request) { return nil; }
     
     request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     request.HTTPShouldHandleCookies = NO;

@@ -28,12 +28,9 @@
 
 #pragma mark - Unwindings
 // Rules unwindings
-#define TMWStoryboardIDs_UnwindFromRuleTransToList      @"TMWUnwindFromTransToList"
-#define TMWStoryboardIDs_UnwindFromRuleTransToSum       @"TMWUnwindFromTransToSum"
-#define TMWStoryboardIDs_UnwindFromRuleMeasurToTrans    @"TMWUnwindFromMeasureToTransmitter"
-#define TMWStoryboardIDs_UnwindFromRuleMeasurToSum      @"TMWUnwindFromMeasureToSummary"
-#define TMWStoryboardIDs_UnwindFromRuleThreshToMeasur   @"TMWUnwindFromThresholdToMeasures"
-#define TMWStoryboardIDs_UnwindFromRuleThreshToSum      @"TMWUnwindFromThresholdToSummary"
-#define TMWStoryboardIDs_UnwindFromRuleNamingToThresh   @"TMWUnwindFromNamingToThreshold"
-#define TMWStoryboardIDs_UnwindFromRuleNamingToSum      @"TMWUnwindFromNamingToSummary"
+#define TMWStoryboardIDs_UnwindFromRuleTransmitters     @"TMWUnwindFromTransmitters"
+#define TMWStoryboardIDs_UnwindFromRuleMeasure          @"TMWUnwindFromMeasure"
+#define TMWStoryboardIDs_UnwindFromRuleThreshold        @"TMWUnwindFromThreshold"
+#define TWMStoryboardIDs_UnwindFromRuleThresholdPacked  @"TMWUnwindFromThresholdPacked"
+#define TWMStoryboardIDs_UnwindFromRuleNaming           @"TMWUnwindFromNaming"
 #define TMWStoryboardIDs_UnwindFromRuleNamingToList     @"TMWUnwindFromNamingToList"

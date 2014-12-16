@@ -21,6 +21,7 @@ typedef struct FPRange {
 @property (strong,nonatomic) NSString* operation;
 @property (strong,nonatomic) id value;
 
+@property (nonatomic) NSNumber* valueConverted;
 @property (readonly,nonatomic) NSString* unit;
 @property (nonatomic) FPRange range;
 
@@ -36,11 +37,24 @@ typedef struct FPRange {
 + (NSString*)meaningForProximity;
 + (NSString*)meaningForLight;
 
+// For converted values
 + (FPRange)rangeForTemperature;
 + (FPRange)rangeForHumidity;
 + (FPRange)rangeForNoise;
 + (FPRange)rangeForProximity;
 + (FPRange)rangeForLight;
+// For server values
++ (FPRange)rangeServerForTemperature;
++ (FPRange)rangeServerForHumidity;
++ (FPRange)rangeServerForNoise;
++ (FPRange)rangeServerForProximity;
++ (FPRange)rangeServerForLight;
+
++ (NSNumber*)defaultValueForTemperature;
++ (NSNumber*)defaultValueForHumitdity;
++ (NSNumber*)defaultValueForNoise;
++ (NSNumber*)defaultValueForProximity;
++ (NSNumber*)defaultValueForLight;
 
 + (id)defaultValueForMeaning:(NSString*)meaning;
 + (NSString*)unitForMeaning:(NSString*)meaning;

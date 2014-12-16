@@ -2,13 +2,13 @@
 
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
+#import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWButton.h"                       // TMW (Views)
 
 @interface TMWRuleNamingController () <TMWSegueUnwindingRules,UITextFieldDelegate>
-@property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
-@property (strong, nonatomic) IBOutlet UITextField* textField;
+@property (strong,nonatomic) IBOutlet UITextField* textField;
 - (IBAction)doneButtonTapped:(TMWButton*)sender;
 @end
 
@@ -19,7 +19,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (_rule.name) { _textField.text = _rule.name; }
+    [_textField becomeFirstResponder];
 }
+
+#pragma mark UIViewController methods
 
 #pragma mark UITextFieldDelegate methods
 
@@ -33,21 +37,44 @@
 
 - (IBAction)backButtonTapped:(id)sender
 {
-    [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+    [self performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleNaming sender:self];
 }
 
 #pragma mark Navigation functionality
-
-- (NSString*)segueIdentifierForUnwind
-{
-    return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleNamingToThresh : TMWStoryboardIDs_UnwindFromRuleNamingToSum;
-}
 
 - (IBAction)doneButtonTapped:(TMWButton*)sender
 {
     if (!_textField.text.length) { return; }
     
-    [_textField resignFirstResponder];
-    [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleNamingToList sender:self];
+    if (!_needsServerModification)
+    {
+        _rule.name = _textField.text;
+        _rule.active = YES;
+        
+        NSData* deviceToken = [TMWStore sharedInstance].deviceToken;
+        [_rule setNotificationsWithDeviceToken:deviceToken previousDeviceToken:deviceToken];
+        
+        [TMWAPIService registerRule:_rule completion:^(NSError* error) {
+            if (error) { return; }
+            
+            [_textField resignFirstResponder];
+            [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleNamingToList sender:self];
+        }];
+    }
+    else
+    {
+        if ([_rule.name isEqualToString:_textField.text]) { [self performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleNaming sender:self]; }
+        
+        NSString* previousName = _rule.name;
+        _rule.name = _textField.text;
+        
+        __weak TMWRuleNamingController* weakSelf = self;
+        [TMWAPIService setRule:_rule completion:^(NSError* error) {
+            if (error) { weakSelf.rule.name = previousName; return; }
+            
+            [weakSelf.textField resignFirstResponder];
+            [weakSelf performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleNaming sender:weakSelf];
+        }];
+    }
 }
 @end

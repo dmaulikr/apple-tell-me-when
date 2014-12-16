@@ -8,11 +8,12 @@
  */
 @interface TMWRule : NSObject <NSCoding,NSCopying>
 
-- (instancetype)initWithUserID:(NSString *)userID;
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
-- (NSDictionary *)compressIntoJSONDictionary;
+- (instancetype)initWithUserID:(NSString*)userID;
+- (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary;
+- (NSDictionary*)compressIntoJSONDictionary;
 - (void)setWith:(TMWRule*)rule;
-- (void)setNotificationsWithDeviceToken:(NSData*)data previousDeviceToken:(NSData*)previousData;
+- (BOOL)setNotificationsWithDeviceToken:(NSData*)data previousDeviceToken:(NSData*)previousData;
+// Returns whethere there are changes to commit to the server.
 
 @property (strong,nonatomic) NSString* uid;
 @property (strong,nonatomic) NSString* revisionString;

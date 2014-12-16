@@ -15,7 +15,6 @@
 #define TMWRuleTransCntrl_RefreshString     @"Querying user's IoTs..."
 
 @interface TMWRuleTransmittersController () <TMWSegueUnwindingRules>
-@property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
 @end
 
 @implementation TMWRuleTransmittersController
@@ -43,7 +42,9 @@
 {
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesTransToMeasures])
     {
-        ((TMWRuleMeasurementsController*)segue.destinationViewController).rule = _rule;
+        TMWRule* ruleCopied = _rule.copy;
+        _rule.transmitterID = nil;
+        ((TMWRuleMeasurementsController*)segue.destinationViewController).rule = ruleCopied;
     }
 }
 
@@ -54,12 +55,14 @@
     NSSet* transSet = [TMWStore sharedInstance].relayrUser.transmitters;
     if (!transSet.count)
     {
-        _transmitters = nil;
-        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+        [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self];
         return 0;
     }
-    _transmitters = transSet.allObjects;
-    return 1;
+    else
+    {
+        _transmitters = transSet.allObjects;
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -82,26 +85,36 @@
 {
     TMWRuleTransmitterCellView* cell = (TMWRuleTransmitterCellView*)[tableView cellForRowAtIndexPath:indexPath];
     RelayrTransmitter* transmitter = [[TMWStore sharedInstance].relayrUser transmitterWithID:cell.transmitterID];
-    if (!transmitter) { return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self]; }
+    if (!transmitter) { return [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self]; }
     
     if (!_needsServerModification)
     {
         _rule.transmitterID = transmitter.uid;
         return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:self];
     }
-    else if ([transmitter.uid isEqualToString:_rule.transmitterID])
+    else
     {
-        return [self performSegueWithIdentifier:[self segueIdentifierForUnwind] sender:self];
+        if ([transmitter.uid isEqualToString:_rule.transmitterID])
+        {
+            return [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self];
+        }
+        
+        NSString* previousTransmitterID = _rule.transmitterID;
+        NSString* previousDeviceID = _rule.deviceID;
+        _rule.transmitterID = transmitter.uid;
+        _rule.deviceID = ((RelayrDevice*)[transmitter devicesWithInputMeaning:_rule.condition.meaning].firstObject).uid;
+        
+        __weak TMWRuleTransmittersController* weakSelf = self;
+        [TMWAPIService setRule:_rule completion:^(NSError* error) {
+            if (error)
+            {
+                weakSelf.rule.transmitterID = previousTransmitterID;
+                weakSelf.rule.deviceID = previousDeviceID;
+            }
+            
+            [weakSelf performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:weakSelf];
+        }];
     }
-    
-    _rule.transmitterID = transmitter.uid;
-    _rule.deviceID = ((RelayrDevice*)[transmitter devicesWithInputMeaning:_rule.condition.meaning].firstObject).uid;
-    _rule.modified = [NSDate date];
-    
-    __weak TMWRuleTransmittersController* weakSelf = self;
-    [TMWAPIService setRule:_rule completion:^(NSError* error) {
-        [weakSelf performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesTransToMeasures sender:weakSelf];
-    }];
 }
 
 #pragma mark - Private functionality
@@ -118,21 +131,14 @@
 
 - (IBAction)backButtonTapped:(id)sender
 {
-    [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+    [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self];
 }
 
 #pragma mark Navigation functionality
 
-- (NSString*)segueIdentifierForUnwind
-{
-    return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleTransToList : TMWStoryboardIDs_UnwindFromRuleTransToSum;
-}
-
 - (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue
 {
-    TMWRuleMeasurementsController* cntrll = (TMWRuleMeasurementsController*)segue.sourceViewController;
-    self.needsServerModification = cntrll.needsServerModification;
-    self.rule = cntrll.rule;
+    // Unwind from rule measurements
 }
 
 @end

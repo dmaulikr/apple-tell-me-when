@@ -28,7 +28,9 @@
     
     for (TMWRule* rule in store.rules)
     {
-        [rule setNotificationsWithDeviceToken:fromData previousDeviceToken:toData];
+        BOOL const needsCommitToServer = [rule setNotificationsWithDeviceToken:fromData previousDeviceToken:toData];
+        if (!needsCommitToServer) { continue; }
+        
         [TMWAPIService setRule:rule completion:^(NSError* error) {
             if (error) { NSLog(@"Error when trying to set up server rules' notifs with new device token."); }
             // TODO: Handle errors

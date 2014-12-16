@@ -29,7 +29,7 @@ static NSString* const kCodingValue     = @"val";
     {
         _meaning = meaning;
         _operation = [TMWRuleCondition lessThanOperator];
-        _value = [TMWRuleCondition defaultValueForMeaning:meaning];
+        self.valueConverted = [TMWRuleCondition defaultValueForMeaning:meaning];
     }
     return self;
 }
@@ -46,6 +46,77 @@ static NSString* const kCodingValue     = @"val";
         _value = jsonDictionary[TMWRule_Condition_Value];   // TODO: Handle non-numeric values
     }
     return self;
+}
+
+- (NSNumber*)valueConverted
+{
+    NSNumber* value = ([_value isKindOfClass:[NSNumber class]]) ? _value : nil;
+    if (!value) { return nil; }
+    
+    FPRange range;
+    float convertedValue;
+    
+    if ([_meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) {
+        range = [TMWRuleCondition rangeForTemperature];
+        convertedValue = value.floatValue;
+    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForHumidity]]) {
+        range = [TMWRuleCondition rangeForHumidity];
+        convertedValue = value.floatValue;
+    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForNoise]]) {
+        range = [TMWRuleCondition rangeForNoise];
+        convertedValue = (range.max / [TMWRuleCondition rangeServerForNoise].max) * value.floatValue;
+    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForProximity]]) {
+        range = [TMWRuleCondition rangeForProximity];
+        convertedValue = (range.max / [TMWRuleCondition rangeServerForProximity].max) * value.floatValue;
+    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForLight]]) {
+        range = [TMWRuleCondition rangeForLight];
+        convertedValue = (range.max / [TMWRuleCondition rangeServerForLight].max) * value.floatValue;
+    } else {
+        return nil;
+    }
+    
+    if (convertedValue < range.min) { convertedValue = range.min; }
+    else if (convertedValue > range.max) { convertedValue = range.max; }
+    
+    return [NSNumber numberWithFloat:convertedValue];
+}
+
+- (void)setValueConverted:(NSNumber*)valueConverted
+{
+    if (!valueConverted) { return; }
+    
+    FPRange serverRange;
+    float serverValue;
+    
+    if ([_meaning isEqualToString:[TMWRuleCondition meaningForTemperature]])
+    {
+        serverRange = [TMWRuleCondition rangeServerForTemperature];
+        serverValue = valueConverted.floatValue;
+    }
+    else if ([_meaning isEqualToString:[TMWRuleCondition meaningForHumidity]])
+    {
+        serverRange = [TMWRuleCondition rangeServerForHumidity];
+        serverValue = (serverRange.max / [TMWRuleCondition rangeForHumidity].max) * valueConverted.floatValue;
+    }
+    else if ([_meaning isEqualToString:[TMWRuleCondition meaningForNoise]])
+    {
+        serverRange = [TMWRuleCondition rangeServerForNoise];
+        serverValue = (serverRange.max / [TMWRuleCondition rangeForNoise].max) * valueConverted.floatValue;
+    }
+    else if ([_meaning isEqualToString:[TMWRuleCondition meaningForProximity]])
+    {
+        serverRange = [TMWRuleCondition rangeServerForProximity];
+        serverValue = (serverRange.max / [TMWRuleCondition rangeForProximity].max) * valueConverted.floatValue;
+    } else if ([_meaning isEqualToString:[TMWRuleCondition meaningForLight]])
+    {
+        serverRange = [TMWRuleCondition rangeServerForLight];
+        serverValue = (serverRange.max / [TMWRuleCondition rangeForLight].max) * valueConverted.floatValue;
+    } else { return; }
+    
+    if (serverValue < serverRange.min) { serverValue = serverRange.min; }
+    else if (serverValue > serverRange.max) { serverValue = serverRange.max; }
+    
+    _value = [NSNumber numberWithFloat:serverValue];
 }
 
 - (NSString*)unit
@@ -74,6 +145,13 @@ static NSString* const kCodingValue     = @"val";
     
     TMWRuleCondition* condition = object;
     return ([_meaning isEqualToString:condition.meaning] && [_operation isEqualToString:condition.operation] && _value==condition.value) ? YES : NO;
+}
+
+#pragma mark NSObject
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"%@ %@ %@", _meaning, _operation, _value];
 }
 
 #pragma mark NSCoding
@@ -179,28 +257,78 @@ static NSString* const kCodingValue     = @"val";
     return FPRangeMake(0.0, 100.0);
 }
 
++ (FPRange)rangeServerForTemperature
+{
+    return FPRangeMake(-40.0, 140.0);
+}
+
++ (FPRange)rangeServerForHumidity
+{
+    return FPRangeMake(0.0, 100.0);
+}
+
++ (FPRange)rangeServerForNoise
+{
+    return FPRangeMake(0.0, 1023.0);
+}
+
++ (FPRange)rangeServerForProximity
+{
+    return FPRangeMake(0.0, 2047.0);
+}
+
++ (FPRange)rangeServerForLight
+{
+    return FPRangeMake(0.0, 4096.0);
+}
+
+
++ (NSNumber*)defaultValueForTemperature
+{
+    return [NSNumber numberWithFloat:28.0];
+}
+
++ (NSNumber*)defaultValueForHumitdity
+{
+    FPRange const range = [TMWRuleCondition rangeForHumidity];
+    return [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+}
+
++ (NSNumber*)defaultValueForNoise
+{
+    FPRange const range = [TMWRuleCondition rangeForNoise];
+    return [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+}
+
++ (NSNumber*)defaultValueForProximity
+{
+    FPRange const range = [TMWRuleCondition rangeForProximity];
+    return [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+}
+
++ (NSNumber*)defaultValueForLight
+{
+    FPRange const range = [TMWRuleCondition rangeForLight];
+    return [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+}
+
 + (id)defaultValueForMeaning:(NSString*)meaning
 {
-    id value;
-    if (!meaning.length) { return value; }
-    
-    if ([meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) {
-        value = [NSNumber numberWithFloat:28.0];
+    if (!meaning.length) {
+        return nil;
+    } else if ([meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) {
+        return [TMWRuleCondition defaultValueForTemperature];
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForHumidity]]) {
-        FPRange const range = [TMWRuleCondition rangeForHumidity];
-        value = [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+        return [TMWRuleCondition defaultValueForHumitdity];
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForNoise]]) {
-        FPRange const range = [TMWRuleCondition rangeForNoise];
-        value = [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+        return [TMWRuleCondition defaultValueForNoise];
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForProximity]]) {
-        FPRange const range = [TMWRuleCondition rangeForProximity];
-        value = [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+        return [TMWRuleCondition defaultValueForProximity];
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForLight]]) {
-        FPRange const range = [TMWRuleCondition rangeForLight];
-        value = [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+        return [TMWRuleCondition defaultValueForLight];
+    } else {
+        return nil;
     }
-    
-    return value;
 }
 
 + (NSString*)unitForMeaning:(NSString*)meaning

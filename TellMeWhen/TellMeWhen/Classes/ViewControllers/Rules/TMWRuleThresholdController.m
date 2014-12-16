@@ -3,6 +3,7 @@
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWRuleCondition.h"                // TMW (Model)
+#import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleNamingController.h"         // TMW (ViewControllers/Rules)
@@ -21,15 +22,17 @@
 @property (strong, nonatomic) IBOutlet UIImageView* measurementImageView;
 @property (strong, nonatomic) IBOutlet UILabel* transmitterNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* measurementLabel;
+
 @property (strong, nonatomic) IBOutlet UIButton* lessThanButton;
 - (IBAction)lessThanTapped:(UIButton*)sender;
 @property (strong, nonatomic) IBOutlet UIButton* greaterThanButton;
 - (IBAction)greaterThanTapped:(UIButton*)sender;
+
 @property (strong, nonatomic) IBOutlet UILabel* conditionValueLabel;
 @property (strong, nonatomic) IBOutlet UISlider* conditionValueSlider;
 - (IBAction)conditionValueChanged:(UISlider*)sender;
+
 @property (strong, nonatomic) IBOutlet TMWButton* doneButton;
-@property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
 - (IBAction)buttonTapped:(TMWButton*)sender;
 @end
 
@@ -41,43 +44,25 @@
 {
     [super viewDidLoad];
     
-    TMWRule* rule = (_tmpRule) ? _tmpRule : _rule;
-    _measurementImageView.image = rule.icon;
-    _transmitterNameLabel.text = rule.transmitter.name.uppercaseString;
-    _measurementLabel.text = rule.type;
+    TMWRule* dataRule = (_tmpRule) ? _tmpRule : _rule;
+    _measurementImageView.image = dataRule.icon;
+    _transmitterNameLabel.text = dataRule.transmitter.name.uppercaseString;
+    _measurementLabel.text = dataRule.type;
     
-    if ([rule.condition.operation isEqualToString:[TMWRuleCondition lessThanOperator]])
-    {
-        _lessThanButton.selected = YES;
-        _greaterThanButton.selected = NO;
-    }
-    else
-    {
-        _lessThanButton.selected = NO;
-        _greaterThanButton.selected = YES;
-    }
+    BOOL const lessThanSelected = ([dataRule.condition.operation isEqualToString:[TMWRuleCondition lessThanOperator]]) ? YES : NO;
+    _lessThanButton.selected = lessThanSelected;
+    _greaterThanButton.selected = !lessThanSelected;
     
-    NSAttributedString* str = [self operatorsText:TMWRuleThreshold_LessThanButtonText];
-    [_lessThanButton setAttributedTitle:str forState:UIControlStateNormal];
-    str = [self operatorsText:TMWRuleThreshold_GreaterThanButtonText];
-    [_greaterThanButton setAttributedTitle:str forState:UIControlStateNormal];
+    [_lessThanButton setAttributedTitle:[self operatorsText:TMWRuleThreshold_LessThanButtonText] forState:UIControlStateNormal];
+    [_greaterThanButton setAttributedTitle:[self operatorsText:TMWRuleThreshold_GreaterThanButtonText] forState:UIControlStateNormal];
     
-    FPRange const sliderRange = rule.condition.range;
+    FPRange const sliderRange = dataRule.condition.range;
     _conditionValueSlider.minimumValue = sliderRange.min;
     _conditionValueSlider.maximumValue = sliderRange.max;
     
-    NSNumber* value = ([rule.condition.value isKindOfClass:[NSNumber class]]) ? rule.condition.value : nil;
-    if (value && FPRangeContainsValue([TMWRuleCondition rangeForMeaning:rule.condition.meaning], value.floatValue))
-    {
-        _conditionValueLabel.text = [NSString stringWithFormat:@"%.1f %@", value.floatValue, rule.condition.unit];
-        _conditionValueSlider.value = value.floatValue;
-    }
-    else
-    {
-        float const floatValue = 0.5*(fabsf(sliderRange.min) + fabsf(sliderRange.max));
-        _conditionValueLabel.text = [NSString stringWithFormat:@"%.1f %@", floatValue, rule.condition.unit];
-        _conditionValueSlider.value = floatValue;
-    }
+    float const value = dataRule.condition.valueConverted.floatValue;
+    _conditionValueLabel.text = [NSString stringWithFormat:@"%.1f %@", value, dataRule.condition.unit];
+    _conditionValueSlider.value = value;
     
     NSString* buttonText = (!_needsServerModification) ? TMWRuleThreshold_DoneButtonText_Next : TMWRuleThreshold_DoneButtonText_Done;
     [_doneButton setTitle:buttonText forState:UIControlStateNormal];
@@ -89,7 +74,10 @@
 {
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesThreshToNaming])
     {
-        ((TMWRuleNamingController*)segue.destinationViewController).rule = _rule;
+        TMWRule* ruleCopied = _rule.copy;
+        ruleCopied.condition.operation = (_lessThanButton.selected) ? [TMWRuleCondition lessThanOperator] : [TMWRuleCondition greaterThanOperator];
+        ruleCopied.condition.valueConverted = [NSNumber numberWithFloat:_conditionValueSlider.value];
+        ((TMWRuleNamingController*)segue.destinationViewController).rule = ruleCopied;
     }
 }
 
@@ -97,7 +85,7 @@
 
 - (IBAction)backButtonTapped:(id)sender
 {
-    [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+    [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleThreshold sender:self];
 }
 
 - (IBAction)lessThanTapped:(UIButton*)sender
@@ -138,24 +126,32 @@
 
 #pragma mark Navigation functionality
 
-- (NSString*)segueIdentifierForUnwind
-{
-    return (!_needsServerModification || _tmpRule) ? TMWStoryboardIDs_UnwindFromRuleThreshToMeasur : TMWStoryboardIDs_UnwindFromRuleThreshToSum;
-}
-
 - (IBAction)buttonTapped:(TMWButton*)sender
 {
-    if (_tmpRule)
-    {
-        [_rule setWith:_tmpRule];
-        _tmpRule = nil;
-    }
+    if (!_needsServerModification) {  return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesThreshToNaming sender:self]; }
+    
+    if (_tmpRule) { [_rule setWith:_tmpRule]; _tmpRule = nil; }
+    
+    NSString* previousOperation = _rule.condition.operation;
+    NSNumber* previousValueConverted = _rule.condition.valueConverted;
     _rule.condition.operation = (_lessThanButton.selected) ? [TMWRuleCondition lessThanOperator] : [TMWRuleCondition greaterThanOperator];
-    _rule.condition.value = [NSNumber numberWithFloat:_conditionValueSlider.value];
-    return (!_needsServerModification) ?
-        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesThreshToNaming sender:self] :
-        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+    _rule.condition.valueConverted = [NSNumber numberWithFloat:_conditionValueSlider.value];
+    
+    __weak TMWRuleThresholdController* weakSelf = self;
+    [TMWAPIService setRule:_rule completion:^(NSError* error) {
+        if (error)
+        {
+            weakSelf.rule.condition.operation = previousOperation;
+            weakSelf.rule.condition.valueConverted = previousValueConverted;
+        }
+        
+        [weakSelf performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleThresholdPacked sender:weakSelf];
+    }];
 }
 
-- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue { }
+- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue
+{
+    // Unwind from rule naming.
+}
+
 @end

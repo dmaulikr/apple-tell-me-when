@@ -257,9 +257,11 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="eOQ-jX-fn1" secondAttribute="bottom" constant="4" id="N2z-PT-xD0"/>
                                         <constraint firstItem="Kgf-91-HEt" firstAttribute="leading" secondItem="eOQ-jX-fn1" secondAttribute="trailing" priority="750" constant="10" id="Ukd-AR-qOg"/>
                                         <constraint firstItem="DpB-vK-pLW" firstAttribute="top" secondItem="Uqb-la-Z2z" secondAttribute="topMargin" constant="12" id="atg-FR-Svt"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="DpB-vK-pLW" secondAttribute="trailing" constant="4" id="dnX-pk-yra"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="fxx-Ag-PrE" secondAttribute="trailing" constant="6" id="hh8-wJ-Ejv"/>
                                         <constraint firstItem="eOQ-jX-fn1" firstAttribute="leading" secondItem="Uqb-la-Z2z" secondAttribute="leadingMargin" constant="4" id="k51-Tq-EFK"/>
                                         <constraint firstItem="fxx-Ag-PrE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kgf-91-HEt" secondAttribute="trailing" constant="4" id="oUP-jW-w2q"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Kgf-91-HEt" secondAttribute="trailing" constant="4" id="pBd-Qm-szi"/>
                                         <constraint firstItem="eOQ-jX-fn1" firstAttribute="top" secondItem="Uqb-la-Z2z" secondAttribute="topMargin" constant="4" id="wFz-AJ-X2x"/>
                                         <constraint firstItem="fxx-Ag-PrE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DpB-vK-pLW" secondAttribute="trailing" constant="4" id="zFe-BT-lsF"/>
                                     </constraints>
@@ -304,10 +306,10 @@
             </objects>
             <point key="canvasLocation" x="1788" y="-753"/>
         </scene>
-        <!--View Controller-->
+        <!--NoTransmitters-->
         <scene sceneID="NlN-A2-ilt">
             <objects>
-                <viewController id="Pwk-h1-dJG" sceneMemberID="viewController">
+                <viewController title="NoTransmitters" id="Pwk-h1-dJG" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sam-Ja-syy"/>
                         <viewControllerLayoutGuide type="bottom" id="alU-JH-Rzn"/>
@@ -385,10 +387,10 @@
             </objects>
             <point key="canvasLocation" x="2955" y="-1861"/>
         </scene>
-        <!--View Controller-->
+        <!--NoRules-->
         <scene sceneID="vuy-jA-Ks7">
             <objects>
-                <viewController id="6vR-82-nQh" sceneMemberID="viewController">
+                <viewController title="NoRules" id="6vR-82-nQh" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u7m-Zc-0Mt"/>
                         <viewControllerLayoutGuide type="bottom" id="PQ6-om-pcl"/>
@@ -539,8 +541,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="bAZ-nF-98u" kind="show" identifier="TMWSegueFromRuleTransToMeasurements" id="WtK-aw-bc6"/>
-                        <segue destination="ik1-kS-Cfq" kind="unwind" identifier="TMWUnwindFromTransToList" unwindAction="unwindFromRuleTransmitters:" id="gkJ-Q1-RIr"/>
-                        <segue destination="ik1-kS-Cfq" kind="unwind" identifier="TMWUnwindFromTransToSum" unwindAction="unwindFromRuleTransmitters:" id="p9l-SY-tuY"/>
+                        <segue destination="ik1-kS-Cfq" kind="unwind" identifier="TMWUnwindFromTransmitters" unwindAction="unwindFromRuleTransmitters:" id="gkJ-Q1-RIr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIU-NU-D59" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -739,8 +740,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="Mne-4e-EUB" kind="show" identifier="TMWSegueFromRuleMeasuresToThreshold" id="fe1-3f-eYe"/>
-                        <segue destination="1BI-9d-iAi" kind="unwind" identifier="TMWUnwindFromMeasureToTransmitter" unwindAction="unwindFromRuleMeasurements:" id="etQ-E5-UbX"/>
-                        <segue destination="1BI-9d-iAi" kind="unwind" identifier="TMWUnwindFromMeasureToSummary" unwindAction="unwindFromRuleMeasurements:" id="XQd-A7-dOB"/>
+                        <segue destination="1BI-9d-iAi" kind="unwind" identifier="TMWUnwindFromMeasure" unwindAction="unwindFromRuleMeasurements:" id="etQ-E5-UbX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GOH-bt-Kht" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -944,9 +944,9 @@
                         <outlet property="measurementImageView" destination="CMi-bA-6Hx" id="7eF-fR-8pI"/>
                         <outlet property="measurementLabel" destination="8KY-is-hgR" id="K8c-sm-CaU"/>
                         <outlet property="transmitterNameLabel" destination="Yu0-d9-jmX" id="cdw-7J-G44"/>
-                        <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToMeasures" unwindAction="unwindFromRuleThreshold:" id="HE0-nS-kz4"/>
-                        <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToSummary" unwindAction="unwindFromRuleThresholdToSummary:" id="bIM-IJ-JaL"/>
+                        <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThreshold" unwindAction="unwindFromRuleThreshold:" id="HE0-nS-kz4"/>
                         <segue destination="XB9-69-Ybw" kind="show" identifier="TMWSegueFromRuleThresholdToNaming" id="3c6-cl-cpH"/>
+                        <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdPacked" unwindAction="unwindFromRuleThresholdPacked:" id="MvE-vl-ffz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U79-Qd-Nhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1044,8 +1044,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="textField" destination="Fd1-7j-9Cn" id="H7g-Qp-C9R"/>
-                        <segue destination="fLx-he-OpJ" kind="unwind" identifier="TMWUnwindFromNamingToThreshold" unwindAction="unwindFromRuleName:" id="03f-wt-6zz"/>
-                        <segue destination="fLx-he-OpJ" kind="unwind" identifier="TMWUnwindFromNamingToSummary" unwindAction="unwindFromRuleName:" id="deZ-fq-zIF"/>
+                        <segue destination="fLx-he-OpJ" kind="unwind" identifier="TMWUnwindFromNaming" unwindAction="unwindFromRuleName:" id="03f-wt-6zz"/>
+                        <segue destination="fLx-he-OpJ" kind="unwind" identifier="TMWUnwindFromNamingToList" unwindAction="unwindFromRuleNameToList:" id="dfV-Dj-qQ3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sf7-OV-vbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1794,10 +1794,10 @@
         <image name="TabBarItemRules" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0Dj-pf-Bz7"/>
         <segue reference="0MQ-4F-ecA"/>
-        <segue reference="WMw-C2-A0e"/>
-        <segue reference="jN9-f0-ZrE"/>
+        <segue reference="R23-2U-ccp"/>
+        <segue reference="WtK-aw-bc6"/>
+        <segue reference="fe1-3f-eYe"/>
         <segue reference="3c6-cl-cpH"/>
     </inferredMetricsTieBreakers>
 </document>

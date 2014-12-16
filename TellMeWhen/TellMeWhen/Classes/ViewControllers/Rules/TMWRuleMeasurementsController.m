@@ -8,7 +8,6 @@
 #import "TMWRuleThresholdController.h"      // TMW (ViewControllers/Rules)
 
 @interface TMWRuleMeasurementsController () <TMWSegueUnwindingRules>
-@property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
 @end
 
 @implementation TMWRuleMeasurementsController
@@ -23,24 +22,27 @@
     {
         TMWRuleThresholdController* cntrll = (TMWRuleThresholdController*)segue.destinationViewController;
         NSString* meaning = [self meaningFromSelectedCell];
-        RelayrDevice* device = [_rule.transmitter devicesWithInputMeaning:_rule.condition.meaning].firstObject;
+        RelayrDevice* device = [_rule.transmitter devicesWithInputMeaning:meaning].firstObject;
         
         if (!_needsServerModification)
         {
-            _rule.condition = [[TMWRuleCondition alloc] initWithMeaning:meaning];
-            _rule.deviceID = device.uid;
+            TMWRule* ruleCopied = _rule.copy;
+            ruleCopied.condition = [[TMWRuleCondition alloc] initWithMeaning:meaning];
+            ruleCopied.deviceID = device.uid;
+            cntrll.rule = ruleCopied;
         }
         else
         {
             TMWRule* tmpRule = _rule.copy;
             tmpRule.condition.meaning = meaning;
             tmpRule.condition.operation = [TMWRuleCondition lessThanOperator];
-            tmpRule.condition.value = [TMWRuleCondition defaultValueForMeaning:tmpRule.condition.meaning];
+            tmpRule.condition.valueConverted = [TMWRuleCondition defaultValueForMeaning:tmpRule.condition.meaning];
             tmpRule.deviceID = device.uid;
+            
             cntrll.tmpRule = tmpRule;
+            cntrll.rule = _rule;
         }
         
-        cntrll.rule = _rule;
         cntrll.needsServerModification = _needsServerModification;
     }
 }
@@ -49,16 +51,16 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return (!_needsServerModification || ![_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]])   ?
-        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self]  :
-        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+    return (!_needsServerModification || ![_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]]) ?
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self] :
+        [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleMeasure sender:self];
 }
 
 #pragma mark - Private functionality
 
 - (IBAction)backButtonTapped:(id)sender
 {
-    [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
+    [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleMeasure sender:self];
 }
 
 - (NSString*)meaningFromSelectedCell
@@ -74,11 +76,9 @@
 
 #pragma mark Navigation functionality
 
-- (NSString*)segueIdentifierForUnwind
+- (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue
 {
-    return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleMeasurToTrans : TMWStoryboardIDs_UnwindFromRuleMeasurToSum;
+    // Unwind from rule threshold
 }
-
-- (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue { }
 
 @end

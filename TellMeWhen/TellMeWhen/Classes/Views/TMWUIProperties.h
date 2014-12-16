@@ -1,5 +1,6 @@
 #pragma once
 
+#define TMWHasBigScreen             (MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) > 320)
 #define TMWColorConverter(rgbValue)  {                  \
     ( (float)( (rgbValue & 0xFF0000) >> 16) ) / 255.0f, \
     ( (float)( (rgbValue & 0xFF00) >> 8) ) / 255.0f,    \

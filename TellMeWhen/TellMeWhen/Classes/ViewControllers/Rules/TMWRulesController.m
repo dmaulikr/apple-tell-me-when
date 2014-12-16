@@ -98,6 +98,7 @@
     cell.ruleName.text = rule.name.uppercaseString;
     cell.ruleDescription.text = rule.thresholdDescription;
     cell.activator.on = rule.active;
+    if (!TMWHasBigScreen) { [cell.activator removeFromSuperview]; }
     return cell;
 }
 
@@ -160,23 +161,41 @@
             [weakSelf refreshRequest:sender];
         }];
     }
+    else
+    {
+        for (UIViewController* cntrll in self.childViewControllers) { if ([cntrll.title isEqualToString:@"NoTransmitters"]) { [weakSelf.tableView reloadData]; break; } }
+    }
     
     // If there are transmitters, look for rules.
     [TMWAPIService requestRulesForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* rules) {
         [sender endRefreshing];
         if (error) { return; }  // TODO:
-        
         TMWStore* store = [TMWStore sharedInstance];
         
-        NSArray* indexPathsToAdd;
-        NSArray* indexPathsToRemove;
-        NSArray* indexPathsToReplace;
+        // Update the rules with the newly arrived rules.
+        NSArray *indexPathsToAdd, *indexPathsToRemove, *indexPathsToReplace;
         BOOL const isThereChanges = [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules.mutableCopy resultingInCellsIndexPathsToAdd:&indexPathsToAdd cellsIndexPathsToRemove:&indexPathsToRemove cellsIndexPathsToReload:&indexPathsToReplace];
         
-        if (!isThereChanges) { return; }
+        // Check that the rules contains the deviceToken
+        for (TMWRule* rule in store.rules)
+        {
+            BOOL const needsCommitToServer = [rule setNotificationsWithDeviceToken:store.deviceToken previousDeviceToken:store.deviceToken];
+            if (!needsCommitToServer) { continue; }
+            
+            [TMWAPIService setRule:rule completion:^(NSError* error) {
+                if (error) { NSLog(@"Error when trying to set up server rules' notifs with new device token."); }
+            }];
+        }
+        
+        // If there are rules and there is a childViewController, reload the data and return.
+        if (self.childViewControllers.count)
+        {
+            return [weakSelf.tableView reloadData];
+        }
+        else if (!isThereChanges) { return; }
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            UITableView* tableView = weakSelf.tableView; if (!tableView) { return; }
+            UITableView* tableView = weakSelf.tableView;    if (!tableView) { return; }
             
             NSUInteger const ruleNumbers = store.rules.count;
             if ((ruleNumbers>tableView.numberOfSections) || (ruleNumbers<tableView.numberOfSections)) { return [tableView reloadData]; }
@@ -238,18 +257,19 @@
     
     NSMutableArray* rules = [TMWStore sharedInstance].rules;
     [rules addObject:createdRule];
+    
+    if (self.childViewControllers.count) { return [self.tableView reloadData]; }
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:(rules.count-1) inSection:0]] withRowAnimation:TMWCntrl_RowAdditionAnimation];
 }
 
 - (IBAction)unwindFromRuleSummary:(UIStoryboardSegue*)segue
 {
+    // Unwinding from Rules summary. The rule have already been pushed to the server.
     TMWRule* rule = ((TMWRulesSummaryController*)segue.sourceViewController).rule;
     NSUInteger const index = [[TMWStore sharedInstance].rules indexOfObject:rule];
     if (index == NSNotFound) { return; }
     
-    [TMWAPIService setRule:rule completion:^(NSError* error) {
-        if (!error) { NSLog(@"Error updating a rule to the server."); }
-    }];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
