@@ -1,8 +1,9 @@
 #import "TMWInitialController.h"    // Headers
+
 #import "TMWStore.h"                // TMW (Model)
 #import "TMWCredentials.h"          // TMW (Model)
+#import "TMWMainController.h"       // TMW (ViewControllers)
 #import "TMWStoryboardIDs.h"        // TMW (ViewControllers/Segues)
-#import <Relayr/Relayr.h>           // Relayr.framework
 
 #pragma mark - Definitions
 
@@ -20,10 +21,10 @@
 #define TMWInitialCntrll_TextToButton_Maximum       70.0
 
 @interface TMWInitialController ()
-@property (strong, nonatomic) IBOutlet UIButton* multipurposeButton;
-@property (strong, nonatomic) IBOutlet UILabel* explanationLabel;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView* spinner;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textToButtonConstraint;
+@property (weak,nonatomic) IBOutlet UIButton* multipurposeButton;
+@property (weak,nonatomic) IBOutlet UILabel* explanationLabel;
+@property (weak,nonatomic) IBOutlet UIActivityIndicatorView* spinner;
+@property (weak,nonatomic) IBOutlet NSLayoutConstraint *textToButtonConstraint;
 @end
 
 @implementation TMWInitialController
@@ -45,9 +46,9 @@
 
 #pragma mark UIViewController methods
 
-- (void)awakeFromNib
+- (void)viewDidLoad
 {
-    [super awakeFromNib];
+    [super viewDidLoad];
     [self reachabilityCheck];
 }
 
@@ -55,6 +56,17 @@
 {
     _textToButtonConstraint.constant = (_spinner.hidden) ? TMWInitialCntrll_TextToButton_Minimum : TMWInitialCntrll_TextToButton_Maximum;
     [super updateViewConstraints];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromSignToMain])
+    {
+        TMWMainController* mainCntrll = ((TMWMainController*)segue.destinationViewController);
+        [mainCntrll loadIoTsWithCompletion:^(NSError* error) {
+            if (!error) { [mainCntrll setupRulesAndNotifications]; }
+        }];
+    }
 }
 
 #pragma mark - Private functionality

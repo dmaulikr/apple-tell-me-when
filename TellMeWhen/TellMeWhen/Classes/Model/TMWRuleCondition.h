@@ -7,6 +7,7 @@ typedef struct FPRange {
 
 #define FPRangeMake(min,max)    ((struct FPRange){min,max})
 #define FPRangeZero             ((struct FPRange){0.0,0.0})
+#define FPRangeContainsValue(range,val)     ((val >= range.min) && (val<= range.max))
 
 /*!
  *  @abstract Condition specify by a rule.

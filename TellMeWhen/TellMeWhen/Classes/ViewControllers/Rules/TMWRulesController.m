@@ -9,6 +9,7 @@
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRulesSummaryController.h"       // TMW (ViewControllers/Rules)
 #import "TMWRuleTransmittersController.h"   // TMW (ViewControllers/Rules)
+#import "TMWRuleNamingController.h"         // TMW (ViewControllers/Rules)
 #import "TMWUIProperties.h"                 // TMW (Views)
 #import "TMWRulesCellView.h"                // TMW (Views/Rules)
 
@@ -19,7 +20,7 @@
 @interface TMWRulesController () <TMWSegueUnwindingRules>
 @property (strong, nonatomic) IBOutlet UIBarButtonItem* createButton;
 - (IBAction)createRule:(UIBarButtonItem*)sender;
-- (IBAction)ruleToogle:(UISwitch *)sender;
+- (IBAction)ruleToogle:(UISwitch*)sender;
 @end
 
 @implementation TMWRulesController
@@ -45,12 +46,6 @@
         NSFontAttributeName : [UIFont fontWithName:TMWFont_NewJuneBook size:14]
     }];
     self.refreshControl = control;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self queryRules];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
@@ -120,9 +115,13 @@
     __weak UITableView* weakTableView = tableView;
     
     [TMWAPIService deleteRule:ruleToDelete completion:^(NSError* error) {
-        if (error) { return [weakTableView setEditing:NO animated:YES]; }
+        if (error)
+        {
+            return dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakTableView setEditing:NO animated:YES];
+            });
+        }
         
-        [TMWRule ruleForID:ruleToDelete.uid withinRulesArray:store.rules];
         [store.rules removeObject:ruleToDelete];
         
         if (!store.rules.count) {
@@ -228,17 +227,29 @@
 
 - (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
 {
-    // Unwinding from Rules creation.
+    // Unwinding from Rules creation. The rule creation process was cancelled.
 }
 
-- (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue
+- (IBAction)unwindFromRuleNameToList:(UIStoryboardSegue*)segue
 {
-    // Unwinding after successful creation
+    // Unwinding from Rules naming. The rule creation process was successful (check if the rule has been added to the server).
+    TMWRule* createdRule = ((TMWRuleNamingController*)segue.sourceViewController).rule;
+    if (!createdRule) { return; }
+    
+    NSMutableArray* rules = [TMWStore sharedInstance].rules;
+    [rules addObject:createdRule];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:(rules.count-1) inSection:0]] withRowAnimation:TMWCntrl_RowAdditionAnimation];
 }
 
 - (IBAction)unwindFromRuleSummary:(UIStoryboardSegue*)segue
 {
-    // Unwinding from Rules summary
+    TMWRule* rule = ((TMWRulesSummaryController*)segue.sourceViewController).rule;
+    NSUInteger const index = [[TMWStore sharedInstance].rules indexOfObject:rule];
+    if (index == NSNotFound) { return; }
+    
+    [TMWAPIService setRule:rule completion:^(NSError* error) {
+        if (!error) { NSLog(@"Error updating a rule to the server."); }
+    }];
 }
 
 @end

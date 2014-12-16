@@ -12,7 +12,13 @@
 - (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue;
 
 @optional
+- (IBAction)unwindFromRuleThresholdToSummary:(UIStoryboardSegue*)segue;
+
+@optional
 - (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue;
+
+@optional
+- (IBAction)unwindFromRuleNameToList:(UIStoryboardSegue*)segue;
 
 @optional
 - (IBAction)unwindFromRuleSummary:(UIStoryboardSegue*)segue;

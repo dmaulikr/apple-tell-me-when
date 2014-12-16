@@ -1,16 +1,20 @@
 #import "TMWMainController.h"               // Apple
+
 #import "TMWStore.h"                        // TMW (Model)
-#import "TMWRulesController.h"              // TMW (ViewController)
-#import "TMWNotificationsController.h"      // TMW (ViewController)
+#import "TMWNavRulesController.h"           // TMW (ViewControllers)
+#import "TMWNavNotificationsController.h"   // TMW (ViewControllers)
 #import "TMWActions.h"                      // TMW (ViewControllers/Protocols)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueSwapRootViewController.h"  // TMW (ViewControllers/Segues)
 #import "TMWUIProperties.h"                 // TMW (Views)
 
+#pragma mark - Definitions
+
+#define TWMMainCntrll_ItemBadgeString   @"!"
+
 @interface TMWMainController () <UITabBarControllerDelegate>
-@property (nonatomic, strong) NSMutableArray* overlayImageViews;
-@property (nonatomic, strong) NSArray* normalTabItemImages;
-@property (nonatomic, strong) NSArray* activeTabItemImages;
+@property (readonly,nonatomic) TMWNavRulesController* navRulesController;
+@property (readonly,nonatomic) TMWNavNotificationsController* navNotificationsController;
 @end
 
 @implementation TMWMainController
@@ -19,19 +23,17 @@
 
 - (void)deviceTokenChangedFromData:(NSData*)fromData toData:(NSData*)toData
 {
-    // TODO:
+    [self.navRulesController deviceTokenChangedFromData:fromData toData:toData];
 }
 
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
-    if ([self.selectedViewController isKindOfClass:[TMWNotificationsController class]])
+    TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
+    if (self.selectedViewController != navNotifCntrll)
     {
-        [(TMWNotificationsController*)self.selectedViewController queryNotifications];
+        navNotifCntrll.tabBarItem.badgeValue = TWMMainCntrll_ItemBadgeString;
     }
-    else if ([self.selectedViewController isKindOfClass:[TMWRulesController class]])
-    {
-        [(TMWRulesController*)self.selectedViewController queryRules];
-    }
+    [navNotifCntrll notificationDidArrived:userInfo];
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
@@ -39,11 +41,20 @@
     [[TMWStore sharedInstance].relayrUser queryCloudForIoTs:completion];
 }
 
+- (void)setupRulesAndNotifications
+{
+    [self.navRulesController queryRules];
+    [self.navNotificationsController queryNotifications];
+}
+
 - (IBAction)signoutFromSender:(id)sender
 {
     TMWStore* store = [TMWStore sharedInstance];
     [store.relayrApp signOutUser:store.relayrUser];
     store.relayrUser = nil;
+    [store.rules removeAllObjects];
+    [store.notifications removeAllObjects];
+    [store removeFromFileSystem];
     
     UIViewController* signInVC = [[UIStoryboard storyboardWithName:TMWStoryboard bundle:nil] instantiateInitialViewController];
     [[[TMWSegueSwapRootViewController alloc] initWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain source:self destination:signInVC] perform];
@@ -62,6 +73,38 @@
         NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBook size:14],
         NSForegroundColorAttributeName  : [UIColor whiteColor]
     } forState:UIControlStateNormal];
+}
+
+#pragma mark UITabBarControllerDelegate methods
+
+- (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController
+{
+    if ([viewController isKindOfClass:[TMWNavNotificationsController class]])
+    {
+        viewController.tabBarItem.badgeValue = nil;
+    }
+}
+
+#pragma mark - Private functionality
+
+- (TMWNavRulesController*)navRulesController
+{
+    TMWNavRulesController* result;
+    for (UINavigationController* navCntrll in self.childViewControllers)
+    {
+        if ([navCntrll isKindOfClass:[TMWNavRulesController class]]) { result = (TMWNavRulesController*)navCntrll; break; }
+    }
+    return result;
+}
+
+- (TMWNavNotificationsController*)navNotificationsController
+{
+    TMWNavNotificationsController* result;
+    for (UINavigationController* navCntrll in self.childViewControllers)
+    {
+        if ([navCntrll isKindOfClass:[TMWNavNotificationsController class]]) { result = (TMWNavNotificationsController*)navCntrll; break; }
+    }
+    return result;
 }
 
 @end

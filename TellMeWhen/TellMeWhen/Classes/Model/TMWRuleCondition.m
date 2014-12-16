@@ -211,13 +211,13 @@ static NSString* const kCodingValue     = @"val";
     if ([meaning isEqualToString:[TMWRuleCondition meaningForTemperature]]) {
         result = @"°C";
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForHumidity]]) {
-        result = @"%%";
+        result = @"%";
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForNoise]]) {
-        result = @"%%";
+        result = @"%";
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForProximity]]) {
-        result = @"%%";
+        result = @"%";
     } else if ([meaning isEqualToString:[TMWRuleCondition meaningForLight]]) {
-        result = @"%%";
+        result = @"%";
     }
     
     return result;

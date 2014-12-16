@@ -98,6 +98,7 @@
 - (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue {}
 - (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue {}
 - (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue {}
+- (IBAction)unwindFromRuleThresholdToSummary:(UIStoryboardSegue*)segue {}
 - (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue {}
 
 @end

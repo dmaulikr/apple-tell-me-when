@@ -128,6 +128,11 @@
     return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleTransToList : TMWStoryboardIDs_UnwindFromRuleTransToSum;
 }
 
-- (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue { }
+- (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue
+{
+    TMWRuleMeasurementsController* cntrll = (TMWRuleMeasurementsController*)segue.sourceViewController;
+    self.needsServerModification = cntrll.needsServerModification;
+    self.rule = cntrll.rule;
+}
 
 @end

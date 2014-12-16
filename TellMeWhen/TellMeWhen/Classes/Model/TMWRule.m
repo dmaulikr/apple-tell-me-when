@@ -51,6 +51,7 @@ static NSString* const kCodingActive    = @"act";
     if (self)
     {
         _userID = userID;
+        _notifications = [[NSMutableArray alloc] init];
         _active = YES;
     }
     return self;
@@ -60,32 +61,25 @@ static NSString* const kCodingActive    = @"act";
 {
     if (!jsonDictionary.count) { return nil; }
     
-    self = [super init];
+    self = [self initWithUserID:jsonDictionary[TMWRule_RuleID]];
     if (self)
     {
-        _uid = jsonDictionary[TMWRule_RuleID];
         _revisionString = jsonDictionary[TMWRule_Revision];
         _userID = jsonDictionary[TMWRule_UserID];
         _transmitterID = jsonDictionary[TMWRule_TransmitterID];
         _deviceID = jsonDictionary[TMWRule_DeviceID];
         NSNumber* tmpNumber = jsonDictionary[TMWRule_Active];
-        _active = (tmpNumber) ? tmpNumber.boolValue : YES; // Rules are active by default
-        
+        _active = (tmpNumber) ? tmpNumber.boolValue : YES;
         NSDictionary* tmpDict = jsonDictionary[TMWRule_Details];
         _name = tmpDict[TMWRule_Details_Name];
         NSNumber* timestamp = jsonDictionary[TMWRule_Details_Modify];
-        if (timestamp) { _modified = [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue / 1000.0]; }
-        
+        _modified = (!timestamp) ? [NSDate date] : [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue / 1000.0];
         _condition = [[TMWRuleCondition alloc] initWithJSONDictionary:jsonDictionary[TMWRule_Condition]];
-        
-        NSMutableArray *notifications = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in jsonDictionary[TMWRule_Notifications]) {
-            TMWRuleNotification* notification = [[TMWRuleNotification alloc] initWithJSONDictionary:dict];
-            if (notification) {
-                [notifications addObject:notification];
-            }
+        for (NSDictionary* dict in jsonDictionary[TMWRule_Notifications])
+        {
+            TMWRuleNotification* notif = [[TMWRuleNotification alloc] initWithJSONDictionary:dict];
+            if (notif) { [_notifications addObject:notif]; }
         }
-        _notifications = [[NSMutableArray alloc] initWithArray:notifications];
     }
     return self;
 }
@@ -103,29 +97,55 @@ static NSString* const kCodingActive    = @"act";
     NSMutableDictionary* details = [[NSMutableDictionary alloc] initWithCapacity:2];
     if (_name) { details[TMWRule_Details_Name] = _name; }
     if (_modified) { details[TMWRule_Details_Modify] = [NSNumber numberWithDouble:floor(_modified.timeIntervalSince1970 * 1000.0)]; }
-    result[TMWRule_Details] = details.copy;
+    result[TMWRule_Details] = [NSDictionary dictionaryWithDictionary:details];
     
     NSDictionary* conditionDictionary = [_condition compressIntoJSONDictionary];
     if (conditionDictionary) { result[TMWRule_Condition] = conditionDictionary; }
-    NSArray *notificationsArray = [self compressRuleIntoJSONArray];
+    NSArray *notificationsArray = [self compressNotificationsIntoJSONArray];
     if (notificationsArray) { result[TMWRule_Notifications] = notificationsArray; }
     return [NSDictionary dictionaryWithDictionary:result];
 }
 
-- (NSArray*)setupNotificationsWithDeviceToken:(NSData *)deviceToken
+- (void)setWith:(TMWRule*)rule
 {
-    TMWRuleNotification* notification = [[TMWRuleNotification alloc] initWithDeviceToken:deviceToken];
-    if (!notification) { return _notifications; }
-    if (!_notifications.count) { return [NSArray arrayWithObject:notification]; }
+    if (!rule) { return; }
     
-    for (TMWRuleNotification* tmp in _notifications)
+    if (rule.uid.length) { _uid = rule.uid; }
+    if (rule.revisionString.length) { _revisionString = rule.revisionString; }
+    if (rule.transmitterID.length) { _transmitterID = rule.transmitterID; }
+    if (rule.deviceID.length) { _deviceID = rule.deviceID; }
+    if (rule.name.length) { _name = rule.name; }
+    if (rule.modified) { _modified = rule.modified; }
+    if (rule.condition) { _condition = rule.condition; }
+    if (rule.notifications) { _notifications = rule.notifications; }
+}
+
+- (void)setNotificationsWithDeviceToken:(NSData*)data previousDeviceToken:(NSData*)previousData
+{
+    if (!previousData.length)
     {
-        if ([tmp.type isEqualToString:TMWRule_Notif_Type_APNS] && [tmp.deviceToken isEqualToData:deviceToken]) { return _notifications; }
+        TMWRuleNotification* notif = [[TMWRuleNotification alloc] initWithDeviceToken:data];
+        if (!notif) { return; }
+        return [_notifications addObject:notif];
     }
     
-    NSMutableArray* result = [NSMutableArray arrayWithArray:_notifications];
-    [result addObject:notification];
-    return [NSArray arrayWithArray:result];
+    if ([previousData isEqualToData:data]) { return; }
+    
+    NSMutableArray* matchedNotifs = [[NSMutableArray alloc] init];
+    for (TMWRuleNotification* notif in _notifications)
+    {
+        if ([notif.type isEqualToString:TMWRuleNotificationTypeAPNS] && [notif.deviceToken isEqualToData:data])
+        {
+            [matchedNotifs addObject:notif];
+        }
+    }
+    
+    TMWRuleNotification* notif = matchedNotifs.firstObject;
+    if (!notif) { return [_notifications addObject:[[TMWRuleNotification alloc] initWithDeviceToken:data]]; }
+    
+    [_notifications removeObjectsInArray:matchedNotifs];
+    notif.deviceToken = data;
+    [_notifications addObject:notif];
 }
 
 #pragma mark Generator methods (readonly)
@@ -137,7 +157,7 @@ static NSString* const kCodingActive    = @"act";
             ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForHumidity]])    ? @"Humidity"     :
             ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForProximity]])   ? @"Proximity"    :
             ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForLight]])       ? @"Brightness"   :
-            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForNoise]])       ? @"Sound"        : nil;
+            ([_condition.meaning isEqualToString:[TMWRuleCondition meaningForNoise]])       ? @"Noise"        : nil;
 }
 
 - (UIImage*)icon
@@ -179,17 +199,17 @@ static NSString* const kCodingActive    = @"act";
 
 - (id)initWithCoder:(NSCoder*)decoder
 {
-    self = [super init];
+    self = [self initWithUserID:[decoder decodeObjectForKey:kCodingID]];
     if (self)
     {
-        _uid = [decoder decodeObjectForKey:kCodingID];
         _revisionString = [decoder decodeObjectForKey:kCodingRevision];
         _userID = [decoder decodeObjectForKey:kCodingUserID];
         _deviceID = [decoder decodeObjectForKey:kCodingDevID];
         _name = [decoder decodeObjectForKey:kCodingName];
         _modified = [decoder decodeObjectForKey:kCodingModified];
         _condition = [decoder decodeObjectForKey:kCodingCondition];
-        _notifications = [decoder decodeObjectForKey:kCodingNotifs];
+        NSArray* tmpNotifs = [decoder decodeObjectForKey:kCodingNotifs];
+        if (tmpNotifs.count) { [_notifications addObjectsFromArray:tmpNotifs]; }
         _active = [decoder decodeBoolForKey:kCodingActive];
     }
     return self;
@@ -205,7 +225,7 @@ static NSString* const kCodingActive    = @"act";
     [coder encodeObject:_name forKey:kCodingName];
     [coder encodeObject:_modified forKey:kCodingModified];
     [coder encodeObject:_condition forKey:kCodingCondition];
-    [coder encodeObject:_notifications forKey:kCodingNotifs];
+    [coder encodeObject:[NSArray arrayWithArray:_notifications] forKey:kCodingNotifs];
     [coder encodeBool:_active forKey:kCodingActive];
 }
 
@@ -219,9 +239,9 @@ static NSString* const kCodingActive    = @"act";
     rule.transmitterID = _transmitterID;
     rule.deviceID = _deviceID;
     rule.name = _name;
-    rule.modified = _modified;
+    rule.modified = _modified.copy;
     rule.condition = _condition.copy;
-    rule.notifications = _notifications.copy;
+    rule.notifications = _notifications;
     rule.active = _active;
     return rule;
 }
@@ -320,17 +340,15 @@ static NSString* const kCodingActive    = @"act";
 
 #pragma mark - Private Methods
 
-- (NSArray*)compressRuleIntoJSONArray
+- (NSArray*)compressNotificationsIntoJSONArray
 {
-    if (!_notifications.count) {
-        return nil;
-    }
-    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:_notifications.count];
-    for (TMWRuleNotification *notification in _notifications) {
-        NSString *hexString = [notification.deviceToken hexadecimalString];
-        if (!notification.type.length || !hexString) {
-            continue;
-        }
+    if (!_notifications.count) { return nil; }
+    
+    NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:_notifications.count];
+    for (TMWRuleNotification *notification in _notifications)
+    {
+        NSString* hexString = [notification.deviceToken hexadecimalString];
+        if (!notification.type.length || !hexString) { continue; }
         [result addObject:@{ TMWRule_Notif_Type : notification.type, TMWRule_Notif_Key : hexString }];
     }
     return (result.count) ? [NSArray arrayWithArray:result] : nil;

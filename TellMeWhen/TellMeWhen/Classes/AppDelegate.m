@@ -21,9 +21,14 @@
     if (store.relayrApp && store.relayrUser)
     {
         controller = [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
-        [controller loadIoTsWithCompletion:nil];
+        [controller loadIoTsWithCompletion:^(NSError* error) {
+            [controller setupRulesAndNotifications];
+        }];
     }
-    else { controller = [storyboard instantiateInitialViewController]; }
+    else
+    {
+        controller = [storyboard instantiateInitialViewController];
+    }
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];
     
@@ -47,24 +52,30 @@
 - (void)applicationDidEnterBackground:(UIApplication*)application
 {
     TMWStore* store = [TMWStore sharedInstance];
-    
-    RelayrApp* app = [TMWStore sharedInstance].relayrApp;
+    RelayrApp* app = store.relayrApp;
     RelayrUser* user = app.loggedUsers.firstObject;
-    if (!app || !user) { [store removeFromFileSystem]; return; }
+    if (!app || !user)
+    {
+        store.relayrUser = nil;
+        [store.rules removeAllObjects];
+        [store.notifications removeAllObjects];
+        [store removeFromFileSystem];
+        return;
+    }
     
     [store persistInFileSystem];
 }
 
-- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings { }
-- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings { }
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:deviceToken];
 }
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:nil];
 }
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
     [((id <TMWActions>)_window.rootViewController) notificationDidArrived:userInfo];
 }

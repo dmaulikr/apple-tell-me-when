@@ -37,6 +37,7 @@
             tmpRule.condition.operation = [TMWRuleCondition lessThanOperator];
             tmpRule.condition.value = [TMWRuleCondition defaultValueForMeaning:tmpRule.condition.meaning];
             tmpRule.deviceID = device.uid;
+            cntrll.tmpRule = tmpRule;
         }
         
         cntrll.rule = _rule;
@@ -48,9 +49,9 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return ([_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]])   ?
-        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self]     :
-        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self];
+    return (!_needsServerModification || ![_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]])   ?
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self]  :
+        [self performSegueWithIdentifier:self.segueIdentifierForUnwind sender:self];
 }
 
 #pragma mark - Private functionality

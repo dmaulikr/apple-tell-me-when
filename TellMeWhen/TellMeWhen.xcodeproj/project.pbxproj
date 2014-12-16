@@ -23,6 +23,8 @@
 		624712C81A38FA8900736711 /* Relayr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 624712BF1A38FA7200736711 /* Relayr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */; };
 		6257604E1A37D8AF0011F89B /* TMWMainTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */; };
+		626E47631A3FD96900360010 /* TMWNavRulesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 626E47621A3FD96900360010 /* TMWNavRulesController.m */; };
+		626E47681A3FD98300360010 /* TMWNavNotificationsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 626E47671A3FD98300360010 /* TMWNavNotificationsController.m */; };
 		627140BC1A3B2FC100C23BAC /* TMWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 627140BB1A3B2FC100C23BAC /* TMWTableViewCell.m */; };
 		6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 628725391A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m */; };
 		62A468AC1A3E5674004F5A73 /* TMWRuleThresholdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A468AB1A3E5674004F5A73 /* TMWRuleThresholdController.m */; };
@@ -133,6 +135,10 @@
 		624D1C371A384D90009BB2D6 /* TMWRulesCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWRulesCellView.m; sourceTree = "<group>"; };
 		6257604C1A37D8AF0011F89B /* TMWMainTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWMainTabBar.h; sourceTree = "<group>"; };
 		6257604D1A37D8AF0011F89B /* TMWMainTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWMainTabBar.m; sourceTree = "<group>"; };
+		626E47611A3FD96900360010 /* TMWNavRulesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNavRulesController.h; sourceTree = "<group>"; };
+		626E47621A3FD96900360010 /* TMWNavRulesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNavRulesController.m; sourceTree = "<group>"; };
+		626E47661A3FD98300360010 /* TMWNavNotificationsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNavNotificationsController.h; sourceTree = "<group>"; };
+		626E47671A3FD98300360010 /* TMWNavNotificationsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNavNotificationsController.m; sourceTree = "<group>"; };
 		627140BA1A3B2FC100C23BAC /* TMWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWTableViewCell.h; sourceTree = "<group>"; };
 		627140BB1A3B2FC100C23BAC /* TMWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWTableViewCell.m; sourceTree = "<group>"; };
 		628725381A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWSegueRemoveViewFromTableBackgroundView.h; sourceTree = "<group>"; };
@@ -415,6 +421,10 @@
 				7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */,
 				7DF4B6F81A1C7C7800F90FFC /* TMWMainController.h */,
 				7DF4B6F91A1C7C7800F90FFC /* TMWMainController.m */,
+				626E47611A3FD96900360010 /* TMWNavRulesController.h */,
+				626E47621A3FD96900360010 /* TMWNavRulesController.m */,
+				626E47661A3FD98300360010 /* TMWNavNotificationsController.h */,
+				626E47671A3FD98300360010 /* TMWNavNotificationsController.m */,
 				622126501A37F05400E24072 /* Rules */,
 				624712AB1A38E4AD00736711 /* Notifications */,
 			);
@@ -567,6 +577,7 @@
 				62169A121A3D16C9005A9E64 /* TMWRuleTransmitterCellView.m in Sources */,
 				62D7E1191A39E09900D81856 /* TMWNotificationsCellView.m in Sources */,
 				6287253A1A39D0110017D8E4 /* TMWSegueRemoveViewFromTableBackgroundView.m in Sources */,
+				626E47631A3FD96900360010 /* TMWNavRulesController.m in Sources */,
 				7DF4B6FA1A1C7C7800F90FFC /* TMWMainController.m in Sources */,
 				7D153AEB1A1E001F00B671B0 /* TMWStore.m in Sources */,
 				622126561A37F6A200E24072 /* TMWSegueSwapChildController.m in Sources */,
@@ -576,6 +587,7 @@
 				622126531A37F06A00E24072 /* TMWRulesController.m in Sources */,
 				62169A0F1A3D127C005A9E64 /* TMWRuleTransmittersController.m in Sources */,
 				7DC4A0421A2DB12E005A65AC /* NSString+Hexadecimal.m in Sources */,
+				626E47681A3FD98300360010 /* TMWNavNotificationsController.m in Sources */,
 				7D8FF3A91A1A4A1500429FDE /* main.m in Sources */,
 				624D1C381A384D90009BB2D6 /* TMWRulesCellView.m in Sources */,
 				624712B61A38F66E00736711 /* TMWSegueEmbedViewInTableBacgroundkView.m in Sources */,

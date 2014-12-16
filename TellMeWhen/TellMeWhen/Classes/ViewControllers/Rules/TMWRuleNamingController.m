@@ -4,37 +4,32 @@
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
+#import "TMWButton.h"                       // TMW (Views)
 
-@interface TMWRuleNamingController () <TMWSegueUnwindingRules>
+@interface TMWRuleNamingController () <TMWSegueUnwindingRules,UITextFieldDelegate>
 @property (readonly,nonatomic) NSString* segueIdentifierForUnwind;
+@property (strong, nonatomic) IBOutlet UITextField* textField;
+- (IBAction)doneButtonTapped:(TMWButton*)sender;
 @end
 
 @implementation TMWRuleNamingController
 
+#pragma mark - Public API
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-#pragma mark - Table view data source
+#pragma mark UITextFieldDelegate methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (BOOL)textFieldShouldReturn:(UITextField*)textField
 {
-    // Return the number of sections.
-    return 0;
+    [self doneButtonTapped:nil];
+    return NO;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return 0;
-}
+#pragma mark - Private functionality
 
 - (IBAction)backButtonTapped:(id)sender
 {
@@ -48,4 +43,11 @@
     return (!_needsServerModification) ? TMWStoryboardIDs_UnwindFromRuleNamingToThresh : TMWStoryboardIDs_UnwindFromRuleNamingToSum;
 }
 
+- (IBAction)doneButtonTapped:(TMWButton*)sender
+{
+    if (!_textField.text.length) { return; }
+    
+    [_textField resignFirstResponder];
+    [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleNamingToList sender:self];
+}
 @end

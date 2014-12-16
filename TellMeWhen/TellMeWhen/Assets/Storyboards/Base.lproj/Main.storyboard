@@ -38,10 +38,11 @@
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
+            <string>NewJuneBold</string>
+            <string>NewJuneBold</string>
+            <string>NewJuneBold</string>
         </mutableArray>
         <mutableArray key="NewJuneBook.otf">
-            <string>NewJuneBook</string>
-            <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
@@ -173,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="-111" y="-84.75"/>
         </scene>
-        <!--Rules Navigation-->
+        <!--Navigation for Rules-->
         <scene sceneID="Kep-Zr-wAh">
             <objects>
-                <navigationController title="Rules Navigation" id="8GJ-EU-OJb" sceneMemberID="viewController">
+                <navigationController title="Navigation for Rules" id="8GJ-EU-OJb" customClass="TMWNavRulesController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="rules" image="TabBarItemRules" id="jPd-qt-zRw"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0uA-OC-DT3">
@@ -759,7 +760,7 @@
                         <sections>
                             <tableViewSection id="2FN-vW-Quc">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="86T-2I-cIq" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="86T-2I-cIq" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="86T-2I-cIq" id="OzQ-dr-UEw">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -803,15 +804,18 @@
                                                 <constraint firstItem="CMi-bA-6Hx" firstAttribute="leading" secondItem="OzQ-dr-UEw" secondAttribute="leadingMargin" constant="8" id="sxW-yY-Mce"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="VYf-82-kLs" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="100" id="VYf-82-kLs" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VYf-82-kLs" id="tY1-KT-e1s">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-uI-CJn" customClass="TMWRuleConditionButton">
-                                                    <rect key="frame" x="8" y="8" width="292" height="84"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="35"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="PYM-uI-CJn" customClass="TMWRuleConditionButton">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="65"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="-20" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="&lt;">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -819,9 +823,11 @@
                                                         <action selector="lessThanTapped:" destination="Mne-4e-EUB" eventType="touchUpInside" id="82C-6A-yek"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="207-ls-fzP" customClass="TMWRuleConditionButton">
-                                                    <rect key="frame" x="300" y="8" width="292" height="84"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="35"/>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="207-ls-fzP" customClass="TMWRuleConditionButton">
+                                                    <rect key="frame" x="300" y="0.0" width="300" height="100"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="65"/>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <inset key="titleEdgeInsets" minX="0.0" minY="-18" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" title="&gt;">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -833,18 +839,19 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="PYM-uI-CJn" firstAttribute="leading" secondItem="tY1-KT-e1s" secondAttribute="leadingMargin" id="3rn-pR-LXZ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="207-ls-fzP" secondAttribute="bottom" id="Dnf-FX-dDg"/>
-                                                <constraint firstItem="207-ls-fzP" firstAttribute="trailing" secondItem="tY1-KT-e1s" secondAttribute="trailingMargin" id="H6f-s8-90h"/>
-                                                <constraint firstItem="207-ls-fzP" firstAttribute="top" secondItem="tY1-KT-e1s" secondAttribute="topMargin" id="Lpg-iY-8P3"/>
-                                                <constraint firstItem="207-ls-fzP" firstAttribute="width" secondItem="PYM-uI-CJn" secondAttribute="width" id="U1g-Gy-1vB"/>
-                                                <constraint firstItem="PYM-uI-CJn" firstAttribute="top" secondItem="tY1-KT-e1s" secondAttribute="topMargin" id="dq7-8I-iXp"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="PYM-uI-CJn" secondAttribute="bottom" id="eoO-BW-Kmt"/>
-                                                <constraint firstItem="207-ls-fzP" firstAttribute="leading" secondItem="PYM-uI-CJn" secondAttribute="trailing" id="u6g-d2-raX"/>
+                                                <constraint firstItem="PYM-uI-CJn" firstAttribute="leading" secondItem="tY1-KT-e1s" secondAttribute="leading" id="0Hw-GI-vXI"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="top" secondItem="tY1-KT-e1s" secondAttribute="top" id="Fjc-ls-xNW"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="leading" secondItem="PYM-uI-CJn" secondAttribute="trailing" id="GGa-3H-4pn"/>
+                                                <constraint firstAttribute="trailing" secondItem="207-ls-fzP" secondAttribute="trailing" id="I6i-cs-9ze"/>
+                                                <constraint firstAttribute="bottom" secondItem="PYM-uI-CJn" secondAttribute="bottom" id="NCV-kQ-L9F"/>
+                                                <constraint firstItem="207-ls-fzP" firstAttribute="width" secondItem="PYM-uI-CJn" secondAttribute="width" id="W36-XP-J4Q"/>
+                                                <constraint firstItem="PYM-uI-CJn" firstAttribute="top" secondItem="tY1-KT-e1s" secondAttribute="top" id="ZGn-Kg-aSL"/>
+                                                <constraint firstAttribute="bottom" secondItem="207-ls-fzP" secondAttribute="bottom" id="g8N-Qc-IvI"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="112" id="3XZ-iR-Qmf" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="112" id="3XZ-iR-Qmf" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3XZ-iR-Qmf" id="CUN-87-Y7S">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -869,7 +876,6 @@
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="XlQ-Sd-YBw" secondAttribute="trailing" constant="8" id="Pcr-Yn-RpQ"/>
-                                                <constraint firstAttribute="centerX" secondItem="XlQ-Sd-YBw" secondAttribute="centerX" constant="-0.5" id="RME-PB-iya"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="XlQ-Sd-YBw" secondAttribute="bottom" constant="8" id="TfP-K5-3tU"/>
                                                 <constraint firstItem="SiW-RZ-nqm" firstAttribute="top" secondItem="CUN-87-Y7S" secondAttribute="topMargin" constant="8" id="aCW-T5-hWk"/>
                                                 <constraint firstItem="XlQ-Sd-YBw" firstAttribute="top" secondItem="SiW-RZ-nqm" secondAttribute="bottom" constant="8" id="dB8-cY-ZaB"/>
@@ -877,41 +883,40 @@
                                                 <constraint firstAttribute="centerX" secondItem="SiW-RZ-nqm" secondAttribute="centerX" id="kyV-wd-q57"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="67" id="TYL-U1-yBQ" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="E5f-Gn-HPX" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TYL-U1-yBQ" id="eNj-bs-waM">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E5f-Gn-HPX" id="dsF-6d-jMK">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Last sensor reading:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeG-b6-pdg">
-                                                    <rect key="frame" x="175" y="23" width="171" height="22"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
-                                                    <color key="textColor" red="0.64313725489999995" green="0.73725490199999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="129" y="327" width="142" height="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="22.12ºC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cu9-gC-ZTK">
-                                                    <rect key="frame" x="360" y="23" width="68" height="22"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
-                                                    <color key="textColor" red="0.64313725489999995" green="0.73725490199999999" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="129" y="327" width="142" height="24"/>
-                                                    </variation>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvD-dl-0ou" customClass="TMWButton">
+                                                    <rect key="frame" x="18" y="11" width="564" height="48"/>
+                                                    <color key="backgroundColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
+                                                    <state key="normal" title="Done">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="Mne-4e-EUB" eventType="touchUpInside" id="xrt-Ur-4oa"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstItem="QeG-b6-pdg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eNj-bs-waM" secondAttribute="leadingMargin" constant="4" id="8D8-6U-OQb"/>
-                                                <constraint firstAttribute="centerY" secondItem="QeG-b6-pdg" secondAttribute="centerY" id="F01-Px-rx2"/>
-                                                <constraint firstAttribute="centerY" secondItem="Cu9-gC-ZTK" secondAttribute="centerY" priority="500" id="VqU-2o-Llt"/>
-                                                <constraint firstAttribute="centerX" secondItem="QeG-b6-pdg" secondAttribute="centerX" priority="500" constant="40" id="gQW-e9-y8q"/>
-                                                <constraint firstItem="Cu9-gC-ZTK" firstAttribute="leading" secondItem="QeG-b6-pdg" secondAttribute="trailing" constant="14" id="gTP-hH-WWn"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Cu9-gC-ZTK" secondAttribute="trailing" constant="4" id="nPQ-Ig-KIz"/>
+                                                <constraint firstItem="tvD-dl-0ou" firstAttribute="leading" secondItem="dsF-6d-jMK" secondAttribute="leadingMargin" constant="10" id="Fng-2i-KaS"/>
+                                                <constraint firstItem="tvD-dl-0ou" firstAttribute="top" secondItem="dsF-6d-jMK" secondAttribute="topMargin" constant="3" id="Icn-Op-sha"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="tvD-dl-0ou" secondAttribute="bottom" constant="3" id="h86-6c-UGM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tvD-dl-0ou" secondAttribute="trailing" constant="10" id="qLt-Aa-4Xy"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -933,14 +938,15 @@
                     <connections>
                         <outlet property="conditionValueLabel" destination="SiW-RZ-nqm" id="Sv9-Ha-nNr"/>
                         <outlet property="conditionValueSlider" destination="XlQ-Sd-YBw" id="05C-XG-qAm"/>
-                        <outlet property="greaterThan" destination="207-ls-fzP" id="MbC-OC-GKE"/>
+                        <outlet property="doneButton" destination="tvD-dl-0ou" id="xX6-Dt-yMK"/>
+                        <outlet property="greaterThanButton" destination="207-ls-fzP" id="XHu-yx-pQc"/>
                         <outlet property="lessThanButton" destination="PYM-uI-CJn" id="XBh-nF-X7k"/>
                         <outlet property="measurementImageView" destination="CMi-bA-6Hx" id="7eF-fR-8pI"/>
                         <outlet property="measurementLabel" destination="8KY-is-hgR" id="K8c-sm-CaU"/>
                         <outlet property="transmitterNameLabel" destination="Yu0-d9-jmX" id="cdw-7J-G44"/>
-                        <segue destination="ljH-yK-8lg" kind="show" identifier="TMWSegueFromRuleThresholdToNaming" id="SY3-C7-gfA"/>
                         <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToMeasures" unwindAction="unwindFromRuleThreshold:" id="HE0-nS-kz4"/>
-                        <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToSummary" unwindAction="unwindFromRuleThreshold:" id="bIM-IJ-JaL"/>
+                        <segue destination="2Lz-gE-is0" kind="unwind" identifier="TMWUnwindFromThresholdToSummary" unwindAction="unwindFromRuleThresholdToSummary:" id="bIM-IJ-JaL"/>
+                        <segue destination="XB9-69-Ybw" kind="show" identifier="TMWSegueFromRuleThresholdToNaming" id="3c6-cl-cpH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U79-Qd-Nhu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -949,36 +955,103 @@
             <point key="canvasLocation" x="5254" y="46"/>
         </scene>
         <!--NAME RULE-->
-        <scene sceneID="M0o-l5-485">
+        <scene sceneID="zNK-71-QIE">
             <objects>
-                <viewController id="ljH-yK-8lg" customClass="TMWRuleNamingController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ybM-t7-Kpm"/>
-                        <viewControllerLayoutGuide type="bottom" id="0n1-Wh-TUw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cfG-bk-PYR">
+                <tableViewController id="XB9-69-Ybw" customClass="TMWRuleNamingController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="zaJ-40-4Hc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
+                        <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="pN2-R1-3zG">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="90" id="i4U-Bq-bK9">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i4U-Bq-bK9" id="PPx-zn-H8e">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rule Name" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Fd1-7j-9Cn">
+                                                    <rect key="frame" x="16" y="16" width="568" height="62"/>
+                                                    <color key="backgroundColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.0" green="0.15686274510000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="XB9-69-Ybw" id="Lgt-Dh-VRG"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="Fd1-7j-9Cn" firstAttribute="top" secondItem="PPx-zn-H8e" secondAttribute="topMargin" constant="8" id="VYP-NC-1eK"/>
+                                                <constraint firstItem="Fd1-7j-9Cn" firstAttribute="leading" secondItem="PPx-zn-H8e" secondAttribute="leadingMargin" constant="8" id="gjA-5p-Plf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Fd1-7j-9Cn" secondAttribute="bottom" constant="4" id="hn1-Yr-tOj"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Fd1-7j-9Cn" secondAttribute="trailing" constant="8" id="ke8-kg-94D"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="AGC-2d-7sI" customClass="TMWRulesCellView">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AGC-2d-7sI" id="1t3-LW-aD1">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ESH-RT-qpj" customClass="TMWButton">
+                                                    <rect key="frame" x="23" y="11" width="554" height="48"/>
+                                                    <color key="backgroundColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
+                                                    <state key="normal" title="Done">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="buttonTapped:" destination="Mne-4e-EUB" eventType="touchUpInside" id="VgE-h2-VLD"/>
+                                                        <action selector="doneButtonTapped:" destination="XB9-69-Ybw" eventType="touchUpInside" id="DbC-2d-T8w"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ESH-RT-qpj" secondAttribute="bottom" constant="3" id="Af4-Cm-9jA"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ESH-RT-qpj" secondAttribute="trailing" constant="15" id="K7T-oE-w09"/>
+                                                <constraint firstItem="ESH-RT-qpj" firstAttribute="top" secondItem="1t3-LW-aD1" secondAttribute="topMargin" constant="3" id="LqW-x7-00C"/>
+                                                <constraint firstItem="ESH-RT-qpj" firstAttribute="leading" secondItem="1t3-LW-aD1" secondAttribute="leadingMargin" constant="15" id="VHC-Gy-xBx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="XB9-69-Ybw" id="uJu-Ck-21v"/>
+                            <outlet property="delegate" destination="XB9-69-Ybw" id="NXi-Xm-yh9"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" title="NAME RULE" id="1XP-DG-MPy">
                         <barButtonItem key="leftBarButtonItem" image="TabBarItemBackArrow" id="Sv9-oX-UEy">
                             <inset key="imageInsets" minX="-8" minY="1" maxX="0.0" maxY="-1"/>
                             <color key="tintColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
-                                <action selector="backButtonTapped:" destination="ljH-yK-8lg" id="pt7-qS-FTq"/>
+                                <action selector="backButtonTapped:" destination="XB9-69-Ybw" id="d8n-5T-RPY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Gb0-RI-xFq" kind="unwind" identifier="TMWUnwindFromNamingToThreshold" unwindAction="unwindFromRuleName:" id="EN6-z5-gYQ"/>
-                        <segue destination="Gb0-RI-xFq" kind="unwind" identifier="TMWUnwindFromNamingToSummary" unwindAction="unwindFromRuleName:" id="g41-uU-8vH"/>
+                        <outlet property="textField" destination="Fd1-7j-9Cn" id="H7g-Qp-C9R"/>
+                        <segue destination="fLx-he-OpJ" kind="unwind" identifier="TMWUnwindFromNamingToThreshold" unwindAction="unwindFromRuleName:" id="03f-wt-6zz"/>
+                        <segue destination="fLx-he-OpJ" kind="unwind" identifier="TMWUnwindFromNamingToSummary" unwindAction="unwindFromRuleName:" id="deZ-fq-zIF"/>
                     </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lRm-Oi-Dhy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Gb0-RI-xFq" userLabel="Exit" sceneMemberID="exit"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sf7-OV-vbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fLx-he-OpJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5961" y="46"/>
+            <point key="canvasLocation" x="5977" y="46"/>
         </scene>
         <!--RULES SUMMARY-->
         <scene sceneID="4B6-Tv-297">
@@ -1253,7 +1326,7 @@
                         <segue destination="qr5-gf-ebk" kind="show" identifier="TMWSegueFromRuleSummaryToTransmitters" id="WMw-C2-A0e"/>
                         <segue destination="bAZ-nF-98u" kind="show" identifier="TMWSegueFromRuleSummaryToMeasurements" id="jN9-f0-ZrE"/>
                         <segue destination="Mne-4e-EUB" kind="show" identifier="TMWSegueFromRuleSummaryToThreshold" id="0Dj-pf-Bz7"/>
-                        <segue destination="ljH-yK-8lg" kind="show" identifier="TMWSegueFromRuleSummaryToNaming" id="m6T-aa-kTM"/>
+                        <segue destination="XB9-69-Ybw" kind="show" identifier="TMWSegueFromRuleSummaryToNaming" id="hsx-QH-yVh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xX1-m6-c0X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1264,7 +1337,7 @@
         <!--Notifications Navigation-->
         <scene sceneID="w6w-Nf-UZ9">
             <objects>
-                <navigationController title="Notifications Navigation" id="7qh-2s-6MH" sceneMemberID="viewController">
+                <navigationController title="Notifications Navigation" id="7qh-2s-6MH" customClass="TMWNavNotificationsController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="notifications" image="TabBarItemNotifications" id="g8v-0k-8B3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vLJ-3g-ejN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1721,10 +1794,10 @@
         <image name="TabBarItemRules" width="20" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="R23-2U-ccp"/>
-        <segue reference="jN9-f0-ZrE"/>
         <segue reference="0Dj-pf-Bz7"/>
-        <segue reference="SY3-C7-gfA"/>
         <segue reference="0MQ-4F-ecA"/>
+        <segue reference="WMw-C2-A0e"/>
+        <segue reference="jN9-f0-ZrE"/>
+        <segue reference="3c6-cl-cpH"/>
     </inferredMetricsTieBreakers>
 </document>

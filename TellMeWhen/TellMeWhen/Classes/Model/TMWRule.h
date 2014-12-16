@@ -11,7 +11,8 @@
 - (instancetype)initWithUserID:(NSString *)userID;
 - (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 - (NSDictionary *)compressIntoJSONDictionary;
-- (NSArray*)setupNotificationsWithDeviceToken:(NSData*)deviceToken;
+- (void)setWith:(TMWRule*)rule;
+- (void)setNotificationsWithDeviceToken:(NSData*)data previousDeviceToken:(NSData*)previousData;
 
 @property (strong,nonatomic) NSString* uid;
 @property (strong,nonatomic) NSString* revisionString;
@@ -21,7 +22,7 @@
 @property (strong,nonatomic) NSString* name;
 @property (strong,nonatomic) NSDate* modified;
 @property (strong,nonatomic) TMWRuleCondition* condition;
-@property (strong,nonatomic) NSArray* notifications;
+@property (strong,nonatomic) NSMutableArray* notifications;
 @property (nonatomic) BOOL active;
 
 @property (readonly,nonatomic) NSString* type;
