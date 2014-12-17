@@ -14,9 +14,9 @@
 
 #pragma mark - Public API
 
-- (void)queryRules
+- (void)queryRulesWithCompletion:(void (^)(NSError*))completion
 {
-    [self.rulesController queryRules];
+    [self.rulesController queryRulesWithCompletion:completion];
 }
 
 - (void)deviceTokenChangedFromData:(NSData*)fromData toData:(NSData*)toData

@@ -23,7 +23,7 @@
 
 - (void)deviceTokenChangedFromData:(NSData*)fromData toData:(NSData*)toData
 {
-    if (![fromData isEqualToData:toData]) { printf("\nDevice token change...\n"); }
+    if (![fromData isEqualToData:toData]) { printf("\nDevice token changed...\n"); }
     [self.navRulesController deviceTokenChangedFromData:fromData toData:toData];
 }
 
@@ -41,8 +41,11 @@
 
 - (void)setupRulesAndNotifications
 {
-    [self.navRulesController queryRules];
-    if (self.selectedViewController == self.navNotificationsController) { [self.navNotificationsController queryNotifications]; }
+    [self.navRulesController queryRulesWithCompletion:^(NSError* error) {
+        if (error) { return; }
+        // TODO: Delete notifications from which I have no rules
+        if (self.selectedViewController == self.navNotificationsController) { [self.navNotificationsController queryNotifications]; }
+    }];
 }
 
 - (IBAction)signoutFromSender:(id)sender
@@ -72,8 +75,11 @@
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
     if (tabBarController.selectedViewController == navNotifCntrll)
     {
-        viewController.tabBarItem.badgeValue = nil;
-        [navNotifCntrll queryNotifications];
+        if (viewController.tabBarItem.badgeValue)
+        {
+            [navNotifCntrll queryNotifications];
+            viewController.tabBarItem.badgeValue = nil;
+        }
     }
 }
 

@@ -27,9 +27,78 @@
 
 #pragma mark - Public API
 
-- (void)queryRules
+- (void)queryRulesWithCompletion:(void (^)(NSError*))completion
 {
-    [self refreshRequest:nil];
+    RelayrUser* user = [TMWStore sharedInstance].relayrUser;
+    __weak TMWRulesController* weakSelf = self;
+    
+    if (!user.transmitters.count)
+    {
+        if (self.refreshControl.refreshing) { [self.refreshControl endRefreshing]; }
+        if (completion) { completion(nil); }
+        return;
+    }
+    
+    // If there are transmitters, look for rules.
+    [TMWAPIService requestRulesForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* rules) {
+        if (error)
+        {
+            if (self.refreshControl.refreshing) { [self.refreshControl endRefreshing]; }
+            if (completion) { completion(error); }
+            return;
+        }
+        
+        TMWStore* store = [TMWStore sharedInstance];
+        
+        // Update the rules with the newly arrived rules.
+        NSArray *indexPathsToAdd, *indexPathsToRemove, *indexPathsToReplace;
+        BOOL const isThereChanges = [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules.mutableCopy resultingInCellsIndexPathsToAdd:&indexPathsToAdd cellsIndexPathsToRemove:&indexPathsToRemove cellsIndexPathsToReload:&indexPathsToReplace];
+        
+        // Check that the rules contains the deviceToken
+        for (TMWRule* rule in store.rules)
+        {
+            BOOL const needsCommitToServer = [rule setNotificationsWithDeviceToken:store.deviceToken previousDeviceToken:store.deviceToken];
+            if (!needsCommitToServer) { continue; }
+            
+            [TMWAPIService setRule:rule completion:^(NSError* error) {
+                if (error) { NSLog(@"Error when trying to set up server rules' notifs with new device token."); }   // TODO:
+            }];
+        }
+        
+        // If there are rules and there is a childViewController, reload the data and return.
+        if (self.childViewControllers.count)
+        {
+            if ([weakSelf isViewLoaded])
+            {
+                if (weakSelf.refreshControl.refreshing) { [weakSelf.refreshControl endRefreshing]; }
+                [weakSelf.tableView reloadData];
+            }
+            if (completion) { completion(nil); }
+            return;
+        }
+        else if (!isThereChanges || ![weakSelf isViewLoaded])
+        {
+            if (weakSelf.refreshControl.refreshing) { [weakSelf.refreshControl endRefreshing]; }
+            if (completion) { completion(nil); }
+            return;
+        }
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (weakSelf.refreshControl.refreshing) { [weakSelf.refreshControl endRefreshing]; }
+            UITableView* tableView = weakSelf.tableView;    if (!tableView) { return; }
+            
+            NSUInteger const ruleNumbers = store.rules.count;
+            if ((ruleNumbers>tableView.numberOfSections) || (ruleNumbers<tableView.numberOfSections)) { return [tableView reloadData]; }
+            
+            [tableView beginUpdates];
+            if (indexPathsToReplace.count) { [self.tableView reloadRowsAtIndexPaths:indexPathsToReplace withRowAnimation:UITableViewRowAnimationNone]; }
+            if (indexPathsToRemove.count) { [self.tableView deleteRowsAtIndexPaths:indexPathsToRemove withRowAnimation:TMWCntrl_RowDeletionAnimation]; }
+            if (indexPathsToAdd.count) { [self.tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWCntrl_RowAdditionAnimation]; }
+            [tableView endUpdates];
+            
+            if (completion) { completion(nil); }
+        });
+    }];
 }
 
 #pragma mark UIViewController methods
@@ -149,64 +218,26 @@
 
 - (void)refreshRequest:(UIRefreshControl*)sender
 {
-    RelayrUser* user = [TMWStore sharedInstance].relayrUser;
     __weak TMWRulesController* weakSelf = self;
+    RelayrUser* user = [TMWStore sharedInstance].relayrUser;
     
-    // If there are no transmitters, when it refreshes it looks for newly added transmitters.
     if (!user.transmitters.count)
     {
         return [user queryCloudForIoTs:^(NSError* error) {
-            if (error || !user.transmitters.count) { return [sender endRefreshing]; } // TODO: Show text to user...
-            [weakSelf.tableView reloadData];
-            [weakSelf refreshRequest:sender];
+            if (weakSelf.refreshControl.refreshing) { [weakSelf.refreshControl endRefreshing]; }
+            if (!error && [weakSelf isViewLoaded]) { [weakSelf.tableView reloadData]; }
         }];
     }
-    else
+    
+    for (UIViewController* cntrll in self.childViewControllers)
     {
-        for (UIViewController* cntrll in self.childViewControllers) { if ([cntrll.title isEqualToString:@"NoTransmitters"]) { [weakSelf.tableView reloadData]; break; } }
+        if ([cntrll.title isEqualToString:@"NoTransmitters"])
+        {
+            if ([self isViewLoaded]) { [weakSelf.tableView reloadData]; } break;
+        }
     }
     
-    // If there are transmitters, look for rules.
-    [TMWAPIService requestRulesForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* rules) {
-        [sender endRefreshing];
-        if (error) { return; }  // TODO:
-        TMWStore* store = [TMWStore sharedInstance];
-        
-        // Update the rules with the newly arrived rules.
-        NSArray *indexPathsToAdd, *indexPathsToRemove, *indexPathsToReplace;
-        BOOL const isThereChanges = [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules.mutableCopy resultingInCellsIndexPathsToAdd:&indexPathsToAdd cellsIndexPathsToRemove:&indexPathsToRemove cellsIndexPathsToReload:&indexPathsToReplace];
-        
-        // Check that the rules contains the deviceToken
-        for (TMWRule* rule in store.rules)
-        {
-            BOOL const needsCommitToServer = [rule setNotificationsWithDeviceToken:store.deviceToken previousDeviceToken:store.deviceToken];
-            if (!needsCommitToServer) { continue; }
-            
-            [TMWAPIService setRule:rule completion:^(NSError* error) {
-                if (error) { NSLog(@"Error when trying to set up server rules' notifs with new device token."); }
-            }];
-        }
-        
-        // If there are rules and there is a childViewController, reload the data and return.
-        if (self.childViewControllers.count)
-        {
-            return [weakSelf.tableView reloadData];
-        }
-        else if (!isThereChanges) { return; }
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(TMWCntrl_EndRefreshingDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            UITableView* tableView = weakSelf.tableView;    if (!tableView) { return; }
-            
-            NSUInteger const ruleNumbers = store.rules.count;
-            if ((ruleNumbers>tableView.numberOfSections) || (ruleNumbers<tableView.numberOfSections)) { return [tableView reloadData]; }
-            
-            [tableView beginUpdates];
-            if (indexPathsToReplace.count) { [self.tableView reloadRowsAtIndexPaths:indexPathsToReplace withRowAnimation:UITableViewRowAnimationNone]; }
-            if (indexPathsToRemove.count) { [self.tableView deleteRowsAtIndexPaths:indexPathsToRemove withRowAnimation:TMWCntrl_RowDeletionAnimation]; }
-            if (indexPathsToAdd.count) { [self.tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWCntrl_RowAdditionAnimation]; }
-            [tableView endUpdates];
-        });
-    }];
+    [self queryRulesWithCompletion:nil];
 }
 
 - (IBAction)ruleToogle:(UISwitch*)sender

@@ -2,7 +2,7 @@
 
 @interface TMWNavRulesController : UINavigationController
 
-- (void)queryRules;
+- (void)queryRulesWithCompletion:(void (^)(NSError*))completion;
 
 - (void)deviceTokenChangedFromData:(NSData*)fromData toData:(NSData*)toData;
 

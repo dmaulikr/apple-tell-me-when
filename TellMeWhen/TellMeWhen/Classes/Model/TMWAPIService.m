@@ -87,6 +87,8 @@ NSString *kTMWAPIAuthorizationNotifications;
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
+    rule.modified = [NSDate date];
+    
     NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
         if (!json) { if (completion) { completion((error) ? error : RelayrErrorWebRequestFailure); } return; }
@@ -94,7 +96,6 @@ NSString *kTMWAPIAuthorizationNotifications;
         
         rule.uid = json[TMWAPI_RulesCreate_ResponseID];
         rule.revisionString = json[TMWAPI_RulesCreate_ResponseRevision];
-        rule.modified = [NSDate date];
         if (completion) { completion(nil); }
     }];
     [task resume];
@@ -147,14 +148,19 @@ NSString *kTMWAPIAuthorizationNotifications;
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
-    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
-        if (!json) { if (completion) { completion((error) ? error : RelayrErrorWebRequestFailure); } return; }
-        if ( !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue ) { if (completion) { completion((error) ? error : RelayrErrorUnknwon); } return; }
+    NSDate* pastModifiedDate = rule.modified;
+    rule.modified = [NSDate date];
+    
+    NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse* response, NSError* error) {
+        NSDictionary* json = (!error && ((NSHTTPURLResponse*)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
+        if (!json || !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue)
+        {
+            rule.modified = pastModifiedDate;
+            if (completion) { completion((error) ? error : RelayrErrorWebRequestFailure); } return;
+        }
         
         rule.uid = json[TMWAPI_RulesCreate_ResponseID];
         rule.revisionString = json[TMWAPI_RulesCreate_ResponseRevision];
-        rule.modified = [NSDate date];
         if (completion) { completion(nil); }
     }];
     [task resume];

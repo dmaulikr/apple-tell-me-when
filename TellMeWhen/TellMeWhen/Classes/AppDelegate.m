@@ -22,13 +22,10 @@
     {
         controller = [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
         [controller loadIoTsWithCompletion:^(NSError* error) {
-            [controller setupRulesAndNotifications];
+            if (!error) { [controller setupRulesAndNotifications]; }
         }];
     }
-    else
-    {
-        controller = [storyboard instantiateInitialViewController];
-    }
+    else { controller = [storyboard instantiateInitialViewController]; }
     _window.rootViewController = controller;
     [_window makeKeyAndVisible];
     

@@ -2,6 +2,6 @@
 
 @interface TMWRulesController : UITableViewController
 
-- (void)queryRules;
+- (void)queryRulesWithCompletion:(void (^)(NSError*))completion;
 
 @end
