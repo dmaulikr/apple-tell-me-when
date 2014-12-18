@@ -40,10 +40,8 @@
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
-            <string>NewJuneBold</string>
         </mutableArray>
         <mutableArray key="NewJuneBook.otf">
-            <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
@@ -208,7 +206,7 @@
                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TMWRulesCellView" rowHeight="93" id="Vel-E6-FCh" customClass="TMWRulesCellView">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TMWRulesCellView" rowHeight="93" id="Vel-E6-FCh" customClass="TMWRulesCellView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vel-E6-FCh" id="Uqb-la-Z2z">
@@ -485,7 +483,7 @@
                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TMWRuleTransmitterCellView" rowHeight="86" id="OSh-p9-ZA2" customClass="TMWRuleTransmitterCellView">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TMWRuleTransmitterCellView" rowHeight="86" id="OSh-p9-ZA2" customClass="TMWRuleTransmitterCellView">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OSh-p9-ZA2" id="Lah-iw-Qeb">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -520,6 +518,7 @@
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Qn5-vq-qFD" secondAttribute="trailing" constant="8" id="wVx-Q9-jbj"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="transmitterNameLabel" destination="Qn5-vq-qFD" id="RpQ-29-ran"/>
                                 </connections>
@@ -561,7 +560,7 @@
                         <sections>
                             <tableViewSection id="E3j-LP-u5V">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="LuE-rL-5TY" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="LuE-rL-5TY" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LuE-rL-5TY" id="RGi-HM-gU5">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -592,8 +591,9 @@
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="8E2-En-B4N" secondAttribute="trailing" constant="8" id="hK1-6W-Jpp"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="ayE-R9-7Th" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="ayE-R9-7Th" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ayE-R9-7Th" id="kf6-Dq-yVF">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -624,8 +624,9 @@
                                                 <constraint firstItem="XvN-I7-NtV" firstAttribute="leading" secondItem="kf6-Dq-yVF" secondAttribute="leadingMargin" constant="8" id="lhH-Q7-Tgz"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="nQP-We-IcO" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="nQP-We-IcO" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nQP-We-IcO" id="Alp-MX-2pW">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -656,8 +657,9 @@
                                                 <constraint firstAttribute="centerY" secondItem="6Vd-aT-nbM" secondAttribute="centerY" constant="-0.75" id="mkt-jv-a4k"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="OvJ-La-0Qr" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="OvJ-La-0Qr" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OvJ-La-0Qr" id="Akq-3A-r7K">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -688,8 +690,9 @@
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Yc7-YH-qF7" secondAttribute="trailing" constant="8" id="wYG-d0-mym"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="86" id="L9B-JX-dny" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="86" id="L9B-JX-dny" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L9B-JX-dny" id="F1u-cj-myS">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -720,6 +723,7 @@
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="vA1-Vf-hG6" secondAttribute="trailing" constant="8" id="wie-5X-zkK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -990,6 +994,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="Fd1-7j-9Cn" secondAttribute="trailing" constant="8" id="ke8-kg-94D"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="AGC-2d-7sI" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1095,8 +1100,9 @@
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="rBJ-t5-L66" secondAttribute="bottom" constant="8" id="vD7-29-bpi"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="78" id="nlC-b5-2qV" customClass="TMWRulesCellView">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="78" id="nlC-b5-2qV" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nlC-b5-2qV" id="tZ2-Gn-1eu">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1135,8 +1141,9 @@
                                                 <constraint firstItem="ZTn-OF-Hay" firstAttribute="top" secondItem="tZ2-Gn-1eu" secondAttribute="topMargin" constant="8" id="uYm-1z-jmJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="78" id="mRI-Ib-1Lj" customClass="TMWRulesCellView">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="78" id="mRI-Ib-1Lj" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mRI-Ib-1Lj" id="J9S-4V-OVJ">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1175,8 +1182,9 @@
                                                 <constraint firstItem="xXu-ui-kNI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hkj-hu-uqs" secondAttribute="trailing" constant="8" id="ezL-Zo-v0o"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="78" id="YLX-PE-1xW" customClass="TMWRulesCellView">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="78" id="YLX-PE-1xW" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YLX-PE-1xW" id="kaL-w1-wvs">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1225,8 +1233,9 @@
                                                 <constraint firstItem="xGZ-9i-wYA" firstAttribute="trailing" secondItem="kaL-w1-wvs" secondAttribute="trailingMargin" constant="-4" id="zHl-BM-g8C"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="78" id="nCF-xa-FDC" customClass="TMWRulesCellView">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="78" id="nCF-xa-FDC" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nCF-xa-FDC" id="8gs-GX-ngC">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1265,6 +1274,7 @@
                                                 <constraint firstItem="bGu-va-gKM" firstAttribute="trailing" secondItem="8gs-GX-ngC" secondAttribute="trailingMargin" constant="-4" id="qfj-zx-f0u"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="Nax-sw-hNd" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1366,7 +1376,7 @@
                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TMWNotificationsCellView" rowHeight="104" id="Ggu-30-xjE" customClass="TMWNotificationsCellView">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TMWNotificationsCellView" rowHeight="104" id="Ggu-30-xjE" customClass="TMWNotificationsCellView">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ggu-30-xjE" id="r07-pm-9c8">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1489,7 +1499,7 @@
                         <sections>
                             <tableViewSection id="U35-71-6PC">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="101" id="u3l-yu-o39" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="101" id="u3l-yu-o39" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u3l-yu-o39" id="ucC-1f-Jrn">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1536,8 +1546,9 @@
                                                 <constraint firstItem="cUl-Q1-83k" firstAttribute="top" secondItem="wys-kx-3YB" secondAttribute="bottom" constant="4" id="znT-LI-gxx"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="76" id="E05-Mz-OxB" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="76" id="E05-Mz-OxB" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E05-Mz-OxB" id="VtD-IZ-t6H">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1572,8 +1583,9 @@
                                                 <constraint firstItem="Sz4-VN-4dF" firstAttribute="leading" secondItem="VtD-IZ-t6H" secondAttribute="leadingMargin" constant="8" id="wTP-3w-wF8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="yLE-tZ-nk2" customClass="TMWTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="77" id="yLE-tZ-nk2" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yLE-tZ-nk2" id="a6x-qP-EpL">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1608,48 +1620,7 @@
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="zAs-BT-cOf" secondAttribute="bottom" constant="8" id="ykR-gg-UMJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="77" id="ri6-tr-Apy" customClass="TMWTableViewCell">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ri6-tr-Apy" id="ywk-ef-7ZD">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Current sensor value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyI-GN-sR1">
-                                                    <rect key="frame" x="16" y="16" width="161" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
-                                                    <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="129" y="327" width="142" height="24"/>
-                                                    </variation>
-                                                </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="22.4 C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONK-Le-3Rp">
-                                                    <rect key="frame" x="16" y="40" width="46" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
-                                                    <color key="textColor" red="0.90196078430000004" green="0.91764705879999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="129" y="327" width="142" height="24"/>
-                                                    </variation>
-                                                </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="die-UU-eQc">
-                                                    <rect key="frame" x="16" y="40" width="20" height="20"/>
-                                                </activityIndicatorView>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="vyI-GN-sR1" firstAttribute="top" secondItem="ywk-ef-7ZD" secondAttribute="topMargin" constant="8" id="4hZ-bS-qRK"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ONK-Le-3Rp" secondAttribute="trailing" constant="8" id="5FI-xR-qBS"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="vyI-GN-sR1" secondAttribute="trailing" constant="8" id="Cyp-ZD-FdR"/>
-                                                <constraint firstItem="ONK-Le-3Rp" firstAttribute="leading" secondItem="ywk-ef-7ZD" secondAttribute="leadingMargin" constant="8" id="Sql-Ye-GXi"/>
-                                                <constraint firstItem="die-UU-eQc" firstAttribute="top" secondItem="vyI-GN-sR1" secondAttribute="bottom" constant="4" id="U12-8e-c5r"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="ONK-Le-3Rp" secondAttribute="bottom" constant="8" id="cxp-nC-YGn"/>
-                                                <constraint firstItem="vyI-GN-sR1" firstAttribute="leading" secondItem="ywk-ef-7ZD" secondAttribute="leadingMargin" constant="8" id="hrr-YX-Lyk"/>
-                                                <constraint firstItem="ONK-Le-3Rp" firstAttribute="top" secondItem="vyI-GN-sR1" secondAttribute="bottom" constant="4" id="lac-hj-8ET"/>
-                                                <constraint firstItem="die-UU-eQc" firstAttribute="leading" secondItem="ywk-ef-7ZD" secondAttribute="leadingMargin" constant="8" id="rtF-xC-O50"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="die-UU-eQc" secondAttribute="bottom" constant="8" id="zXc-3E-TnD"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="MR5-NK-HwC" customClass="TMWTableViewCell">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -1705,8 +1676,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="currentValue" destination="ONK-Le-3Rp" id="c76-Be-HSs"/>
-                        <outlet property="indicator" destination="die-UU-eQc" id="Ql9-hh-DKF"/>
                         <outlet property="ruleDescription" destination="cUl-Q1-83k" id="VhI-Yg-ls7"/>
                         <outlet property="ruleName" destination="wys-kx-3YB" id="cOM-Lj-mtT"/>
                         <outlet property="triggeredDate" destination="aBN-7x-kFM" id="nRg-22-aFz"/>
@@ -1796,8 +1765,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="0MQ-4F-ecA"/>
         <segue reference="R23-2U-ccp"/>
-        <segue reference="WtK-aw-bc6"/>
-        <segue reference="fe1-3f-eYe"/>
-        <segue reference="3c6-cl-cpH"/>
+        <segue reference="0Dj-pf-Bz7"/>
+        <segue reference="jN9-f0-ZrE"/>
+        <segue reference="hsx-QH-yVh"/>
     </inferredMetricsTieBreakers>
 </document>

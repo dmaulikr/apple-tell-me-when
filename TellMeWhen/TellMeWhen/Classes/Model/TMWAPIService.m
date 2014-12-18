@@ -74,6 +74,7 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 + (void)registerRule:(TMWRule *)rule completion:(void (^)(NSError *error))completion
 {
+    rule.modified = [NSDate date];
     NSDictionary *bodyDict = [rule compressIntoJSONDictionary];
     if (!bodyDict) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
     
@@ -86,8 +87,6 @@ NSString *kTMWAPIAuthorizationNotifications;
     [request setValue:kTMWAPIAuthorizationRules forHTTPHeaderField:TMWAPIService_HeaderField_Authorization];
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
-    
-    rule.modified = [NSDate date];
     
     NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData* data, NSURLResponse* response, NSError* error) {
         NSDictionary* json = (!error && ((NSHTTPURLResponse *)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
@@ -135,7 +134,12 @@ NSString *kTMWAPIAuthorizationNotifications;
 
 + (void)setRule:(TMWRule*)rule completion:(void (^)(NSError* error))completion
 {
+    NSDate* pastModifiedDate = rule.modified;
+    NSDate* currentModifiedDate = [NSDate date];
+    rule.modified = currentModifiedDate;
+    
     NSDictionary* bodyDict = [rule compressIntoJSONDictionary];
+    rule.modified = pastModifiedDate;
     if (!bodyDict || !rule.uid.length || !rule.revisionString.length) { if (completion) { completion(RelayrErrorMissingArgument); } return; }
     
     __autoreleasing NSError* error;
@@ -148,19 +152,16 @@ NSString *kTMWAPIAuthorizationNotifications;
     [request setValue:TMWAPIService_HeaderField_Content_JSON forHTTPHeaderField:TMWAPIService_HeaderField_Content];
     request.HTTPBody = bodyData;
     
-    NSDate* pastModifiedDate = rule.modified;
-    rule.modified = [NSDate date];
-    
     NSURLSessionDataTask* task = [[TMWAPIService sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse* response, NSError* error) {
         NSDictionary* json = (!error && ((NSHTTPURLResponse*)response).statusCode == 201 && data) ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : nil;
         if (!json || !((NSNumber *)json[TMWAPI_RulesCreate_ResponseOK]).boolValue)
         {
-            rule.modified = pastModifiedDate;
             if (completion) { completion((error) ? error : RelayrErrorWebRequestFailure); } return;
         }
         
         rule.uid = json[TMWAPI_RulesCreate_ResponseID];
         rule.revisionString = json[TMWAPI_RulesCreate_ResponseRevision];
+        rule.modified = currentModifiedDate;
         if (completion) { completion(nil); }
     }];
     [task resume];

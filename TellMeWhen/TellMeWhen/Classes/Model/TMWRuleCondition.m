@@ -111,19 +111,21 @@ static NSString* const kCodingValue     = @"val";
     };
 }
 
-- (BOOL)isEqual:(id)object
-{
-    if (!object || ![object isKindOfClass:[TMWRuleCondition class]]) { return NO; }
-    
-    TMWRuleCondition* condition = object;
-    return ([_meaning isEqualToString:condition.meaning] && [_operation isEqualToString:condition.operation] && _value==condition.value) ? YES : NO;
-}
-
 #pragma mark NSObject
 
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"%@ %@ %@", _meaning, _operation, _value];
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (!object || ![object isKindOfClass:[TMWRuleCondition class]]) { return NO; }
+    
+    TMWRuleCondition* condition = object;
+    if (![_meaning isEqualToString:condition.meaning] || ![_operation isEqualToString:condition.operation]) { return NO; }
+    if (![condition.value isKindOfClass:[NSNumber class]]) { return YES; }
+    return ( ((NSNumber*)_value).floatValue == ((NSNumber*)condition.value).floatValue ) ? YES : NO;
 }
 
 #pragma mark NSCoding

@@ -31,7 +31,7 @@
 {
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
     navNotifCntrll.tabBarItem.badgeValue = (self.selectedViewController != navNotifCntrll) ? TWMMainCntrll_ItemBadgeString : nil;
-    if (self.selectedViewController == self.navNotificationsController) { [navNotifCntrll notificationDidArrived:userInfo]; }
+    if (self.selectedViewController == navNotifCntrll) { [navNotifCntrll notificationDidArrived:userInfo]; }
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion
@@ -44,7 +44,8 @@
     [self.navRulesController queryRulesWithCompletion:^(NSError* error) {
         if (error) { return; }
         // TODO: Delete notifications from which I have no rules
-        if (self.selectedViewController == self.navNotificationsController) { [self.navNotificationsController queryNotifications]; }
+        TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
+        if (self.selectedViewController == navNotifCntrll) { [navNotifCntrll queryNotifications]; }
     }];
 }
 

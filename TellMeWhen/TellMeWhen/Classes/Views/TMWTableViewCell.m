@@ -1,5 +1,6 @@
 #import "TMWTableViewCell.h"    // Header
 #import "TMWUIProperties.h"     // TMW (Views)
+#import "UIColor+LightAndDark.h"// TMW (Utilities)
 
 static UIColor* kTMWTableViewCellUpperLineColor;
 static UIColor* kTMWTableViewCellBottomLineColor;
@@ -9,6 +10,7 @@ static CGFloat kTMWTableViewCellLineHeight;
 {
     CALayer* _upperLine;
     CALayer* _bottomLine;
+    UIColor* _definedColor;
 }
 
 #pragma mark - Public API
@@ -24,6 +26,7 @@ static CGFloat kTMWTableViewCellLineHeight;
 {
     [self setUpperLineWithColor:kTMWTableViewCellUpperLineColor height:kTMWTableViewCellLineHeight];
     [self setBottomLineWithColor:kTMWTableViewCellBottomLineColor height:kTMWTableViewCellLineHeight];
+    _definedColor = self.backgroundColor;
 }
 
 - (void)setUpperLineWithColor:(UIColor*)color height:(CGFloat)height
@@ -115,8 +118,15 @@ static CGFloat kTMWTableViewCellLineHeight;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+    
+    self.contentView.backgroundColor = (!selected) ? _definedColor : _definedColor.darkerColor;
+}
 
-    // Configure the view for the selected state
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
+{
+    [super setHighlighted:highlighted animated:animated];
+    
+    self.contentView.backgroundColor = (!highlighted) ? _definedColor : _definedColor.darkerColor;
 }
 
 @end

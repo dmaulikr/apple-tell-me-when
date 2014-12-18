@@ -60,6 +60,16 @@ static NSString* const kCodingDeviceToken    = @"devTok";
     return [NSDictionary dictionaryWithDictionary:result];
 }
 
+#pragma mark NSObject
+
+- (BOOL)isEqual:(id)object
+{
+    if (!object) { return NO; }
+    
+    TMWRuleNotification* notif = object;
+    return ([_type isEqualToString:notif.type] && [_deviceToken isEqualToData:notif.deviceToken]) ? YES : NO;
+}
+
 #pragma mark NSCoding
 
 - (id)initWithCoder:(NSCoder*)decoder

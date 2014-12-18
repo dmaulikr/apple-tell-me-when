@@ -84,6 +84,26 @@ static NSString* const kCodingActive    = @"act";
     return self;
 }
 
+- (BOOL)isEqualDeeplyTo:(TMWRule*)rule
+{
+    if (!rule) { return NO; }
+    
+    if ( ![_uid isEqualToString:rule.uid] ||
+         ![_revisionString isEqualToString:rule.revisionString] ||
+         ![_userID isEqualToString:rule.userID] ||
+         ![_transmitterID isEqualToString:rule.transmitterID] ||
+         ![_deviceID isEqualToString:rule.deviceID] ||
+         ![_name isEqualToString:rule.name] ||
+         _active != rule.active ||
+         ![_condition isEqual:rule.condition]) { return NO; }
+    
+    for (TMWRuleNotification* notif in _notifications)
+    {
+        if (![rule.notifications containsObject:notif]) { return NO; }
+    }
+    return YES;
+}
+
 - (NSDictionary*)compressIntoJSONDictionary
 {
     NSMutableDictionary* result = [[NSMutableDictionary alloc] init];
@@ -123,35 +143,40 @@ static NSString* const kCodingActive    = @"act";
 - (BOOL)setNotificationsWithDeviceToken:(NSData*)data previousDeviceToken:(NSData*)previousData
 {
     if (!previousData.length)
-    {
+    {   // Case to add a new notification deviceToken
         TMWRuleNotification* notif = [[TMWRuleNotification alloc] initWithDeviceToken:data];
-        if (!notif) { return NO; }
+        if (!notif || [_notifications containsObject:notif]) { return NO; }
         [_notifications addObject:notif];
         return YES;
     }
-
-    NSMutableArray* matchedNotifs = [[NSMutableArray alloc] init];
-    for (TMWRuleNotification* notif in _notifications)
-    {
-        if ([notif.type isEqualToString:TMWRuleNotificationTypeAPNS] && [notif.deviceToken isEqualToData:previousData])
-        {
-            [matchedNotifs addObject:notif];
-        }
-    }
-    
-    TMWRuleNotification* notif = matchedNotifs.firstObject;
-    if (!notif)
-    {
-        [_notifications addObject:[[TMWRuleNotification alloc] initWithDeviceToken:data]];
+    else if (!data)
+    {   // Case to remove a previous notification deviceToken
+        TMWRuleNotification* notif = [[TMWRuleNotification alloc] initWithDeviceToken:previousData];
+        NSUInteger const index = [_notifications indexOfObject:notif];
+        if (index == NSNotFound) { return NO; }
+        [_notifications removeObjectAtIndex:index];
         return YES;
     }
-    
-    if ([notif.deviceToken isEqualToData:data]) { return NO; }
-    
-    [_notifications removeObjectsInArray:matchedNotifs];
-    notif.deviceToken = data;
-    [_notifications addObject:notif];
-    return YES;
+    else if ([data isEqualToData:previousData])
+    {   // Case to add a notification deviceToken in case it is not there.
+        TMWRuleNotification* notif = [[TMWRuleNotification alloc] initWithDeviceToken:data];
+        NSUInteger const index = [_notifications indexOfObject:notif];
+        if (index != NSNotFound) { return NO; }
+        [_notifications addObject:notif];
+        return YES;
+    }
+    else
+    {   // Case to set with a new deviceToken a previous notification
+        TMWRuleNotification* notif = [[TMWRuleNotification alloc] initWithDeviceToken:previousData];
+        NSUInteger const index = [_notifications indexOfObject:notif];
+        if (index != NSNotFound)
+        {
+            TMWRuleNotification* cNotif = [_notifications objectAtIndex:index];
+            cNotif.deviceToken = data;
+        }
+        else { [_notifications addObject:notif]; }
+        return YES;
+    }
 }
 
 #pragma mark Generator methods (readonly)
@@ -211,6 +236,7 @@ static NSString* const kCodingActive    = @"act";
     {
         _uid = [decoder decodeObjectForKey:kCodingID];
         _revisionString = [decoder decodeObjectForKey:kCodingRevision];
+        _transmitterID = [decoder decodeObjectForKey:kCodingTransID];
         _deviceID = [decoder decodeObjectForKey:kCodingDevID];
         _name = [decoder decodeObjectForKey:kCodingName];
         _modified = [decoder decodeObjectForKey:kCodingModified];
@@ -224,9 +250,9 @@ static NSString* const kCodingActive    = @"act";
 
 - (void)encodeWithCoder:(NSCoder*)coder
 {
+    [coder encodeObject:_userID forKey:kCodingUserID];
     [coder encodeObject:_uid forKey:kCodingID];
     [coder encodeObject:_revisionString forKey:kCodingRevision];
-    [coder encodeObject:_userID forKey:kCodingUserID];
     [coder encodeObject:_transmitterID forKey:kCodingTransID];
     [coder encodeObject:_deviceID forKey:kCodingDevID];
     [coder encodeObject:_name forKey:kCodingName];
@@ -267,9 +293,9 @@ static NSString* const kCodingActive    = @"act";
     return result;
 }
 
-+ (BOOL)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSMutableArray*)serverRules resultingInCellsIndexPathsToAdd:(NSArray**)addingCellIndexPaths cellsIndexPathsToRemove:(NSArray**)removingCellsIndexPaths cellsIndexPathsToReload:(NSArray**)reloadingCellIndexPaths
++ (BOOL)synchronizeStoredRules:(NSMutableArray*)coreRules withNewlyArrivedRules:(NSArray*)rules resultingInCellsIndexPathsToAdd:(NSArray**)addingCellIndexPaths cellsIndexPathsToRemove:(NSArray**)removingCellsIndexPaths cellsIndexPathsToReload:(NSArray**)reloadingCellIndexPaths
 {
-    if (!serverRules.count)
+    if (!rules.count)
     {
         *addingCellIndexPaths = nil;
         *removingCellsIndexPaths = [TMWRule arrayIndexPaths:coreRules inSection:0];
@@ -279,53 +305,46 @@ static NSString* const kCodingActive    = @"act";
     }
     else if (!coreRules.count)
     {
-        *addingCellIndexPaths = [TMWRule arrayIndexPaths:serverRules inSection:0];
+        [coreRules addObjectsFromArray:rules];
+        *addingCellIndexPaths = [TMWRule arrayIndexPaths:rules inSection:0];
         *removingCellsIndexPaths = nil;
         *reloadingCellIndexPaths = nil;
-        [coreRules addObjectsFromArray:serverRules];
         return (*addingCellIndexPaths) ? YES : NO;
     }
     
-    __block NSMutableArray* rulesToRemove;
+    __block NSMutableArray* coreRulesToRemove;
     __block NSMutableArray* indexPathsToRemove;
     __block NSMutableArray* indexPathsToReplace;
+    NSMutableArray* serverRules = [NSMutableArray arrayWithArray:rules];
     [coreRules enumerateObjectsUsingBlock:^(TMWRule* cRule, NSUInteger idx, BOOL* stop) {
-        TMWRule* toReplace;
-        
+        TMWRule* matchedRule;
         for (TMWRule* sRule in serverRules)
         {
             if ([cRule.uid isEqualToString:sRule.uid])
             {
-                toReplace = sRule;
-                
-                cRule.revisionString = sRule.revisionString;
-                cRule.transmitterID = sRule.transmitterID;
-                cRule.deviceID = sRule.deviceID;
-                if (![cRule.name isEqualToString:sRule.name] || ![cRule.condition isEqual:sRule.condition] || cRule.active!=sRule.active)
+                matchedRule = sRule;
+                if (![cRule isEqualDeeplyTo:sRule])
                 {
-                    cRule.name = sRule.name;
-                    cRule.condition = sRule.condition;
-                    cRule.active = sRule.active;
+                    [cRule setWith:sRule];
                     if (!indexPathsToReplace) { indexPathsToReplace = [[NSMutableArray alloc] init]; }
                     [indexPathsToReplace addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
                 }
-                cRule.notifications = sRule.notifications;
                 break;
             }
         }
         
-        if (!toReplace)
+        if (!matchedRule)
         {
             if (!indexPathsToRemove) { indexPathsToRemove = [[NSMutableArray alloc] init]; }
             [indexPathsToRemove addObject:[NSIndexPath indexPathForRow:idx inSection:0]];
             
-            if (!rulesToRemove) { rulesToRemove = [[NSMutableArray alloc] init]; }
-            [rulesToRemove addObject:cRule];
+            if (!coreRulesToRemove) { coreRulesToRemove = [[NSMutableArray alloc] init]; }
+            [coreRulesToRemove addObject:cRule];
         }
-        else { [serverRules removeObject:toReplace]; }
+        else { [serverRules removeObject:matchedRule]; }
     }];
     
-    [coreRules removeObjectsInArray:rulesToRemove];
+    [coreRules removeObjectsInArray:coreRulesToRemove];
     *removingCellsIndexPaths = (indexPathsToRemove.count) ? indexPathsToRemove.copy : nil;
     *reloadingCellIndexPaths = (indexPathsToReplace.count) ? indexPathsToReplace.copy : nil;
     
@@ -368,7 +387,7 @@ static NSString* const kCodingActive    = @"act";
     
     NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:count];
     for (NSUInteger i=0; i<count; ++i) { [result addObject:[NSIndexPath indexPathForRow:i inSection:section]]; }
-    return result;
+    return [NSArray arrayWithArray:result];
 }
 
 @end

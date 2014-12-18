@@ -11,6 +11,7 @@
 - (instancetype)initWithUserID:(NSString*)userID;
 - (instancetype)initWithJSONDictionary:(NSDictionary*)jsonDictionary;
 - (NSDictionary*)compressIntoJSONDictionary;
+- (BOOL)isEqualDeeplyTo:(TMWRule*)rule;
 - (void)setWith:(TMWRule*)rule;
 - (BOOL)setNotificationsWithDeviceToken:(NSData*)data previousDeviceToken:(NSData*)previousData;
 // Returns whethere there are changes to commit to the server.
@@ -34,7 +35,7 @@
 + (TMWRule*)ruleForID:(NSString*)ruleID withinRulesArray:(NSArray*)rules;
 
 + (BOOL)synchronizeStoredRules:(NSMutableArray*)coreRules
-         withNewlyArrivedRules:(NSMutableArray*)serverRules
+         withNewlyArrivedRules:(NSArray*)rules
 resultingInCellsIndexPathsToAdd:(NSArray**)addingCellIndexPaths
        cellsIndexPathsToRemove:(NSArray**)removingCellsIndexPaths
        cellsIndexPathsToReload:(NSArray**)reloadingCellIndexPaths;

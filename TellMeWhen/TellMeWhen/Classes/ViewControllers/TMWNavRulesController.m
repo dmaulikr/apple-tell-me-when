@@ -24,7 +24,7 @@
     if ( (!toData && !fromData) || [toData isEqualToData:fromData]) { return; }
     
     TMWStore* store = [TMWStore sharedInstance];
-    store.deviceToken = nil;
+    store.deviceToken = toData;
     
     for (TMWRule* rule in store.rules)
     {

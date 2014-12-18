@@ -52,7 +52,8 @@
         
         // Update the rules with the newly arrived rules.
         NSArray *indexPathsToAdd, *indexPathsToRemove, *indexPathsToReplace;
-        BOOL const isThereChanges = [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules.mutableCopy resultingInCellsIndexPathsToAdd:&indexPathsToAdd cellsIndexPathsToRemove:&indexPathsToRemove cellsIndexPathsToReload:&indexPathsToReplace];
+        BOOL const isThereChanges = [TMWRule synchronizeStoredRules:store.rules withNewlyArrivedRules:rules resultingInCellsIndexPathsToAdd:&indexPathsToAdd cellsIndexPathsToRemove:&indexPathsToRemove cellsIndexPathsToReload:&indexPathsToReplace];
+        printf("There is%s changes in rules\n", (isThereChanges) ? "" : " NO");
         
         // Check that the rules contains the deviceToken
         for (TMWRule* rule in store.rules)
