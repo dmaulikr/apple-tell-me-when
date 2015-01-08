@@ -5,6 +5,7 @@
 #import "TMWActions.h"      // TMW (ViewControllers/Protocol)
 #import "TMWSegueSwapRootViewController.h"
 #import <Relayr/Relayr.h>   // Relayr.framework
+#import "NSData+Hexadecimal.h"
 
 @interface AppDelegate ()
 @end
@@ -65,6 +66,7 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:deviceToken];
+    printf("%s\n", [[deviceToken hexadecimalString] cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {

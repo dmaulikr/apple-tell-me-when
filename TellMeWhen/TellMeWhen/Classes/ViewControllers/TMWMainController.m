@@ -1,4 +1,5 @@
 #import "TMWMainController.h"               // Apple
+@import AudioToolbox;
 
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWNavRulesController.h"           // TMW (ViewControllers)
@@ -10,11 +11,14 @@
 
 #pragma mark - Definitions
 
-#define TWMMainCntrll_ItemBadgeString   @"!"
+#define TWMMainCntrll_ItemBadgeString       @"!"
+#define TMWMainCntrll_NotifSoundName        @"DingDing"
+#define TMWMainCntrll_NotifSoundExtension   @"wav"
 
 @interface TMWMainController () <UITabBarControllerDelegate>
 @property (readonly,nonatomic) TMWNavRulesController* navRulesController;
 @property (readonly,nonatomic) TMWNavNotificationsController* navNotificationsController;
+@property (readonly,nonatomic) SystemSoundID sound;
 @end
 
 @implementation TMWMainController
@@ -30,9 +34,15 @@
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
-    navNotifCntrll.tabBarItem.badgeValue = (self.selectedViewController != navNotifCntrll) ? TWMMainCntrll_ItemBadgeString : nil;
-    if (self.selectedViewController == navNotifCntrll) {
+    if (self.selectedViewController == navNotifCntrll)
+    {
         [navNotifCntrll notificationDidArrived:userInfo];
+        navNotifCntrll.tabBarItem.badgeValue = nil;
+    }
+    else
+    {
+        navNotifCntrll.tabBarItem.badgeValue = TWMMainCntrll_ItemBadgeString;
+        AudioServicesPlayAlertSound(_sound);
     }
 }
 
@@ -99,6 +109,16 @@
         NSFontAttributeName             : [UIFont fontWithName:TMWFont_NewJuneBook size:14],
         NSForegroundColorAttributeName  : [UIColor whiteColor]
     } forState:UIControlStateNormal];
+    
+    NSURL* soundPath = [[NSBundle mainBundle] URLForResource:TMWMainCntrll_NotifSoundName withExtension:TMWMainCntrll_NotifSoundExtension];
+    if (!soundPath) { return; }
+    
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundPath, &_sound);
+}
+
+- (void)dealloc
+{
+    AudioServicesDisposeSystemSoundID(_sound);
 }
 
 #pragma mark - Private functionality
