@@ -1,4 +1,4 @@
-@import UIKit;          // Apple
+@import UIKit;  // Apple
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

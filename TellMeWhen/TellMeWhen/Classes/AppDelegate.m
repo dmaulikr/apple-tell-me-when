@@ -58,9 +58,7 @@
         [store.notifications removeAllObjects];
         [store removeFromFileSystem];
         return;
-    }
-    
-    [store persistInFileSystem];
+    } else { [store persistInFileSystem]; }
 }
 
 - (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings { }

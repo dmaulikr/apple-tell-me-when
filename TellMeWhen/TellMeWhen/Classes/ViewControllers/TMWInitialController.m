@@ -10,7 +10,7 @@
 #define TMWInitialCntrll_Button_SignInText          @"sign in"
 #define TMWInitialCntrll_Button_CheckReachability   @"check connection"
 
-#define TMWInitialCntrll_Text_CheckingReach         @"Checking reachability of Relayr Servers..."
+#define TMWInitialCntrll_Text_CheckingReach         @"Checking Relayr Servers reachability..."
 #define TMWInitialCntrll_Text_Unreachable           @"It has not been possible to connect with the relayr cloud.\nPlease check that your device is connected to the internet and try again."
 #define TMWInitialCntrll_Text_SignInAvailable       @"The relayr cloud is reachable.\nPlease sign in."
 #define TMWInitialCntrll_Text_SigningIn             @"Signing in..."
@@ -104,14 +104,12 @@
         TMWStore* store = [TMWStore sharedInstance];
         if (store.relayrApp)
         {
-            if (!store.relayrUser)
-            {
-                strongSelf.explanationLabel.text = TMWInitialCntrll_Text_SignInAvailable;
-                [_multipurposeButton setTitle:TMWInitialCntrll_Button_SignInText forState:UIControlStateNormal];
-                strongSelf.multipurposeButton.enabled = YES;
-                return [strongSelf hiddeSpinner:YES];
-            }
-            else { return [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self]; }
+            if (store.relayrUser) { return [strongSelf performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:strongSelf]; }
+            
+            strongSelf.explanationLabel.text = TMWInitialCntrll_Text_SignInAvailable;
+            [_multipurposeButton setTitle:TMWInitialCntrll_Button_SignInText forState:UIControlStateNormal];
+            strongSelf.multipurposeButton.enabled = YES;
+            return [strongSelf hiddeSpinner:YES];
         }
         
         [RelayrApp appWithID:TMWCredentials_RelayrAppID OAuthClientSecret:TMWCredentials_ClientSecret redirectURI:TMWCredentials_RedirectURI completion:^(NSError* error, RelayrApp* app) {
@@ -153,7 +151,7 @@
         }
         
         [TMWStore sharedInstance].relayrUser = user;
-        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self];
+        [strongSelf performSegueWithIdentifier:TMWStoryboardIDs_SegueFromSignToMain sender:self];
     }];
 }
 

@@ -359,6 +359,7 @@ static NSString* const kCodingActive    = @"act";
         }
         
         [coreRules addObjectsFromArray:serverRules];
+        *addingCellIndexPaths = (indexPathsToAdd.count) ? indexPathsToAdd.copy : nil;
     }
     
     return ((*reloadingCellIndexPaths).count || (*addingCellIndexPaths).count || (*removingCellsIndexPaths).count) ? YES : NO;

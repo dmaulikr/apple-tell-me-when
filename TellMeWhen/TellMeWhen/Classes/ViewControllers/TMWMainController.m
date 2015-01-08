@@ -31,7 +31,9 @@
 {
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
     navNotifCntrll.tabBarItem.badgeValue = (self.selectedViewController != navNotifCntrll) ? TWMMainCntrll_ItemBadgeString : nil;
-    if (self.selectedViewController == navNotifCntrll) { [navNotifCntrll notificationDidArrived:userInfo]; }
+    if (self.selectedViewController == navNotifCntrll) {
+        [navNotifCntrll notificationDidArrived:userInfo];
+    }
 }
 
 - (void)loadIoTsWithCompletion:(void (^)(NSError*))completion

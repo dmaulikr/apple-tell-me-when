@@ -1,4 +1,5 @@
 #import "TMWNavNotificationsController.h"   // Header
+#import "TMWNotificationsController.h"      // TMW (ViewControllers/Notifications)
 
 @interface TMWNavNotificationsController ()
 @property (readonly,nonatomic) TMWNavNotificationsController* notificationController;
@@ -25,7 +26,7 @@
     TMWNavNotificationsController* result;
     for (UIViewController* cntrll in self.childViewControllers)
     {
-        if ([cntrll isKindOfClass:[TMWNavNotificationsController class]]) { result = (TMWNavNotificationsController*)cntrll; break; }
+        if ([cntrll isKindOfClass:[TMWNotificationsController class]]) { result = (TMWNavNotificationsController*)cntrll; break; }
     }
     return result;
 }
