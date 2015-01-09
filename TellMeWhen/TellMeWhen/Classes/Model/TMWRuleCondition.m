@@ -28,7 +28,7 @@ static NSString* const kCodingValue     = @"val";
     if (self)
     {
         _meaning = meaning;
-        _operation = [TMWRuleCondition lessThanOperator];
+        _operation = [TMWRuleCondition defaultOperationForMeaning:meaning];
         self.valueConverted = [TMWRuleCondition defaultValueForMeaning:meaning];
     }
     return self;
@@ -284,6 +284,11 @@ static NSString* const kCodingValue     = @"val";
 {
     FPRange const range = [TMWRuleCondition rangeForLight];
     return [NSNumber numberWithFloat:range.min + 0.5*(fabsf(range.min) + fabsf(range.max))];
+}
+
++ (NSString*)defaultOperationForMeaning:(NSString*)meaning
+{
+    return [TMWRuleCondition greaterThanOperator];
 }
 
 + (id)defaultValueForMeaning:(NSString*)meaning

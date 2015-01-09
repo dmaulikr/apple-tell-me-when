@@ -29,6 +29,7 @@ typedef struct FPRange {
 
 + (NSString*)lessThanOperator;
 + (NSString*)greaterThanOperator;
++ (NSString*)defaultOperationForMeaning:(NSString*)meaning;
 
 + (BOOL)isMeaningValid:(NSString*)meaning;
 + (NSString*)meaningForTemperature;
@@ -49,16 +50,17 @@ typedef struct FPRange {
 + (FPRange)rangeServerForNoise;
 + (FPRange)rangeServerForProximity;
 + (FPRange)rangeServerForLight;
+// Depending on meaning
++ (FPRange)rangeForMeaning:(NSString*)meaning;
++ (NSNumber*)convertServerValue:(id)serverValue withMeaning:(NSString*)meaning;
 
 + (NSNumber*)defaultValueForTemperature;
 + (NSNumber*)defaultValueForHumitdity;
 + (NSNumber*)defaultValueForNoise;
 + (NSNumber*)defaultValueForProximity;
 + (NSNumber*)defaultValueForLight;
-
 + (id)defaultValueForMeaning:(NSString*)meaning;
+
 + (NSString*)unitForMeaning:(NSString*)meaning;
-+ (FPRange)rangeForMeaning:(NSString*)meaning;
-+ (NSNumber*)convertServerValue:(id)serverValue withMeaning:(NSString*)meaning;
 
 @end
