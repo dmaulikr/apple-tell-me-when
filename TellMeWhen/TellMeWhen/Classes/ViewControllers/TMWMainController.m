@@ -1,6 +1,7 @@
 #import "TMWMainController.h"               // Apple
 @import AudioToolbox;
 
+#import "AppDelegate.h"
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWNavRulesController.h"           // TMW (ViewControllers)
 #import "TMWNavNotificationsController.h"   // TMW (ViewControllers)
@@ -34,10 +35,16 @@
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
+    navNotifCntrll.tabBarItem.badgeValue = nil;
+    
     if (self.selectedViewController == navNotifCntrll)
     {
         [navNotifCntrll notificationDidArrived:userInfo];
-        navNotifCntrll.tabBarItem.badgeValue = nil;
+    }
+    else if (((AppDelegate*)[UIApplication sharedApplication].delegate).enteringForeground)
+    {
+        self.selectedViewController = navNotifCntrll;
+        [navNotifCntrll notificationDidArrived:userInfo];
     }
     else
     {
@@ -51,13 +58,16 @@
     [[TMWStore sharedInstance].relayrUser queryCloudForIoTs:completion];
 }
 
-- (void)setupRulesAndNotifications
+- (void)loadRulesWithCompletion:(void (^)(NSError* error))completion
 {
     [self.navRulesController queryRulesWithCompletion:^(NSError* error) {
-        if (error) { return; }
-        // TODO: Delete notifications from which I have no rules
+        if (error) { if (completion) { completion(error); } return; }
+        
         TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
+        [navNotifCntrll setupNotifications];    // Delete notifications from which I have no rules.
         if (self.selectedViewController == navNotifCntrll) { [navNotifCntrll queryNotifications]; }
+        
+        if (completion) { completion(error); }
     }];
 }
 
@@ -86,14 +96,11 @@
 - (void)tabBarController:(UITabBarController*)tabBarController didSelectViewController:(UIViewController*)viewController
 {
     TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
-    if (tabBarController.selectedViewController == navNotifCntrll)
-    {
-        if (viewController.tabBarItem.badgeValue)
-        {
-            [navNotifCntrll queryNotifications];
-            viewController.tabBarItem.badgeValue = nil;
-        }
-    }
+    if (tabBarController.selectedViewController != navNotifCntrll) { return; }
+
+    [navNotifCntrll setupNotifications];
+    [navNotifCntrll queryNotifications];
+    viewController.tabBarItem.badgeValue = nil;
 }
 
 #pragma mark NSObject methods

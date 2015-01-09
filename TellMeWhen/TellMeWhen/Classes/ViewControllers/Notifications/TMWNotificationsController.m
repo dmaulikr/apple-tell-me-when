@@ -23,6 +23,14 @@
 
 #pragma mark - Public API
 
+- (void)setupNotifications
+{
+    BOOL isThereChanges = [[TMWStore sharedInstance] removeUnlinkedNotifications];
+    if (!isThereChanges || !self.isViewLoaded) { return; }
+    
+    [self.tableView reloadData];
+}
+
 - (void)queryNotifications
 {
     [self refreshRequest:nil];

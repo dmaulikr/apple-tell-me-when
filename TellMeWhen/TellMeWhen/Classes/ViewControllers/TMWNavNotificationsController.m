@@ -14,6 +14,11 @@
     [self.notificationController queryNotifications];
 }
 
+- (void)setupNotifications
+{
+    [self.notificationController setupNotifications];
+}
+
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
     [self queryNotifications];

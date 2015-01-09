@@ -1,5 +1,6 @@
-#import "TMWStore.h"      // Header
-#import "TMWCredentials.h"
+#import "TMWStore.h"        // Header
+#import "TMWCredentials.h"  // TMW (Model)
+#import "TMWNotification.h" // TMW (Model)
 
 #define RelayrTMW_FSFolder                  @"/io.relayr.tmw"
 
@@ -42,6 +43,32 @@ static NSString* const kCodingNotifications = @"notif";
 {
     [self doesNotRecognizeSelector:_cmd];
     return nil;
+}
+
+- (BOOL)removeUnlinkedNotifications
+{
+    BOOL result = NO;
+    if (!_notifications.count) { return result; }
+    
+    NSMutableArray* toRemove = [[NSMutableArray alloc] init];
+    for (TMWNotification* notif in _notifications)
+    {
+        BOOL matched = NO;
+        for (TMWRule* rule in _rules)
+        {
+            if ([notif.ruleID isEqualToString:rule.uid]) { matched = YES; break; }
+        }
+        
+        if (!matched) { [toRemove addObject:notif]; }
+    }
+    
+    if (toRemove.count)
+    {
+        result = YES;
+        [_notifications removeObjectsInArray:toRemove];
+    }
+    
+    return result;
 }
 
 - (BOOL)persistInFileSystem

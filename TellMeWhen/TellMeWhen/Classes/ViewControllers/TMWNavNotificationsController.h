@@ -4,6 +4,8 @@
 
 - (void)queryNotifications;
 
+- (void)setupNotifications;
+
 - (void)notificationDidArrived:(NSDictionary*)userInfo;
 
 @end

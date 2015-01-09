@@ -7,13 +7,20 @@
 #import <Relayr/Relayr.h>   // Relayr.framework
 #import "NSData+Hexadecimal.h"
 
+#define AppDelegate_EnteringForegroundTimer     0.8
+
 @interface AppDelegate ()
+@property (readwrite,nonatomic) BOOL enteringForeground;
 @end
 
 @implementation AppDelegate
 
+#pragma mark - Public API
+
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+    self.enteringForeground = YES;
+    
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:TMWStoryboard bundle:nil];
     
@@ -22,9 +29,7 @@
     if (store.relayrApp && store.relayrUser)
     {
         controller = [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
-        [controller loadIoTsWithCompletion:^(NSError* error) {
-            if (!error) { [controller setupRulesAndNotifications]; }
-        }];
+        [controller loadIoTsWithCompletion:^(NSError* error) { if (!error) { [controller loadRulesWithCompletion:nil]; } }];
     }
     else { controller = [storyboard instantiateInitialViewController]; }
     _window.rootViewController = controller;
@@ -39,13 +44,20 @@
     // Retrieve the notification (if any) that launched the application.
     NSDictionary* notif = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notif.count) { [((id <TMWActions>)_window.rootViewController) notificationDidArrived:notif]; }
-    
     return YES;
 }
 
-- (void)applicationWillEnterForeground:(UIApplication*)application { }
+- (void)applicationWillEnterForeground:(UIApplication*)application
+{
+    self.enteringForeground = YES;
+}
+
 - (void)applicationDidBecomeActive:(UIApplication*)application { }
-- (void)applicationWillResignActive:(UIApplication*)application { }
+- (void)applicationWillResignActive:(UIApplication*)application
+{
+    self.enteringForeground = NO;
+}
+
 - (void)applicationWillTerminate:(UIApplication*)application { }
 - (void)applicationDidEnterBackground:(UIApplication*)application
 {
@@ -68,13 +80,33 @@
     [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:deviceToken];
     printf("%s\n", [[deviceToken hexadecimalString] cStringUsingEncoding:NSUTF8StringEncoding]);
 }
+
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     [((id <TMWActions>)_window.rootViewController) deviceTokenChangedFromData:[TMWStore sharedInstance].deviceToken toData:nil];
 }
+
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
     [((id <TMWActions>)_window.rootViewController) notificationDidArrived:userInfo];
+}
+
+#pragma mark - Private functionality
+
+- (void)setEnteringForeground:(BOOL)enteringForeground
+{
+    static NSTimer* timer;
+    if (timer) { if (timer.valid) { [timer invalidate]; } timer = nil; }
+    
+    if (enteringForeground)
+    {
+        __weak AppDelegate* weakSelf = self;
+        timer = [NSTimer scheduledTimerWithTimeInterval:AppDelegate_EnteringForegroundTimer target:[NSBlockOperation blockOperationWithBlock:^{
+            weakSelf.enteringForeground = NO;
+        }] selector:@selector(main) userInfo:nil repeats:NO];
+    }
+    
+    _enteringForeground = enteringForeground;
 }
 
 @end
