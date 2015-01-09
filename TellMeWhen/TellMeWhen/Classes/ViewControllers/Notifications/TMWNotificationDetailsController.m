@@ -39,7 +39,7 @@
     
     NSNumber* value = [_notification convertServerValueWithMeaning:rule.condition.meaning];
     NSString* valueString = (value) ? [NSString stringWithFormat:@"%.1f", value.floatValue] : @"N/A";
-    _triggeredValue.text = [NSString stringWithFormat:@"Triggered value: %@", valueString];
+    _triggeredValue.text = [NSString stringWithFormat:@"%@ %@", valueString, rule.condition.unit];
 }
 
 @end
