@@ -51,25 +51,18 @@ static NSString* const kCodingValue     = @"val";
     return [TMWRuleCondition convertServerValue:_value withMeaning:meaning];
 }
 
-+ (BOOL)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs resultingInCellsIndexPathsToAdd:(NSArray *__autoreleasing *)addingCellIndexPaths
++ (BOOL)synchronizeStoredNotifications:(NSMutableArray*)coreNotifs withNewlyArrivedNotifications:(NSArray*)serverNotifs resultingInCellsIndexPathsToAdd:(NSArray*__autoreleasing *)addingCellIndexPaths
 {
     NSUInteger const numServerNotifs = serverNotifs.count;
-    if (!numServerNotifs)
-    {
-        *addingCellIndexPaths = nil;
-        return NO;
-    }
-    
-    NSUInteger const numCoreNotifs = coreNotifs.count;
-    NSUInteger const end = coreNotifs.count + numServerNotifs;
+    if (!numServerNotifs) { *addingCellIndexPaths = nil; return NO; }
     
     NSMutableArray* result = [[NSMutableArray alloc] initWithCapacity:numServerNotifs];
-    for (NSUInteger i=numCoreNotifs; i<end; ++i)
+    for (NSUInteger i=0; i<numServerNotifs; ++i)
     {
         [result addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
     
-    [coreNotifs addObjectsFromArray:serverNotifs];
+    [coreNotifs insertObjects:serverNotifs atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, numServerNotifs)]];
     *addingCellIndexPaths = result.copy;
     return YES;
 }

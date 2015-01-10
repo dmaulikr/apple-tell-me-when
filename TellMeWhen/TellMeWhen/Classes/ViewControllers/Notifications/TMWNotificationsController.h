@@ -4,6 +4,6 @@
 
 - (void)setupNotifications;
 
-- (void)queryNotifications;
+- (void)queryNotificationsWithCompletion:(void (^)(NSError*))completion;
 
 @end

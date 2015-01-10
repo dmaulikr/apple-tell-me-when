@@ -65,7 +65,7 @@
         
         TMWNavNotificationsController* navNotifCntrll = self.navNotificationsController;
         [navNotifCntrll setupNotifications];    // Delete notifications from which I have no rules.
-        if (self.selectedViewController == navNotifCntrll) { [navNotifCntrll queryNotifications]; }
+        if (self.selectedViewController == navNotifCntrll) { [navNotifCntrll queryNotificationsWithCompletion:nil]; }
         
         if (completion) { completion(error); }
     }];
@@ -99,8 +99,9 @@
     if (tabBarController.selectedViewController != navNotifCntrll) { return; }
 
     [navNotifCntrll setupNotifications];
-    [navNotifCntrll queryNotifications];
-    viewController.tabBarItem.badgeValue = nil;
+    [navNotifCntrll queryNotificationsWithCompletion:^(NSError* error) {
+        viewController.tabBarItem.badgeValue = nil;
+    }];
 }
 
 #pragma mark NSObject methods

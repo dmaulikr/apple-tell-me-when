@@ -59,7 +59,7 @@
     dispatch_once(&onceToken, ^{
         formatter = [[NSDateFormatter alloc] init];
         formatter.calendar = [NSCalendar currentCalendar];
-        formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        formatter.timeZone = [NSTimeZone systemTimeZone];
         [formatter setDateFormat:@"yyyy-MM-dd"];
     });
     return formatter;
@@ -72,7 +72,7 @@
     dispatch_once(&onceToken, ^{
         formatter = [[NSDateFormatter alloc] init];
         formatter.calendar = [NSCalendar currentCalendar];
-        formatter.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        formatter.timeZone = [NSTimeZone systemTimeZone];
         [formatter setDateFormat:@"HH:mm:ss"];
     });
     return formatter;

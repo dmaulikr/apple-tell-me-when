@@ -9,19 +9,19 @@
 
 #pragma mark - Public API
 
-- (void)queryNotifications
-{
-    [self.notificationController queryNotifications];
-}
-
 - (void)setupNotifications
 {
     [self.notificationController setupNotifications];
 }
 
+- (void)queryNotificationsWithCompletion:(void (^)(NSError* error))completion
+{
+    [self.notificationController queryNotificationsWithCompletion:completion];
+}
+
 - (void)notificationDidArrived:(NSDictionary*)userInfo
 {
-    [self queryNotifications];
+    [self queryNotificationsWithCompletion:nil];
 }
 
 #pragma mark - Private functionality

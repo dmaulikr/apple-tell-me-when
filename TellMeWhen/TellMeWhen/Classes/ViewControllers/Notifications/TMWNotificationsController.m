@@ -31,9 +31,32 @@
     [self.tableView reloadData];
 }
 
-- (void)queryNotifications
+- (void)queryNotificationsWithCompletion:(void (^)(NSError* error))completion
 {
-    [self refreshRequest:nil];
+    __weak TMWNotificationsController* weakSelf = self;
+    [TMWAPIService requestNotificationsForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* notifications) {
+        if (error || !notifications.count) { if (completion) { completion(error); } return; }
+        
+        [TMWAPIService deleteNotifications:notifications completion:^(NSError* error) {
+            if (error) { if (completion) { completion(error); } return; }
+            NSUInteger const numPreviousNotifications = [TMWStore sharedInstance].notifications.count;
+            
+            __autoreleasing NSArray* indexPathsToAdd;
+            BOOL isThereChanges = [TMWNotification synchronizeStoredNotifications:[TMWStore sharedInstance].notifications withNewlyArrivedNotifications:notifications resultingInCellsIndexPathsToAdd:&indexPathsToAdd];
+            
+            TMWNotificationsController* strongSelf = weakSelf;
+            if (strongSelf && isThereChanges && strongSelf.isViewLoaded)
+            {
+                if (!numPreviousNotifications) {
+                    [strongSelf.tableView reloadData];
+                } else {
+                    [strongSelf.tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWCntrl_RowAdditionAnimation];
+                }
+            }
+            
+            if (completion) { completion(error); }
+        }];
+    }];
 }
 
 #pragma mark UIViewController methods
@@ -131,26 +154,9 @@
 
 - (void)refreshRequest:(UIRefreshControl*)sender
 {
-    __weak UITableView* tableView = self.tableView;
-    [TMWAPIService requestNotificationsForUserID:[TMWStore sharedInstance].relayrUser.uid completion:^(NSError* error, NSArray* notifications) {
-        if (error || !notifications.count) { return [sender endRefreshing]; }  // TODO:
-        
-        [TMWAPIService deleteNotifications:notifications completion:^(NSError* error) {
-            [sender endRefreshing];
-            if (error) { return; }
-            
-            NSUInteger const numPreviousNotifications = [TMWStore sharedInstance].notifications.count;
-            
-            __autoreleasing NSArray* indexPathsToAdd;
-            BOOL isThereChanges = [TMWNotification synchronizeStoredNotifications:[TMWStore sharedInstance].notifications withNewlyArrivedNotifications:notifications resultingInCellsIndexPathsToAdd:&indexPathsToAdd];
-            if (!isThereChanges) { return; }
-            
-            if (!numPreviousNotifications) {
-                [tableView reloadData];
-            } else {
-                [tableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:TMWCntrl_RowAdditionAnimation];
-            }
-        }];
+    __weak TMWNotificationsController* weakSelf = self;
+    [self queryNotificationsWithCompletion:^(NSError* error) {
+        if (weakSelf.isViewLoaded) { [sender endRefreshing]; }
     }];
 }
 

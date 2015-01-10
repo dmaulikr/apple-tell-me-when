@@ -2,9 +2,9 @@
 
 @interface TMWNavNotificationsController : UINavigationController
 
-- (void)queryNotifications;
-
 - (void)setupNotifications;
+
+- (void)queryNotificationsWithCompletion:(void (^)(NSError*))completion;
 
 - (void)notificationDidArrived:(NSDictionary*)userInfo;
 
