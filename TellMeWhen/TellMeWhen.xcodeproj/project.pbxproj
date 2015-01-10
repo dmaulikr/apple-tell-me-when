@@ -156,6 +156,7 @@
 		62D742071A3722D100DBBAED /* TMWActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWActions.h; sourceTree = "<group>"; };
 		62D7E1171A39E09900D81856 /* TMWNotificationsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWNotificationsCellView.h; sourceTree = "<group>"; };
 		62D7E1181A39E09900D81856 /* TMWNotificationsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMWNotificationsCellView.m; sourceTree = "<group>"; };
+		62F0B1801A618A330054B75E /* TMWLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TMWLogging.h; path = TellMeWhen/Classes/Utilities/TMWLogging.h; sourceTree = SOURCE_ROOT; };
 		7D153AE61A1DFDF100B671B0 /* TMWInitialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWInitialController.h; sourceTree = "<group>"; };
 		7D153AE71A1DFDF100B671B0 /* TMWInitialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TMWInitialController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7D153AE91A1E001F00B671B0 /* TMWStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMWStore.h; sourceTree = "<group>"; };
@@ -339,6 +340,7 @@
 				7DC9E5011A25D2D5008ECA66 /* TMWNotification.m */,
 				62A490EC1A39E7AC0093157E /* TMWDateConverter.h */,
 				62A490ED1A39E7AC0093157E /* TMWDateConverter.m */,
+				62F0B1801A618A330054B75E /* TMWLogging.h */,
 			);
 			path = Model;
 			sourceTree = "<group>";

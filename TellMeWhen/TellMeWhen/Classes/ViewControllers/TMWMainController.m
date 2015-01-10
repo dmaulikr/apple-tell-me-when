@@ -3,6 +3,8 @@
 
 #import "AppDelegate.h"
 #import "TMWStore.h"                        // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 #import "TMWNavRulesController.h"           // TMW (ViewControllers)
 #import "TMWNavNotificationsController.h"   // TMW (ViewControllers)
 #import "TMWActions.h"                      // TMW (ViewControllers/Protocols)
@@ -43,6 +45,7 @@
     }
     else if (((AppDelegate*)[UIApplication sharedApplication].delegate).enteringForeground)
     {
+        [RelayrCloud logMessage:TMWLogging_View_AppNotified onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         self.selectedViewController = navNotifCntrll;
         [navNotifCntrll notificationDidArrived:userInfo];
     }

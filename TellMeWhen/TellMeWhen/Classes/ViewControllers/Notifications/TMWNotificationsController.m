@@ -3,7 +3,8 @@
 #import "TMWStore.h"                                // TMW (Model)
 #import "TMWAPIService.h"                           // TMW (Model)
 #import "TMWNotification.h"                         // TMW (Model)
-
+#import "TMWLogging.h"                              // TMW (Model)
+#import <Relayr/RelayrCloud.h>                      // Relayr.framework
 #import "TMWStoryboardIDs.h"                        // TMW (ViewControllers)
 #import "TMWSegueEmbedViewInTableBacgroundkView.h"  // TMW (ViewControllers/Segue)
 #import "TMWNotificationDetailsController.h"        // TMW (ViewControllers/Notifications)
@@ -124,6 +125,7 @@
     
     NSMutableArray* notifications = [TMWStore sharedInstance].notifications;
     [notifications removeObjectAtIndex:indexPath.row];
+    [RelayrCloud logMessage:TMWLogging_Delete_Notification onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
     
     if (!notifications.count)
     {
@@ -167,6 +169,7 @@
     
     [TMWAPIService deleteNotifications:notifications completion:^(NSError* error) {
         if (error) { return; }  // TODO: Handle error
+        [RelayrCloud logMessage:TMWLogging_Delete_Notifications(@([TMWStore sharedInstance].notifications.count)) onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         [[TMWStore sharedInstance].notifications removeObjectsInArray:notifications];
         
         TMWNotificationsController* strongSelf = weakSelf;

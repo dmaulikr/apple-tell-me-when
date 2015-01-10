@@ -4,6 +4,8 @@
 #import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWRuleCondition.h"                // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
@@ -125,6 +127,7 @@
     }
     else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesToNew])
     {
+        [RelayrCloud logMessage:TMWLogging_Creation_Transmitter onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         ((TMWRuleTransmittersController*)segue.destinationViewController).rule = [[TMWRule alloc] initWithUserID:[TMWStore sharedInstance].relayrUser.uid];
     }
 }
@@ -193,6 +196,7 @@
         }
         
         [store.rules removeObject:ruleToDelete];
+        [RelayrCloud logMessage:TMWLogging_Delete_Rule(ruleToDelete.type) onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         
         if (!store.rules.count) {
             [weakTableView reloadData];
@@ -250,7 +254,8 @@
     
     rule.active = sender.on;
     [TMWAPIService setRule:rule completion:^(NSError* error) {
-        if (!error) { return; }
+        if (!error) { [RelayrCloud logMessage:TMWLogging_Edit_Switch(rule.active) onBehalfOfUser:[TMWStore sharedInstance].relayrUser]; return; }
+        
         rule.active = !sender.on;
         [sender setOn:rule.active animated:YES];
     }];
@@ -277,7 +282,7 @@
 
 - (IBAction)unwindFromRuleTransmitters:(UIStoryboardSegue*)segue
 {
-    // Unwinding from Rules creation. The rule creation process was cancelled.
+    [RelayrCloud logMessage:TMWLogging_Creation_Cancelled onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
 }
 
 - (IBAction)unwindFromRuleNameToList:(UIStoryboardSegue*)segue

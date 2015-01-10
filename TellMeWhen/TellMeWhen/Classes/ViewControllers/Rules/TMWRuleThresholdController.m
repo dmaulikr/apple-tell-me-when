@@ -4,6 +4,8 @@
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWRuleCondition.h"                // TMW (Model)
 #import "TMWAPIService.h"                   // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleNamingController.h"         // TMW (ViewControllers/Rules)
@@ -40,6 +42,20 @@
 
 #pragma mark - Public API
 
+#pragma mark UIViewController methods
+
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesThreshToNaming])
+    {
+        [RelayrCloud logMessage:TMWLogging_Creation_Name onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
+        TMWRule* ruleCopied = _rule.copy;
+        ruleCopied.condition.operation = (_lessThanButton.selected) ? [TMWRuleCondition lessThanOperator] : [TMWRuleCondition greaterThanOperator];
+        ruleCopied.condition.valueConverted = [NSNumber numberWithFloat:_conditionValueSlider.value];
+        ((TMWRuleNamingController*)segue.destinationViewController).rule = ruleCopied;
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -68,23 +84,11 @@
     [_doneButton setTitle:buttonText forState:UIControlStateNormal];
 }
 
-#pragma mark UIViewController methods
-
-- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesThreshToNaming])
-    {
-        TMWRule* ruleCopied = _rule.copy;
-        ruleCopied.condition.operation = (_lessThanButton.selected) ? [TMWRuleCondition lessThanOperator] : [TMWRuleCondition greaterThanOperator];
-        ruleCopied.condition.valueConverted = [NSNumber numberWithFloat:_conditionValueSlider.value];
-        ((TMWRuleNamingController*)segue.destinationViewController).rule = ruleCopied;
-    }
-}
-
 #pragma mark - Private functionality
 
 - (IBAction)backButtonTapped:(id)sender
 {
+    if (_needsServerModification) { [RelayrCloud logMessage:TMWLogging_Edit_Cancelled onBehalfOfUser:[TMWStore sharedInstance].relayrUser]; }
     [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleThreshold sender:self];
 }
 
@@ -145,13 +149,14 @@
             weakSelf.rule.condition.valueConverted = previousValueConverted;
         }
         
+        [RelayrCloud logMessage:TMWLogging_Edit_Finished onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         [weakSelf performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleThresholdPacked sender:weakSelf];
     }];
 }
 
 - (IBAction)unwindFromRuleName:(UIStoryboardSegue*)segue
 {
-    // Unwind from rule naming.
+    [RelayrCloud logMessage:TMWLogging_Creation_Threshold onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
 }
 
 @end

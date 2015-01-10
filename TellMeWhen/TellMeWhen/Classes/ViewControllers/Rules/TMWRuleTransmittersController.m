@@ -4,6 +4,8 @@
 #import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWRuleCondition.h"                // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleMeasurementsController.h"   // TMW (ViewControllers/Rules)
@@ -42,6 +44,7 @@
 {
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesTransToMeasures])
     {
+        [RelayrCloud logMessage:TMWLogging_Creation_Sensor onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         TMWRule* ruleCopied = _rule.copy;
         _rule.transmitterID = nil;
         ((TMWRuleMeasurementsController*)segue.destinationViewController).rule = ruleCopied;
@@ -94,6 +97,8 @@
     }
     else
     {
+        [RelayrCloud logMessage:TMWLogging_Edit_Finished onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
+        
         if ([transmitter.uid isEqualToString:_rule.transmitterID])
         {
             return [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self];
@@ -131,6 +136,7 @@
 
 - (IBAction)backButtonTapped:(id)sender
 {
+    if (_needsServerModification) { [RelayrCloud logMessage:TMWLogging_Edit_Cancelled onBehalfOfUser:[TMWStore sharedInstance].relayrUser]; }
     [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self];
 }
 
@@ -138,7 +144,7 @@
 
 - (IBAction)unwindFromRuleMeasurements:(UIStoryboardSegue*)segue
 {
-    // Unwind from rule measurements
+    [RelayrCloud logMessage:TMWLogging_Creation_Transmitter onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
 }
 
 @end

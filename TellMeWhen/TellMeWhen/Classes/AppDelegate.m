@@ -1,6 +1,7 @@
 #import "AppDelegate.h"     // Header
 
 #import "TMWStore.h"        // TMW (Model)
+#import "TMWLogging.h"      // TMW (Model)
 #import "TMWStoryboardIDs.h"// TMW (ViewControllers/Segues)
 #import "TMWActions.h"      // TMW (ViewControllers/Protocol)
 #import "TMWSegueSwapRootViewController.h"
@@ -49,6 +50,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication*)application
 {
+    [RelayrCloud logMessage:TMWLogging_View_AppOpenned onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
     self.enteringForeground = YES;
 }
 

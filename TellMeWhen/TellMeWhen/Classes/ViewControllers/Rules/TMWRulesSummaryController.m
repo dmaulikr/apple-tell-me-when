@@ -3,6 +3,8 @@
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWAPIService.h"                   // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleTransmittersController.h"   // TMW (ViewControllers/Rules)
@@ -48,24 +50,28 @@
 {
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToTransm])
     {
+        [RelayrCloud logMessage:TMWLogging_Edit_Transmitter onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         TMWRuleTransmittersController* cntrll = (TMWRuleTransmittersController*)segue.destinationViewController;
         cntrll.rule = _rule;
         cntrll.needsServerModification = YES;
     }
     else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToMeasur])
     {
+        [RelayrCloud logMessage:TMWLogging_Edit_Sensor onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         TMWRuleMeasurementsController* cntrll = (TMWRuleMeasurementsController*)segue.destinationViewController;
         cntrll.rule = _rule;
         cntrll.needsServerModification = YES;
     }
     else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToThresh])
     {
+        [RelayrCloud logMessage:TMWLogging_Edit_Threshold onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         TMWRuleThresholdController* cntrll = (TMWRuleThresholdController*)segue.destinationViewController;
         cntrll.rule = _rule;
         cntrll.needsServerModification = YES;
     }
     else if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromRulesSummaryToNaming])
     {
+        [RelayrCloud logMessage:TMWLogging_Edit_Name onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         TMWRuleNamingController* cntrll = (TMWRuleNamingController*)segue.destinationViewController;
         cntrll.rule = _rule;
         cntrll.needsServerModification = YES;
@@ -97,7 +103,8 @@
     TMWRule* rule = _rule;
     rule.active = sender.on;
     [TMWAPIService setRule:_rule completion:^(NSError* error) {
-        if (!error) { return; }
+        if (!error) { [RelayrCloud logMessage:TMWLogging_Edit_Switch(rule.active) onBehalfOfUser:[TMWStore sharedInstance].relayrUser]; return; }
+        
         rule.active = !sender.on;
         [sender setOn:rule.active animated:YES];
     }];

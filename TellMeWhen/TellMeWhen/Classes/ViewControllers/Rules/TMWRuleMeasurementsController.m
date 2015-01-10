@@ -3,6 +3,8 @@
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWRuleCondition.h"                // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleThresholdController.h"      // TMW (ViewControllers/Rules)
@@ -26,6 +28,7 @@
         
         if (!_needsServerModification)
         {
+            [RelayrCloud logMessage:TMWLogging_Creation_Threshold onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
             TMWRule* ruleCopied = _rule.copy;
             ruleCopied.condition = [[TMWRuleCondition alloc] initWithMeaning:meaning];
             ruleCopied.deviceID = device.uid;
@@ -33,6 +36,7 @@
         }
         else
         {
+            [RelayrCloud logMessage:TMWLogging_Edit_Threshold onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
             TMWRule* tmpRule = _rule.copy;
             tmpRule.condition.meaning = meaning;
             tmpRule.condition.operation = [TMWRuleCondition lessThanOperator];
@@ -51,15 +55,22 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return (!_needsServerModification || ![_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]]) ?
-        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self] :
+    if (!_needsServerModification || ![_rule.condition.meaning isEqualToString:[self meaningFromSelectedCell]])
+    {
+        [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesMeasuToThresh sender:self];
+    }
+    else
+    {
+        [RelayrCloud logMessage:TMWLogging_Edit_Finished onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleMeasure sender:self];
+    }
 }
 
 #pragma mark - Private functionality
 
 - (IBAction)backButtonTapped:(id)sender
 {
+    if (_needsServerModification) { [RelayrCloud logMessage:TMWLogging_Edit_Cancelled onBehalfOfUser:[TMWStore sharedInstance].relayrUser]; }
     [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleMeasure sender:self];
 }
 
@@ -78,7 +89,14 @@
 
 - (IBAction)unwindFromRuleThreshold:(UIStoryboardSegue*)segue
 {
-    // Unwind from rule threshold
+    if (!_needsServerModification)
+    {
+        [RelayrCloud logMessage:TMWLogging_Creation_Sensor onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
+    }
+    else
+    {
+        [RelayrCloud logMessage:TMWLogging_Edit_Sensor onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
+    }
 }
 
 @end

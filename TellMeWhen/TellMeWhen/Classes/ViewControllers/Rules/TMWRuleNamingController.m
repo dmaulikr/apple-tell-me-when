@@ -3,6 +3,8 @@
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
 #import "TMWAPIService.h"                   // TMW (Model)
+#import "TMWLogging.h"                      // TMW (Model)
+#import <Relayr/RelayrCloud.h>              // Relayr.framework
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWButton.h"                       // TMW (Views)
@@ -37,6 +39,7 @@
 
 - (IBAction)backButtonTapped:(id)sender
 {
+    if (_needsServerModification) { [RelayrCloud logMessage:TMWLogging_Edit_Cancelled onBehalfOfUser:[TMWStore sharedInstance].relayrUser]; }
     [self performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleNaming sender:self];
 }
 
@@ -54,15 +57,18 @@
         NSData* deviceToken = [TMWStore sharedInstance].deviceToken;
         [_rule setNotificationsWithDeviceToken:deviceToken previousDeviceToken:deviceToken];
         
+        [RelayrCloud logMessage:TMWLogging_Creation_Finished onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         [TMWAPIService registerRule:_rule completion:^(NSError* error) {
             if (error) { return; }
             
+            [RelayrCloud logMessage:TMWLogging_Creation_Saved(_rule.type, _rule.thresholdDescription) onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
             [_textField resignFirstResponder];
             [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleNamingToList sender:self];
         }];
     }
     else
     {
+        [RelayrCloud logMessage:TMWLogging_Edit_Finished onBehalfOfUser:[TMWStore sharedInstance].relayrUser];
         if ([_rule.name isEqualToString:_textField.text]) { [self performSegueWithIdentifier:TWMStoryboardIDs_UnwindFromRuleNaming sender:self]; }
         
         NSString* previousName = _rule.name;
