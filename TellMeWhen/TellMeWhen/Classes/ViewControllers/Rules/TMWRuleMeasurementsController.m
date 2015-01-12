@@ -24,7 +24,7 @@
     {
         TMWRuleThresholdController* cntrll = (TMWRuleThresholdController*)segue.destinationViewController;
         NSString* meaning = [self meaningFromSelectedCell];
-        RelayrDevice* device = [_rule.transmitter devicesWithInputMeaning:meaning].firstObject;
+        RelayrDevice* device = [_rule.transmitter devicesWithInputMeaning:meaning].anyObject;
         
         if (!_needsServerModification)
         {

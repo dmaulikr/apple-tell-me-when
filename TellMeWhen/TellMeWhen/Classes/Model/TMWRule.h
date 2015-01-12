@@ -31,6 +31,7 @@
 @property (readonly,nonatomic) UIImage* icon;
 @property (readonly,nonatomic) NSString* thresholdDescription;
 @property (readonly,nonatomic) RelayrTransmitter* transmitter;
+@property (readonly,nonatomic) RelayrDevice* device;
 
 + (TMWRule*)ruleForID:(NSString*)ruleID withinRulesArray:(NSArray*)rules;
 

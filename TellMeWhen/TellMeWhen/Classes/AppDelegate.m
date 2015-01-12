@@ -30,7 +30,7 @@
     if (store.relayrApp && store.relayrUser)
     {
         controller = [storyboard instantiateViewControllerWithIdentifier:TMWStoryboardIDs_ControllerMain];
-        [controller loadIoTsWithCompletion:^(NSError* error) { if (!error) { [controller loadRulesWithCompletion:nil]; } }];
+        [controller loadIoTsWithCompletion:^(NSError* error) { if (!error && store.relayrUser.transmitters.count) { [controller loadRulesWithCompletion:nil]; } }];
     }
     else { controller = [storyboard instantiateInitialViewController]; }
     _window.rootViewController = controller;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="f1d-eT-KgF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C94b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="f1d-eT-KgF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -40,8 +40,10 @@
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
             <string>NewJuneBold</string>
+            <string>NewJuneBold</string>
         </mutableArray>
         <mutableArray key="NewJuneBook.otf">
+            <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
             <string>NewJuneBook</string>
@@ -1276,12 +1278,50 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="Nax-sw-hNd" customClass="TMWRulesCellView">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="78" id="Nax-sw-hNd" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nax-sw-hNd" id="fCv-bH-J15">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGx-fD-y3R" customClass="TMWButton">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current value:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-wR-NXC">
+                                                    <rect key="frame" x="16" y="16" width="108" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30.0 ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="und-rr-gp0">
+                                                    <rect key="frame" x="16" y="42" width="56" height="20"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
+                                                    <color key="textColor" red="0.80947849230000002" green="0.83765815160000001" blue="0.896484375" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="uRu-xM-Pjf">
+                                                    <rect key="frame" x="16" y="42" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="und-rr-gp0" firstAttribute="top" secondItem="chi-wR-NXC" secondAttribute="bottom" constant="6" id="5mY-m0-Fnc"/>
+                                                <constraint firstItem="und-rr-gp0" firstAttribute="leading" secondItem="fCv-bH-J15" secondAttribute="leadingMargin" constant="8" id="FFo-SZ-vud"/>
+                                                <constraint firstItem="chi-wR-NXC" firstAttribute="leading" secondItem="fCv-bH-J15" secondAttribute="leadingMargin" constant="8" id="IXd-GK-9Y7"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="uRu-xM-Pjf" secondAttribute="trailing" constant="8" id="KK4-DR-lRs"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="und-rr-gp0" secondAttribute="trailing" constant="8" id="LPv-Gy-VpZ"/>
+                                                <constraint firstItem="uRu-xM-Pjf" firstAttribute="top" secondItem="chi-wR-NXC" secondAttribute="bottom" constant="6" id="RKK-WH-Qtk"/>
+                                                <constraint firstItem="chi-wR-NXC" firstAttribute="top" secondItem="fCv-bH-J15" secondAttribute="topMargin" constant="8" id="XIf-fP-C5p"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="uRu-xM-Pjf" secondAttribute="bottom" constant="8" id="YIh-Cb-x6I"/>
+                                                <constraint firstItem="uRu-xM-Pjf" firstAttribute="leading" secondItem="fCv-bH-J15" secondAttribute="leadingMargin" constant="8" id="bJW-KF-crs"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="chi-wR-NXC" secondAttribute="trailing" constant="8" id="eMK-gK-caS"/>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="und-rr-gp0" secondAttribute="bottom" constant="8" id="qTi-gG-Cre"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="70" id="LM1-wv-gip" customClass="TMWRulesCellView">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LM1-wv-gip" id="Cm7-xp-CuI">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oYK-xT-QXb" customClass="TMWButton">
                                                     <rect key="frame" x="18" y="11" width="564" height="48"/>
                                                     <color key="backgroundColor" red="0.50588235290000005" green="0.65098039220000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
@@ -1294,17 +1334,14 @@
                                                             <integer key="value" value="20"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <segue destination="iqc-dm-YZi" kind="unwind" unwindAction="unwindFromRuleSummary:" id="UUp-tX-xeK"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="CGx-fD-y3R" secondAttribute="bottom" constant="3" id="OQq-Zc-K6u"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="CGx-fD-y3R" secondAttribute="trailing" constant="10" id="Y6J-TQ-yYO"/>
-                                                <constraint firstItem="CGx-fD-y3R" firstAttribute="leading" secondItem="fCv-bH-J15" secondAttribute="leadingMargin" constant="10" id="acD-8E-me7"/>
-                                                <constraint firstItem="CGx-fD-y3R" firstAttribute="top" secondItem="fCv-bH-J15" secondAttribute="topMargin" constant="3" id="dLr-9R-W50"/>
+                                                <constraint firstItem="oYK-xT-QXb" firstAttribute="top" secondItem="Cm7-xp-CuI" secondAttribute="topMargin" constant="3" id="ASo-zK-H1F"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="oYK-xT-QXb" secondAttribute="trailing" constant="10" id="JIW-n9-zsD"/>
+                                                <constraint firstItem="oYK-xT-QXb" firstAttribute="leading" secondItem="Cm7-xp-CuI" secondAttribute="leadingMargin" constant="10" id="Zia-bN-9A8"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="oYK-xT-QXb" secondAttribute="bottom" constant="3" id="scO-ZG-1wv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1329,6 +1366,8 @@
                     <connections>
                         <outlet property="activationSwitch" destination="rBJ-t5-L66" id="FAz-Ym-QIQ"/>
                         <outlet property="conditionLabel" destination="MXg-4j-i4x" id="TEo-vY-pe1"/>
+                        <outlet property="currentValueIndicator" destination="uRu-xM-Pjf" id="6b9-31-SXf"/>
+                        <outlet property="currentValueLabel" destination="und-rr-gp0" id="QtW-gJ-XGW"/>
                         <outlet property="measurementImageView" destination="3mK-mo-OUK" id="oyG-rt-982"/>
                         <outlet property="measurementNameLabel" destination="TR3-6Q-YvP" id="GJR-r4-LGw"/>
                         <outlet property="ruleNameLabel" destination="Pu2-1i-cLI" id="sb9-XI-Yvb"/>
@@ -1764,9 +1803,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0MQ-4F-ecA"/>
-        <segue reference="R23-2U-ccp"/>
-        <segue reference="WtK-aw-bc6"/>
-        <segue reference="fe1-3f-eYe"/>
-        <segue reference="3c6-cl-cpH"/>
+        <segue reference="jN9-f0-ZrE"/>
+        <segue reference="hsx-QH-yVh"/>
+        <segue reference="0Dj-pf-Bz7"/>
+        <segue reference="WMw-C2-A0e"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -107,7 +107,7 @@
         NSString* previousTransmitterID = _rule.transmitterID;
         NSString* previousDeviceID = _rule.deviceID;
         _rule.transmitterID = transmitter.uid;
-        _rule.deviceID = ((RelayrDevice*)[transmitter devicesWithInputMeaning:_rule.condition.meaning].firstObject).uid;
+        _rule.deviceID = ((RelayrDevice*)[transmitter devicesWithInputMeaning:_rule.condition.meaning].anyObject).uid;
         
         __weak TMWRuleTransmittersController* weakSelf = self;
         [TMWAPIService setRule:_rule completion:^(NSError* error) {

@@ -220,6 +220,20 @@ static NSString* const kCodingActive    = @"act";
     return result;
 }
 
+- (RelayrDevice*)device
+{
+    RelayrTransmitter* transmitter = self.transmitter;
+    if (!transmitter) { return nil; }
+    
+    RelayrDevice* matchedDevice;
+    for (RelayrDevice* device in transmitter.devices)
+    {
+        if ([device.uid isEqualToString:_deviceID]) {  matchedDevice = device; break; }
+    }
+    
+    return matchedDevice;
+}
+
 #pragma mark NSObject
 
 - (NSString*)description

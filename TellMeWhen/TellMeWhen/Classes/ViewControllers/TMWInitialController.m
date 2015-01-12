@@ -64,7 +64,7 @@
     {
         TMWMainController* mainCntrll = ((TMWMainController*)segue.destinationViewController);
         [mainCntrll loadIoTsWithCompletion:^(NSError* error) {
-            if (!error) { [mainCntrll loadRulesWithCompletion:nil]; }
+            if (!error && [TMWStore sharedInstance].relayrUser.transmitters.count) { [mainCntrll loadRulesWithCompletion:nil]; }
         }];
     }
 }

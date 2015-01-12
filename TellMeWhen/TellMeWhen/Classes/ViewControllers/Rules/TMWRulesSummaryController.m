@@ -2,6 +2,7 @@
 
 #import "TMWStore.h"                        // TMW (Model)
 #import "TMWRule.h"                         // TMW (Model)
+#import "TMWRuleCondition.h"                // TMW (Model)
 #import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWLogging.h"                      // TMW (Model)
 #import <Relayr/RelayrCloud.h>              // Relayr.framework
@@ -19,18 +20,30 @@
 #define TMWRuleSummary_CellIndexForTransmitterName  2
 #define TMWRuleSummary_CellIndexForMeasurement      3
 #define TMWRuleSummary_CellIndexForCondition        4
+#define TMWRuleSummary_CellIndexForCurrentValue     5
+#define TMWRulesSummaryCntrll_SubscriptionError     @"Error subscripbing to MQTT channel"
+#define TMWRulesSummaryCntrll_SubscriptionUnknown   @"N/A"
 
 @interface TMWRulesSummaryController () <TMWSegueUnwindingRules>
-- (IBAction)activationToogled:(UISwitch *)sender;
+- (IBAction)activationToogled:(UISwitch*)sender;
 @property (strong, nonatomic) IBOutlet UISwitch* activationSwitch;
 @property (strong, nonatomic) IBOutlet UILabel* ruleNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* transmitterNameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView* measurementImageView;
 @property (strong, nonatomic) IBOutlet UILabel* measurementNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* conditionLabel;
+@property (strong, nonatomic) IBOutlet UILabel* currentValueLabel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView* currentValueIndicator;
 @end
 
 @implementation TMWRulesSummaryController
+
+#pragma mark - NSObject
+
+//- (void)dealloc
+//{
+//    [self unsubscribeToRule:_rule];
+//}
 
 #pragma mark - UIViewController methods
 
@@ -44,6 +57,8 @@
     _measurementImageView.image = _rule.icon;
     _measurementNameLabel.text = _rule.type;
     _conditionLabel.text = _rule.thresholdDescription;
+    
+//    [self subscribeToRule:_rule];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
@@ -83,7 +98,10 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     NSUInteger const row = indexPath.row;
-    if (row == 1) {
+    if (row == 0) {
+        [_activationSwitch setOn:!_activationSwitch.on animated:YES];
+        [self activationToogled:_activationSwitch];
+    } else if (row == 1) {
         [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesSummaryToNaming sender:self];
     } else if (row == 2) {
         [self performSegueWithIdentifier:TMWStoryboardIDs_SegueFromRulesSummaryToTransm sender:self];
@@ -95,6 +113,39 @@
 }
 
 #pragma mark - Private functionality
+
+- (void)subscribeToRule:(TMWRule*)rule
+{
+    NSString* meaning = rule.condition.meaning;
+    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:meaning].anyObject;
+    RelayrInput* input = [device inputWithMeaning:meaning];
+    if (!input) { return; }
+    
+    _currentValueLabel.hidden = YES;
+    _currentValueIndicator.hidden = NO;
+    [_currentValueIndicator startAnimating];
+    
+    __weak UILabel* weakLabel = _currentValueLabel;
+    __weak UIActivityIndicatorView* weakIndicator = _currentValueIndicator;
+    NSString* valueUnit = _rule.condition.unit;
+    [input subscribeWithBlock:^(RelayrDevice* device, RelayrInput* input, BOOL* unsubscribe) {
+        [weakIndicator stopAnimating];
+        weakIndicator.hidden = YES;
+        
+        if (![input.value isKindOfClass:[NSNumber class]]) { weakLabel.text = TMWRulesSummaryCntrll_SubscriptionUnknown; *unsubscribe = YES; return; }
+        weakLabel.text = [NSString stringWithFormat:@"%.1f %@", ((NSNumber*)input.value).floatValue, valueUnit];
+    } error:^(NSError* error) {
+        weakLabel.text = TMWRulesSummaryCntrll_SubscriptionError;
+    }];
+}
+
+- (void)unsubscribeToRule:(TMWRule*)rule
+{
+    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:rule.condition.meaning].anyObject;
+    [device removeAllSubscriptions];
+    
+    _currentValueLabel.text = TMWRulesSummaryCntrll_SubscriptionUnknown;
+}
 
 #pragma mark Navigation functionality
 
