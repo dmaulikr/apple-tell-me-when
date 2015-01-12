@@ -21,6 +21,7 @@
 #define TMWRuleSummary_CellIndexForMeasurement      3
 #define TMWRuleSummary_CellIndexForCondition        4
 #define TMWRuleSummary_CellIndexForCurrentValue     5
+#define TMWRuleSummary_CellValue(type, num, unit)   [NSString stringWithFormat:@"%@ = %.1f %@", type, ((NSNumber*)num).floatValue, unit]
 #define TMWRulesSummaryCntrll_SubscriptionError     @"Error subscripbing to MQTT channel"
 #define TMWRulesSummaryCntrll_SubscriptionUnknown   @"N/A"
 
@@ -38,12 +39,12 @@
 
 @implementation TMWRulesSummaryController
 
-#pragma mark - NSObject
+#pragma mark NSObject
 
-//- (void)dealloc
-//{
-//    [self unsubscribeToRule:_rule];
-//}
+- (void)dealloc
+{
+    [self unsubscribeToRule:_rule];
+}
 
 #pragma mark - UIViewController methods
 
@@ -58,7 +59,7 @@
     _measurementNameLabel.text = _rule.type;
     _conditionLabel.text = _rule.thresholdDescription;
     
-//    [self subscribeToRule:_rule];
+    [self subscribeToRule:_rule];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
@@ -119,23 +120,41 @@
     NSString* meaning = rule.condition.meaning;
     RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:meaning].anyObject;
     RelayrInput* input = [device inputWithMeaning:meaning];
-    if (!input) { return; }
+    if (!input)
+    {
+        [_currentValueIndicator stopAnimating];
+        _currentValueIndicator.hidden = YES;
+        
+        _currentValueLabel.text = TMWRulesSummaryCntrll_SubscriptionError;
+        _currentValueLabel.hidden = NO;
+        return;
+    }
     
     _currentValueLabel.hidden = YES;
     _currentValueIndicator.hidden = NO;
     [_currentValueIndicator startAnimating];
     
+    NSString* valueType = _rule.type;
+    NSString* valueUnit = _rule.condition.unit;
     __weak UILabel* weakLabel = _currentValueLabel;
     __weak UIActivityIndicatorView* weakIndicator = _currentValueIndicator;
-    NSString* valueUnit = _rule.condition.unit;
     [input subscribeWithBlock:^(RelayrDevice* device, RelayrInput* input, BOOL* unsubscribe) {
+        if (!weakIndicator.hidden)
+        {
+            [weakIndicator stopAnimating];
+            weakIndicator.hidden = YES;
+            weakLabel.hidden = NO;
+            
+            if (![input.value isKindOfClass:[NSNumber class]]) { weakLabel.text = TMWRulesSummaryCntrll_SubscriptionUnknown; *unsubscribe = YES; return; }
+        }
+        
+        weakLabel.text = TMWRuleSummary_CellValue(valueType, [TMWRuleCondition convertServerValue:input.value withMeaning:meaning], valueUnit);
+    } error:^(NSError* error) {
         [weakIndicator stopAnimating];
         weakIndicator.hidden = YES;
         
-        if (![input.value isKindOfClass:[NSNumber class]]) { weakLabel.text = TMWRulesSummaryCntrll_SubscriptionUnknown; *unsubscribe = YES; return; }
-        weakLabel.text = [NSString stringWithFormat:@"%.1f %@", ((NSNumber*)input.value).floatValue, valueUnit];
-    } error:^(NSError* error) {
         weakLabel.text = TMWRulesSummaryCntrll_SubscriptionError;
+        weakLabel.hidden = NO;
     }];
 }
 

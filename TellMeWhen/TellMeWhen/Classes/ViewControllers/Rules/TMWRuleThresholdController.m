@@ -5,7 +5,7 @@
 #import "TMWRuleCondition.h"                // TMW (Model)
 #import "TMWAPIService.h"                   // TMW (Model)
 #import "TMWLogging.h"                      // TMW (Model)
-#import <Relayr/RelayrCloud.h>              // Relayr.framework
+#import <Relayr/Relayr.h>                   // Relayr.framework
 #import "TMWStoryboardIDs.h"                // TMW (ViewControllers/Segues)
 #import "TMWSegueUnwindingRules.h"          // TMW (ViewControllers/Segues)
 #import "TMWRuleNamingController.h"         // TMW (ViewControllers/Rules)
@@ -16,6 +16,10 @@
 
 #define TMWRuleThreshold_LessThanButtonText     @"<\nless than"
 #define TMWRuleThreshold_GreaterThanButtonText  @">\ngreater than"
+
+#define TMWRuleThreshold_CellValue(type, num, unit) [NSString stringWithFormat:@"%@ = %.1f %@", type, ((NSNumber*)num).floatValue, unit]
+#define TMWRuleThreshold_CellSubscriptionError      @"Error subscripbing to MQTT channel"
+#define TMWRuleThreshold_CellSubscriptionUnknown    @"N/A"
 
 #define TMWRuleThreshold_DoneButtonText_Done    @"done"
 #define TMWRuleThreshold_DoneButtonText_Next    @"next"
@@ -34,6 +38,9 @@
 @property (strong, nonatomic) IBOutlet UISlider* conditionValueSlider;
 - (IBAction)conditionValueChanged:(UISlider*)sender;
 
+@property (strong, nonatomic) IBOutlet UILabel* currentValueLabel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView* currentIndicator;
+
 @property (strong, nonatomic) IBOutlet TMWButton* doneButton;
 - (IBAction)buttonTapped:(TMWButton*)sender;
 @end
@@ -41,6 +48,15 @@
 @implementation TMWRuleThresholdController
 
 #pragma mark - Public API
+
+#pragma mark NSObject
+
+- (void)dealloc
+{
+    TMWRule* rule = ((_tmpRule) ? _tmpRule : _rule);
+    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:rule.condition.meaning].anyObject;
+    [[device inputWithMeaning:rule.condition.meaning] unsubscribeTarget:self action:@selector(dataArrivedFromDevice:withInput:)];
+}
 
 #pragma mark UIViewController methods
 
@@ -82,9 +98,52 @@
     
     NSString* buttonText = (!_needsServerModification) ? TMWRuleThreshold_DoneButtonText_Next : TMWRuleThreshold_DoneButtonText_Done;
     [_doneButton setTitle:buttonText forState:UIControlStateNormal];
+    
+    [self subscribeToRule:dataRule];
 }
 
 #pragma mark - Private functionality
+
+- (void)subscribeToRule:(TMWRule*)rule
+{
+    NSString* meaning = rule.condition.meaning;
+    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:meaning].anyObject;
+    RelayrInput* input = [device inputWithMeaning:meaning];
+    if (!input)
+    {
+        [_currentIndicator stopAnimating];
+        _currentIndicator.hidden = YES;
+        
+        _currentValueLabel.text = TMWRuleThreshold_CellSubscriptionError;
+        _currentValueLabel.hidden = NO;
+        return;
+    }
+    
+    __weak UILabel* weakLabel = _currentValueLabel;
+    __weak UIActivityIndicatorView* weakIndicator = _currentIndicator;
+    [input subscribeWithTarget:self action:@selector(dataArrivedFromDevice:withInput:) error:^(NSError* error) {
+        [weakIndicator stopAnimating];
+        weakIndicator.hidden = YES;
+        
+        weakLabel.text = TMWRuleThreshold_CellSubscriptionError;
+        weakLabel.hidden = NO;
+    }];
+}
+
+- (void)dataArrivedFromDevice:(RelayrDevice*)device withInput:(RelayrInput*)input
+{
+    if (!_currentIndicator.hidden)
+    {
+        [_currentIndicator stopAnimating];
+        _currentIndicator.hidden = YES;
+        _currentIndicator.hidden = NO;
+        
+        if (![input.value isKindOfClass:[NSNumber class]]) { _currentValueLabel.text = TMWRuleThreshold_CellSubscriptionError; return; }
+    }
+    
+    TMWRule* rule = ((_tmpRule) ? _tmpRule : _rule);
+    _currentValueLabel.text = TMWRuleThreshold_CellValue(rule.type, [TMWRuleCondition convertServerValue:input.value withMeaning:rule.condition.meaning], rule.condition.unit);
+}
 
 - (IBAction)backButtonTapped:(id)sender
 {
