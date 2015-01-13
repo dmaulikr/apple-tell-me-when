@@ -43,7 +43,9 @@
 
 - (void)dealloc
 {
-    [self unsubscribeToRule:_rule];
+    NSString* meaning = _rule.condition.meaning;
+    RelayrDevice* device = [_rule.transmitter devicesWithInputMeaning:meaning].anyObject;
+    [[device inputWithMeaning:meaning] unsubscribeTarget:self action:@selector(dataArrivedFromDevice:withInput:)];
 }
 
 #pragma mark - UIViewController methods
@@ -59,7 +61,17 @@
     _measurementNameLabel.text = _rule.type;
     _conditionLabel.text = _rule.thresholdDescription;
     
-    [self subscribeToRule:_rule];
+    __weak TMWRulesSummaryController* weakSelf = self;
+    [self subscribeToRule:_rule withTarget:self action:@selector(dataArrivedFromDevice:withInput:) withErrorBlock:^(NSError* error) {
+        TMWRulesSummaryController* strongSelf = weakSelf;
+        if (!strongSelf) { return; }
+        
+        [strongSelf.currentValueIndicator stopAnimating];
+        strongSelf.currentValueIndicator.hidden = YES;
+        
+        strongSelf.currentValueLabel.text = TMWRulesSummaryCntrll_SubscriptionError;
+        strongSelf.currentValueLabel.hidden = NO;
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
@@ -115,55 +127,28 @@
 
 #pragma mark - Private functionality
 
-- (void)subscribeToRule:(TMWRule*)rule
+- (void)subscribeToRule:(TMWRule*)rule withTarget:(id)target action:(SEL)action withErrorBlock:(void (^)(NSError* error))errorBlock
 {
     NSString* meaning = rule.condition.meaning;
     RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:meaning].anyObject;
     RelayrInput* input = [device inputWithMeaning:meaning];
-    if (!input)
+    if (!rule || !input) { if (errorBlock) { errorBlock(RelayrErrorMQTTSubscriptionFailed); } return; }
+    
+    [input subscribeWithTarget:target action:action error:errorBlock];
+}
+
+- (void)dataArrivedFromDevice:(RelayrDevice*)device withInput:(RelayrInput*)input
+{
+    if (!_currentValueIndicator.hidden)
     {
         [_currentValueIndicator stopAnimating];
         _currentValueIndicator.hidden = YES;
-        
-        _currentValueLabel.text = TMWRulesSummaryCntrll_SubscriptionError;
         _currentValueLabel.hidden = NO;
-        return;
     }
     
-    _currentValueLabel.hidden = YES;
-    _currentValueIndicator.hidden = NO;
-    [_currentValueIndicator startAnimating];
-    
-    NSString* valueType = _rule.type;
-    NSString* valueUnit = _rule.condition.unit;
-    __weak UILabel* weakLabel = _currentValueLabel;
-    __weak UIActivityIndicatorView* weakIndicator = _currentValueIndicator;
-    [input subscribeWithBlock:^(RelayrDevice* device, RelayrInput* input, BOOL* unsubscribe) {
-        if (!weakIndicator.hidden)
-        {
-            [weakIndicator stopAnimating];
-            weakIndicator.hidden = YES;
-            weakLabel.hidden = NO;
-            
-            if (![input.value isKindOfClass:[NSNumber class]]) { weakLabel.text = TMWRulesSummaryCntrll_SubscriptionUnknown; *unsubscribe = YES; return; }
-        }
-        
-        weakLabel.text = TMWRuleSummary_CellValue(valueType, [TMWRuleCondition convertServerValue:input.value withMeaning:meaning], valueUnit);
-    } error:^(NSError* error) {
-        [weakIndicator stopAnimating];
-        weakIndicator.hidden = YES;
-        
-        weakLabel.text = TMWRulesSummaryCntrll_SubscriptionError;
-        weakLabel.hidden = NO;
-    }];
-}
-
-- (void)unsubscribeToRule:(TMWRule*)rule
-{
-    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:rule.condition.meaning].anyObject;
-    [device removeAllSubscriptions];
-    
-    _currentValueLabel.text = TMWRulesSummaryCntrll_SubscriptionUnknown;
+    _currentValueLabel.text = ([input.value isKindOfClass:[NSNumber class]]) ?
+    TMWRuleSummary_CellValue(_rule.type, [TMWRuleCondition convertServerValue:input.value withMeaning:_rule.condition.meaning], _rule.condition.unit) :
+    TMWRulesSummaryCntrll_SubscriptionUnknown;
 }
 
 #pragma mark Navigation functionality

@@ -895,25 +895,25 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="78" id="E5f-Gn-HPX" customClass="TMWRulesCellView">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="82" id="E5f-Gn-HPX" customClass="TMWRulesCellView">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E5f-Gn-HPX" id="dsF-6d-jMK">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current value:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vm-pd-Ekg">
-                                                    <rect key="frame" x="16" y="16" width="108" height="20"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="16"/>
+                                                    <rect key="frame" x="16" y="16" width="122" height="22"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBold" family="NewJuneBold" pointSize="18"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30.0 ºC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baB-Cv-tAc">
-                                                    <rect key="frame" x="16" y="41.5" width="55.5" height="19.5"/>
-                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="16"/>
+                                                    <rect key="frame" x="16" y="44" width="63" height="22"/>
+                                                    <fontDescription key="fontDescription" name="NewJuneBook" family="NewJuneBook" pointSize="18"/>
                                                     <color key="textColor" red="0.80947849230000002" green="0.83765815160000001" blue="0.896484375" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="pec-2s-PHU">
-                                                    <rect key="frame" x="16" y="42" width="20" height="20"/>
+                                                    <rect key="frame" x="16" y="44" width="20" height="20"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.19215686269999999" green="0.2901960784" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1800,6 +1800,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="currentValueIndicator" destination="zmJ-cW-ILg" id="LNn-A9-DDI"/>
+                        <outlet property="currentValueLabel" destination="wvA-XC-2cI" id="rbn-y6-6cW"/>
                         <outlet property="ruleDescription" destination="cUl-Q1-83k" id="VhI-Yg-ls7"/>
                         <outlet property="ruleName" destination="wys-kx-3YB" id="cOM-Lj-mtT"/>
                         <outlet property="triggeredDate" destination="aBN-7x-kFM" id="nRg-22-aFz"/>

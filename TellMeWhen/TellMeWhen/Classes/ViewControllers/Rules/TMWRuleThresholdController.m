@@ -54,8 +54,10 @@
 - (void)dealloc
 {
     TMWRule* rule = ((_tmpRule) ? _tmpRule : _rule);
-    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:rule.condition.meaning].anyObject;
-    [[device inputWithMeaning:rule.condition.meaning] unsubscribeTarget:self action:@selector(dataArrivedFromDevice:withInput:)];
+    NSString* meaning = rule.condition.meaning;
+    
+    RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:meaning].anyObject;
+    [[device inputWithMeaning:meaning] unsubscribeTarget:self action:@selector(dataArrivedFromDevice:withInput:)];
 }
 
 #pragma mark UIViewController methods
@@ -99,35 +101,29 @@
     NSString* buttonText = (!_needsServerModification) ? TMWRuleThreshold_DoneButtonText_Next : TMWRuleThreshold_DoneButtonText_Done;
     [_doneButton setTitle:buttonText forState:UIControlStateNormal];
     
-    [self subscribeToRule:dataRule];
+    __weak TMWRuleThresholdController* weakSelf = self;
+    [self subscribeToRule:dataRule withTarget:self action:@selector(dataArrivedFromDevice:withInput:) withErrorBlock:^(NSError *error) {
+        TMWRuleThresholdController* strongSelf = weakSelf;
+        if (!strongSelf) { return; }
+        
+        [strongSelf.currentIndicator stopAnimating];
+        strongSelf.currentIndicator.hidden = YES;
+        
+        strongSelf.currentValueLabel.text = TMWRuleThreshold_CellSubscriptionError;
+        strongSelf.currentValueLabel.hidden = NO;
+    }];
 }
 
 #pragma mark - Private functionality
 
-- (void)subscribeToRule:(TMWRule*)rule
+- (void)subscribeToRule:(TMWRule*)rule withTarget:(id)target action:(SEL)action withErrorBlock:(void (^)(NSError* error))errorBlock
 {
     NSString* meaning = rule.condition.meaning;
     RelayrDevice* device = [rule.transmitter devicesWithInputMeaning:meaning].anyObject;
     RelayrInput* input = [device inputWithMeaning:meaning];
-    if (!input)
-    {
-        [_currentIndicator stopAnimating];
-        _currentIndicator.hidden = YES;
-        
-        _currentValueLabel.text = TMWRuleThreshold_CellSubscriptionError;
-        _currentValueLabel.hidden = NO;
-        return;
-    }
+    if (!input) { if (errorBlock) { errorBlock(RelayrErrorMQTTSubscriptionFailed); return; } }
     
-    __weak UILabel* weakLabel = _currentValueLabel;
-    __weak UIActivityIndicatorView* weakIndicator = _currentIndicator;
-    [input subscribeWithTarget:self action:@selector(dataArrivedFromDevice:withInput:) error:^(NSError* error) {
-        [weakIndicator stopAnimating];
-        weakIndicator.hidden = YES;
-        
-        weakLabel.text = TMWRuleThreshold_CellSubscriptionError;
-        weakLabel.hidden = NO;
-    }];
+    [input subscribeWithTarget:self action:@selector(dataArrivedFromDevice:withInput:) error:errorBlock];
 }
 
 - (void)dataArrivedFromDevice:(RelayrDevice*)device withInput:(RelayrInput*)input
@@ -137,12 +133,12 @@
         [_currentIndicator stopAnimating];
         _currentIndicator.hidden = YES;
         _currentIndicator.hidden = NO;
-        
-        if (![input.value isKindOfClass:[NSNumber class]]) { _currentValueLabel.text = TMWRuleThreshold_CellSubscriptionError; return; }
     }
     
     TMWRule* rule = ((_tmpRule) ? _tmpRule : _rule);
-    _currentValueLabel.text = TMWRuleThreshold_CellValue(rule.type, [TMWRuleCondition convertServerValue:input.value withMeaning:rule.condition.meaning], rule.condition.unit);
+    _currentValueLabel.text = ([input.value isKindOfClass:[NSNumber class]]) ?
+        TMWRuleThreshold_CellValue(rule.type, [TMWRuleCondition convertServerValue:input.value withMeaning:rule.condition.meaning], rule.condition.unit) :
+        TMWRuleThreshold_CellSubscriptionUnknown;
 }
 
 - (IBAction)backButtonTapped:(id)sender
