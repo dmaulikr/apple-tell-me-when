@@ -87,7 +87,7 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     TMWRuleTransmitterCellView* cell = (TMWRuleTransmitterCellView*)[tableView cellForRowAtIndexPath:indexPath];
-    RelayrTransmitter* transmitter = [[TMWStore sharedInstance].relayrUser transmitterWithID:cell.transmitterID];
+    RelayrTransmitter* transmitter = (RelayrTransmitter*)[TMWStore sharedInstance].relayrUser.transmitters[cell.transmitterID];
     if (!transmitter) { return [self performSegueWithIdentifier:TMWStoryboardIDs_UnwindFromRuleTransmitters sender:self]; }
     
     if (!_needsServerModification)
