@@ -56,6 +56,18 @@
     NSNumber* value = [_notification convertServerValueWithMeaning:_notificationRule.condition.meaning];
     NSString* valueString = (value) ? [NSString stringWithFormat:@"%.1f", value.floatValue] : @"N/A";
     _triggeredValue.text = [NSString stringWithFormat:@"%@ %@", valueString, _notificationRule.condition.unit];
+    
+    __weak TMWNotificationDetailsController* weakSelf = self;
+    [self subscribeToRule:_notificationRule withTarget:self action:@selector(dataArrivedFromDevice:withInput:) withErrorBlock:^(NSError* error) {
+        TMWNotificationDetailsController* strongSelf = weakSelf;
+        if (!strongSelf) { return; }
+        
+        [strongSelf.currentValueIndicator stopAnimating];
+        strongSelf.currentValueIndicator.hidden = YES;
+        
+        strongSelf.currentValueLabel.text = TMWNotificationDetailsCntrll_SubscriptionError;
+        strongSelf.currentValueLabel.hidden = NO;
+    }];
 }
 
 #pragma mark - Private functionality

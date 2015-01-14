@@ -132,7 +132,7 @@
     {
         [_currentIndicator stopAnimating];
         _currentIndicator.hidden = YES;
-        _currentIndicator.hidden = NO;
+        _currentValueLabel.hidden = NO;
     }
     
     TMWRule* rule = ((_tmpRule) ? _tmpRule : _rule);
