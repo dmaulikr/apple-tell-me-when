@@ -8,7 +8,7 @@ NOTE: The purpose of this application is to exemplify a useful and easy-to-imple
 
 For information about our sensors, have a look at our [Making Sense of Sensors](https://developer.relayr.io/documents/Welcome/Sensors) page.
 
-*The app is currently being reviewed by Apple and will shortly be available for download from the Apple app store.*
+The app is available for download from the Apple App store at [this](https://itunes.apple.com/de/app/tell-me-when/id947289745?l=en&mt=8) link
 
 ### 1. Logging in
 
