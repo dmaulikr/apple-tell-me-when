@@ -75,7 +75,7 @@
     self.refreshControl = control;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:TMWStoryboardIDs_SegueFromNotifsToDetails])
     {
