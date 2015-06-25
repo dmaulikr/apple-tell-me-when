@@ -6,7 +6,7 @@ TellMeWhen is an open source application, so you are more than welcome to downlo
 
 NOTE: The purpose of this application is to exemplify a useful and easy-to-implement manner of utilizing the WunderBar sensor modules. It is in no way intended for use in mission critical or life critical situations. Furthermore, delivery of push notifications cannot be guaranteed as they rely on the up-time and functionality of services external to the relayr platform.
 
-For information about our sensors, have a look at our [Making Sense of Sensors](https://developer.relayr.io/documents/Welcome/Sensors) page.
+For information about our sensors, have a look at our [Making Sense of Sensors](https://developer.relayr.io/documents/WunderBar/Sensors) page.
 
 The app is available for download from the Apple App store at [this](https://itunes.apple.com/de/app/tell-me-when/id947289745?l=en&mt=8) link
 
